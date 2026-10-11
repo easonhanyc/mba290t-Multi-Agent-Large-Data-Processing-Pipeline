@@ -1,0 +1,323 @@
+{
+  "agreement": {
+    "intent": {
+      "agree": 3,
+      "of": 10,
+      "rate": 0.3
+    },
+    "sentiment_within_tolerance": {
+      "agree": 8,
+      "of": 10,
+      "rate": 0.8
+    },
+    "severity": {
+      "agree": 4,
+      "of": 10,
+      "rate": 0.4
+    },
+    "topic": {
+      "agree": 1,
+      "of": 10,
+      "rate": 0.1
+    }
+  },
+  "by_enricher_tier": {
+    "fallback1": {
+      "all_three_agree": 0,
+      "n": 1
+    },
+    "primary": {
+      "all_three_agree": 0,
+      "n": 9
+    }
+  },
+  "compared": 10,
+  "disagreements": [
+    {
+      "enricher": {
+        "intent": "request",
+        "sentiment": 0.5,
+        "severity": 1,
+        "topic": "billing"
+      },
+      "enricher_labeled_by": "fallback1",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic"
+      ],
+      "review_id": "035213ba-b1b9-411c-b028-70296e5f0e73",
+      "severity_abs_diff": 0,
+      "text": "I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .",
+      "verifier": {
+        "confidence": "high",
+        "intent": "request",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 1.0,
+        "severity": 3,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "severity"
+      ],
+      "review_id": "2be2ae92-6ad1-4c93-8589-65a0ce68fe46",
+      "severity_abs_diff": 1,
+      "text": "Very nice app",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": 0.5,
+        "severity": 4,
+        "topic": "other"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 5,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent"
+      ],
+      "review_id": "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+      "severity_abs_diff": 0,
+      "text": "RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮",
+      "verifier": {
+        "confidence": "low",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 5,
+        "topic": "access"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "downloads"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "review_id": "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+      "severity_abs_diff": 2,
+      "text": "I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs",
+      "verifier": {
+        "confidence": "low",
+        "intent": "unclear",
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 4,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent"
+      ],
+      "review_id": "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+      "severity_abs_diff": 0,
+      "text": "Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time.",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "unclear",
+        "sentiment": -0.5,
+        "severity": 4,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "playback"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "severity"
+      ],
+      "review_id": "a1a28752-3256-4f81-b888-3e943343529f",
+      "severity_abs_diff": 2,
+      "text": "It's nice but gospel music isn't much",
+      "verifier": {
+        "confidence": "low",
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 2,
+        "topic": "support"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.5,
+        "severity": 3,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "aeee488a-2077-489d-8914-1e01d5f7672f",
+      "severity_abs_diff": 1,
+      "text": "Amazing!!!",
+      "verifier": {
+        "confidence": "low",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 2,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "severity"
+      ],
+      "review_id": "dc73ecd9-3293-4ede-90d5-dd6cd1e8d087",
+      "severity_abs_diff": 2,
+      "text": "Great",
+      "verifier": {
+        "confidence": "high",
+        "intent": "cancellation",
+        "sentiment": 0.0,
+        "severity": 2,
+        "topic": "playback"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": 0.5,
+        "severity": 2,
+        "topic": "access"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "e25cf0b6-0285-4cc9-9a4a-5a8a05be929e",
+      "severity_abs_diff": 0,
+      "text": "Awesome music app can def see y everyone loves it so much best part to me personally is the categories suggested for you personally",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "billing"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "unclear",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "playback"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "severity"
+      ],
+      "review_id": "ed15bb17-865a-492b-ba1b-268f4cab78f6",
+      "severity_abs_diff": 1,
+      "text": "Very good app enna advertisement verudu premium best",
+      "verifier": {
+        "confidence": "high",
+        "intent": "unclear",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "usability"
+      }
+    }
+  ],
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(1.5%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-e965211041",
+  "note": "Agreement between two models is a consistency check, not accuracy. Disagreements are reported for inspection; enriched labels are never overwritten by the verifier.",
+  "owner": "independent model + code",
+  "sample": {
+    "fraction": 0.1,
+    "max": 2000,
+    "method": "lowest SHA-256(seed + ':' + review_id) among distinct completed texts",
+    "min": 10,
+    "population": 100,
+    "sample_size": 10,
+    "seed": "berkeley-fa-2026-insight-v1"
+  },
+  "sentiment_mean_abs_diff": 0.5,
+  "sentiment_tolerance": 0.5,
+  "severity_abs_diff_counts": {
+    "0": 4,
+    "1": 3,
+    "2": 3
+  },
+  "stage": "verify",
+  "top_confusions": {
+    "intent": {
+      "cancellation -> complaint": 3,
+      "cancellation -> unclear": 1,
+      "complaint -> cancellation": 1,
+      "complaint -> request": 1,
+      "complaint -> unclear": 1
+    },
+    "topic": {
+      "access -> billing": 1,
+      "billing -> usability": 1,
+      "catalog -> downloads": 1,
+      "catalog -> playback": 1,
+      "playback -> support": 1,
+      "playback -> usability": 1,
+      "usability -> access": 1,
+      "usability -> downloads": 1,
+      "usability -> other": 1
+    }
+  },
+  "verifier_config": "stub-haiku@n/a|verify-v1|cfg-0cb6e691ec",
+  "verifier_failures": 0
+}

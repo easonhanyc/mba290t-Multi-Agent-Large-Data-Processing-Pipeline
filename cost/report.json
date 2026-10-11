@@ -1,0 +1,754 @@
+{
+  "measured": null,
+  "refreshes": [],
+  "projection": {
+    "full_run": {
+      "rows": 660622,
+      "nonempty_to_classify": 660609,
+      "empty_text_quarantines": 13,
+      "distinct_nonempty_texts": 484189,
+      "source": "GRADING_CONTRACT.md / course brief; distinct-text count verified by reading the full CSV on 2026-10-10"
+    },
+    "budget_usd": 9.0,
+    "workers": 4,
+    "per_stage_inputs": {
+      "enrich_primary": {
+        "billed_per_call": 0.000476,
+        "billed_per_review": 9.714285714285715e-06,
+        "equiv_per_call": null,
+        "equiv_per_review": null,
+        "reviews_per_request": 49.0,
+        "latency_s": 25,
+        "tier": "flex",
+        "billing": "api",
+        "source": "assumptions.json (estimate)",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "fixed_calls": null,
+        "rpm_limit": 1000
+      },
+      "fallback1": {
+        "billed_per_call": 0.0001135,
+        "billed_per_review": 0.0001135,
+        "equiv_per_call": null,
+        "equiv_per_review": null,
+        "reviews_per_request": 1.0,
+        "latency_s": 8,
+        "tier": "flex",
+        "billing": "api",
+        "source": "assumptions.json (estimate)",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "fixed_calls": null,
+        "rpm_limit": 1000
+      },
+      "fallback2": {
+        "billed_per_call": 0.0,
+        "billed_per_review": 0.0,
+        "equiv_per_call": 0.0132,
+        "equiv_per_review": 0.0132,
+        "reviews_per_request": 1.0,
+        "latency_s": 20,
+        "tier": "standard",
+        "billing": "subscription",
+        "source": "assumptions.json (estimate)",
+        "provider": "claude_code",
+        "model": "sonnet",
+        "fixed_calls": null,
+        "rpm_limit": 8
+      },
+      "verify": {
+        "billed_per_call": 0.0,
+        "billed_per_review": 0.0,
+        "equiv_per_call": 0.00067,
+        "equiv_per_review": 2.68e-05,
+        "reviews_per_request": 25.0,
+        "latency_s": 25,
+        "tier": "standard",
+        "billing": "subscription",
+        "source": "assumptions.json (estimate)",
+        "provider": "claude_code",
+        "model": "haiku",
+        "fixed_calls": null,
+        "rpm_limit": 8
+      },
+      "group": {
+        "billed_per_call": 0.0,
+        "billed_per_review": 0.0,
+        "equiv_per_call": 0.0034000000000000002,
+        "equiv_per_review": 0.0034000000000000002,
+        "reviews_per_request": 1.0,
+        "latency_s": 12,
+        "tier": "standard",
+        "billing": "subscription",
+        "source": "assumptions.json (estimate)",
+        "provider": "claude_code",
+        "model": "sonnet",
+        "fixed_calls": 12,
+        "rpm_limit": 8
+      },
+      "memo": {
+        "billed_per_call": 0.0,
+        "billed_per_review": 0.0,
+        "equiv_per_call": 0.035,
+        "equiv_per_review": 0.035,
+        "reviews_per_request": 1.0,
+        "latency_s": 60,
+        "tier": "standard",
+        "billing": "subscription",
+        "source": "assumptions.json (estimate)",
+        "provider": "claude_code",
+        "model": "sonnet",
+        "fixed_calls": 2,
+        "rpm_limit": 8
+      }
+    },
+    "measured_fallback_rates": {},
+    "inputs_measured_on": null,
+    "scenarios": {
+      "base_reuse": {
+        "scenario": "base",
+        "exact_text_reuse": true,
+        "work_units": 484189,
+        "fallback1_rate": 0.01,
+        "fallback2_rate": 0.0005,
+        "verify_sample": 2000,
+        "retry_multiplier": 1.03,
+        "token_multiplier": 1.0,
+        "stages": {
+          "enrich_primary": {
+            "reviews": 498714.7,
+            "requests": 10177.9,
+            "billed_usd": 4.8447,
+            "api_equivalent_usd": null,
+            "seconds": 63611.6,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback1": {
+            "reviews": 4987.1,
+            "requests": 4987.1,
+            "billed_usd": 0.566,
+            "api_equivalent_usd": null,
+            "seconds": 9974.3,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback2": {
+            "reviews": 249.4,
+            "requests": 249.4,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 3.2915,
+            "seconds": 1870.2,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "verify": {
+            "reviews": 2060.0,
+            "requests": 82.4,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.0552,
+            "seconds": 618.0,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "group": {
+            "reviews": 0,
+            "requests": 12.4,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.042,
+            "seconds": 92.7,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "memo": {
+            "reviews": 0,
+            "requests": 2.1,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.0721,
+            "seconds": 30.9,
+            "inputs_from": "assumptions.json (estimate)"
+          }
+        },
+        "code_stage_seconds": 66.1,
+        "api_cost_usd": 5.41,
+        "api_equivalent_subscription_usd": 3.46,
+        "elapsed_hours": 21.18,
+        "exceeds_budget": false,
+        "unpriced_stages": []
+      },
+      "base_no_reuse": {
+        "scenario": "base",
+        "exact_text_reuse": false,
+        "work_units": 660609,
+        "fallback1_rate": 0.01,
+        "fallback2_rate": 0.0005,
+        "verify_sample": 2000,
+        "retry_multiplier": 1.03,
+        "token_multiplier": 1.0,
+        "stages": {
+          "enrich_primary": {
+            "reviews": 680427.3,
+            "requests": 13886.3,
+            "billed_usd": 6.6099,
+            "api_equivalent_usd": null,
+            "seconds": 86789.2,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback1": {
+            "reviews": 6804.3,
+            "requests": 6804.3,
+            "billed_usd": 0.7723,
+            "api_equivalent_usd": null,
+            "seconds": 13608.5,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback2": {
+            "reviews": 340.2,
+            "requests": 340.2,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 4.4908,
+            "seconds": 2551.6,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "verify": {
+            "reviews": 2060.0,
+            "requests": 82.4,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.0552,
+            "seconds": 618.0,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "group": {
+            "reviews": 0,
+            "requests": 12.4,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.042,
+            "seconds": 92.7,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "memo": {
+            "reviews": 0,
+            "requests": 2.1,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.0721,
+            "seconds": 30.9,
+            "inputs_from": "assumptions.json (estimate)"
+          }
+        },
+        "code_stage_seconds": 66.1,
+        "api_cost_usd": 7.38,
+        "api_equivalent_subscription_usd": 4.66,
+        "elapsed_hours": 28.82,
+        "exceeds_budget": false,
+        "unpriced_stages": []
+      },
+      "conservative_reuse": {
+        "scenario": "conservative",
+        "exact_text_reuse": true,
+        "work_units": 484189,
+        "fallback1_rate": 0.015,
+        "fallback2_rate": 0.0025,
+        "verify_sample": 2000,
+        "retry_multiplier": 1.15,
+        "token_multiplier": 1.3,
+        "stages": {
+          "enrich_primary": {
+            "reviews": 556817.3,
+            "requests": 11363.6,
+            "billed_usd": 7.0318,
+            "api_equivalent_usd": null,
+            "seconds": 71022.6,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback1": {
+            "reviews": 8352.3,
+            "requests": 8352.3,
+            "billed_usd": 1.2324,
+            "api_equivalent_usd": null,
+            "seconds": 16704.5,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback2": {
+            "reviews": 1392.0,
+            "requests": 1392.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 23.8875,
+            "seconds": 10440.3,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "verify": {
+            "reviews": 2300.0,
+            "requests": 92.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.0801,
+            "seconds": 690.0,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "group": {
+            "reviews": 0,
+            "requests": 13.8,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.061,
+            "seconds": 103.5,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "memo": {
+            "reviews": 0,
+            "requests": 2.3,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.1047,
+            "seconds": 34.5,
+            "inputs_from": "assumptions.json (estimate)"
+          }
+        },
+        "code_stage_seconds": 66.1,
+        "api_cost_usd": 8.26,
+        "api_equivalent_subscription_usd": 24.13,
+        "elapsed_hours": 27.52,
+        "exceeds_budget": false,
+        "unpriced_stages": []
+      },
+      "conservative_no_reuse": {
+        "scenario": "conservative",
+        "exact_text_reuse": false,
+        "work_units": 660609,
+        "fallback1_rate": 0.015,
+        "fallback2_rate": 0.0025,
+        "verify_sample": 2000,
+        "retry_multiplier": 1.15,
+        "token_multiplier": 1.3,
+        "stages": {
+          "enrich_primary": {
+            "reviews": 759700.3,
+            "requests": 15504.1,
+            "billed_usd": 9.5939,
+            "api_equivalent_usd": null,
+            "seconds": 96900.6,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback1": {
+            "reviews": 11395.5,
+            "requests": 11395.5,
+            "billed_usd": 1.6814,
+            "api_equivalent_usd": null,
+            "seconds": 22791.0,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "fallback2": {
+            "reviews": 1899.3,
+            "requests": 1899.3,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 32.5911,
+            "seconds": 14244.4,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "verify": {
+            "reviews": 2300.0,
+            "requests": 92.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.0801,
+            "seconds": 690.0,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "group": {
+            "reviews": 0,
+            "requests": 13.8,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.061,
+            "seconds": 103.5,
+            "inputs_from": "assumptions.json (estimate)"
+          },
+          "memo": {
+            "reviews": 0,
+            "requests": 2.3,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.1047,
+            "seconds": 34.5,
+            "inputs_from": "assumptions.json (estimate)"
+          }
+        },
+        "code_stage_seconds": 66.1,
+        "api_cost_usd": 11.28,
+        "api_equivalent_subscription_usd": 32.84,
+        "elapsed_hours": 37.45,
+        "exceeds_budget": true,
+        "unpriced_stages": []
+      }
+    },
+    "declared_scope": {
+      "scope": {
+        "rows": 200013,
+        "nonempty_to_classify": 200000,
+        "empty_text_quarantines": 13,
+        "distinct_nonempty_texts": 152363,
+        "source": "data/analysis_200k.manifest.json (scripts/make_analysis_subset.py)"
+      },
+      "scenarios": {
+        "base_reuse": {
+          "scenario": "base",
+          "exact_text_reuse": true,
+          "work_units": 152363,
+          "fallback1_rate": 0.01,
+          "fallback2_rate": 0.0005,
+          "verify_sample": 2000,
+          "retry_multiplier": 1.03,
+          "token_multiplier": 1.0,
+          "stages": {
+            "enrich_primary": {
+              "reviews": 156933.9,
+              "requests": 3202.7,
+              "billed_usd": 1.5245,
+              "api_equivalent_usd": null,
+              "seconds": 20017.1,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback1": {
+              "reviews": 1569.3,
+              "requests": 1569.3,
+              "billed_usd": 0.1781,
+              "api_equivalent_usd": null,
+              "seconds": 3138.7,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback2": {
+              "reviews": 78.5,
+              "requests": 78.5,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 1.0358,
+              "seconds": 588.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "verify": {
+              "reviews": 2060.0,
+              "requests": 82.4,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.0552,
+              "seconds": 618.0,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "group": {
+              "reviews": 0,
+              "requests": 12.4,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.042,
+              "seconds": 92.7,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "memo": {
+              "reviews": 0,
+              "requests": 2.1,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.0721,
+              "seconds": 30.9,
+              "inputs_from": "assumptions.json (estimate)"
+            }
+          },
+          "code_stage_seconds": 20.0,
+          "api_cost_usd": 1.7,
+          "api_equivalent_subscription_usd": 1.21,
+          "elapsed_hours": 6.81,
+          "exceeds_budget": false,
+          "unpriced_stages": []
+        },
+        "base_no_reuse": {
+          "scenario": "base",
+          "exact_text_reuse": false,
+          "work_units": 200000,
+          "fallback1_rate": 0.01,
+          "fallback2_rate": 0.0005,
+          "verify_sample": 2000,
+          "retry_multiplier": 1.03,
+          "token_multiplier": 1.0,
+          "stages": {
+            "enrich_primary": {
+              "reviews": 206000.0,
+              "requests": 4204.1,
+              "billed_usd": 2.0011,
+              "api_equivalent_usd": null,
+              "seconds": 26275.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback1": {
+              "reviews": 2060.0,
+              "requests": 2060.0,
+              "billed_usd": 0.2338,
+              "api_equivalent_usd": null,
+              "seconds": 4120.0,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback2": {
+              "reviews": 103.0,
+              "requests": 103.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 1.3596,
+              "seconds": 772.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "verify": {
+              "reviews": 2060.0,
+              "requests": 82.4,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.0552,
+              "seconds": 618.0,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "group": {
+              "reviews": 0,
+              "requests": 12.4,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.042,
+              "seconds": 92.7,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "memo": {
+              "reviews": 0,
+              "requests": 2.1,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.0721,
+              "seconds": 30.9,
+              "inputs_from": "assumptions.json (estimate)"
+            }
+          },
+          "code_stage_seconds": 20.0,
+          "api_cost_usd": 2.23,
+          "api_equivalent_subscription_usd": 1.53,
+          "elapsed_hours": 8.87,
+          "exceeds_budget": false,
+          "unpriced_stages": []
+        },
+        "conservative_reuse": {
+          "scenario": "conservative",
+          "exact_text_reuse": true,
+          "work_units": 152363,
+          "fallback1_rate": 0.015,
+          "fallback2_rate": 0.0025,
+          "verify_sample": 2000,
+          "retry_multiplier": 1.15,
+          "token_multiplier": 1.3,
+          "stages": {
+            "enrich_primary": {
+              "reviews": 175217.4,
+              "requests": 3575.9,
+              "billed_usd": 2.2127,
+              "api_equivalent_usd": null,
+              "seconds": 22349.2,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback1": {
+              "reviews": 2628.3,
+              "requests": 2628.3,
+              "billed_usd": 0.3878,
+              "api_equivalent_usd": null,
+              "seconds": 5256.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback2": {
+              "reviews": 438.0,
+              "requests": 438.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 7.5168,
+              "seconds": 3285.3,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "verify": {
+              "reviews": 2300.0,
+              "requests": 92.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.0801,
+              "seconds": 690.0,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "group": {
+              "reviews": 0,
+              "requests": 13.8,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.061,
+              "seconds": 103.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "memo": {
+              "reviews": 0,
+              "requests": 2.3,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.1047,
+              "seconds": 34.5,
+              "inputs_from": "assumptions.json (estimate)"
+            }
+          },
+          "code_stage_seconds": 20.0,
+          "api_cost_usd": 2.6,
+          "api_equivalent_subscription_usd": 7.76,
+          "elapsed_hours": 8.82,
+          "exceeds_budget": false,
+          "unpriced_stages": []
+        },
+        "conservative_no_reuse": {
+          "scenario": "conservative",
+          "exact_text_reuse": false,
+          "work_units": 200000,
+          "fallback1_rate": 0.015,
+          "fallback2_rate": 0.0025,
+          "verify_sample": 2000,
+          "retry_multiplier": 1.15,
+          "token_multiplier": 1.3,
+          "stages": {
+            "enrich_primary": {
+              "reviews": 230000.0,
+              "requests": 4693.9,
+              "billed_usd": 2.9046,
+              "api_equivalent_usd": null,
+              "seconds": 29336.7,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback1": {
+              "reviews": 3450.0,
+              "requests": 3450.0,
+              "billed_usd": 0.509,
+              "api_equivalent_usd": null,
+              "seconds": 6900.0,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "fallback2": {
+              "reviews": 575.0,
+              "requests": 575.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 9.867,
+              "seconds": 4312.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "verify": {
+              "reviews": 2300.0,
+              "requests": 92.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.0801,
+              "seconds": 690.0,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "group": {
+              "reviews": 0,
+              "requests": 13.8,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.061,
+              "seconds": 103.5,
+              "inputs_from": "assumptions.json (estimate)"
+            },
+            "memo": {
+              "reviews": 0,
+              "requests": 2.3,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": 0.1047,
+              "seconds": 34.5,
+              "inputs_from": "assumptions.json (estimate)"
+            }
+          },
+          "code_stage_seconds": 20.0,
+          "api_cost_usd": 3.41,
+          "api_equivalent_subscription_usd": 10.11,
+          "elapsed_hours": 11.5,
+          "exceeds_budget": false,
+          "unpriced_stages": []
+        }
+      }
+    },
+    "primary_alternatives": [
+      {
+        "name": "GPT-6 Luna, 50 reviews/request, effort none, Flex (configured)",
+        "requests": 9684,
+        "api_cost_usd": 4.61,
+        "declared_scope_api_cost_usd": 1.45,
+        "hours": 16.81,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
+      },
+      {
+        "name": "GPT-6 Luna, 50 reviews/request, effort none, Standard",
+        "requests": 9684,
+        "api_cost_usd": 9.22,
+        "declared_scope_api_cost_usd": 2.9,
+        "hours": 8.07,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
+      },
+      {
+        "name": "Jev 1.13, one review per request",
+        "requests": 484189,
+        "api_cost_usd": 33.88,
+        "declared_scope_api_cost_usd": 10.66,
+        "hours": 20.17,
+        "source": "preflight estimate on checkpoint_500 with the Jev question set (6,665 characters / 4); output free"
+      },
+      {
+        "name": "Claude Haiku 5.5, 50 reviews/request, Standard",
+        "requests": 9684,
+        "api_cost_usd": 9.22,
+        "declared_scope_api_cost_usd": 2.9,
+        "hours": 8.07,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4; same shape assumed"
+      },
+      {
+        "name": "Gemini 2.5 Flash-Lite, 50 reviews/request (adapter not built)",
+        "requests": 9684,
+        "api_cost_usd": 9.68,
+        "declared_scope_api_cost_usd": 3.05,
+        "hours": 8.07,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4; no cache price listed"
+      }
+    ],
+    "local_compute_note": "orchestrator only: 15 W x hours x $0.4/kWh (assumptions); hardware unknown (not estimated)"
+  },
+  "scaling": {
+    "100": {
+      "base_reuse": {
+        "api_cost_usd": 0.0,
+        "elapsed_hours": 0.04
+      },
+      "base_no_reuse": {
+        "api_cost_usd": 0.0,
+        "elapsed_hours": 0.04
+      },
+      "conservative_reuse": {
+        "api_cost_usd": 0.0,
+        "elapsed_hours": 0.04
+      },
+      "conservative_no_reuse": {
+        "api_cost_usd": 0.0,
+        "elapsed_hours": 0.04
+      }
+    },
+    "500": {
+      "base_reuse": {
+        "api_cost_usd": 0.0,
+        "elapsed_hours": 0.05
+      },
+      "base_no_reuse": {
+        "api_cost_usd": 0.01,
+        "elapsed_hours": 0.06
+      },
+      "conservative_reuse": {
+        "api_cost_usd": 0.01,
+        "elapsed_hours": 0.06
+      },
+      "conservative_no_reuse": {
+        "api_cost_usd": 0.01,
+        "elapsed_hours": 0.07
+      }
+    },
+    "10000": {
+      "base_reuse": {
+        "api_cost_usd": 0.08,
+        "elapsed_hours": 0.41
+      },
+      "base_no_reuse": {
+        "api_cost_usd": 0.11,
+        "elapsed_hours": 0.53
+      },
+      "conservative_reuse": {
+        "api_cost_usd": 0.13,
+        "elapsed_hours": 0.52
+      },
+      "conservative_no_reuse": {
+        "api_cost_usd": 0.17,
+        "elapsed_hours": 0.67
+      }
+    }
+  },
+  "spend": {
+    "total_billed_usd": 0.0,
+    "per_run": {},
+    "computed_at": "2026-10-11T06:43:20+00:00"
+  }
+}

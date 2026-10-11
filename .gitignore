@@ -1,0 +1,21 @@
+# Secrets: real keys live only in a local .env
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.vercel/
+node_modules/
+# Large raw data: link it and record its checksum instead of committing it
+Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv
+data/*.csv
+# The large final-run state database is published as a release asset, not committed
+runs/final-*/state.sqlite*
+runs/_*/
+runs/**/local-reference.json
+runs/**/.lock
+web/local.db
+# Course-provided dataset folder (download the course ZIP and unzip it here; see README)
+Final Assignment - Spotify Reviews Dataset/

@@ -1,0 +1,41 @@
+kind,provider,model,tier,item,unit,usd_per_million,currency,price_effective,checked_date,source_url,notes
+api,openai,gpt-6-luna,standard,input_uncached,token,0.10,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Standard processing
+api,openai,gpt-6-luna,standard,input_cached,token,0.01,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,"prompt-cache reads, 10% of input; only when reported in usage"
+api,openai,gpt-6-luna,standard,input_cache_write,token,0.125,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,"cache writes 1.25x input; applied only when usage reports cache-write tokens"
+api,openai,gpt-6-luna,standard,output,token,0.50,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,reasoning tokens are part of billed output; not added twice
+api,openai,gpt-6-luna,flex,input_uncached,token,0.05,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,"Flex = 50% of Standard (model page: 'Batch and Flex are priced at 50% of Standard rates')"
+api,openai,gpt-6-luna,flex,input_cached,token,0.005,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Flex cached input (50% of Standard)
+api,openai,gpt-6-luna,flex,input_cache_write,token,0.0625,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Flex cache write (50% of Standard)
+api,openai,gpt-6-luna,flex,output,token,0.25,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Flex output (50% of Standard)
+api,typesafe,jev-1.13.0,standard,input_uncached,token,0.042,USD,listed,2026-10-01,https://docs.typesafe.ai/models,$42 per billion input tokens
+api,typesafe,jev-1.13.0,standard,input_cached,token,0.042,USD,listed,2026-10-01,https://docs.typesafe.ai/models,no cached-input discount listed; same as input
+api,typesafe,jev-1.13.0,standard,output,token,0,USD,listed,2026-10-01,https://docs.typesafe.ai/models,output tokens are free
+subscription,claude_code,haiku,subscription,input_uncached,token,0,USD,Claude Pro plan,2026-10-10,https://claude.com/pricing,"claude -p under the Claude Pro subscription: no per-token charge; API-equivalent shown separately"
+subscription,claude_code,haiku,subscription,input_cached,token,0,USD,Claude Pro plan,2026-10-10,https://claude.com/pricing,subscription (not billed per call)
+subscription,claude_code,haiku,subscription,output,token,0,USD,Claude Pro plan,2026-10-10,https://claude.com/pricing,subscription (not billed per call)
+subscription,claude_code,sonnet,subscription,input_uncached,token,0,USD,Claude Pro plan,2026-10-10,https://claude.com/pricing,"claude -p under the Claude Pro subscription: no per-token charge; API-equivalent shown separately"
+subscription,claude_code,sonnet,subscription,input_cached,token,0,USD,Claude Pro plan,2026-10-10,https://claude.com/pricing,subscription (not billed per call)
+subscription,claude_code,sonnet,subscription,output,token,0,USD,Claude Pro plan,2026-10-10,https://claude.com/pricing,subscription (not billed per call)
+api,anthropic,claude-haiku-5-5,standard,input_uncached,token,0.10,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,prompts up to 100k tokens; API-equivalent reference for claude -p calls
+api,anthropic,claude-haiku-5-5,standard,input_cached,token,0.01,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,cache hits and refreshes
+api,anthropic,claude-haiku-5-5,standard,input_cache_write,token,0.125,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,5-minute cache writes
+api,anthropic,claude-haiku-5-5,standard,output,token,0.50,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,thinking tokens are billed as output
+api,anthropic,claude-sonnet-5-5,standard,input_uncached,token,2.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,API-equivalent reference for claude -p calls
+api,anthropic,claude-sonnet-5-5,standard,input_cached,token,0.10,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,cache hits and refreshes
+api,anthropic,claude-sonnet-5-5,standard,input_cache_write,token,2.50,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,5-minute cache writes
+api,anthropic,claude-sonnet-5-5,standard,output,token,10.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,thinking tokens are billed as output
+api,anthropic,claude-sonnet-5,standard,input_uncached,token,2.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,API-equivalent reference
+api,anthropic,claude-sonnet-5,standard,input_cached,token,0.20,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,cache hits and refreshes
+api,anthropic,claude-sonnet-5,standard,input_cache_write,token,2.50,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,5-minute cache writes
+api,anthropic,claude-sonnet-5,standard,output,token,10.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,thinking tokens are billed as output
+api,anthropic,claude-opus-5-5,standard,input_uncached,token,4.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,API-equivalent reference (only if the CLI resolves an alias to Opus)
+api,anthropic,claude-opus-5-5,standard,input_cached,token,0.20,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,cache hits and refreshes
+api,anthropic,claude-opus-5-5,standard,input_cache_write,token,5.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,5-minute cache writes
+api,anthropic,claude-opus-5-5,standard,output,token,20.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,thinking tokens are billed as output
+api,anthropic,claude-haiku-4-5,standard,input_uncached,token,1.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,API-equivalent reference (older model)
+api,anthropic,claude-haiku-4-5,standard,input_cached,token,0.10,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,cache hits
+api,anthropic,claude-haiku-4-5,standard,input_cache_write,token,1.25,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,5-minute cache writes
+api,anthropic,claude-haiku-4-5,standard,output,token,5.00,USD,listed,2026-10-10,https://platform.claude.com/docs/en/about-claude/pricing,older model
+api,google,gemini-2.5-flash-lite,standard,input_uncached,token,0.10,USD,listed,2026-10-01,https://ai.google.dev/gemini-api/docs/pricing,alternative only (not configured); paid tier
+api,google,gemini-2.5-flash-lite,standard,input_cached,token,0.10,USD,listed,2026-10-01,https://ai.google.dev/gemini-api/docs/pricing,no caching price listed; treated as input
+api,google,gemini-2.5-flash-lite,standard,output,token,0.40,USD,listed,2026-10-01,https://ai.google.dev/gemini-api/docs/pricing,alternative only (not configured)

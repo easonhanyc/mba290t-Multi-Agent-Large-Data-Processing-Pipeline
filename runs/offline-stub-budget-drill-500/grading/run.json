@@ -1,0 +1,14 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 500,
+  "analysis_sha256": "a94e31663ee7b7eaa77e23b7a8425b530cc0c866ed5e714953172a0afef6a12f",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-02T01:12:06.008Z",
+  "input_file": "Final Assignment - Spotify Reviews Dataset/checkpoint_500.csv",
+  "label_config": "stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1",
+  "offline_stub": true,
+  "scope_note": "Development checkpoint export, not the full-corpus submission.",
+  "version": "a5-audit-v1"
+}

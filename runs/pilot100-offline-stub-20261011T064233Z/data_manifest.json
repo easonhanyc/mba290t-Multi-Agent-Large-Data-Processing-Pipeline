@@ -1,0 +1,29 @@
+{
+  "analysis_input": {
+    "bytes": 15466,
+    "path": "runs/pilot100-offline-stub-20261011T064233Z/input/cost_100.csv",
+    "rows": 100,
+    "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
+  },
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "ingestion_profile": {
+    "counts": {
+      "duplicate_review_ids": 0,
+      "empty_review_text": 0,
+      "missing_app_version": 18,
+      "records": 100
+    },
+    "file": "ingestion.json",
+    "file_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+    "parsed_rows_sha256": "23f840350257c058a03a508754384902373a593c09dbac3d1bd0481651fa1733",
+    "profiled": "runs/pilot100-offline-stub-20261011T064233Z/input/cost_100.csv"
+  },
+  "run_id": "run-20261011T064233.895Z-cce4",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "written_at": "2026-10-11T06:42:33.935Z"
+}

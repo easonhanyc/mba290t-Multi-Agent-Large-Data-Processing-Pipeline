@@ -1,0 +1,11 @@
+review_id,fields,enricher_topic,verifier_topic,enricher_intent,verifier_intent,enricher_severity,verifier_severity,enricher_labeled_by,text
+035213ba-b1b9-411c-b028-70296e5f0e73,topic,billing,usability,request,request,1,1,fallback1,I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .
+2be2ae92-6ad1-4c93-8589-65a0ce68fe46,topic|intent|severity,usability,other,complaint,request,3,4,primary,Very nice app
+33526c6f-7a49-4b3d-bd20-d1bc191c494c,topic|intent,usability,access,cancellation,complaint,5,5,primary,"RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮"
+46ff0c74-5e86-4e5b-b4cd-36201aab0f9e,intent|severity,downloads,downloads,cancellation,unclear,2,4,primary,I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs
+94c9f2f9-36fa-4c11-936e-660514fe7a35,topic|intent,usability,downloads,complaint,unclear,4,4,primary,"Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time."
+a1a28752-3256-4f81-b888-3e943343529f,topic|intent|severity,playback,support,cancellation,complaint,4,2,primary,It's nice but gospel music isn't much
+aeee488a-2077-489d-8914-1e01d5f7672f,topic|severity|sentiment_within_tolerance,catalog,downloads,complaint,complaint,3,2,primary,Amazing!!!
+dc73ecd9-3293-4ede-90d5-dd6cd1e8d087,topic|intent|severity,catalog,playback,complaint,cancellation,4,2,primary,Great
+e25cf0b6-0285-4cc9-9a4a-5a8a05be929e,topic|intent|sentiment_within_tolerance,access,billing,cancellation,complaint,2,2,primary,Awesome music app can def see y everyone loves it so much best part to me personally is the categories suggested for you personally
+ed15bb17-865a-492b-ba1b-268f4cab78f6,topic|severity,playback,usability,unclear,unclear,1,2,primary,Very good app enna advertisement verudu premium best

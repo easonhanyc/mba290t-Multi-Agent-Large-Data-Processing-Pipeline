@@ -1,0 +1,6 @@
+# Only needed for live model calls and the offline-stub runs (which use the same SDK code paths).
+# Ingest, ranking, exports, the course checker and the cost calculator replay need the standard library only.
+# Versions installed and tested on 2026-10-01 with Python 3.12.14.
+typesafe-sdk==0.7.2
+openai==3.23.0
+anthropic==1.11.0

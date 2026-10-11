@@ -1,0 +1,277 @@
+{
+  "_doc": "Editable inputs for projections. Every value carries its source. Values marked 'estimate' or 'assumption' are NOT measurements: once a real pilot (cost/pilot_runs.json) or a refresh (cost/refreshes/*.json) exists, measured per-unit costs, latencies and fallback rates replace them automatically and the report says which was used. Prices live in cost/rates.csv.",
+  "as_of": "2026-10-10",
+  "budget_usd": 9.0,
+  "full_run": {
+    "rows": 660622,
+    "nonempty_to_classify": 660609,
+    "empty_text_quarantines": 13,
+    "distinct_nonempty_texts": 484189,
+    "source": "GRADING_CONTRACT.md / course brief; distinct-text count verified by reading the full CSV on 2026-10-10"
+  },
+  "declared_scope": {
+    "rows": 200013,
+    "nonempty_to_classify": 200000,
+    "empty_text_quarantines": 13,
+    "distinct_nonempty_texts": 152363,
+    "source": "data/analysis_200k.manifest.json (scripts/make_analysis_subset.py)"
+  },
+  "controls": {
+    "max_workers": 4,
+    "output_token_cap_per_review": 60,
+    "max_fallback1_fraction": 0.015,
+    "max_fallback2_fraction": 0.0025,
+    "verify_sample_fraction": 0.1,
+    "verify_min_sample": 10,
+    "verify_max_sample": 2000,
+    "project_cap_usd": 9.0,
+    "source": "config/pipeline.toml (run, enrich.fallback*, verify)"
+  },
+  "scenarios": {
+    "base": {
+      "fallback1_rate": 0.01,
+      "fallback2_rate": 0.0005,
+      "transient_retry_rate": 0.02,
+      "invalid_output_retry_rate": 0.01,
+      "token_multiplier": 1.0,
+      "_note": "with measured inputs, base adds no retries on top of the measured ones and uses measured fallback rates"
+    },
+    "conservative": {
+      "fallback1_rate": 0.015,
+      "fallback2_rate": 0.0025,
+      "transient_retry_rate": 0.1,
+      "invalid_output_retry_rate": 0.05,
+      "token_multiplier": 1.3,
+      "_note": "fallbacks at their caps, 15% extra attempts, 30% more tokens per unit"
+    }
+  },
+  "stages": {
+    "enrich_primary": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "tier": "flex",
+      "reviews_per_request": {
+        "value": 49,
+        "source": "config batch 50; last batch partial"
+      },
+      "input_uncached_tokens_per_request": {
+        "value": 1800,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4 (review text, ids, schema tail)"
+      },
+      "input_cached_tokens_per_request": {
+        "value": 2200,
+        "source": "estimate: 9,046-char system prompt is a stable prefix (OpenAI caches >= 1,024-token prefixes)"
+      },
+      "output_tokens_per_request": {
+        "value": 1500,
+        "source": "assumption: about 30 JSON tokens per review x 50"
+      },
+      "seconds_per_request": {
+        "value": 25,
+        "source": "assumption for Flex (slower than Standard); not measured"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 1000,
+        "source": "config (Build tier allows 5,000 RPM)"
+      }
+    },
+    "fallback1": {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "tier": "flex",
+      "reviews_per_request": 1,
+      "input_uncached_tokens_per_request": {
+        "value": 300,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
+      },
+      "input_cached_tokens_per_request": {
+        "value": 2200,
+        "source": "same system prompt as the primary"
+      },
+      "output_tokens_per_request": {
+        "value": 350,
+        "source": "assumption: JSON plus low-effort reasoning"
+      },
+      "seconds_per_request": {
+        "value": 8,
+        "source": "assumption"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 1000,
+        "source": "config"
+      }
+    },
+    "fallback2": {
+      "provider": "claude_code",
+      "model": "sonnet",
+      "api_equivalent_model": "claude-sonnet-5-5",
+      "reviews_per_request": 1,
+      "input_uncached_tokens_per_request": {
+        "value": 2600,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
+      },
+      "output_tokens_per_request": {
+        "value": 800,
+        "source": "assumption"
+      },
+      "seconds_per_request": {
+        "value": 20,
+        "source": "assumption (CLI start-up included)"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 8,
+        "source": "config (gentle on Pro usage limits)"
+      }
+    },
+    "verify": {
+      "provider": "claude_code",
+      "model": "haiku",
+      "api_equivalent_model": "claude-haiku-5-5",
+      "reviews_per_request": 25,
+      "input_uncached_tokens_per_request": {
+        "value": 1700,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4 (25-review verifier request)"
+      },
+      "output_tokens_per_request": {
+        "value": 1000,
+        "source": "assumption: about 40 JSON tokens per review"
+      },
+      "seconds_per_request": {
+        "value": 25,
+        "source": "assumption (CLI start-up included)"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 8,
+        "source": "config"
+      }
+    },
+    "group": {
+      "provider": "claude_code",
+      "model": "sonnet",
+      "api_equivalent_model": "claude-sonnet-5-5",
+      "fixed_calls": 12,
+      "reviews_per_request": 1,
+      "input_uncached_tokens_per_request": {
+        "value": 700,
+        "source": "estimate: definition + 8 quotes"
+      },
+      "output_tokens_per_request": {
+        "value": 200,
+        "source": "assumption"
+      },
+      "seconds_per_request": {
+        "value": 12,
+        "source": "assumption"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 8,
+        "source": "config"
+      }
+    },
+    "memo": {
+      "provider": "claude_code",
+      "model": "sonnet",
+      "api_equivalent_model": "claude-sonnet-5-5",
+      "fixed_calls": 2,
+      "reviews_per_request": 1,
+      "input_uncached_tokens_per_request": {
+        "value": 5000,
+        "source": "estimate: aggregates + evidence pack JSON"
+      },
+      "output_tokens_per_request": {
+        "value": 2500,
+        "source": "assumption"
+      },
+      "seconds_per_request": {
+        "value": 60,
+        "source": "assumption"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 8,
+        "source": "config"
+      }
+    }
+  },
+  "stages_code": {
+    "seconds_per_1000_rows": {
+      "value": 0.1,
+      "source": "measured: offline-stub scale test, 20,000 synthetic rows (runs/offline-stub-scale-20k/scale_summary.json); excludes model latency"
+    }
+  },
+  "failed_attempt_billing": "Measured costs use reported usage; failed attempts without usage cost $0 unless the call timed out (reservation kept as unknown).",
+  "local_compute": {
+    "orchestrator_power_watts": {
+      "value": 15,
+      "status": "assumption, not measured"
+    },
+    "electricity_usd_per_kwh": {
+      "value": 0.4,
+      "status": "assumption, set to your tariff"
+    },
+    "hardware_and_depreciation": "unknown (not estimated)",
+    "note": "All model inference here is remote API inference; local compute is only the orchestrating laptop."
+  },
+  "primary_alternatives": {
+    "_doc": "Enrichment-stage alternatives priced from token estimates (same request shape). Quality is compared on the golden set separately.",
+    "options": [
+      {
+        "name": "GPT-6 Luna, 50 reviews/request, effort none, Flex (configured)",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "tier": "flex",
+        "reviews_per_request": 50,
+        "input_uncached_tokens_per_request": 1800,
+        "input_cached_tokens_per_request": 2200,
+        "output_tokens_per_request": 1500,
+        "seconds_per_request": 25,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
+      },
+      {
+        "name": "GPT-6 Luna, 50 reviews/request, effort none, Standard",
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "tier": "standard",
+        "reviews_per_request": 50,
+        "input_uncached_tokens_per_request": 1800,
+        "input_cached_tokens_per_request": 2200,
+        "output_tokens_per_request": 1500,
+        "seconds_per_request": 12,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
+      },
+      {
+        "name": "Jev 1.13, one review per request",
+        "provider": "typesafe",
+        "model": "jev-1.13.0",
+        "tier": "standard",
+        "reviews_per_request": 1,
+        "input_uncached_tokens_per_request": 1666,
+        "output_tokens_per_request": 48,
+        "seconds_per_request": 0.6,
+        "source": "preflight estimate on checkpoint_500 with the Jev question set (6,665 characters / 4); output free"
+      },
+      {
+        "name": "Claude Haiku 5.5, 50 reviews/request, Standard",
+        "provider": "anthropic",
+        "model": "claude-haiku-5-5",
+        "tier": "standard",
+        "reviews_per_request": 50,
+        "input_uncached_tokens_per_request": 1800,
+        "input_cached_tokens_per_request": 2200,
+        "output_tokens_per_request": 1500,
+        "seconds_per_request": 12,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4; same shape assumed"
+      },
+      {
+        "name": "Gemini 2.5 Flash-Lite, 50 reviews/request (adapter not built)",
+        "provider": "google",
+        "model": "gemini-2.5-flash-lite",
+        "tier": "standard",
+        "reviews_per_request": 50,
+        "input_uncached_tokens_per_request": 4000,
+        "output_tokens_per_request": 1500,
+        "seconds_per_request": 12,
+        "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4; no cache price listed"
+      }
+    ]
+  }
+}

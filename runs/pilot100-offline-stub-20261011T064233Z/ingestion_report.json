@@ -1,0 +1,80 @@
+{
+  "counts": {
+    "distinct_nonempty_texts": 100,
+    "duplicate_review_id_rows": 0,
+    "empty_review_text": 0,
+    "exact_text_cache_aliases": 0,
+    "first_pass_model_work_units": 100,
+    "invalid_rating": 0,
+    "missing_app_version": 18,
+    "mostly_non_latin_text": 0,
+    "multiline_text": 0,
+    "no_letter_text": 0,
+    "nonempty_to_classify": 100,
+    "records": 100,
+    "rows_in_exact_duplicate_text_groups": 0,
+    "unique_review_ids": 100
+  },
+  "exact_text_reuse": true,
+  "finished_at": "2026-10-11T06:42:33.929Z",
+  "first_review": "2022-06-02 10:30:18",
+  "handling": {
+    "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
+    "duplicate_review_id": "first occurrence kept; later rows reported here and excluded",
+    "empty_text": "quarantined with reason empty_review_text; never sent to a model",
+    "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
+    "missing_app_version": "kept; app_version is metadata and never used for classification"
+  },
+  "helper_profile": "ingestion.json: full-file profile of runs/pilot100-offline-stub-20261011T064233Z/input/cost_100.csv produced by the provided check_submission.py profile helper",
+  "input": {
+    "bytes": 15466,
+    "ignored_columns": [],
+    "note": "Only the six source fields are stored; ignored columns never reach any model.",
+    "path": "runs/pilot100-offline-stub-20261011T064233Z/input/cost_100.csv",
+    "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
+  },
+  "last_review": "2023-11-13 15:07:19",
+  "owner": "code",
+  "reviews_by_month": {
+    "2022-06": 5,
+    "2022-07": 5,
+    "2022-08": 6,
+    "2022-09": 5,
+    "2022-10": 4,
+    "2022-11": 1,
+    "2022-12": 2,
+    "2023-01": 4,
+    "2023-02": 4,
+    "2023-03": 7,
+    "2023-04": 4,
+    "2023-05": 5,
+    "2023-06": 4,
+    "2023-07": 11,
+    "2023-08": 3,
+    "2023-09": 6,
+    "2023-10": 19,
+    "2023-11": 5
+  },
+  "reviews_by_rating": {
+    "1": 33,
+    "2": 8,
+    "3": 6,
+    "4": 10,
+    "5": 43
+  },
+  "run_id": "run-20261011T064233.895Z-cce4",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "stage": "ingest",
+  "started_at": "2026-10-11T06:42:33.927Z",
+  "text_length_chars": {
+    "max": 486,
+    "mean": 80.4,
+    "median": 44.5,
+    "min": 4,
+    "p90": 183
+  },
+  "top_duplicate_texts": []
+}

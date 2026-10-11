@@ -1,0 +1,16 @@
+{
+  "distinct_texts_pending": 479,
+  "fallback_request_chars_example": 7199,
+  "method": "characters / 4 = typical token estimate; characters / 3 = conservative (used for spend reservations). Estimates only: providers tokenize differently; the pilot measures real usage.",
+  "primary_backend": "jev",
+  "primary_request_chars": {
+    "max": 7701,
+    "mean": 6665.5,
+    "median": 6520,
+    "p90": 7074
+  },
+  "primary_requests": 479,
+  "primary_tokens_per_request_estimate": 1666.4,
+  "reviews_ingested": 500,
+  "verify_request_chars_example": 3103
+}

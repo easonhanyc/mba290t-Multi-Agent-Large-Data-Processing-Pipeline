@@ -1,0 +1,38 @@
+{
+  "file": "data/analysis_200k.csv",
+  "sha256": "3c023c9dd47a577523dc2a74eb00ec69a79ae1300b80de13f2423256b7222fad",
+  "bytes": 29411284,
+  "rows": 200013,
+  "sampled_nonempty": 200000,
+  "empty_text_rows_added": 13,
+  "distinct_sampled_texts": 152363,
+  "full_source": {
+    "file": "Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv",
+    "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6",
+    "rows": 660622,
+    "matches_course_manifest": true
+  },
+  "method": "Lowest SHA-256('berkeley-fall-2026-assignment-5-v1:' + review_id) among unique-ID, nonempty, valid-rating records (the course's sampling rule), first 200000; plus every empty-text row so it is explicitly quarantined. Rows unchanged, source order, csv.DictWriter(lineterminator='\\n').",
+  "contains_course_files": {
+    "golden_50_to_label.csv": {
+      "rows": 50,
+      "all_in_scope": true
+    },
+    "analysis_10000.csv": {
+      "rows": 10000,
+      "all_in_scope": true
+    },
+    "checkpoint_500.csv": {
+      "rows": 500,
+      "all_in_scope": true
+    },
+    "cost_100.csv": {
+      "rows": 100,
+      "all_in_scope": true
+    }
+  },
+  "out_of_scope_rows": 460609,
+  "out_of_scope_reason": "Not classified: outside the declared 200,000-review analysis scope chosen to keep total API spend under the $10 project budget. Ingested and profiled only.",
+  "created_at": "2026-10-11T06:34:20+00:00",
+  "command": "python3 scripts/make_analysis_subset.py"
+}

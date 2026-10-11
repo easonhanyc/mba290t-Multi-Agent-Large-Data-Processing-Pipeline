@@ -1,0 +1,540 @@
+{
+  "generated_at": "2026-10-02T01:12:06.005Z",
+  "memo_config": "stub-gpt-6-luna@low|memo-v1|cfg-0d09621bbe",
+  "output": {
+    "alternatives": [
+      {
+        "area": "usability",
+        "why_not_first": "Stub text (offline plumbing test)."
+      },
+      {
+        "area": "playback/performance",
+        "why_not_first": "Stub text (offline plumbing test)."
+      },
+      {
+        "area": "billing/support",
+        "why_not_first": "Stub text (offline plumbing test)."
+      }
+    ],
+    "cited_reviews": [
+      "9f46904c-4ed3-4799-8949-379b949c7344"
+    ],
+    "limitations": [
+      "Stub text from the offline test server; not a model output.",
+      "Stub text from the offline test server; not a model output."
+    ],
+    "rationale": [
+      "Stub text from the offline test server; not a model output.",
+      "Stub text from the offline test server; not a model output."
+    ],
+    "recommendation": "Stub memo text (offline plumbing test, not a finding), citing {C01} and {C02}.",
+    "recommended_area": "access/onboarding"
+  },
+  "payload": {
+    "areas": [
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{A01}",
+          "value": 67
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A02}",
+          "value": 202
+        },
+        "share_of_complaints": {
+          "token": "{A03}",
+          "value": "0.304545"
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{A04}",
+          "value": 48
+        },
+        "decision_option": false,
+        "severity_sum": {
+          "token": "{A05}",
+          "value": 151
+        },
+        "share_of_complaints": {
+          "token": "{A06}",
+          "value": "0.218182"
+        }
+      },
+      {
+        "area": "billing/support",
+        "complaint_count": {
+          "token": "{A07}",
+          "value": 43
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A08}",
+          "value": 124
+        },
+        "share_of_complaints": {
+          "token": "{A09}",
+          "value": "0.195455"
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{A10}",
+          "value": 35
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A11}",
+          "value": 116
+        },
+        "share_of_complaints": {
+          "token": "{A12}",
+          "value": "0.159091"
+        }
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{A13}",
+          "value": 19
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A14}",
+          "value": 55
+        },
+        "share_of_complaints": {
+          "token": "{A15}",
+          "value": "0.086364"
+        }
+      },
+      {
+        "area": "general/unspecified",
+        "complaint_count": {
+          "token": "{A16}",
+          "value": 8
+        },
+        "decision_option": false,
+        "severity_sum": {
+          "token": "{A17}",
+          "value": 30
+        },
+        "share_of_complaints": {
+          "token": "{A18}",
+          "value": "0.036364"
+        }
+      }
+    ],
+    "decision_rule": "baseline priority = severity_sum over complaint and cancellation reviews; areas sum their issues",
+    "evidence": [
+      {
+        "issue_id": "downloads.offline",
+        "quote": "Best indeeeeeeeed",
+        "review_id": "9f46904c-4ed3-4799-8949-379b949c7344"
+      },
+      {
+        "issue_id": "downloads.offline",
+        "quote": "I haven't experted about this from Spotify...🙄 I'm uninstalling successful....meet me when have got the old Spotify update !!!",
+        "review_id": "62b53e0a-0397-4200-826f-122d18fdde32"
+      },
+      {
+        "issue_id": "playback.devices",
+        "quote": "i have used spotify for 5 years and would say its the best streaming service",
+        "review_id": "6455e7cb-ad90-47ad-883f-5b0f0e205af1"
+      },
+      {
+        "issue_id": "playback.devices",
+        "quote": "Excellent quality and great choice",
+        "review_id": "00a77161-cb3f-4fae-a7b6-eca2cfc124ec"
+      },
+      {
+        "issue_id": "billing.premium_only",
+        "quote": "I can't use anything else but Spotify 💯👍🏼",
+        "review_id": "ba274609-2cbc-4d6a-9624-276d1c8246e8"
+      },
+      {
+        "issue_id": "billing.premium_only",
+        "quote": "Very good app enna advertisement verudu premium best",
+        "review_id": "ed15bb17-865a-492b-ba1b-268f4cab78f6"
+      },
+      {
+        "issue_id": "catalog.lyrics",
+        "quote": "I hate application",
+        "review_id": "1db044db-d184-4335-877c-d8fc364b282e"
+      },
+      {
+        "issue_id": "catalog.lyrics",
+        "quote": "Nice as always,keep up the good job.",
+        "review_id": "b25beb44-9cc8-4d1e-b375-a4f319419424"
+      },
+      {
+        "issue_id": "playback.stops",
+        "quote": "App is very easy to use and no more ads",
+        "review_id": "28a441b5-1d54-4a5d-9df3-cbc84d21527c"
+      },
+      {
+        "issue_id": "playback.stops",
+        "quote": "No good",
+        "review_id": "5fb51bd0-dbe9-4a19-a466-a77f0c14393e"
+      }
+    ],
+    "question": "Where should the next quarter of product-improvement effort go: access/onboarding, usability, playback/performance, or billing/support?",
+    "scope_figures": {
+      "S01": {
+        "label": "Reviews in scope (unique IDs ingested)",
+        "source": "ingestion_report.json",
+        "token": "{S01}",
+        "value": 500
+      },
+      "S02": {
+        "label": "Completed classifications",
+        "source": "grading/records.jsonl",
+        "token": "{S02}",
+        "value": 500
+      },
+      "S03": {
+        "label": "Quarantined: empty text",
+        "source": "quarantine.jsonl",
+        "token": "{S03}",
+        "value": 0
+      },
+      "S04": {
+        "label": "Quarantined: other reasons",
+        "source": "quarantine.jsonl",
+        "token": "{S04}",
+        "value": 0
+      },
+      "S05": {
+        "label": "Unfinished",
+        "source": "run_summary.json",
+        "token": "{S05}",
+        "value": 0
+      },
+      "S06": {
+        "label": "Completed records flagged needs_review",
+        "source": "enriched.jsonl",
+        "token": "{S06}",
+        "value": 210
+      },
+      "S07": {
+        "label": "Complaint and cancellation records ranked",
+        "source": "membership.csv",
+        "token": "{S07}",
+        "value": 220
+      },
+      "S08": {
+        "label": "Verification sample compared",
+        "source": "verification/report.json",
+        "token": "{S08}",
+        "value": 48
+      },
+      "S09": {
+        "label": "Verifier topic agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S09}",
+        "value": 0.125
+      },
+      "S10": {
+        "label": "Verifier intent agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S10}",
+        "value": 0.25
+      },
+      "S11": {
+        "label": "Verifier exact severity agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S11}",
+        "value": 0.1875
+      }
+    },
+    "top_issues": [
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C01}",
+          "value": 17
+        },
+        "issue_id": "downloads.offline",
+        "mean_severity": {
+          "token": "{C03}",
+          "value": "3.117647"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C04}",
+          "value": 53
+        },
+        "severity_sum": {
+          "token": "{C02}",
+          "value": 53
+        }
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C05}",
+          "value": 13
+        },
+        "issue_id": "playback.devices",
+        "mean_severity": {
+          "token": "{C07}",
+          "value": "3.384615"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C08}",
+          "value": 44
+        },
+        "severity_sum": {
+          "token": "{C06}",
+          "value": 44
+        }
+      },
+      {
+        "area": "billing/support",
+        "complaint_count": {
+          "token": "{C09}",
+          "value": 14
+        },
+        "issue_id": "billing.premium_only",
+        "mean_severity": {
+          "token": "{C11}",
+          "value": "2.928571"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C12}",
+          "value": 41
+        },
+        "severity_sum": {
+          "token": "{C10}",
+          "value": 41
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{C13}",
+          "value": 13
+        },
+        "issue_id": "catalog.lyrics",
+        "mean_severity": {
+          "token": "{C15}",
+          "value": "3.076923"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C16}",
+          "value": 40
+        },
+        "severity_sum": {
+          "token": "{C14}",
+          "value": 40
+        }
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C17}",
+          "value": 13
+        },
+        "issue_id": "playback.stops",
+        "mean_severity": {
+          "token": "{C19}",
+          "value": "2.923077"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C20}",
+          "value": 38
+        },
+        "severity_sum": {
+          "token": "{C18}",
+          "value": 38
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{C21}",
+          "value": 12
+        },
+        "issue_id": "catalog.missing",
+        "mean_severity": {
+          "token": "{C23}",
+          "value": "2.916667"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C24}",
+          "value": 35
+        },
+        "severity_sum": {
+          "token": "{C22}",
+          "value": 35
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{C25}",
+          "value": 11
+        },
+        "issue_id": "catalog.search",
+        "mean_severity": {
+          "token": "{C27}",
+          "value": "3.181818"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C28}",
+          "value": 35
+        },
+        "severity_sum": {
+          "token": "{C26}",
+          "value": 35
+        }
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{C29}",
+          "value": 12
+        },
+        "issue_id": "access.account",
+        "mean_severity": {
+          "token": "{C31}",
+          "value": "2.833333"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C32}",
+          "value": 34
+        },
+        "severity_sum": {
+          "token": "{C30}",
+          "value": 34
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C33}",
+          "value": 10
+        },
+        "issue_id": "usability.ads",
+        "mean_severity": {
+          "token": "{C35}",
+          "value": "3.400000"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C36}",
+          "value": 34
+        },
+        "severity_sum": {
+          "token": "{C34}",
+          "value": 34
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C37}",
+          "value": 9
+        },
+        "issue_id": "usability.navigation",
+        "mean_severity": {
+          "token": "{C39}",
+          "value": "3.444444"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C40}",
+          "value": 31
+        },
+        "severity_sum": {
+          "token": "{C38}",
+          "value": 31
+        }
+      }
+    ]
+  },
+  "source": "model",
+  "tokens": {
+    "A01": "67",
+    "A02": "202",
+    "A03": "0.304545",
+    "A04": "48",
+    "A05": "151",
+    "A06": "0.218182",
+    "A07": "43",
+    "A08": "124",
+    "A09": "0.195455",
+    "A10": "35",
+    "A11": "116",
+    "A12": "0.159091",
+    "A13": "19",
+    "A14": "55",
+    "A15": "0.086364",
+    "A16": "8",
+    "A17": "30",
+    "A18": "0.036364",
+    "C01": "17",
+    "C02": "53",
+    "C03": "3.117647",
+    "C04": "53",
+    "C05": "13",
+    "C06": "44",
+    "C07": "3.384615",
+    "C08": "44",
+    "C09": "14",
+    "C10": "41",
+    "C11": "2.928571",
+    "C12": "41",
+    "C13": "13",
+    "C14": "40",
+    "C15": "3.076923",
+    "C16": "40",
+    "C17": "13",
+    "C18": "38",
+    "C19": "2.923077",
+    "C20": "38",
+    "C21": "12",
+    "C22": "35",
+    "C23": "2.916667",
+    "C24": "35",
+    "C25": "11",
+    "C26": "35",
+    "C27": "3.181818",
+    "C28": "35",
+    "C29": "12",
+    "C30": "34",
+    "C31": "2.833333",
+    "C32": "34",
+    "C33": "10",
+    "C34": "34",
+    "C35": "3.400000",
+    "C36": "34",
+    "C37": "9",
+    "C38": "31",
+    "C39": "3.444444",
+    "C40": "31",
+    "S01": "500",
+    "S02": "500",
+    "S03": "0",
+    "S04": "0",
+    "S05": "0",
+    "S06": "210",
+    "S07": "220",
+    "S08": "48",
+    "S09": "0.125",
+    "S10": "0.25",
+    "S11": "0.1875"
+  },
+  "validation_problems": []
+}

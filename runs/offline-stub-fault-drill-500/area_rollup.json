@@ -1,0 +1,60 @@
+{
+  "areas": [
+    {
+      "area": "playback/performance",
+      "cancellation_count": 39,
+      "complaint_count": 67,
+      "decision_option": true,
+      "issues": 6,
+      "severity_sum": 202,
+      "share_of_complaints": "0.304545"
+    },
+    {
+      "area": "catalog/content",
+      "cancellation_count": 26,
+      "complaint_count": 48,
+      "decision_option": false,
+      "issues": 5,
+      "severity_sum": 151,
+      "share_of_complaints": "0.218182"
+    },
+    {
+      "area": "billing/support",
+      "cancellation_count": 20,
+      "complaint_count": 43,
+      "decision_option": true,
+      "issues": 4,
+      "severity_sum": 124,
+      "share_of_complaints": "0.195455"
+    },
+    {
+      "area": "usability",
+      "cancellation_count": 18,
+      "complaint_count": 35,
+      "decision_option": true,
+      "issues": 4,
+      "severity_sum": 116,
+      "share_of_complaints": "0.159091"
+    },
+    {
+      "area": "access/onboarding",
+      "cancellation_count": 10,
+      "complaint_count": 19,
+      "decision_option": true,
+      "issues": 2,
+      "severity_sum": 55,
+      "share_of_complaints": "0.086364"
+    },
+    {
+      "area": "general/unspecified",
+      "cancellation_count": 4,
+      "complaint_count": 8,
+      "decision_option": false,
+      "issues": 1,
+      "severity_sum": 30,
+      "share_of_complaints": "0.036364"
+    }
+  ],
+  "denominator_complaints": 220,
+  "note": "Derived view: sums of baseline issue metrics by decision area. Not a contract metric."
+}

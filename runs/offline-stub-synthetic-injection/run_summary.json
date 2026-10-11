@@ -1,0 +1,166 @@
+{
+  "history": [
+    {
+      "completed_ids_saved": 4,
+      "phase": "initial",
+      "run_id": "run-20261002T011208.683Z-3189",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 0.109
+    }
+  ],
+  "latest": {
+    "calls_all_invocations": {
+      "enrich:primary": {
+        "attempts": 4,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.0,
+        "input_tokens": 6774,
+        "invalid_output_retries": 0,
+        "output_tokens": 184,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 4
+      }
+    },
+    "calls_this_invocation": {
+      "enrich:primary": {
+        "attempts": 4,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.0,
+        "input_tokens": 6774,
+        "invalid_output_retries": 0,
+        "output_tokens": 184,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 4
+      }
+    },
+    "completed_ids_saved": 4,
+    "finished_at": "2026-10-02T01:12:08.810Z",
+    "input": {
+      "bytes": 831,
+      "ingested_at": "2026-10-02T01:12:08.702Z",
+      "path": "evals/synthetic/injection_cases.csv",
+      "rows": 6,
+      "sha256": "83089277b16270a47463cd1b5c86e232bd0c3350c49faae019aed6cd07895dd3"
+    },
+    "label_config": "stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1",
+    "ledger": {
+      "cap_usd": 1.0,
+      "denials": 0,
+      "reserved_usd": 0.0,
+      "spent_usd": 0.0,
+      "unknown_usd": 0.0
+    },
+    "models": {
+      "enrich_primary": {
+        "effort": "n/a",
+        "model": "stub-jev-1.13.0",
+        "provider": "typesafe"
+      },
+      "fallback1": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.1,
+        "model": "stub-gpt-6-luna",
+        "provider": "openai"
+      },
+      "fallback2": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.01,
+        "model": "stub-claude-sonnet-5",
+        "provider": "anthropic"
+      },
+      "group": {
+        "effort": "none",
+        "model": "stub-gpt-6-luna",
+        "provider": "openai"
+      },
+      "memo": {
+        "effort": "low",
+        "model": "stub-gpt-6-luna",
+        "provider": "openai"
+      },
+      "verify": {
+        "effort": "low",
+        "model": "stub-gpt-6-luna",
+        "provider": "openai"
+      }
+    },
+    "offline_stub": true,
+    "phase": "initial",
+    "reconciled_unknown_calls": 0,
+    "results": {
+      "by_status_and_tier": {
+        "completed:primary": 4,
+        "quarantined:rule": 2
+      },
+      "completed": 4,
+      "exact_text_cache_reuses": 0,
+      "needs_review": 0,
+      "quarantined": 2,
+      "quarantined_empty_text": 2,
+      "scope": {
+        "distinct_nonempty_texts": 4,
+        "duplicate_id_rows": 0,
+        "empty_texts": 2,
+        "nonempty": 4,
+        "representatives": 4,
+        "rows": 6,
+        "unique_ids": 6
+      },
+      "unfinished": 0
+    },
+    "run_id": "run-20261002T011208.683Z-3189",
+    "stage_configs": {
+      "group": "stub-gpt-6-luna@none|group-v1|cfg-97658bc59d",
+      "memo": "stub-gpt-6-luna@low|memo-v1|cfg-0d09621bbe",
+      "verify": "stub-gpt-6-luna@low|verify-v1|cfg-520f0f4346"
+    },
+    "stage_seconds": {
+      "enrich": 0.094,
+      "export": 0.003,
+      "ingest": 0.006
+    },
+    "stages": {
+      "enrich": {
+        "aliases_written": 0,
+        "caps": {
+          "fallback1": 1,
+          "fallback2": 1
+        },
+        "difficult": 0,
+        "fallback_not_selected_cap": 0,
+        "invalid_output_retries": 0,
+        "invalid_outputs": 0,
+        "left_pending_stopping": 0,
+        "left_pending_transient": 0,
+        "quarantined": 0,
+        "routed": {
+          "fallback1": 0,
+          "fallback2": 0
+        },
+        "saved_fallback1": 0,
+        "saved_fallback2": 0,
+        "saved_primary": 4,
+        "staged": 0,
+        "still_pending": 0,
+        "stop_reason": null,
+        "transient_requeued": 0
+      },
+      "export": {
+        "calls": 4,
+        "checkpoint_after": 4,
+        "checkpoint_before": 0,
+        "grading_dir": "runs/offline-stub-synthetic-injection/grading",
+        "records": 6
+      }
+    },
+    "status": "completed",
+    "stop_reason": null,
+    "wall_clock_s": 0.109,
+    "workers": 1
+  }
+}

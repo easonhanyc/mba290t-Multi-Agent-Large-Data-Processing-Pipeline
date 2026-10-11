@@ -1,0 +1,130 @@
+# Pipeline configuration. Every setting that can change a label is folded into label_config,
+# so editing a model, effort, prompt, threshold or fallback cap forces new work instead of
+# silently reusing cached results. Live providers run only with `--allow-paid`.
+
+[paths]
+dataset_dir = "Final Assignment - Spotify Reviews Dataset"
+checker = "Final Assignment - Spotify Reviews Dataset/check_submission.py"
+rates = "cost/rates.csv"
+
+[run]
+seed = "berkeley-fa-2026-insight-v1"   # verification sampling seed
+workers = 1                  # start at one worker; raise only after a measured comparison
+max_in_flight_per_worker = 2 # queued requests per worker
+budget_usd = 1.00            # hard cap per run directory, cumulative across resumes (--budget-usd overrides)
+project_cap_usd = 9.00       # hard cap on billed API spend summed over EVERY run directory under runs/ (Eason's $10 limit, $1 margin)
+circuit_breaker_failures = 5 # consecutive requests that exhaust their retries -> stop and save
+
+[retry]
+max_attempts = 4             # transient errors (429, 5xx, timeouts, connection), including the first try
+backoff_initial_s = 1.0      # exponential backoff with full jitter, capped below
+backoff_max_s = 30.0
+invalid_output_retries = 1   # contract: at most one retry for invalid output
+
+[enrich]
+backend = "llm"              # "llm": batched LLM, <= 50 reviews | "jev": classifier, one review per request (measured candidate)
+prompt_version = "enrich-v2"
+schema_version = "schema-v2"
+dispatch_batch = 25          # reviews admitted together; each review is saved as soon as it resolves
+llm_batch_size = 50          # reviews per request when backend = "llm" (contract maximum 50)
+exact_text_reuse = true      # identical text reuses one validated result (cache_source_id provenance)
+
+[enrich.jev]
+provider = "typesafe"
+model = "jev-1.13.0"         # pinned version, not the moving jev-latest alias
+questions = "prompts/jev_enrich_v1.json"
+# Below these confidences a Jev answer counts as difficult and may use the capped fallback.
+# Placeholders until tuned on development reviews (never on the golden set).
+min_confidence_issue = 0.55
+min_confidence_intent = 0.60
+min_confidence_severity = 0.50
+max_unclear_probability = 0.50
+
+[enrich.llm]                 # prompt for backend = "llm" and for the fallback tiers
+prompt = "prompts/llm_enrich_v2.md"
+provider = "openai"          # used only when backend = "llm"
+model = "gpt-6-luna"
+effort = "none"              # cheapest supported reasoning setting for GPT-6 Luna
+max_output_tokens_per_review = 60
+service_tier = "flex"        # cost-only (not in label_config): Flex is 50% of Standard, slower, may return 429
+timeout_s = 900              # Flex requests can queue; OpenAI suggests long client timeouts
+
+[enrich.fallback1]           # capped: difficult or invalid primary results only, one review per request
+enabled = true
+provider = "openai"
+model = "gpt-6-luna"
+effort = "low"
+max_fraction = 0.015
+max_output_tokens = 600
+service_tier = "flex"
+timeout_s = 900
+
+[enrich.fallback2]           # capped stronger model: only when fallback1 output is invalid twice
+enabled = true
+provider = "claude_code"     # Claude Pro subscription via `claude -p` (no per-call API bill)
+model = "sonnet"             # CLI alias; the exact model ID is recorded on every call
+effort = "low"
+max_fraction = 0.0025
+max_output_tokens = 2000
+
+[verify]
+provider = "claude_code"     # different model family from the enricher; blind to its labels
+model = "haiku"
+effort = "n/a"
+prompt = "prompts/verify_v2.md"
+batch_size = 25              # reviews per verifier request (each judged independently)
+sample_fraction = 0.10       # of distinct completed texts; declared before the run
+min_sample = 10
+max_sample = 2000
+max_output_tokens = 4000
+
+[group]
+provider = "claude_code"
+model = "sonnet"
+effort = "low"
+prompt = "prompts/group_v1.md"
+name_top_k = 12              # only the top-ranked issues are named by the model
+evidence_per_issue = 8
+max_output_tokens = 1500
+
+[memo]
+provider = "claude_code"
+model = "sonnet"
+effort = "low"
+prompt = "prompts/memo_v2.md"
+top_n = 10
+evidence_issues = 5
+quotes_per_issue = 2
+max_output_tokens = 6000
+
+[providers.typesafe]
+kind = "typesafe"
+api_key_env = "TYPESAFE_API_KEY"
+base_url = "https://api.typesafe.ai"
+timeout_s = 30
+requests_per_minute = 1200   # documented limit is 40 requests/s and 100k tokens/s; stay well below
+tokens_per_minute = 2000000
+
+[providers.openai]
+kind = "openai"
+api_key_env = "OPENAI_API_KEY"
+base_url = "https://api.openai.com/v1"
+timeout_s = 120
+requests_per_minute = 1000   # gpt-6-luna Build tier: 5,000 RPM / 2M TPM (model page, checked 2026-10-10); stay well below
+tokens_per_minute = 1500000
+
+[providers.anthropic]
+kind = "anthropic"
+api_key_env = "ANTHROPIC_API_KEY"
+base_url = "https://api.anthropic.com"
+timeout_s = 120
+requests_per_minute = 40
+tokens_per_minute = 30000
+
+[providers.claude_code]
+kind = "claude_code"         # local `claude` CLI logged in with Claude Pro; ANTHROPIC_API_KEY is stripped from its env
+api_key_env = ""
+command = "claude"
+timeout_s = 300
+requests_per_minute = 8      # be gentle with subscription usage limits
+tokens_per_minute = 400000

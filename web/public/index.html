@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spotify Review Insights</title>
+  <meta name="description" content="Processed Spotify app reviews, issue ranking and an AI recommendation grounded in saved metrics and review evidence.">
+  <link rel="stylesheet" href="styles.css?v=2026101101">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/asciinema-player@3.7.1/dist/bundle/asciinema-player.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <h1>Spotify Review Insights</h1>
+        <p id="scope" class="muted">Loading run…</p>
+      </div>
+      <div id="health" class="health" title="Backend and database status">checking…</div>
+    </div>
+    <nav class="tabs wrap" role="tablist">
+      <button role="tab" data-tab="overview" class="active">Overview</button>
+      <button role="tab" data-tab="recommendation">AI recommendation</button>
+      <button role="tab" data-tab="issues">Issue ranking</button>
+      <button role="tab" data-tab="trends">Trends</button>
+      <button role="tab" data-tab="evaluation">Evaluation</button>
+      <button role="tab" data-tab="run">Run &amp; cost</button>
+      <button role="tab" data-tab="lookup">Review lookup</button>
+    </nav>
+  </header>
+  <div id="stub-banner" class="banner hidden wrap">OFFLINE STUB DATA: labels and text in this database came from a local test server and are not findings.</div>
+
+  <main class="wrap">
+    <section id="tab-overview" class="tab active">
+      <div id="kpis" class="kpis"></div>
+      <div class="grid2">
+        <div class="card"><h3>Baseline priority by decision area</h3><p class="muted small">Sum of severity over complaint and cancellation reviews (the course baseline), grouped by the four decision areas plus other topics.</p><div class="chart" style="height:270px"><canvas id="chart-areas"></canvas></div></div>
+        <div class="card"><h3>What reviewers are doing (intent)</h3><div class="chart" style="height:270px"><canvas id="chart-intents"></canvas></div></div>
+        <div class="card"><h3>Complaints by topic</h3><div class="chart" style="height:270px"><canvas id="chart-topics"></canvas></div></div>
+        <div class="card"><h3>Severity of complaints</h3><p class="muted small">1 no problem, 2 annoyance, 3 degraded, 4 blocked core task, 5 serious financial/privacy/data harm.</p><div class="chart" style="height:270px"><canvas id="chart-severity"></canvas></div></div>
+      </div>
+      <div class="card"><h3>Accounting</h3><div id="accounting"></div></div>
+    </section>
+
+    <section id="tab-recommendation" class="tab">
+      <div class="card rec">
+        <div class="rec-head"><span class="pill" id="rec-area">…</span><span class="muted small" id="rec-source"></span></div>
+        <p id="rec-text" class="lead"></p>
+        <div class="grid2">
+          <div><h3>Why</h3><ul id="rec-why"></ul></div>
+          <div><h3>Alternatives considered</h3><ul id="rec-alts"></ul></div>
+        </div>
+        <h3>Limitations</h3><ul id="rec-limits"></ul>
+        <h3>Cited review evidence</h3><div id="rec-cited"></div>
+      </div>
+      <div class="card"><h3>Every number in the recommendation, traced</h3>
+        <p class="muted small">The memo model never typed a digit: it wrote tokens such as <code>{C01}</code> and code filled them from saved calculations. Issue-level claims are checked against the ranking table in the database on every page load.</p>
+        <div id="rec-consistency" class="status"></div>
+        <div class="table-wrap"><table id="rec-claims"></table></div>
+      </div>
+      <details class="card"><summary>Full memo (memo.md)</summary><div id="rec-memo" class="md"></div></details>
+    </section>
+
+    <section id="tab-issues" class="tab">
+      <div class="card"><h3>Baseline issue ranking</h3>
+        <p class="muted small">priority = severity_sum = complaint_count × mean_severity over complaint and cancellation reviews; ties broken by issue ID. Click an issue for its trend and source evidence.</p>
+        <div class="table-wrap"><table id="ranking"></table></div></div>
+      <div id="issue-detail" class="card hidden"></div>
+    </section>
+
+    <section id="tab-trends" class="tab">
+      <div class="card"><h3>Complaint share by month</h3><p class="muted small">Complaint and cancellation reviews / all classified reviews in the month (denominators shown on hover). First and last months are partial.</p><div class="chart" style="height:300px"><canvas id="chart-monthly"></canvas></div></div>
+      <div class="card"><h3>Complaints by decision area per month (share of all reviews)</h3><div class="chart" style="height:300px"><canvas id="chart-area-months"></canvas></div></div>
+      <div class="grid2">
+        <div class="card"><h3>Same months, one year apart</h3><div id="period"></div></div>
+        <div class="card"><h3>Review-volume spikes</h3><div id="spikes"></div></div>
+      </div>
+    </section>
+
+    <section id="tab-evaluation" class="tab">
+      <div class="grid2">
+        <div class="card"><h3>Golden set (50 human labels)</h3><div id="golden"></div></div>
+        <div class="card"><h3>Independent verification</h3><div id="verify"></div></div>
+        <div class="card"><h3>Planted wrong label</h3><div id="planted"></div></div>
+        <div class="card"><h3>Prompt injection (synthetic)</h3><div id="injection"></div></div>
+      </div>
+      <div class="card"><h3>Reproducibility and course checker</h3><div id="checks"></div></div>
+    </section>
+
+    <section id="tab-run" class="tab">
+      <div class="grid2">
+        <div class="card"><h3>Cost</h3><div id="cost"></div></div>
+        <div class="card"><h3>Interruption and resume</h3><div id="checkpoints"></div></div>
+      </div>
+      <div class="card"><h3>Recording: live interruption (Ctrl-C) then resume</h3><div id="recordings"></div></div>
+      <div class="card"><h3>Run history</h3><div class="table-wrap"><table id="history"></table></div></div>
+      <details class="card"><summary>One review traced end to end (docs/trace_example.md)</summary><div id="trace-md" class="md"></div></details>
+    </section>
+
+    <section id="tab-lookup" class="tab">
+      <div class="card">
+        <form id="search" class="search">
+          <input id="s-q" placeholder="Search review text (e.g. shuffle, logged out)" aria-label="Search text">
+          <select id="s-intent" aria-label="Intent"><option value="">any intent</option><option>complaint</option><option>cancellation</option><option>request</option><option>praise</option><option>unclear</option></select>
+          <select id="s-topic" aria-label="Topic"><option value="">any topic</option><option>access</option><option>usability</option><option>playback</option><option>downloads</option><option>catalog</option><option>billing</option><option>support</option><option>other</option></select>
+          <input id="s-id" placeholder="or paste a review ID" aria-label="Review ID">
+          <button type="submit">Search</button>
+        </form>
+        <div id="s-results"></div>
+      </div>
+      <div id="trace" class="card hidden"></div>
+    </section>
+  </main>
+  <footer class="wrap muted small">Read-only dashboard. Data: BwandoWando, "3.4 Million Spotify Google Store Reviews" (CC0), course extract May 2022 to Nov 2023. Backend: FastAPI on Vercel; database: Postgres. No model is called by this site.</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.7.1/dist/bundle/asciinema-player.min.js"></script>
+  <script src="app.js?v=2026101101"></script>
+</body>
+</html>

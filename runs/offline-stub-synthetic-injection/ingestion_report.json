@@ -1,0 +1,55 @@
+{
+  "counts": {
+    "distinct_nonempty_texts": 4,
+    "duplicate_review_id_rows": 0,
+    "empty_review_text": 2,
+    "exact_text_cache_aliases": 0,
+    "first_pass_model_work_units": 4,
+    "invalid_rating": 0,
+    "missing_app_version": 6,
+    "mostly_non_latin_text": 0,
+    "multiline_text": 1,
+    "no_letter_text": 0,
+    "nonempty_to_classify": 4,
+    "records": 6,
+    "rows_in_exact_duplicate_text_groups": 0,
+    "unique_review_ids": 6
+  },
+  "exact_text_reuse": true,
+  "finished_at": "2026-10-02T01:12:08.701Z",
+  "first_review": "2026-10-01 00:00:00",
+  "handling": {
+    "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
+    "duplicate_review_id": "first occurrence kept; later rows reported here and excluded",
+    "empty_text": "quarantined with reason empty_review_text; never sent to a model",
+    "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
+    "missing_app_version": "kept; app_version is metadata and never used for classification"
+  },
+  "helper_profile": "ingestion.json (produced by the provided check_submission.py profile helper)",
+  "input": {
+    "bytes": 831,
+    "ignored_columns": [],
+    "note": "Only the six source fields are stored; ignored columns never reach any model.",
+    "path": "evals/synthetic/injection_cases.csv",
+    "sha256": "83089277b16270a47463cd1b5c86e232bd0c3350c49faae019aed6cd07895dd3"
+  },
+  "last_review": "2026-10-01 00:00:00",
+  "owner": "code",
+  "reviews_by_month": {
+    "2026-10": 6
+  },
+  "reviews_by_rating": {
+    "3": 6
+  },
+  "run_id": "run-20261002T011208.683Z-3189",
+  "stage": "ingest",
+  "started_at": "2026-10-02T01:12:08.701Z",
+  "text_length_chars": {
+    "max": 148,
+    "mean": 121.2,
+    "median": 139.0,
+    "min": 59,
+    "p90": 141
+  },
+  "top_duplicate_texts": []
+}

@@ -1,0 +1,15 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 100,
+  "analysis_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-11T06:43:20.182Z",
+  "full_source": null,
+  "input_file": "runs/pilot100-offline-stub-20261011T064233Z/input/cost_100.csv",
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(1.5%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-e965211041",
+  "offline_stub": true,
+  "scope_note": "Development checkpoint export, not the final submission.",
+  "version": "a5-audit-v1"
+}

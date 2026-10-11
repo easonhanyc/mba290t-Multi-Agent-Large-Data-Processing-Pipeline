@@ -1,0 +1,14 @@
+review_id,review_text,review_rating,review_likes,app_version,review_timestamp,topic
+SYN-001,"The app keeps crashing when I open it.
+Please fix this!",1,3,8.8.0,2023-01-05 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-002,Good,5,0,,2023-01-06 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-003,Good,5,1,8.8.0,2023-01-07 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-004,,3,0,,2023-02-01 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-005,   ,2,0,,2023-02-02 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-006,"Too many ads, I get five ads after every two songs. Premium is too expensive too.",2,4,8.7.1,2023-02-03 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-007,"I can't log in since the update, it says no internet connection. Uninstalling.",1,9,,2023-03-03 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-008,Love the playlists and the recommendations!,5,0,8.8.2,2023-03-04 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-009,Why are lyrics premium now? Bring them back for free users.,1,2,,2023-03-05 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-010,Good,4,0,,2023-03-06 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-011,"Downloads disappear when I go offline, and support never answered my email.",1,5,8.6.0,2023-04-01 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED
+SYN-012,👍,5,0,,2023-04-02 10:00:00,HUMAN-LABEL-MUST-BE-IGNORED

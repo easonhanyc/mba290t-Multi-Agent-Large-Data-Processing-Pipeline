@@ -1,0 +1,10 @@
+{"confidence":"high","intent":"request","request_id":"req-20261011T064234394337-a3836f45","review_id":"035213ba-b1b9-411c-b028-70296e5f0e73","sentiment":0.0,"severity":1,"status":"completed","topic":"usability"}
+{"confidence":"medium","intent":"request","request_id":"req-20261011T064234394337-a3836f45","review_id":"2be2ae92-6ad1-4c93-8589-65a0ce68fe46","sentiment":0.5,"severity":4,"status":"completed","topic":"other"}
+{"confidence":"low","intent":"complaint","request_id":"req-20261011T064234394337-a3836f45","review_id":"33526c6f-7a49-4b3d-bd20-d1bc191c494c","sentiment":-1.0,"severity":5,"status":"completed","topic":"access"}
+{"confidence":"low","intent":"unclear","request_id":"req-20261011T064234394337-a3836f45","review_id":"46ff0c74-5e86-4e5b-b4cd-36201aab0f9e","sentiment":0.0,"severity":4,"status":"completed","topic":"downloads"}
+{"confidence":"medium","intent":"unclear","request_id":"req-20261011T064234394337-a3836f45","review_id":"94c9f2f9-36fa-4c11-936e-660514fe7a35","sentiment":-0.5,"severity":4,"status":"completed","topic":"downloads"}
+{"confidence":"low","intent":"complaint","request_id":"req-20261011T064234394337-a3836f45","review_id":"a1a28752-3256-4f81-b888-3e943343529f","sentiment":0.0,"severity":2,"status":"completed","topic":"support"}
+{"confidence":"low","intent":"complaint","request_id":"req-20261011T064234394337-a3836f45","review_id":"aeee488a-2077-489d-8914-1e01d5f7672f","sentiment":-1.0,"severity":2,"status":"completed","topic":"downloads"}
+{"confidence":"high","intent":"cancellation","request_id":"req-20261011T064234394337-a3836f45","review_id":"dc73ecd9-3293-4ede-90d5-dd6cd1e8d087","sentiment":0.0,"severity":2,"status":"completed","topic":"playback"}
+{"confidence":"high","intent":"complaint","request_id":"req-20261011T064234394337-a3836f45","review_id":"e25cf0b6-0285-4cc9-9a4a-5a8a05be929e","sentiment":-0.5,"severity":2,"status":"completed","topic":"billing"}
+{"confidence":"high","intent":"unclear","request_id":"req-20261011T064234394337-a3836f45","review_id":"ed15bb17-865a-492b-ba1b-268f4cab78f6","sentiment":-0.5,"severity":2,"status":"completed","topic":"usability"}

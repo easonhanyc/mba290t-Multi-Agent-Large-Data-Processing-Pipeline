@@ -1,0 +1,297 @@
+{
+  "calls_all_invocations": {
+    "enrich:fallback1": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 2603,
+      "invalid_output_retries": 0,
+      "output_tokens": 25,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "enrich:primary": {
+      "attempts": 2,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 8510,
+      "invalid_output_retries": 0,
+      "output_tokens": 2870,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 2
+    },
+    "group": {
+      "attempts": 12,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 3032,
+      "invalid_output_retries": 0,
+      "output_tokens": 360,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 12
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 2523,
+      "invalid_output_retries": 0,
+      "output_tokens": 188,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 1084,
+      "invalid_output_retries": 0,
+      "output_tokens": 280,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    }
+  },
+  "calls_this_invocation": {},
+  "completed_ids_saved": 100,
+  "config_summary": {
+    "enrich_primary": {
+      "batch": "50 reviews/request",
+      "service_tier": "flex"
+    },
+    "fallback1": {
+      "batch": "1 review/request",
+      "service_tier": "flex"
+    },
+    "fallback2": {
+      "batch": "1 review/request",
+      "service_tier": "subscription"
+    },
+    "group": {
+      "batch": "<= 8 quotes/request",
+      "service_tier": "subscription"
+    },
+    "memo": {
+      "batch": "aggregates + evidence pack",
+      "service_tier": "subscription"
+    },
+    "verify": {
+      "batch": "25 reviews/request",
+      "service_tier": "subscription"
+    }
+  },
+  "finished_at": "2026-10-11T06:43:20.189Z",
+  "input": {
+    "bytes": 15466,
+    "ingested_at": "2026-10-11T06:42:33.929Z",
+    "path": "runs/pilot100-offline-stub-20261011T064233Z/input/cost_100.csv",
+    "rows": 100,
+    "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
+  },
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(1.5%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-e965211041",
+  "ledger": {
+    "cap_usd": 1.0,
+    "denials": 0,
+    "reserved_usd": 0.0,
+    "spent_usd": 0.0,
+    "unknown_usd": 0.0
+  },
+  "models": {
+    "enrich_primary": {
+      "effort": "none",
+      "model": "stub-gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback1": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.015,
+      "model": "stub-gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback2": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.0025,
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "group": {
+      "effort": "low",
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "memo": {
+      "effort": "low",
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "verify": {
+      "effort": "n/a",
+      "model": "stub-haiku",
+      "provider": "claude_code"
+    }
+  },
+  "offline_stub": true,
+  "phase": "resume",
+  "project_spend": null,
+  "reconciled_unknown_calls": 0,
+  "results": {
+    "by_status_and_tier": {
+      "completed:fallback1": 1,
+      "completed:primary": 99
+    },
+    "completed": 100,
+    "exact_text_cache_reuses": 0,
+    "needs_review": 60,
+    "quarantined": 0,
+    "quarantined_empty_text": 0,
+    "scope": {
+      "distinct_nonempty_texts": 100,
+      "duplicate_id_rows": 0,
+      "empty_texts": 0,
+      "nonempty": 100,
+      "representatives": 100,
+      "rows": 100,
+      "unique_ids": 100
+    },
+    "unfinished": 0
+  },
+  "run_id": "run-20261011T064320.139Z-9928",
+  "stage_configs": {
+    "group": "stub-sonnet@low|group-v1|cfg-1b3fa9ce48",
+    "memo": "stub-sonnet@low|memo-v1|cfg-09b40429f3",
+    "verify": "stub-haiku@n/a|verify-v1|cfg-0cb6e691ec"
+  },
+  "stage_seconds": {
+    "enrich": 0.001,
+    "export": 0.007,
+    "group": 0.003,
+    "ingest": 0.0,
+    "memo": 0.004,
+    "rank": 0.001,
+    "verify": 0.003
+  },
+  "stages": {
+    "enrich": {
+      "aliases_written": 0,
+      "caps": {
+        "fallback1": 1,
+        "fallback2": 1
+      },
+      "difficult": 0,
+      "fallback_not_selected_cap": 0,
+      "invalid_output_retries": 0,
+      "invalid_outputs": 0,
+      "left_pending_stopping": 0,
+      "left_pending_transient": 0,
+      "quarantined": 0,
+      "routed": {
+        "fallback1": 1,
+        "fallback2": 0
+      },
+      "saved_fallback1": 0,
+      "saved_fallback2": 0,
+      "saved_primary": 0,
+      "staged": 0,
+      "still_pending": 0,
+      "stop_reason": null,
+      "transient_requeued": 0
+    },
+    "export": {
+      "calls": 17,
+      "checkpoint_after": 100,
+      "checkpoint_before": 0,
+      "grading_dir": "runs/pilot100-offline-stub-20261011T064233Z/grading",
+      "records": 100
+    },
+    "group": {
+      "issues": 20,
+      "memberships": 46,
+      "named_calls": 0
+    },
+    "memo": {
+      "claims": 40,
+      "source": "cache"
+    },
+    "rank": {
+      "complaints": 46,
+      "issues": 20,
+      "top": [
+        {
+          "complaint_count": 6,
+          "issue_id": "billing.premium_only",
+          "mean_severity": "2.666667",
+          "priority_score": 16,
+          "rank": 1,
+          "severity_sum": 16
+        },
+        {
+          "complaint_count": 5,
+          "issue_id": "usability.navigation",
+          "mean_severity": "3.200000",
+          "priority_score": 16,
+          "rank": 2,
+          "severity_sum": 16
+        },
+        {
+          "complaint_count": 4,
+          "issue_id": "catalog.missing",
+          "mean_severity": "3.250000",
+          "priority_score": 13,
+          "rank": 3,
+          "severity_sum": 13
+        },
+        {
+          "complaint_count": 3,
+          "issue_id": "usability.ads",
+          "mean_severity": "4.333333",
+          "priority_score": 13,
+          "rank": 4,
+          "severity_sum": 13
+        },
+        {
+          "complaint_count": 3,
+          "issue_id": "catalog.search",
+          "mean_severity": "3.333333",
+          "priority_score": 10,
+          "rank": 5,
+          "severity_sum": 10
+        }
+      ]
+    },
+    "verify": {
+      "agreement": {
+        "intent": {
+          "agree": 3,
+          "of": 10,
+          "rate": 0.3
+        },
+        "sentiment_within_tolerance": {
+          "agree": 8,
+          "of": 10,
+          "rate": 0.8
+        },
+        "severity": {
+          "agree": 4,
+          "of": 10,
+          "rate": 0.4
+        },
+        "topic": {
+          "agree": 1,
+          "of": 10,
+          "rate": 0.1
+        }
+      },
+      "sample": 10
+    }
+  },
+  "status": "completed",
+  "stop_reason": null,
+  "wall_clock_s": 0.03,
+  "workers": 1
+}

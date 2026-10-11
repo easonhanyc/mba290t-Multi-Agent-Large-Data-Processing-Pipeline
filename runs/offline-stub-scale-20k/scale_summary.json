@@ -1,0 +1,34 @@
+{
+  "what": "Offline-stub scale test on 20,000 SYNTHETIC rows built from checkpoint_500 texts (scripts/make_scale_fixture.py). Provider rate limits were lifted in a temporary config so only the pipeline's own overhead is measured. Not course data, not a result, no model calls.",
+  "date": "2026-10-01",
+  "workers": 4,
+  "process_real_seconds": 25.67,
+  "peak_rss_mb": 127.0,
+  "stage_seconds": {
+    "enrich": 20.663,
+    "export": 0.91,
+    "group": 0.518,
+    "ingest": 0.537,
+    "memo": 0.068,
+    "rank": 0.042,
+    "verify": 2.082
+  },
+  "attempts_by_role": {
+    "enrich:fallback1": 1500,
+    "enrich:primary": 15006,
+    "group": 12,
+    "memo": 1,
+    "verify": 1501
+  },
+  "results": {
+    "completed": 20000,
+    "quarantined": 0,
+    "unfinished": 0,
+    "exact_text_cache_reuses": 4994
+  },
+  "derived": {
+    "orchestrator_ms_per_enrich_attempt": 1.25,
+    "code_stage_seconds_per_1000_rows": 0.1
+  },
+  "note_on_first_attempt": "A first attempt with the default config ran at about 15 calls/s because the configured provider rate limits (Jev 1,200/min, GPT-6 Luna 450/min) also apply to stub calls; it was stopped."
+}
