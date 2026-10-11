@@ -1,8 +1,9 @@
 """Dashboard backend: a read-only JSON API over the dashboard database (deployed as a Vercel Python function).
 
 Every endpoint queries the database loaded by web/load_db.py; nothing is computed from files and no model
-is ever called. Connection string: DATABASE_URL_READONLY (a SELECT-only role) or DATABASE_URL. A value
-starting with sqlite:/// selects a local SQLite file (tests and local preview).
+is ever called. Connection string: DATABASE_URL_READONLY (a SELECT-only role) if set, else the Neon
+integration's DATABASE_URL_UNPOOLED / DATABASE_URL; sessions are set read-only and every query is a SELECT.
+A value starting with sqlite:/// selects a local SQLite file (tests and local preview).
 """
 
 import json
@@ -24,7 +25,8 @@ METRICS = ("complaint_count", "severity_sum", "mean_severity", "priority_score")
 
 
 def _url():
-    url = os.environ.get("DATABASE_URL_READONLY") or os.environ.get("DATABASE_URL")
+    url = (os.environ.get("DATABASE_URL_READONLY") or os.environ.get("DATABASE_URL_UNPOOLED")
+           or os.environ.get("DATABASE_URL"))
     if not url:
         raise HTTPException(503, "database not configured (set DATABASE_URL_READONLY)")
     return url
@@ -36,7 +38,12 @@ def _connect():
         c = sqlite3.connect(url[len("sqlite:///"):], check_same_thread=False)
         return c, "sqlite"
     import psycopg
-    return psycopg.connect(url, autocommit=True, connect_timeout=10), "postgres"
+    c = psycopg.connect(url, autocommit=True, connect_timeout=10)
+    try:  # belt and braces: this API only reads; refuse writes at the session level too
+        c.execute("SET default_transaction_read_only = on")
+    except Exception:
+        pass
+    return c, "postgres"
 
 
 def q(sql, params=(), one=False):

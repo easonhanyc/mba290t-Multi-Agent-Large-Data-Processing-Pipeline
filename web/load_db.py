@@ -37,8 +37,9 @@ REVIEW_COLS = ("review_id", "row_num", "review_text", "review_rating", "review_l
 
 
 def load_env():
-    env = ROOT / ".env"
-    if env.exists() and not os.environ.get("INSIGHT_NO_DOTENV"):
+    for env in (ROOT / ".env", ROOT / "web" / ".env.local"):
+        if not env.exists() or os.environ.get("INSIGHT_NO_DOTENV"):
+            continue
         for line in env.read_text(encoding="utf-8").splitlines():
             if "=" in line and not line.strip().startswith("#"):
                 k, v = line.split("=", 1)
@@ -271,7 +272,7 @@ def main(argv=None):
     ap.add_argument("--input-csv", type=Path, default=None, help="source CSV if not at the path recorded in run.json")
     args = ap.parse_args(argv)
     load_env()
-    url = args.database_url or os.environ.get("DATABASE_URL")
+    url = args.database_url or os.environ.get("DATABASE_URL_UNPOOLED") or os.environ.get("DATABASE_URL")
     if not url:
         raise SystemExit("Set DATABASE_URL (owner connection string) in .env or pass --database-url")
     load(args.run_dir, url, args.input_csv)
