@@ -1,0 +1,5 @@
+review_id,fields,enricher_topic,verifier_topic,enricher_intent,verifier_intent,enricher_severity,verifier_severity,enricher_labeled_by,text
+035213ba-b1b9-411c-b028-70296e5f0e73,severity,usability,usability,cancellation,cancellation,2,3,primary,I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .
+33526c6f-7a49-4b3d-bd20-d1bc191c494c,topic,other,support,complaint,complaint,2,2,primary,"RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮"
+94c9f2f9-36fa-4c11-936e-660514fe7a35,severity,usability,usability,complaint,complaint,3,2,primary,"Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time."
+a1a28752-3256-4f81-b888-3e943343529f,severity,catalog,catalog,complaint,complaint,3,2,primary,It's nice but gospel music isn't much

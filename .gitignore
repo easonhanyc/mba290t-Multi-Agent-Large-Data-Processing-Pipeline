@@ -19,3 +19,9 @@ runs/**/.lock
 web/local.db
 # Course-provided dataset folder (download the course ZIP and unzip it here; see README)
 Final Assignment - Spotify Reviews Dataset/
+runs/.live.lock
+runs/*_console.log
+runs/**/full-reference.json
+runs/**/self-check-vs-full-reference.json.tmp
+runs/**/state.sqlite-shm
+runs/**/state.sqlite-wal

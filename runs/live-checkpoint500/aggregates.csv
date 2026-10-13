@@ -1,0 +1,21 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,name,area,cancellation_count,needs_review_count,share_of_complaints,representative_review_ids
+1,billing.premium_only,54,157,2.907407,157,Premium-only restrictions,billing/support,9,0,0.218623,11ad400f-4487-4dfa-a9da-c8d624f4f107;15502657-31ee-440e-8df3-2c405b5da275;890aeb60-e7cf-4f0d-a321-03a1c8b65757
+2,other.general,56,109,1.946429,109,General dissatisfaction without specifics,general/unspecified,7,2,0.226721,a598cfe0-473b-4665-9eb2-4eebb3c1d877;b47c203f-366e-4409-922d-cd52aa8bbef6;19effee5-bf96-4313-8cf9-1ac996c1c4f1
+3,usability.ads,34,73,2.147059,73,Excessive ad frequency,usability,2,0,0.137652,cf6166ae-d71a-4839-9add-088645ad3b78;e5e6c55f-3069-4b7c-9807-f8b5d5bf2726;b9ae23d2-1152-4bfe-a876-afc09c005377
+4,playback.stops,14,48,3.428571,48,"Playback randomly stops, skips, or fails to start",playback/performance,2,0,0.056680,f1abd13b-2391-4b04-8109-efa7f3cfed0b;a7b7539a-c8d3-4f4e-9edd-d46cd1b1fd12;77a53aa5-a453-4bcb-8267-d4f44a492dd3
+5,playback.crash,8,32,4.000000,32,App crashes and fails to load after update,playback/performance,0,0,0.032389,065c418e-7f18-42a3-b241-fe693b7a2b0c;651e6e7b-f93e-4369-9631-15c73ddcd4ad;55cc3abf-c295-4591-8c3a-78085cfdefaa
+6,usability.navigation,12,30,2.500000,30,Confusing redesigned home screen layout,usability,2,0,0.048583,2e2480c1-7799-4a66-be67-a947a2d99680;0070e713-4cb7-4d78-954f-1764d5593c91;2aae0ce4-ae4a-46ce-b2fe-0d901eb23c06
+7,playback.connection,7,27,3.857143,27,"False ""No Internet Connection"" Errors",playback/performance,1,0,0.028340,98d936e1-fd1d-475a-89ee-0e1517cb60d3;3df77a78-ad9a-4456-8be8-8178ffd43d67;05fa5b8a-a49b-43be-bab5-38af789a65a7
+8,usability.other,11,27,2.454545,27,Lack of control over app behavior and settings,usability,2,0,0.044534,d455c11e-c530-4c03-a395-38f5a5cdb8d3;02777996-211f-447b-94c4-99b61f049f78;8cd35162-9223-42d1-8097-06e22fde94ea
+9,access.login,6,24,4.000000,24,Login failures,access/onboarding,0,0,0.024291,12efd15d-4d4f-4a71-8e71-69d03b6f983a;de0a9cdf-8974-48bc-802f-331228df4619;9ce5f16c-aef0-48eb-ace1-91905796bc3d
+10,catalog.recommendations,7,20,2.857143,20,Unwanted forced recommendations and shuffle,catalog/content,1,0,0.028340,618d1dbb-0186-4537-923a-7b4dabf19afb;5c9c17d3-9d6a-4fa1-a2a4-ae98eefbbd25;1807cc68-ba99-4edc-b6f1-2a1478e69109
+11,downloads.offline,6,20,3.333333,20,Downloaded music disappears or fails to work offline,playback/performance,2,0,0.024291,b03d6dc9-449a-4647-b112-559186656759;2ffdf599-a0d5-4c01-bf26-025215d44c06;dcff57c6-abd6-413b-b255-aec3dc34fcbd
+12,playback.devices,6,20,3.333333,20,Casting and Device Connectivity Issues,playback/performance,2,0,0.024291,46ff0c74-5e86-4e5b-b4cd-36201aab0f9e;c7df9cb8-7bec-4036-a6a1-1353d2d705d8;a0cbc9d6-51bb-46f0-9ba9-ad4f4593c266
+13,billing.payment,4,15,3.750000,15,Charges and subscriptions,billing/support,1,0,0.016194,16929558-ce1e-4b87-8738-a1de3f557f66;1d1480fb-0142-46da-8570-45bf3983bf6d;686fa8a8-f220-4ddd-b283-d61dd242051a
+14,usability.library,5,15,3.000000,15,"Library, queue and playlists",usability,0,0,0.020243,991dc66a-aba8-4844-be48-816539680877;7f27bbab-ef19-4fb1-80d8-cd014da3e002;d218ffde-42f9-48f8-a793-832507454b35
+15,catalog.lyrics,5,14,2.800000,14,Lyrics availability,catalog/content,0,0,0.020243,59f31721-b2c8-40c5-ba3c-b9fe64a58d68;e0127547-4edd-44a0-8d5e-e8398bc07086;47becad0-8ae5-4a10-9731-fde8f2091862
+16,catalog.missing,4,12,3.000000,12,Missing or removed content,catalog/content,0,0,0.016194,4b3ace8e-b199-40b3-8ad4-5c0580e38203;0658feaa-5bec-416e-b6b0-3de2a4c14580;a1a28752-3256-4f81-b888-3e943343529f
+17,access.account,2,9,4.500000,9,Account and sign-up,access/onboarding,0,0,0.008097,d87536c5-6fe0-4b38-b0b1-c47936e4a0d8;32fb340f-4f9f-4551-8dae-755221e58d6a
+18,billing.price,2,7,3.500000,7,Price and value,billing/support,0,0,0.008097,08c07310-e802-4a88-bd97-2a5f240c0b44;3e82cf28-6b0a-4980-902c-b6aa154d353a
+19,playback.performance,2,6,3.000000,6,Performance and audio quality,playback/performance,0,0,0.008097,3899ed22-7b96-4c4f-9706-42985b8d8049;a862b037-7542-4a3e-94ef-836b7092f4ef
+20,catalog.podcasts,2,5,2.500000,5,Podcasts and audiobooks,catalog/content,0,0,0.008097,caa9bb7e-814c-4895-b872-10637419b9ba;5650dbb7-7525-46e7-87b7-a75197c48ec7

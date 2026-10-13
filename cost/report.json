@@ -1,6 +1,1027 @@
 {
-  "measured": null,
-  "refreshes": [],
+  "measured": {
+    "pilot_id": "pilot100-20261012T224901Z",
+    "offline_stub": false,
+    "input": {
+      "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+      "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+      "manifest_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+      "matches_manifest": true,
+      "review_ids": [
+        "084077ee-f9be-446a-9935-9e58550d5153",
+        "ff14ea84-fdec-4363-9b1b-a23dcab287c5",
+        "dc73ecd9-3293-4ede-90d5-dd6cd1e8d087",
+        "a78d831a-69f4-428a-9235-cfdd9775c509",
+        "d146397f-4a94-4980-be00-ae9212eca3a7",
+        "4c0242ca-099a-4c89-b11b-219ef28f1e16",
+        "42f0c9d1-088c-437b-bfc8-c1c36114a8f0",
+        "5bc203df-dac3-41ae-8b8d-ee0e8b9d9f50",
+        "b39971d2-e3f0-4559-96da-a609f54d9cb4",
+        "797d12c7-78dd-4805-a066-342ace701805",
+        "9d851b7f-a738-449b-a841-de8076f13276",
+        "ad730d1a-829a-4dc4-9561-7e1cd07e2c30",
+        "f44b3617-a645-4375-ae2d-44b742a1a306",
+        "5d4d3f47-4b3c-4be4-8f11-6cca41d27068",
+        "84353026-5e56-4ca4-bfa4-e006d021ef44",
+        "178c3b49-b689-4fe4-92a2-2257a58e6d95",
+        "b92a7381-b5cd-4c77-9176-e5c4b4818c8a",
+        "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+        "e25cf0b6-0285-4cc9-9a4a-5a8a05be929e",
+        "9f46904c-4ed3-4799-8949-379b949c7344",
+        "618d1dbb-0186-4537-923a-7b4dabf19afb",
+        "277c75cb-ec6a-4387-902d-eb721d038db6",
+        "45c561b9-cc47-4d80-95d3-f0d20bc84af3",
+        "ba274609-2cbc-4d6a-9624-276d1c8246e8",
+        "a3605554-5c3a-441d-836e-e9fdea83eb2e",
+        "7e91d976-20e5-40f0-a6f5-7312eadf7e78",
+        "8cb9d355-e14c-4f55-b026-c6abd7bbce0d",
+        "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+        "b47c203f-366e-4409-922d-cd52aa8bbef6",
+        "9c9757da-6b99-4c95-a0e7-0661ee858027",
+        "23de7958-ccb0-4356-bc12-094935e6857d",
+        "0f2b7fd2-71a6-4657-998e-da44f5893956",
+        "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+        "88439ec2-7c49-4c57-bedb-c5e098692aff",
+        "3e8bdc92-4934-457e-85cc-8b9d14bf51c0",
+        "c1fe1a70-f5ec-4009-bad6-b75437ba1c0b",
+        "2be2ae92-6ad1-4c93-8589-65a0ce68fe46",
+        "c2738a4f-e57c-46bc-a4ad-8ec5a4b5d5cd",
+        "21915fcd-9a35-48ba-b277-6296c4154603",
+        "7084ced1-0428-4093-9328-442f74719b4f",
+        "4aee0d75-6901-426e-b0f7-11d042ccc73e",
+        "2ffdf599-a0d5-4c01-bf26-025215d44c06",
+        "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+        "51bfd887-24a0-4741-8b59-68e0a726dd7a",
+        "5c9c17d3-9d6a-4fa1-a2a4-ae98eefbbd25",
+        "e575daac-46ab-4da3-b9f5-723bf4000234",
+        "8737ac88-7e76-45ba-aa42-4eb97e3300ec",
+        "3e82cf28-6b0a-4980-902c-b6aa154d353a",
+        "ed15bb17-865a-492b-ba1b-268f4cab78f6",
+        "ca16e65d-d2ff-4453-a495-b8c422809330",
+        "10f09c93-34ef-4a3b-8ee2-97d7c00d44e0",
+        "8decb2ac-5860-49e3-8dce-9ca198ad061e",
+        "035213ba-b1b9-411c-b028-70296e5f0e73",
+        "486d1d7a-d6f6-41ea-81ad-ed875452729c",
+        "dcff57c6-abd6-413b-b255-aec3dc34fcbd",
+        "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+        "8b6e028a-5f63-4011-9841-cbbade4830eb",
+        "67b21b33-e6b9-4d1a-b874-86bc182b9ada",
+        "53e95a47-d326-4579-945d-a7aabd780b12",
+        "85383985-844d-4f9b-bcd9-d6016ac35f6b",
+        "9e5f9745-f8be-48d3-b9de-4d118507d94a",
+        "0658feaa-5bec-416e-b6b0-3de2a4c14580",
+        "b9a3e661-0eac-4cc9-a30e-7b1e11ef1315",
+        "85ccf50b-7e85-4068-8765-5c122d61580f",
+        "23d905f8-8684-41b3-8faa-42571f3eaeee",
+        "2b57a12b-bbbe-457c-83a8-1bec297a5f63",
+        "89ea2c30-db8b-459d-8ab7-bbcb7f92c774",
+        "d7b04025-054b-4929-a507-15b751c39fdc",
+        "7a833667-4fcb-4a40-a88d-c55cfeca3d16",
+        "89a8e180-7846-4421-a2b6-fa7787e9d0d2",
+        "0b52ac4e-1982-46ed-aeaa-74eedaefb5c9",
+        "ab67a772-c3b7-42ba-9b80-8d21d3857018",
+        "cf6166ae-d71a-4839-9add-088645ad3b78",
+        "dd90623c-dcd8-45a2-bb5b-3ace2b383667",
+        "6c257eba-3dca-49f6-b7f0-4c4484d81e26",
+        "1d9f396e-7a8a-414b-a622-3ad6f9570abe",
+        "de0a9cdf-8974-48bc-802f-331228df4619",
+        "06a45bd5-3ed9-43af-b7f2-8b9487e2ffff",
+        "5db4a676-1f15-48cf-b989-a0a0fdb1c7a3",
+        "916d1cb1-3a9f-42c0-9c36-fee4b1983c68",
+        "ebc64fe2-9553-4528-87d5-cb4bb9783be6",
+        "d455c11e-c530-4c03-a395-38f5a5cdb8d3",
+        "1807cc68-ba99-4edc-b6f1-2a1478e69109",
+        "e16a4550-43e7-4ae1-b538-a65cc652c31b",
+        "2d5cdd20-3094-40a5-bc6e-653302b59b56",
+        "9e3a706c-f502-4664-a23f-33f3480eca64",
+        "e0127547-4edd-44a0-8d5e-e8398bc07086",
+        "66a29b3c-c14d-440e-b722-b23e0c99ae82",
+        "32fb340f-4f9f-4551-8dae-755221e58d6a",
+        "ee3e2bd4-f94d-4e76-b2a6-5f6533d74c7c",
+        "0a5ff524-27b1-4f3b-a761-17ca48ee731d",
+        "47becad0-8ae5-4a10-9731-fde8f2091862",
+        "a1a28752-3256-4f81-b888-3e943343529f",
+        "a7aebec4-11e0-40d6-abf5-7a4798ebbb98",
+        "aeee488a-2077-489d-8914-1e01d5f7672f",
+        "884e8712-da13-4890-a39e-731b69f42d6c",
+        "c1ab120a-f91f-4ee3-87f5-66f352e2d47f",
+        "9f3794ed-4f4b-4430-a548-9cfd2d0c0084",
+        "def34476-7bdc-443a-ab3d-475cdd5ca2f6",
+        "e5e6c55f-3069-4b7c-9807-f8b5d5bf2726"
+      ]
+    },
+    "settings": {
+      "workers": 1,
+      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "stages": {
+        "enrich_primary": {
+          "provider": "openai",
+          "model": "gpt-6-luna",
+          "effort": "none",
+          "tier": "flex",
+          "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+          "batch": "50 reviews/request"
+        },
+        "crosscheck": {
+          "provider": "openai_decisions",
+          "model": "gpt-6-luna",
+          "effort": "n/a",
+          "tier": "standard",
+          "config": null,
+          "batch": "1 review/request"
+        },
+        "fallback1": {
+          "provider": "openai",
+          "model": "gpt-6-luna",
+          "effort": "low",
+          "tier": "flex",
+          "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+          "batch": "1 review/request"
+        },
+        "fallback2": {
+          "provider": "claude_code",
+          "model": "sonnet",
+          "effort": "low",
+          "tier": "subscription",
+          "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+          "batch": "1 review/request"
+        },
+        "verify": {
+          "provider": "claude_code",
+          "model": "haiku",
+          "effort": "n/a",
+          "tier": "subscription",
+          "config": "haiku@n/a|verify-v1|cfg-e6ab73d745",
+          "batch": "25 reviews/request"
+        },
+        "group": {
+          "provider": "claude_code",
+          "model": "sonnet",
+          "effort": "low",
+          "tier": "subscription",
+          "config": "sonnet@low|group-v1|cfg-df12b8e8c6",
+          "batch": "<= 8 quotes/request"
+        },
+        "memo": {
+          "provider": "claude_code",
+          "model": "sonnet",
+          "effort": "low",
+          "tier": "subscription",
+          "config": "sonnet@low|memo-v1|cfg-7897f460ec",
+          "batch": "aggregates + evidence pack"
+        }
+      }
+    },
+    "runs": {
+      "cold": {
+        "run_id": "run-20261012T224901.597Z-55e5",
+        "status": "completed",
+        "wall_clock_s": 159.495,
+        "process_wall_clock_s": 160.006,
+        "stage_seconds": {
+          "enrich": 61.262,
+          "export": 0.012,
+          "group": 42.729,
+          "ingest": 0.009,
+          "memo": 36.601,
+          "rank": 0.019,
+          "verify": 18.834
+        },
+        "rows": 100,
+        "completed": 100,
+        "quarantined": 0,
+        "unfinished": 0,
+        "distinct_texts": 100,
+        "exact_text_cache_reuses": 0,
+        "result_cache_hits": 0,
+        "new_enrichment_calls": 3,
+        "stages": {
+          "enrich_primary": {
+            "attempts": 2,
+            "first_attempts": 2,
+            "transient_retries": 0,
+            "invalid_output_retries": 0,
+            "failed": 0,
+            "succeeded": 2,
+            "usage": {
+              "input_uncached": 6,
+              "input_cached": 2368,
+              "input_cache_write": 5941,
+              "output": 3231
+            },
+            "billed_usd": 0.0011912025,
+            "api_equivalent_usd": 0.0,
+            "api_equivalent_unpriced": 0,
+            "reviews_sent": 100,
+            "tiers": [
+              "flex"
+            ],
+            "billing": [
+              "api"
+            ],
+            "models_reported": [
+              "gpt-6-luna"
+            ],
+            "unique_reviews": 100,
+            "mean_latency_s": 29.5833,
+            "reviews_per_request": 50.0,
+            "billed_usd_per_review": 1.1912025e-05,
+            "api_equivalent_usd_per_review": 0.0,
+            "billed_usd_per_call": 0.0005956013,
+            "api_equivalent_usd_per_call": 0.0,
+            "mean_input_tokens": 4157.5,
+            "mean_output_tokens": 1615.5
+          },
+          "fallback1": {
+            "attempts": 1,
+            "first_attempts": 1,
+            "transient_retries": 0,
+            "invalid_output_retries": 0,
+            "failed": 0,
+            "succeeded": 1,
+            "usage": {
+              "input_uncached": 3,
+              "input_cached": 0,
+              "input_cache_write": 2227,
+              "output": 35
+            },
+            "billed_usd": 0.0001480875,
+            "api_equivalent_usd": 0.0,
+            "api_equivalent_unpriced": 0,
+            "reviews_sent": 1,
+            "tiers": [
+              "flex"
+            ],
+            "billing": [
+              "api"
+            ],
+            "models_reported": [
+              "gpt-6-luna"
+            ],
+            "unique_reviews": 1,
+            "mean_latency_s": 1.7815,
+            "reviews_per_request": 1.0,
+            "billed_usd_per_review": 0.0001480875,
+            "api_equivalent_usd_per_review": 0.0,
+            "billed_usd_per_call": 0.0001480875,
+            "api_equivalent_usd_per_call": 0.0,
+            "mean_input_tokens": 2230.0,
+            "mean_output_tokens": 35.0
+          },
+          "verify": {
+            "attempts": 1,
+            "first_attempts": 1,
+            "transient_retries": 0,
+            "invalid_output_retries": 0,
+            "failed": 0,
+            "succeeded": 1,
+            "usage": {
+              "input_uncached": 2646,
+              "input_cached": 0,
+              "input_cache_write": 0,
+              "output": 2115
+            },
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.013221,
+            "api_equivalent_unpriced": 0,
+            "reviews_sent": 10,
+            "tiers": [
+              "subscription"
+            ],
+            "billing": [
+              "subscription"
+            ],
+            "models_reported": [
+              "claude-haiku-4-5-20251001"
+            ],
+            "unique_reviews": 10,
+            "mean_latency_s": 18.821,
+            "reviews_per_request": 10.0,
+            "billed_usd_per_review": 0.0,
+            "api_equivalent_usd_per_review": 0.0013221,
+            "billed_usd_per_call": 0.0,
+            "api_equivalent_usd_per_call": 0.013221,
+            "mean_input_tokens": 2646.0,
+            "mean_output_tokens": 2115.0
+          },
+          "group": {
+            "attempts": 12,
+            "first_attempts": 12,
+            "transient_retries": 0,
+            "invalid_output_retries": 0,
+            "failed": 0,
+            "succeeded": 12,
+            "usage": {
+              "input_uncached": 24,
+              "input_cached": 0,
+              "input_cache_write": 19394,
+              "output": 1753
+            },
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.066063,
+            "api_equivalent_unpriced": 0,
+            "reviews_sent": 38,
+            "tiers": [
+              "subscription"
+            ],
+            "billing": [
+              "subscription"
+            ],
+            "models_reported": [
+              "claude-sonnet-5"
+            ],
+            "unique_reviews": 38,
+            "mean_latency_s": 3.559,
+            "reviews_per_request": 3.167,
+            "billed_usd_per_review": 0.0,
+            "api_equivalent_usd_per_review": 0.0017385,
+            "billed_usd_per_call": 0.0,
+            "api_equivalent_usd_per_call": 0.00550525,
+            "mean_input_tokens": 1618.2,
+            "mean_output_tokens": 146.1
+          },
+          "memo": {
+            "attempts": 1,
+            "first_attempts": 1,
+            "transient_retries": 0,
+            "invalid_output_retries": 0,
+            "failed": 0,
+            "succeeded": 1,
+            "usage": {
+              "input_uncached": 2,
+              "input_cached": 0,
+              "input_cache_write": 7930,
+              "output": 2861
+            },
+            "billed_usd": 0.0,
+            "api_equivalent_usd": 0.048439,
+            "api_equivalent_unpriced": 0,
+            "reviews_sent": 0,
+            "tiers": [
+              "subscription"
+            ],
+            "billing": [
+              "subscription"
+            ],
+            "models_reported": [
+              "claude-sonnet-5"
+            ],
+            "unique_reviews": 0,
+            "mean_latency_s": 36.5876,
+            "reviews_per_request": 0.0,
+            "billed_usd_per_review": null,
+            "api_equivalent_usd_per_review": null,
+            "billed_usd_per_call": 0.0,
+            "api_equivalent_usd_per_call": 0.048439,
+            "mean_input_tokens": 7932.0,
+            "mean_output_tokens": 2861.0
+          }
+        },
+        "api_cost_usd": 0.00133929,
+        "api_equivalent_subscription_usd": 0.127723,
+        "cost_per_1000_input_rows_usd": 0.0133929,
+        "cost_per_completed_record_usd": 1.33929e-05,
+        "throughput_rows_per_s": 0.627
+      },
+      "warm": {
+        "run_id": "run-20261012T225141.618Z-d2d1",
+        "status": "completed",
+        "wall_clock_s": 0.038,
+        "process_wall_clock_s": 0.314,
+        "stage_seconds": {
+          "enrich": 0.001,
+          "export": 0.007,
+          "group": 0.002,
+          "ingest": 0.0,
+          "memo": 0.005,
+          "rank": 0.007,
+          "verify": 0.002
+        },
+        "rows": 100,
+        "completed": 100,
+        "quarantined": 0,
+        "unfinished": 0,
+        "distinct_texts": 100,
+        "exact_text_cache_reuses": 0,
+        "result_cache_hits": 100,
+        "new_enrichment_calls": 0,
+        "stages": {},
+        "api_cost_usd": 0,
+        "api_equivalent_subscription_usd": 0,
+        "cost_per_1000_input_rows_usd": 0.0,
+        "cost_per_completed_record_usd": 0.0,
+        "throughput_rows_per_s": 2631.579
+      }
+    },
+    "unpriced_items": []
+  },
+  "refreshes": [
+    {
+      "label": "checkpoint_500",
+      "run_dir": "runs/live-checkpoint500",
+      "offline_stub": false,
+      "rows": 500,
+      "distinct_texts": 479,
+      "completed": 500,
+      "quarantined": 0,
+      "unfinished": 0,
+      "workers": 1,
+      "invocations": 1,
+      "wall_clock_s": 396.63,
+      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "saved_at": "2026-10-12T23:01:54+00:00",
+      "stages": {
+        "enrich_primary": {
+          "attempts": 10,
+          "first_attempts": 10,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 10,
+          "usage": {
+            "input_uncached": 30,
+            "input_cached": 24885,
+            "input_cache_write": 15507,
+            "output": 15517
+          },
+          "billed_usd": 0.0049743625,
+          "api_equivalent_usd": 0.0,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 479,
+          "tiers": [
+            "flex"
+          ],
+          "billing": [
+            "api"
+          ],
+          "models_reported": [
+            "gpt-6-luna"
+          ],
+          "unique_reviews": 479,
+          "mean_latency_s": 25.3286,
+          "reviews_per_request": 47.9,
+          "billed_usd_per_review": 1.038489e-05,
+          "api_equivalent_usd_per_review": 0.0,
+          "billed_usd_per_call": 0.0004974363,
+          "api_equivalent_usd_per_call": 0.0,
+          "mean_input_tokens": 4042.2,
+          "mean_output_tokens": 1551.7
+        },
+        "fallback1": {
+          "attempts": 7,
+          "first_attempts": 7,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 7,
+          "usage": {
+            "input_uncached": 21,
+            "input_cached": 15409,
+            "input_cache_write": 266,
+            "output": 422
+          },
+          "billed_usd": 0.00020022,
+          "api_equivalent_usd": 0.0,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 7,
+          "tiers": [
+            "flex"
+          ],
+          "billing": [
+            "api"
+          ],
+          "models_reported": [
+            "gpt-6-luna"
+          ],
+          "unique_reviews": 7,
+          "mean_latency_s": 1.8785,
+          "reviews_per_request": 1.0,
+          "billed_usd_per_review": 2.8602857e-05,
+          "api_equivalent_usd_per_review": 0.0,
+          "billed_usd_per_call": 2.86029e-05,
+          "api_equivalent_usd_per_call": 0.0,
+          "mean_input_tokens": 2242.3,
+          "mean_output_tokens": 60.3
+        },
+        "verify": {
+          "attempts": 2,
+          "first_attempts": 2,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 2,
+          "usage": {
+            "input_uncached": 6239,
+            "input_cached": 0,
+            "input_cache_write": 0,
+            "output": 6922
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.040849,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 48,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-haiku-4-5-20251001"
+          ],
+          "unique_reviews": 48,
+          "mean_latency_s": 23.7091,
+          "reviews_per_request": 24.0,
+          "billed_usd_per_review": 0.0,
+          "api_equivalent_usd_per_review": 0.000851020833,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0204245,
+          "mean_input_tokens": 3119.5,
+          "mean_output_tokens": 3461.0
+        },
+        "group": {
+          "attempts": 12,
+          "first_attempts": 12,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 12,
+          "usage": {
+            "input_uncached": 24,
+            "input_cached": 0,
+            "input_cache_write": 21078,
+            "output": 1858
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.071323,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 88,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-sonnet-5"
+          ],
+          "unique_reviews": 88,
+          "mean_latency_s": 3.8239,
+          "reviews_per_request": 7.333,
+          "billed_usd_per_review": 0.0,
+          "api_equivalent_usd_per_review": 0.000810488636,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0059435833,
+          "mean_input_tokens": 1758.5,
+          "mean_output_tokens": 154.8
+        },
+        "memo": {
+          "attempts": 1,
+          "first_attempts": 1,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 1,
+          "usage": {
+            "input_uncached": 4,
+            "input_cached": 7972,
+            "input_cache_write": 9961,
+            "output": 3108
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.0575849,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 0,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-sonnet-5"
+          ],
+          "unique_reviews": 0,
+          "mean_latency_s": 36.3452,
+          "reviews_per_request": 0.0,
+          "billed_usd_per_review": null,
+          "api_equivalent_usd_per_review": null,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0575849,
+          "mean_input_tokens": 17937.0,
+          "mean_output_tokens": 3108.0
+        }
+      },
+      "api_cost_usd": 0.00517458,
+      "unpriced_items": [],
+      "api_equivalent_subscription_usd": 0.1697569,
+      "cost_per_1000_input_rows_usd": 0.010349
+    },
+    {
+      "label": "analysis_10000",
+      "run_dir": "runs/live-analysis10000",
+      "offline_stub": false,
+      "rows": 10000,
+      "distinct_texts": 8448,
+      "completed": 10000,
+      "quarantined": 0,
+      "unfinished": 0,
+      "workers": 8,
+      "invocations": 1,
+      "wall_clock_s": 931.56,
+      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "saved_at": "2026-10-12T23:25:23+00:00",
+      "stages": {
+        "enrich_primary": {
+          "attempts": 173,
+          "first_attempts": 169,
+          "transient_retries": 0,
+          "invalid_output_retries": 4,
+          "failed": 3,
+          "succeeded": 170,
+          "usage": {
+            "input_uncached": 519,
+            "input_cached": 420046,
+            "input_cache_write": 297991,
+            "output": 282045
+          },
+          "billed_usd": 0.0912618675,
+          "api_equivalent_usd": 0.0,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 8550,
+          "tiers": [
+            "flex"
+          ],
+          "billing": [
+            "api"
+          ],
+          "models_reported": [
+            "gpt-6-luna"
+          ],
+          "unique_reviews": 8398,
+          "mean_latency_s": 28.0869,
+          "reviews_per_request": 49.422,
+          "billed_usd_per_review": 1.0867095e-05,
+          "api_equivalent_usd_per_review": 0.0,
+          "billed_usd_per_call": 0.0005275252,
+          "api_equivalent_usd_per_call": 0.0,
+          "mean_input_tokens": 4226.8,
+          "mean_output_tokens": 1659.1
+        },
+        "fallback1": {
+          "attempts": 126,
+          "first_attempts": 126,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 126,
+          "usage": {
+            "input_uncached": 378,
+            "input_cached": 259298,
+            "input_cache_write": 22839,
+            "output": 9286
+          },
+          "billed_usd": 0.0050643275,
+          "api_equivalent_usd": 0.0,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 126,
+          "tiers": [
+            "flex"
+          ],
+          "billing": [
+            "api"
+          ],
+          "models_reported": [
+            "gpt-6-luna"
+          ],
+          "unique_reviews": 126,
+          "mean_latency_s": 3.1493,
+          "reviews_per_request": 1.0,
+          "billed_usd_per_review": 4.0193075e-05,
+          "api_equivalent_usd_per_review": 0.0,
+          "billed_usd_per_call": 4.01931e-05,
+          "api_equivalent_usd_per_call": 0.0,
+          "mean_input_tokens": 2242.2,
+          "mean_output_tokens": 73.7
+        },
+        "verify": {
+          "attempts": 17,
+          "first_attempts": 17,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 17,
+          "usage": {
+            "input_uncached": 12213,
+            "input_cached": 0,
+            "input_cache_write": 60356,
+            "output": 113062
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.652968,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 845,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-haiku-4-5-20251001"
+          ],
+          "unique_reviews": 845,
+          "mean_latency_s": 50.7875,
+          "reviews_per_request": 49.706,
+          "billed_usd_per_review": 0.0,
+          "api_equivalent_usd_per_review": 0.000772743195,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0384098824,
+          "mean_input_tokens": 4268.8,
+          "mean_output_tokens": 6650.7
+        },
+        "group": {
+          "attempts": 12,
+          "first_attempts": 12,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 12,
+          "usage": {
+            "input_uncached": 24,
+            "input_cached": 0,
+            "input_cache_write": 21762,
+            "output": 1921
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.073663,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 96,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-sonnet-5"
+          ],
+          "unique_reviews": 96,
+          "mean_latency_s": 4.3759,
+          "reviews_per_request": 8.0,
+          "billed_usd_per_review": 0.0,
+          "api_equivalent_usd_per_review": 0.000767322917,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0061385833,
+          "mean_input_tokens": 1815.5,
+          "mean_output_tokens": 160.1
+        },
+        "memo": {
+          "attempts": 1,
+          "first_attempts": 1,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 1,
+          "usage": {
+            "input_uncached": 2,
+            "input_cached": 0,
+            "input_cache_write": 8019,
+            "output": 2132
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.0413715,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 0,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-sonnet-5"
+          ],
+          "unique_reviews": 0,
+          "mean_latency_s": 28.7795,
+          "reviews_per_request": 0.0,
+          "billed_usd_per_review": null,
+          "api_equivalent_usd_per_review": null,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0413715,
+          "mean_input_tokens": 8021.0,
+          "mean_output_tokens": 2132.0
+        }
+      },
+      "api_cost_usd": 0.0963262,
+      "unpriced_items": [],
+      "api_equivalent_subscription_usd": 0.7680025,
+      "cost_per_1000_input_rows_usd": 0.009633
+    },
+    {
+      "label": "final_200k",
+      "run_dir": "runs/final-200k",
+      "offline_stub": false,
+      "rows": 200013,
+      "distinct_texts": 152363,
+      "completed": 200000,
+      "quarantined": 13,
+      "unfinished": 0,
+      "workers": 4,
+      "invocations": 5,
+      "wall_clock_s": 9156.131,
+      "label_config": "gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790",
+      "saved_at": "2026-10-13T02:10:46+00:00",
+      "stages": {
+        "enrich_primary": {
+          "attempts": 3163,
+          "first_attempts": 3048,
+          "transient_retries": 96,
+          "invalid_output_retries": 20,
+          "failed": 106,
+          "succeeded": 3057,
+          "usage": {
+            "input_uncached": 9201,
+            "input_cached": 7403878,
+            "input_cache_write": 5627949,
+            "output": 4981116
+          },
+          "billed_usd": 1.6345052525,
+          "api_equivalent_usd": 0.0,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 157623,
+          "tiers": [
+            "flex",
+            "standard"
+          ],
+          "billing": [
+            "api"
+          ],
+          "models_reported": [
+            "gpt-6-luna"
+          ],
+          "unique_reviews": 152313,
+          "mean_latency_s": 29.2946,
+          "reviews_per_request": 49.833,
+          "billed_usd_per_review": 1.0731226e-05,
+          "api_equivalent_usd_per_review": 0.0,
+          "billed_usd_per_call": 0.0005167579,
+          "api_equivalent_usd_per_call": 0.0,
+          "mean_input_tokens": 4266.0,
+          "mean_output_tokens": 1629.4
+        },
+        "fallback1": {
+          "attempts": 13715,
+          "first_attempts": 13639,
+          "transient_retries": 76,
+          "invalid_output_retries": 0,
+          "failed": 76,
+          "succeeded": 13639,
+          "usage": {
+            "input_uncached": 40917,
+            "input_cached": 29942431,
+            "input_cache_write": 483463,
+            "output": 811066
+          },
+          "billed_usd": 0.3847409425,
+          "api_equivalent_usd": 0.0,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 13715,
+          "tiers": [
+            "flex",
+            "standard"
+          ],
+          "billing": [
+            "api"
+          ],
+          "models_reported": [
+            "gpt-6-luna"
+          ],
+          "unique_reviews": 13639,
+          "mean_latency_s": 2.8192,
+          "reviews_per_request": 1.0,
+          "billed_usd_per_review": 2.8208882e-05,
+          "api_equivalent_usd_per_review": 0.0,
+          "billed_usd_per_call": 2.80526e-05,
+          "api_equivalent_usd_per_call": 0.0,
+          "mean_input_tokens": 2233.8,
+          "mean_output_tokens": 59.5
+        },
+        "verify": {
+          "attempts": 40,
+          "first_attempts": 40,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 40,
+          "usage": {
+            "input_uncached": 20353,
+            "input_cached": 0,
+            "input_cache_write": 152780,
+            "output": 250668
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 1.464668,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 2000,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-haiku-4-5-20251001"
+          ],
+          "unique_reviews": 2000,
+          "mean_latency_s": 47.1121,
+          "reviews_per_request": 50.0,
+          "billed_usd_per_review": 0.0,
+          "api_equivalent_usd_per_review": 0.000732334,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0366167,
+          "mean_input_tokens": 4328.3,
+          "mean_output_tokens": 6266.7
+        },
+        "group": {
+          "attempts": 22,
+          "first_attempts": 22,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 22,
+          "usage": {
+            "input_uncached": 44,
+            "input_cached": 0,
+            "input_cache_write": 41218,
+            "output": 3709
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.140223,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 216,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-sonnet-5"
+          ],
+          "unique_reviews": 216,
+          "mean_latency_s": 4.0621,
+          "reviews_per_request": 9.818,
+          "billed_usd_per_review": 0.0,
+          "api_equivalent_usd_per_review": 0.000649180556,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.0063737727,
+          "mean_input_tokens": 1875.5,
+          "mean_output_tokens": 168.6
+        },
+        "memo": {
+          "attempts": 4,
+          "first_attempts": 4,
+          "transient_retries": 0,
+          "invalid_output_retries": 0,
+          "failed": 0,
+          "succeeded": 4,
+          "usage": {
+            "input_uncached": 14,
+            "input_cached": 27292,
+            "input_cache_write": 38003,
+            "output": 11746
+          },
+          "billed_usd": 0.0,
+          "api_equivalent_usd": 0.2179539,
+          "api_equivalent_unpriced": 0,
+          "reviews_sent": 0,
+          "tiers": [
+            "subscription"
+          ],
+          "billing": [
+            "subscription"
+          ],
+          "models_reported": [
+            "claude-sonnet-5"
+          ],
+          "unique_reviews": 0,
+          "mean_latency_s": 34.914,
+          "reviews_per_request": 0.0,
+          "billed_usd_per_review": null,
+          "api_equivalent_usd_per_review": null,
+          "billed_usd_per_call": 0.0,
+          "api_equivalent_usd_per_call": 0.054488475,
+          "mean_input_tokens": 16327.2,
+          "mean_output_tokens": 2936.5
+        }
+      },
+      "api_cost_usd": 2.0192462,
+      "unpriced_items": [],
+      "api_equivalent_subscription_usd": 1.8228449,
+      "cost_per_1000_input_rows_usd": 0.010096
+    }
+  ],
   "projection": {
     "full_run": {
       "rows": 660622,
@@ -13,33 +1034,51 @@
     "workers": 4,
     "per_stage_inputs": {
       "enrich_primary": {
-        "billed_per_call": 0.000476,
-        "billed_per_review": 9.714285714285715e-06,
-        "equiv_per_call": null,
-        "equiv_per_review": null,
-        "reviews_per_request": 49.0,
-        "latency_s": 25,
-        "tier": "flex",
+        "billed_per_call": 0.0005167579,
+        "billed_per_review": 1.0731226e-05,
+        "equiv_per_call": 0.0,
+        "equiv_per_review": 0.0,
+        "reviews_per_request": 49.833,
+        "latency_s": 29.2946,
+        "tier": "flex,standard",
         "billing": "api",
-        "source": "assumptions.json (estimate)",
+        "source": "measured: final_200k (152363 distinct texts)",
         "provider": "openai",
         "model": "gpt-6-luna",
         "fixed_calls": null,
+        "workers": null,
         "rpm_limit": 1000
       },
-      "fallback1": {
-        "billed_per_call": 0.0001135,
-        "billed_per_review": 0.0001135,
+      "crosscheck": {
+        "billed_per_call": 3.6700000000000004e-05,
+        "billed_per_review": 3.6700000000000004e-05,
         "equiv_per_call": null,
         "equiv_per_review": null,
         "reviews_per_request": 1.0,
-        "latency_s": 8,
-        "tier": "flex",
+        "latency_s": 0.6,
+        "tier": "standard",
         "billing": "api",
         "source": "assumptions.json (estimate)",
+        "provider": "openai_decisions",
+        "model": "gpt-6-luna",
+        "fixed_calls": null,
+        "workers": 8,
+        "rpm_limit": 0.0347
+      },
+      "fallback1": {
+        "billed_per_call": 2.80526e-05,
+        "billed_per_review": 2.8208882e-05,
+        "equiv_per_call": 0.0,
+        "equiv_per_review": 0.0,
+        "reviews_per_request": 1.0,
+        "latency_s": 2.8192,
+        "tier": "flex,standard",
+        "billing": "api",
+        "source": "measured: final_200k (152363 distinct texts)",
         "provider": "openai",
         "model": "gpt-6-luna",
         "fixed_calls": null,
+        "workers": null,
         "rpm_limit": 1000
       },
       "fallback2": {
@@ -55,120 +1094,136 @@
         "provider": "claude_code",
         "model": "sonnet",
         "fixed_calls": null,
+        "workers": null,
         "rpm_limit": 8
       },
       "verify": {
         "billed_per_call": 0.0,
         "billed_per_review": 0.0,
-        "equiv_per_call": 0.00067,
-        "equiv_per_review": 2.68e-05,
-        "reviews_per_request": 25.0,
-        "latency_s": 25,
-        "tier": "standard",
+        "equiv_per_call": 0.0366167,
+        "equiv_per_review": 0.000732334,
+        "reviews_per_request": 50.0,
+        "latency_s": 47.1121,
+        "tier": "subscription",
         "billing": "subscription",
-        "source": "assumptions.json (estimate)",
+        "source": "measured: final_200k (152363 distinct texts)",
         "provider": "claude_code",
         "model": "haiku",
         "fixed_calls": null,
+        "workers": null,
         "rpm_limit": 8
       },
       "group": {
         "billed_per_call": 0.0,
         "billed_per_review": 0.0,
-        "equiv_per_call": 0.0034000000000000002,
-        "equiv_per_review": 0.0034000000000000002,
-        "reviews_per_request": 1.0,
-        "latency_s": 12,
-        "tier": "standard",
+        "equiv_per_call": 0.0063737727,
+        "equiv_per_review": 0.000649180556,
+        "reviews_per_request": 9.818,
+        "latency_s": 4.0621,
+        "tier": "subscription",
         "billing": "subscription",
-        "source": "assumptions.json (estimate)",
+        "source": "measured: final_200k (152363 distinct texts)",
         "provider": "claude_code",
         "model": "sonnet",
         "fixed_calls": 12,
+        "workers": null,
         "rpm_limit": 8
       },
       "memo": {
         "billed_per_call": 0.0,
-        "billed_per_review": 0.0,
-        "equiv_per_call": 0.035,
-        "equiv_per_review": 0.035,
+        "billed_per_review": null,
+        "equiv_per_call": 0.054488475,
+        "equiv_per_review": null,
         "reviews_per_request": 1.0,
-        "latency_s": 60,
-        "tier": "standard",
+        "latency_s": 34.914,
+        "tier": "subscription",
         "billing": "subscription",
-        "source": "assumptions.json (estimate)",
+        "source": "measured: final_200k (152363 distinct texts)",
         "provider": "claude_code",
         "model": "sonnet",
         "fixed_calls": 2,
+        "workers": null,
         "rpm_limit": 8
       }
     },
-    "measured_fallback_rates": {},
-    "inputs_measured_on": null,
+    "measured_fallback_rates": {
+      "crosscheck": 0.0,
+      "fallback1": 0.08954586936111822,
+      "fallback2": 0.0
+    },
+    "inputs_measured_on": "final_200k",
     "scenarios": {
       "base_reuse": {
         "scenario": "base",
         "exact_text_reuse": true,
         "work_units": 484189,
-        "fallback1_rate": 0.01,
-        "fallback2_rate": 0.0005,
+        "fallback1_rate": 0.08954586936111822,
+        "fallback2_rate": 0.0,
         "verify_sample": 2000,
-        "retry_multiplier": 1.03,
+        "retry_multiplier": 1.0,
         "token_multiplier": 1.0,
         "stages": {
           "enrich_primary": {
-            "reviews": 498714.7,
-            "requests": 10177.9,
-            "billed_usd": 4.8447,
+            "reviews": 484189.0,
+            "requests": 9716.2,
+            "billed_usd": 5.1959,
             "api_equivalent_usd": null,
-            "seconds": 63611.6,
+            "seconds": 71158.3,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
+          },
+          "crosscheck": {
+            "reviews": 0.0,
+            "requests": 0.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": null,
+            "seconds": 0.0,
             "inputs_from": "assumptions.json (estimate)"
           },
           "fallback1": {
-            "reviews": 4987.1,
-            "requests": 4987.1,
-            "billed_usd": 0.566,
+            "reviews": 43357.1,
+            "requests": 43357.1,
+            "billed_usd": 1.2231,
             "api_equivalent_usd": null,
-            "seconds": 9974.3,
-            "inputs_from": "assumptions.json (estimate)"
+            "seconds": 30558.1,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "fallback2": {
-            "reviews": 249.4,
-            "requests": 249.4,
+            "reviews": 0.0,
+            "requests": 0.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 3.2915,
-            "seconds": 1870.2,
+            "api_equivalent_usd": null,
+            "seconds": 0.0,
             "inputs_from": "assumptions.json (estimate)"
           },
           "verify": {
-            "reviews": 2060.0,
-            "requests": 82.4,
+            "reviews": 2000.0,
+            "requests": 40.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.0552,
-            "seconds": 618.0,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 1.4647,
+            "seconds": 471.1,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "group": {
             "reviews": 0,
-            "requests": 12.4,
+            "requests": 12.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.042,
-            "seconds": 92.7,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 0.0765,
+            "seconds": 90.0,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "memo": {
             "reviews": 0,
-            "requests": 2.1,
+            "requests": 2.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.0721,
-            "seconds": 30.9,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 0.109,
+            "seconds": 17.5,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           }
         },
         "code_stage_seconds": 66.1,
-        "api_cost_usd": 5.41,
-        "api_equivalent_subscription_usd": 3.46,
-        "elapsed_hours": 21.18,
+        "api_cost_usd": 6.42,
+        "api_equivalent_subscription_usd": 1.65,
+        "elapsed_hours": 28.43,
         "exceeds_budget": false,
         "unpriced_stages": []
       },
@@ -176,65 +1231,73 @@
         "scenario": "base",
         "exact_text_reuse": false,
         "work_units": 660609,
-        "fallback1_rate": 0.01,
-        "fallback2_rate": 0.0005,
+        "fallback1_rate": 0.08954586936111822,
+        "fallback2_rate": 0.0,
         "verify_sample": 2000,
-        "retry_multiplier": 1.03,
+        "retry_multiplier": 1.0,
         "token_multiplier": 1.0,
         "stages": {
           "enrich_primary": {
-            "reviews": 680427.3,
-            "requests": 13886.3,
-            "billed_usd": 6.6099,
+            "reviews": 660609.0,
+            "requests": 13256.5,
+            "billed_usd": 7.0891,
             "api_equivalent_usd": null,
-            "seconds": 86789.2,
+            "seconds": 97085.6,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
+          },
+          "crosscheck": {
+            "reviews": 0.0,
+            "requests": 0.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": null,
+            "seconds": 0.0,
             "inputs_from": "assumptions.json (estimate)"
           },
           "fallback1": {
-            "reviews": 6804.3,
-            "requests": 6804.3,
-            "billed_usd": 0.7723,
+            "reviews": 59154.8,
+            "requests": 59154.8,
+            "billed_usd": 1.6687,
             "api_equivalent_usd": null,
-            "seconds": 13608.5,
-            "inputs_from": "assumptions.json (estimate)"
+            "seconds": 41692.3,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "fallback2": {
-            "reviews": 340.2,
-            "requests": 340.2,
+            "reviews": 0.0,
+            "requests": 0.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 4.4908,
-            "seconds": 2551.6,
+            "api_equivalent_usd": null,
+            "seconds": 0.0,
             "inputs_from": "assumptions.json (estimate)"
           },
           "verify": {
-            "reviews": 2060.0,
-            "requests": 82.4,
+            "reviews": 2000.0,
+            "requests": 40.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.0552,
-            "seconds": 618.0,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 1.4647,
+            "seconds": 471.1,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "group": {
             "reviews": 0,
-            "requests": 12.4,
+            "requests": 12.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.042,
-            "seconds": 92.7,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 0.0765,
+            "seconds": 90.0,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "memo": {
             "reviews": 0,
-            "requests": 2.1,
+            "requests": 2.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.0721,
-            "seconds": 30.9,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 0.109,
+            "seconds": 17.5,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           }
         },
         "code_stage_seconds": 66.1,
-        "api_cost_usd": 7.38,
-        "api_equivalent_subscription_usd": 4.66,
-        "elapsed_hours": 28.82,
+        "api_cost_usd": 8.76,
+        "api_equivalent_subscription_usd": 1.65,
+        "elapsed_hours": 38.73,
         "exceeds_budget": false,
         "unpriced_stages": []
       },
@@ -242,7 +1305,7 @@
         "scenario": "conservative",
         "exact_text_reuse": true,
         "work_units": 484189,
-        "fallback1_rate": 0.015,
+        "fallback1_rate": 0.08954586936111822,
         "fallback2_rate": 0.0025,
         "verify_sample": 2000,
         "retry_multiplier": 1.15,
@@ -250,19 +1313,27 @@
         "stages": {
           "enrich_primary": {
             "reviews": 556817.3,
-            "requests": 11363.6,
-            "billed_usd": 7.0318,
+            "requests": 11173.7,
+            "billed_usd": 7.7679,
             "api_equivalent_usd": null,
-            "seconds": 71022.6,
+            "seconds": 81832.0,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
+          },
+          "crosscheck": {
+            "reviews": 0.0,
+            "requests": 0.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": null,
+            "seconds": 0.0,
             "inputs_from": "assumptions.json (estimate)"
           },
           "fallback1": {
-            "reviews": 8352.3,
-            "requests": 8352.3,
-            "billed_usd": 1.2324,
+            "reviews": 49860.7,
+            "requests": 49860.7,
+            "billed_usd": 1.8285,
             "api_equivalent_usd": null,
-            "seconds": 16704.5,
-            "inputs_from": "assumptions.json (estimate)"
+            "seconds": 35141.8,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "fallback2": {
             "reviews": 1392.0,
@@ -274,41 +1345,41 @@
           },
           "verify": {
             "reviews": 2300.0,
-            "requests": 92.0,
+            "requests": 46.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.0801,
-            "seconds": 690.0,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 2.1897,
+            "seconds": 541.8,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "group": {
             "reviews": 0,
             "requests": 13.8,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.061,
+            "api_equivalent_usd": 0.1143,
             "seconds": 103.5,
-            "inputs_from": "assumptions.json (estimate)"
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "memo": {
             "reviews": 0,
             "requests": 2.3,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.1047,
-            "seconds": 34.5,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 0.1629,
+            "seconds": 20.1,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           }
         },
         "code_stage_seconds": 66.1,
-        "api_cost_usd": 8.26,
-        "api_equivalent_subscription_usd": 24.13,
-        "elapsed_hours": 27.52,
-        "exceeds_budget": false,
+        "api_cost_usd": 9.6,
+        "api_equivalent_subscription_usd": 26.35,
+        "elapsed_hours": 35.6,
+        "exceeds_budget": true,
         "unpriced_stages": []
       },
       "conservative_no_reuse": {
         "scenario": "conservative",
         "exact_text_reuse": false,
         "work_units": 660609,
-        "fallback1_rate": 0.015,
+        "fallback1_rate": 0.08954586936111822,
         "fallback2_rate": 0.0025,
         "verify_sample": 2000,
         "retry_multiplier": 1.15,
@@ -316,19 +1387,27 @@
         "stages": {
           "enrich_primary": {
             "reviews": 759700.3,
-            "requests": 15504.1,
-            "billed_usd": 9.5939,
+            "requests": 15244.9,
+            "billed_usd": 10.5983,
             "api_equivalent_usd": null,
-            "seconds": 96900.6,
+            "seconds": 111648.5,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
+          },
+          "crosscheck": {
+            "reviews": 0.0,
+            "requests": 0.0,
+            "billed_usd": 0.0,
+            "api_equivalent_usd": null,
+            "seconds": 0.0,
             "inputs_from": "assumptions.json (estimate)"
           },
           "fallback1": {
-            "reviews": 11395.5,
-            "requests": 11395.5,
-            "billed_usd": 1.6814,
+            "reviews": 68028.0,
+            "requests": 68028.0,
+            "billed_usd": 2.4947,
             "api_equivalent_usd": null,
-            "seconds": 22791.0,
-            "inputs_from": "assumptions.json (estimate)"
+            "seconds": 47946.2,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "fallback2": {
             "reviews": 1899.3,
@@ -340,33 +1419,33 @@
           },
           "verify": {
             "reviews": 2300.0,
-            "requests": 92.0,
+            "requests": 46.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.0801,
-            "seconds": 690.0,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 2.1897,
+            "seconds": 541.8,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "group": {
             "reviews": 0,
             "requests": 13.8,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.061,
+            "api_equivalent_usd": 0.1143,
             "seconds": 103.5,
-            "inputs_from": "assumptions.json (estimate)"
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           },
           "memo": {
             "reviews": 0,
             "requests": 2.3,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.1047,
-            "seconds": 34.5,
-            "inputs_from": "assumptions.json (estimate)"
+            "api_equivalent_usd": 0.1629,
+            "seconds": 20.1,
+            "inputs_from": "measured: final_200k (152363 distinct texts)"
           }
         },
         "code_stage_seconds": 66.1,
-        "api_cost_usd": 11.28,
-        "api_equivalent_subscription_usd": 32.84,
-        "elapsed_hours": 37.45,
+        "api_cost_usd": 13.09,
+        "api_equivalent_subscription_usd": 35.06,
+        "elapsed_hours": 48.49,
         "exceeds_budget": true,
         "unpriced_stages": []
       }
@@ -384,65 +1463,73 @@
           "scenario": "base",
           "exact_text_reuse": true,
           "work_units": 152363,
-          "fallback1_rate": 0.01,
-          "fallback2_rate": 0.0005,
+          "fallback1_rate": 0.08954586936111822,
+          "fallback2_rate": 0.0,
           "verify_sample": 2000,
-          "retry_multiplier": 1.03,
+          "retry_multiplier": 1.0,
           "token_multiplier": 1.0,
           "stages": {
             "enrich_primary": {
-              "reviews": 156933.9,
-              "requests": 3202.7,
-              "billed_usd": 1.5245,
+              "reviews": 152363.0,
+              "requests": 3057.5,
+              "billed_usd": 1.635,
               "api_equivalent_usd": null,
-              "seconds": 20017.1,
+              "seconds": 22391.9,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
+            },
+            "crosscheck": {
+              "reviews": 0.0,
+              "requests": 0.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": null,
+              "seconds": 0.0,
               "inputs_from": "assumptions.json (estimate)"
             },
             "fallback1": {
-              "reviews": 1569.3,
-              "requests": 1569.3,
-              "billed_usd": 0.1781,
+              "reviews": 13643.5,
+              "requests": 13643.5,
+              "billed_usd": 0.3849,
               "api_equivalent_usd": null,
-              "seconds": 3138.7,
-              "inputs_from": "assumptions.json (estimate)"
+              "seconds": 9615.9,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "fallback2": {
-              "reviews": 78.5,
-              "requests": 78.5,
+              "reviews": 0.0,
+              "requests": 0.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 1.0358,
-              "seconds": 588.5,
+              "api_equivalent_usd": null,
+              "seconds": 0.0,
               "inputs_from": "assumptions.json (estimate)"
             },
             "verify": {
-              "reviews": 2060.0,
-              "requests": 82.4,
+              "reviews": 2000.0,
+              "requests": 40.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.0552,
-              "seconds": 618.0,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 1.4647,
+              "seconds": 471.1,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "group": {
               "reviews": 0,
-              "requests": 12.4,
+              "requests": 12.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.042,
-              "seconds": 92.7,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 0.0765,
+              "seconds": 90.0,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "memo": {
               "reviews": 0,
-              "requests": 2.1,
+              "requests": 2.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.0721,
-              "seconds": 30.9,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 0.109,
+              "seconds": 17.5,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             }
           },
           "code_stage_seconds": 20.0,
-          "api_cost_usd": 1.7,
-          "api_equivalent_subscription_usd": 1.21,
-          "elapsed_hours": 6.81,
+          "api_cost_usd": 2.02,
+          "api_equivalent_subscription_usd": 1.65,
+          "elapsed_hours": 9.06,
           "exceeds_budget": false,
           "unpriced_stages": []
         },
@@ -450,65 +1537,73 @@
           "scenario": "base",
           "exact_text_reuse": false,
           "work_units": 200000,
-          "fallback1_rate": 0.01,
-          "fallback2_rate": 0.0005,
+          "fallback1_rate": 0.08954586936111822,
+          "fallback2_rate": 0.0,
           "verify_sample": 2000,
-          "retry_multiplier": 1.03,
+          "retry_multiplier": 1.0,
           "token_multiplier": 1.0,
           "stages": {
             "enrich_primary": {
-              "reviews": 206000.0,
-              "requests": 4204.1,
-              "billed_usd": 2.0011,
+              "reviews": 200000.0,
+              "requests": 4013.4,
+              "billed_usd": 2.1462,
               "api_equivalent_usd": null,
-              "seconds": 26275.5,
+              "seconds": 29392.8,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
+            },
+            "crosscheck": {
+              "reviews": 0.0,
+              "requests": 0.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": null,
+              "seconds": 0.0,
               "inputs_from": "assumptions.json (estimate)"
             },
             "fallback1": {
-              "reviews": 2060.0,
-              "requests": 2060.0,
-              "billed_usd": 0.2338,
+              "reviews": 17909.2,
+              "requests": 17909.2,
+              "billed_usd": 0.5052,
               "api_equivalent_usd": null,
-              "seconds": 4120.0,
-              "inputs_from": "assumptions.json (estimate)"
+              "seconds": 12622.4,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "fallback2": {
-              "reviews": 103.0,
-              "requests": 103.0,
+              "reviews": 0.0,
+              "requests": 0.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 1.3596,
-              "seconds": 772.5,
+              "api_equivalent_usd": null,
+              "seconds": 0.0,
               "inputs_from": "assumptions.json (estimate)"
             },
             "verify": {
-              "reviews": 2060.0,
-              "requests": 82.4,
+              "reviews": 2000.0,
+              "requests": 40.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.0552,
-              "seconds": 618.0,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 1.4647,
+              "seconds": 471.1,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "group": {
               "reviews": 0,
-              "requests": 12.4,
+              "requests": 12.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.042,
-              "seconds": 92.7,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 0.0765,
+              "seconds": 90.0,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "memo": {
               "reviews": 0,
-              "requests": 2.1,
+              "requests": 2.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.0721,
-              "seconds": 30.9,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 0.109,
+              "seconds": 17.5,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             }
           },
           "code_stage_seconds": 20.0,
-          "api_cost_usd": 2.23,
-          "api_equivalent_subscription_usd": 1.53,
-          "elapsed_hours": 8.87,
+          "api_cost_usd": 2.65,
+          "api_equivalent_subscription_usd": 1.65,
+          "elapsed_hours": 11.84,
           "exceeds_budget": false,
           "unpriced_stages": []
         },
@@ -516,7 +1611,7 @@
           "scenario": "conservative",
           "exact_text_reuse": true,
           "work_units": 152363,
-          "fallback1_rate": 0.015,
+          "fallback1_rate": 0.08954586936111822,
           "fallback2_rate": 0.0025,
           "verify_sample": 2000,
           "retry_multiplier": 1.15,
@@ -524,19 +1619,27 @@
           "stages": {
             "enrich_primary": {
               "reviews": 175217.4,
-              "requests": 3575.9,
-              "billed_usd": 2.2127,
+              "requests": 3516.1,
+              "billed_usd": 2.4444,
               "api_equivalent_usd": null,
-              "seconds": 22349.2,
+              "seconds": 25750.6,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
+            },
+            "crosscheck": {
+              "reviews": 0.0,
+              "requests": 0.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": null,
+              "seconds": 0.0,
               "inputs_from": "assumptions.json (estimate)"
             },
             "fallback1": {
-              "reviews": 2628.3,
-              "requests": 2628.3,
-              "billed_usd": 0.3878,
+              "reviews": 15690.0,
+              "requests": 15690.0,
+              "billed_usd": 0.5754,
               "api_equivalent_usd": null,
-              "seconds": 5256.5,
-              "inputs_from": "assumptions.json (estimate)"
+              "seconds": 11058.3,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "fallback2": {
               "reviews": 438.0,
@@ -548,33 +1651,33 @@
             },
             "verify": {
               "reviews": 2300.0,
-              "requests": 92.0,
+              "requests": 46.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.0801,
-              "seconds": 690.0,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 2.1897,
+              "seconds": 541.8,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "group": {
               "reviews": 0,
               "requests": 13.8,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.061,
+              "api_equivalent_usd": 0.1143,
               "seconds": 103.5,
-              "inputs_from": "assumptions.json (estimate)"
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "memo": {
               "reviews": 0,
               "requests": 2.3,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.1047,
-              "seconds": 34.5,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 0.1629,
+              "seconds": 20.1,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             }
           },
           "code_stage_seconds": 20.0,
-          "api_cost_usd": 2.6,
-          "api_equivalent_subscription_usd": 7.76,
-          "elapsed_hours": 8.82,
+          "api_cost_usd": 3.02,
+          "api_equivalent_subscription_usd": 9.98,
+          "elapsed_hours": 11.33,
           "exceeds_budget": false,
           "unpriced_stages": []
         },
@@ -582,7 +1685,7 @@
           "scenario": "conservative",
           "exact_text_reuse": false,
           "work_units": 200000,
-          "fallback1_rate": 0.015,
+          "fallback1_rate": 0.08954586936111822,
           "fallback2_rate": 0.0025,
           "verify_sample": 2000,
           "retry_multiplier": 1.15,
@@ -590,19 +1693,27 @@
           "stages": {
             "enrich_primary": {
               "reviews": 230000.0,
-              "requests": 4693.9,
-              "billed_usd": 2.9046,
+              "requests": 4615.4,
+              "billed_usd": 3.2086,
               "api_equivalent_usd": null,
-              "seconds": 29336.7,
+              "seconds": 33801.7,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
+            },
+            "crosscheck": {
+              "reviews": 0.0,
+              "requests": 0.0,
+              "billed_usd": 0.0,
+              "api_equivalent_usd": null,
+              "seconds": 0.0,
               "inputs_from": "assumptions.json (estimate)"
             },
             "fallback1": {
-              "reviews": 3450.0,
-              "requests": 3450.0,
-              "billed_usd": 0.509,
+              "reviews": 20595.5,
+              "requests": 20595.5,
+              "billed_usd": 0.7553,
               "api_equivalent_usd": null,
-              "seconds": 6900.0,
-              "inputs_from": "assumptions.json (estimate)"
+              "seconds": 14515.7,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "fallback2": {
               "reviews": 575.0,
@@ -614,33 +1725,33 @@
             },
             "verify": {
               "reviews": 2300.0,
-              "requests": 92.0,
+              "requests": 46.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.0801,
-              "seconds": 690.0,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 2.1897,
+              "seconds": 541.8,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "group": {
               "reviews": 0,
               "requests": 13.8,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.061,
+              "api_equivalent_usd": 0.1143,
               "seconds": 103.5,
-              "inputs_from": "assumptions.json (estimate)"
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             },
             "memo": {
               "reviews": 0,
               "requests": 2.3,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.1047,
-              "seconds": 34.5,
-              "inputs_from": "assumptions.json (estimate)"
+              "api_equivalent_usd": 0.1629,
+              "seconds": 20.1,
+              "inputs_from": "measured: final_200k (152363 distinct texts)"
             }
           },
           "code_stage_seconds": 20.0,
-          "api_cost_usd": 3.41,
-          "api_equivalent_subscription_usd": 10.11,
-          "elapsed_hours": 11.5,
+          "api_cost_usd": 3.96,
+          "api_equivalent_subscription_usd": 12.33,
+          "elapsed_hours": 14.81,
           "exceeds_budget": false,
           "unpriced_stages": []
         }
@@ -664,12 +1775,20 @@
         "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
       },
       {
-        "name": "Jev 1.13, one review per request",
+        "name": "Jev 1.13, one review per request (not run: $5 minimum purchase)",
         "requests": 484189,
         "api_cost_usd": 33.88,
         "declared_scope_api_cost_usd": 10.66,
         "hours": 20.17,
         "source": "preflight estimate on checkpoint_500 with the Jev question set (6,665 characters / 4); output free"
+      },
+      {
+        "name": "OpenAI Decisions API (gpt-6-luna), one review per request",
+        "requests": 484189,
+        "api_cost_usd": 93.88,
+        "declared_scope_api_cost_usd": 29.54,
+        "hours": 20.17,
+        "source": "preflight estimate on checkpoint_500: Decisions request body 7,755 characters / 4; output free; cached input conservatively billed in full until the pilot's usage and the OpenAI usage page show otherwise"
       },
       {
         "name": "Claude Haiku 5.5, 50 reviews/request, Standard",
@@ -694,7 +1813,7 @@
     "100": {
       "base_reuse": {
         "api_cost_usd": 0.0,
-        "elapsed_hours": 0.04
+        "elapsed_hours": 0.03
       },
       "base_no_reuse": {
         "api_cost_usd": 0.0,
@@ -729,26 +1848,87 @@
     },
     "10000": {
       "base_reuse": {
-        "api_cost_usd": 0.08,
-        "elapsed_hours": 0.41
+        "api_cost_usd": 0.1,
+        "elapsed_hours": 0.51
       },
       "base_no_reuse": {
-        "api_cost_usd": 0.11,
-        "elapsed_hours": 0.53
+        "api_cost_usd": 0.13,
+        "elapsed_hours": 0.66
       },
       "conservative_reuse": {
-        "api_cost_usd": 0.13,
-        "elapsed_hours": 0.52
+        "api_cost_usd": 0.15,
+        "elapsed_hours": 0.63
       },
       "conservative_no_reuse": {
-        "api_cost_usd": 0.17,
-        "elapsed_hours": 0.67
+        "api_cost_usd": 0.2,
+        "elapsed_hours": 0.82
       }
     }
   },
   "spend": {
-    "total_billed_usd": 0.0,
-    "per_run": {},
-    "computed_at": "2026-10-11T06:43:20+00:00"
+    "total_billed_usd": 2.142643,
+    "per_run": {
+      "runs/final-200k": {
+        "billed_usd": 2.019246,
+        "unknown_reserved_usd": 0,
+        "calls": 16878
+      },
+      "runs/golden-decisions": {
+        "billed_usd": 0.00909,
+        "unknown_reserved_usd": 0,
+        "calls": 49
+      },
+      "runs/golden-luna-low": {
+        "billed_usd": 0.000866,
+        "unknown_reserved_usd": 0,
+        "calls": 2
+      },
+      "runs/golden-luna-none": {
+        "billed_usd": 0.00067,
+        "unknown_reserved_usd": 0,
+        "calls": 2
+      },
+      "runs/live-analysis10000": {
+        "billed_usd": 0.096326,
+        "unknown_reserved_usd": 0,
+        "calls": 299
+      },
+      "runs/live-budget-drill": {
+        "billed_usd": 0.004306,
+        "unknown_reserved_usd": 0,
+        "calls": 17
+      },
+      "runs/live-checkpoint500": {
+        "billed_usd": 0.005175,
+        "unknown_reserved_usd": 0,
+        "calls": 17
+      },
+      "runs/live-checkpoint500-w2": {
+        "billed_usd": 0.00425,
+        "unknown_reserved_usd": 0,
+        "calls": 17
+      },
+      "runs/live-synthetic-injection": {
+        "billed_usd": 0.000234,
+        "unknown_reserved_usd": 0,
+        "calls": 2
+      },
+      "runs/pilot100-20261012T224901Z": {
+        "billed_usd": 0.001339,
+        "unknown_reserved_usd": 0,
+        "calls": 3
+      },
+      "runs/probe-decisions": {
+        "billed_usd": 0.000942,
+        "unknown_reserved_usd": 0,
+        "calls": 5
+      },
+      "runs/probe-luna": {
+        "billed_usd": 0.000198,
+        "unknown_reserved_usd": 0,
+        "calls": 1
+      }
+    },
+    "computed_at": "2026-10-13T02:10:47+00:00"
   }
 }

@@ -1,0 +1,15 @@
+review_id,fields,enricher_topic,verifier_topic,enricher_intent,verifier_intent,enricher_severity,verifier_severity,enricher_labeled_by,text
+035213ba-b1b9-411c-b028-70296e5f0e73,severity,usability,usability,cancellation,cancellation,2,3,primary,I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .
+05fa5b8a-a49b-43be-bab5-38af789a65a7,severity,playback,playback,complaint,complaint,4,3,primary,Very bad doesn't work properly even if you network connection is best
+08c07310-e802-4a88-bd97-2a5f240c0b44,severity,billing,billing,complaint,complaint,5,3,primary,Kitna paisa chahiye bhai...gareebo ko lootega to paap lagega...sudhar jao bhagwaan sab dekh raha hai..mera jigri dost lattu depression me chala gaya hai tum kameeno ke karan..lattu ki aah lagegi saalo tumhe
+0d9c62d1-2b53-4887-8156-a28eeac86e82,topic,usability,other,complaint,complaint,2,2,primary,Recent update bad and needs rework
+10775595-01b9-4623-9163-51619e2a0fa9,severity,usability,usability,complaint,complaint,2,3,primary,"One star for the songs availability, I like underrated songs which sometimes not available on other app but this app have, otherwise this app is worst it have adds every sec"
+1f13c3a2-e57b-460c-b569-964e6b2b1f31,topic|intent|severity,downloads,access,cancellation,complaint,3,4,primary,"Can no longer listen to music off line or even log in. The app is broken. Stop telling people to reinstall the app. Just fix it. Maybe if all of your dissatisfied customers were to canal their subscriptions, you might listen. Without them, you have nothing."
+33526c6f-7a49-4b3d-bd20-d1bc191c494c,topic,other,support,complaint,complaint,2,2,primary,"RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮"
+46ff0c74-5e86-4e5b-b4cd-36201aab0f9e,severity,playback,playback,complaint,complaint,4,3,primary,I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs
+4e4c0ec8-e42b-4428-b192-d527c3384aab,intent,other,other,cancellation,unclear,1,1,primary,Nice but i am not install
+5d5e08d1-1686-4c86-b9bd-cb0f3a719e0b,topic|severity,usability,other,cancellation,cancellation,2,1,primary,Time to switch to another platform. Spotify team has made a bad decision with the new updates.
+8b9d84a8-f650-4272-b332-4d60cb42377d,topic,playback,access,complaint,complaint,3,3,primary,Sometimes it's a pain to connect to other devices live a gaming console or the PC
+92c43612-30bb-4514-bd51-cb7419c7e4d2,severity,usability,usability,complaint,complaint,2,3,primary,Very bad app only ad
+d3ddb3ad-e576-4638-a100-926ba56caabe,topic,usability,other,complaint,complaint,2,2,primary,Worst update
+ed15bb17-865a-492b-ba1b-268f4cab78f6,topic|intent|severity,usability,other,complaint,praise,2,1,primary,Very good app enna advertisement verudu premium best

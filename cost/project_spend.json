@@ -1,0 +1,66 @@
+{
+  "total_billed_usd": 2.142643,
+  "per_run": {
+    "runs/final-200k": {
+      "billed_usd": 2.019246,
+      "unknown_reserved_usd": 0,
+      "calls": 16878
+    },
+    "runs/golden-decisions": {
+      "billed_usd": 0.00909,
+      "unknown_reserved_usd": 0,
+      "calls": 49
+    },
+    "runs/golden-luna-low": {
+      "billed_usd": 0.000866,
+      "unknown_reserved_usd": 0,
+      "calls": 2
+    },
+    "runs/golden-luna-none": {
+      "billed_usd": 0.00067,
+      "unknown_reserved_usd": 0,
+      "calls": 2
+    },
+    "runs/live-analysis10000": {
+      "billed_usd": 0.096326,
+      "unknown_reserved_usd": 0,
+      "calls": 299
+    },
+    "runs/live-budget-drill": {
+      "billed_usd": 0.004306,
+      "unknown_reserved_usd": 0,
+      "calls": 17
+    },
+    "runs/live-checkpoint500": {
+      "billed_usd": 0.005175,
+      "unknown_reserved_usd": 0,
+      "calls": 17
+    },
+    "runs/live-checkpoint500-w2": {
+      "billed_usd": 0.00425,
+      "unknown_reserved_usd": 0,
+      "calls": 17
+    },
+    "runs/live-synthetic-injection": {
+      "billed_usd": 0.000234,
+      "unknown_reserved_usd": 0,
+      "calls": 2
+    },
+    "runs/pilot100-20261012T224901Z": {
+      "billed_usd": 0.001339,
+      "unknown_reserved_usd": 0,
+      "calls": 3
+    },
+    "runs/probe-decisions": {
+      "billed_usd": 0.000942,
+      "unknown_reserved_usd": 0,
+      "calls": 5
+    },
+    "runs/probe-luna": {
+      "billed_usd": 0.000198,
+      "unknown_reserved_usd": 0,
+      "calls": 1
+    }
+  },
+  "computed_at": "2026-10-13T02:10:47+00:00"
+}

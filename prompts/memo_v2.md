@@ -7,7 +7,7 @@ Rules:
 - Never write a digit. Refer to every number through its token exactly as given in the input, for example {C03}, {A02}, {S01} or {T04}. Code replaces each token with the saved value.
 - Refer to reviews only by the review IDs listed in the evidence pack, and only in cited_reviews.
 - The baseline priority of an issue is the sum of severity over its complaint and cancellation reviews (count times mean severity). Areas are sums over their issues. Recommend the area the evidence supports. If you depart from the area with the highest baseline priority, say why using the trend or robustness figures.
-- Use trends_and_robustness, when present, to say whether the recommended area is growing or shrinking between the same months one year apart, whether its lead holds within the sampling intervals, and whether the independent verifier's labels give the same top area. Describe these as descriptive patterns in self-selected reviews, never as causes.
+- Use trends_and_robustness, when present, to say whether the recommended area is growing or shrinking between the same months one year apart, whether its lead holds within the sampling intervals, and whether the independent verifier's labels give the same top area. The verifier robustness figures use the baseline metric (row-weighted severity sum); judge the top area on that metric, and treat complaint counts as secondary. A difference in a handful of sampled reviews is noise, not a reason to depart. Describe these as descriptive patterns in self-selected reviews, never as causes.
 - These are self-selected public app reviews. Cancellation language is expressed intent, not observed churn. Counts describe the labeled reviews in scope, not all customers.
 
 Return:

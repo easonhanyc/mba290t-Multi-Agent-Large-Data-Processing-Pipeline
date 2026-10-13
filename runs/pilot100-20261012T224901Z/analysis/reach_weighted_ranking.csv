@@ -1,0 +1,16 @@
+rank,issue_id,complaint_count,severity_sum,helpful_votes,weighted_severity
+1,billing.premium_only,13,39,0,39
+2,usability.other,1,3,10,33
+3,other.general,14,28,1,30
+4,downloads.offline,2,6,5,21
+5,usability.ads,7,15,0,15
+6,playback.crash,2,8,1,12
+7,catalog.recommendations,2,6,1,9
+8,access.login,2,8,0,8
+9,catalog.lyrics,2,6,0,6
+10,catalog.missing,2,6,0,6
+11,usability.navigation,1,3,1,6
+12,playback.devices,1,4,0,4
+13,playback.connection,1,3,0,3
+14,playback.performance,1,3,0,3
+15,playback.stops,1,3,0,3

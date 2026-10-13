@@ -1,0 +1,198 @@
+{
+  "counts": {
+    "distinct_nonempty_texts": 152363,
+    "duplicate_review_id_rows": 0,
+    "empty_review_text": 13,
+    "exact_text_cache_aliases": 47637,
+    "first_pass_model_work_units": 152363,
+    "invalid_rating": 0,
+    "missing_app_version": 48432,
+    "mostly_non_latin_text": 1066,
+    "multiline_text": 26,
+    "no_letter_text": 3877,
+    "nonempty_to_classify": 200000,
+    "records": 200013,
+    "rows_in_exact_duplicate_text_groups": 52728,
+    "unique_review_ids": 200013
+  },
+  "exact_text_reuse": true,
+  "finished_at": "2026-10-12T23:29:31.436Z",
+  "first_review": "2022-05-17 00:04:56",
+  "handling": {
+    "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
+    "duplicate_review_id": "first occurrence kept; later rows reported here and excluded",
+    "empty_text": "quarantined with reason empty_review_text; never sent to a model",
+    "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
+    "missing_app_version": "kept; app_version is metadata and never used for classification"
+  },
+  "helper_profile": "ingestion.json: full-file profile of Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv produced by the provided check_submission.py profile helper",
+  "input": {
+    "bytes": 29411284,
+    "ignored_columns": [],
+    "note": "Only the six source fields are stored; ignored columns never reach any model.",
+    "path": "data/analysis_200k.csv",
+    "sha256": "3c023c9dd47a577523dc2a74eb00ec69a79ae1300b80de13f2423256b7222fad"
+  },
+  "last_review": "2023-11-15 23:11:32",
+  "owner": "code",
+  "reviews_by_month": {
+    "2022-05": 4719,
+    "2022-06": 9215,
+    "2022-07": 9916,
+    "2022-08": 9373,
+    "2022-09": 8172,
+    "2022-10": 8399,
+    "2022-11": 8175,
+    "2022-12": 9567,
+    "2023-01": 8553,
+    "2023-02": 6159,
+    "2023-03": 8299,
+    "2023-04": 7635,
+    "2023-05": 8522,
+    "2023-06": 8331,
+    "2023-07": 25850,
+    "2023-08": 9312,
+    "2023-09": 12714,
+    "2023-10": 26792,
+    "2023-11": 10310
+  },
+  "reviews_by_rating": {
+    "1": 73182,
+    "2": 9190,
+    "3": 10129,
+    "4": 16246,
+    "5": 91266
+  },
+  "run_id": "run-20261012T232925.093Z-9d9d",
+  "scope": {
+    "accounting": {
+      "analysis_rows_matched_in_full_file": 200013,
+      "empty_text_rows_in_full_file": 13,
+      "empty_text_rows_in_scope": 13,
+      "full_rows": 660622,
+      "out_of_scope_rows": 460609
+    },
+    "declared_scope": "200013 rows of data/analysis_200k.csv (subset of the full file)",
+    "full_file": {
+      "path": "Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv",
+      "profile_counts": {
+        "duplicate_review_ids": 0,
+        "empty_review_text": 13,
+        "missing_app_version": 159701,
+        "records": 660622
+      },
+      "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6"
+    },
+    "input_is_subset": true,
+    "out_of_scope_handling": "ingested and profiled (ingestion.json) but not classified: outside the declared analysis scope; they are not in records.jsonl and are not completed classifications",
+    "subset_manifest": {
+      "bytes": 29411284,
+      "command": "python3 scripts/make_analysis_subset.py",
+      "contains_course_files": {
+        "analysis_10000.csv": {
+          "all_in_scope": true,
+          "rows": 10000
+        },
+        "checkpoint_500.csv": {
+          "all_in_scope": true,
+          "rows": 500
+        },
+        "cost_100.csv": {
+          "all_in_scope": true,
+          "rows": 100
+        },
+        "golden_50_to_label.csv": {
+          "all_in_scope": true,
+          "rows": 50
+        }
+      },
+      "created_at": "2026-10-12T23:29:24+00:00",
+      "distinct_sampled_texts": 152363,
+      "empty_text_rows_added": 13,
+      "file": "data/analysis_200k.csv",
+      "full_source": {
+        "file": "Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv",
+        "matches_course_manifest": true,
+        "rows": 660622,
+        "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6"
+      },
+      "method": "Lowest SHA-256('berkeley-fall-2026-assignment-5-v1:' + review_id) among unique-ID, nonempty, valid-rating records (the course's sampling rule), first 200000; plus every empty-text row so it is explicitly quarantined. Rows unchanged, source order, csv.DictWriter(lineterminator='\\n').",
+      "out_of_scope_reason": "Not classified: outside the declared 200,000-review analysis scope chosen to keep total API spend under the $10 project budget. Ingested and profiled only.",
+      "out_of_scope_rows": 460609,
+      "rows": 200013,
+      "sampled_nonempty": 200000,
+      "sha256": "3c023c9dd47a577523dc2a74eb00ec69a79ae1300b80de13f2423256b7222fad"
+    }
+  },
+  "stage": "ingest",
+  "started_at": "2026-10-12T23:29:25.490Z",
+  "text_length_chars": {
+    "max": 615,
+    "mean": 74.4,
+    "median": 32.0,
+    "min": 1,
+    "p90": 206
+  },
+  "top_duplicate_texts": [
+    {
+      "rows": 3972,
+      "text": "Good"
+    },
+    {
+      "rows": 1674,
+      "text": "Nice"
+    },
+    {
+      "rows": 1245,
+      "text": "Great"
+    },
+    {
+      "rows": 1195,
+      "text": "Excellent"
+    },
+    {
+      "rows": 1012,
+      "text": "Awesome"
+    },
+    {
+      "rows": 916,
+      "text": "Love it"
+    },
+    {
+      "rows": 828,
+      "text": "Very good"
+    },
+    {
+      "rows": 653,
+      "text": "Nice app"
+    },
+    {
+      "rows": 585,
+      "text": "Amazing"
+    },
+    {
+      "rows": 575,
+      "text": "Super"
+    },
+    {
+      "rows": 570,
+      "text": "Good app"
+    },
+    {
+      "rows": 565,
+      "text": "Worst app"
+    },
+    {
+      "rows": 535,
+      "text": "Best"
+    },
+    {
+      "rows": 478,
+      "text": "Great app"
+    },
+    {
+      "rows": 441,
+      "text": "Hate this application 👎"
+    }
+  ]
+}

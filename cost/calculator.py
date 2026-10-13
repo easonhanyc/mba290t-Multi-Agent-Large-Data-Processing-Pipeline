@@ -44,10 +44,10 @@ ROOT = COST_DIR.parent
 DATA_DIR = ROOT / "Final Assignment - Spotify Reviews Dataset"
 FIELDS = ["review_id", "review_text", "review_rating", "review_likes", "app_version", "review_timestamp"]
 ITEMS = ("input_uncached", "input_cached", "input_cache_write", "output")
-STAGE_OF = {("enrich", "primary"): "enrich_primary", ("enrich", "fallback1"): "fallback1",
+STAGE_OF = {("enrich", "primary"): "enrich_primary", ("enrich", "crosscheck"): "crosscheck", ("enrich", "fallback1"): "fallback1",
             ("enrich", "fallback2"): "fallback2", ("verify", "verify"): "verify", ("group", "group"): "group",
             ("memo", "memo"): "memo"}
-STAGE_ORDER = ("enrich_primary", "fallback1", "fallback2", "verify", "group", "memo")
+STAGE_ORDER = ("enrich_primary", "crosscheck", "fallback1", "fallback2", "verify", "group", "memo")
 USAGE_FIELDS = ["request_id", "run_label", "run_id", "stage", "role", "provider", "model", "model_reported", "tier",
                 "billing", "item", "billed_units", "unit", "usage_reported"]
 
@@ -273,12 +273,13 @@ def per_stage_inputs(a, R, measured_sources):
                 "tier": ",".join(m["tiers"]), "billing": ",".join(m["billing"]),
                 "source": f"measured: {best.get('label') or best.get('pilot_id')} ({best.get('distinct_texts')} distinct texts)"})
         base.update({"provider": st["provider"], "model": st["model"], "fixed_calls": st.get("fixed_calls"),
+                     "workers": st.get("workers"),
                      "rpm_limit": _val(st.get("provider_requests_per_minute_limit", {"value": None}))})
         out[name] = base
     rates = {}
     if best:
         prim = best["stages"].get("enrich_primary", {}).get("unique_reviews") or 0
-        for t in ("fallback1", "fallback2"):
+        for t in ("crosscheck", "fallback1", "fallback2"):
             rates[t] = (best["stages"].get(t, {}).get("unique_reviews", 0) / prim) if prim else None
     return out, rates, best
 
@@ -301,8 +302,11 @@ def _scenarios(a, R, scope, per_stage, measured_rates, budget, workers):
                 fb[t] = min(rate, float(controls[cap_key]))
             verify_n = min(max(round(scope["distinct_nonempty_texts"] * float(controls["verify_sample_fraction"])),
                                int(controls.get("verify_min_sample", 0))), int(controls["verify_max_sample"]))
-            work = {"enrich_primary": units, "fallback1": units * fb["fallback1"], "fallback2": units * fb["fallback2"],
-                    "verify": verify_n}
+            xc = float(controls.get("crosscheck_fraction", 0.0))
+            if measured_rates.get("crosscheck") is not None:  # measured share of texts that were cross-checked
+                xc = measured_rates["crosscheck"] if scen_name == "base" else max(xc, measured_rates["crosscheck"])
+            work = {"enrich_primary": units, "crosscheck": units * xc,
+                    "fallback1": units * fb["fallback1"], "fallback2": units * fb["fallback2"], "verify": verify_n}
             stages, billed, equiv, total_s, unpriced = {}, 0.0, 0.0, 0.0, []
             for name in STAGE_ORDER:
                 ps = per_stage[name]
@@ -325,11 +329,14 @@ def _scenarios(a, R, scope, per_stage, measured_rates, budget, workers):
                     equiv += eq
                 lat = ps["latency_s"]
                 if lat:
-                    rate = workers / lat
+                    rate = (ps.get("workers") or workers) / lat
                     if ps.get("rpm_limit"):
                         rate = min(rate, ps["rpm_limit"] / 60)
                     secs = requests / rate
-                    total_s += secs
+                    if name == "crosscheck":  # own worker pool, runs alongside the primary pass: only the excess adds
+                        total_s += max(0.0, secs - (stages.get("enrich_primary", {}).get("seconds") or 0.0))
+                    else:
+                        total_s += secs
                 else:
                     secs = None
                 stages[name] = {"reviews": round(reviews, 1), "requests": round(requests, 1),

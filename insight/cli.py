@@ -7,7 +7,7 @@
   status     counts, spend and invocation history for a run directory
   planted-error   corrupt one label in a test copy and show the verifier comparison flags it
   golden     score saved predictions against a human-labelled golden CSV
-  render-prompts  regenerate prompts/jev_enrich_v1.json from insight/labels.py
+  render-prompts  regenerate prompts/jev_enrich_v1.json and prompts/decisions_crosscheck_v1.json
   label-golden    terminal labeller for the golden 50 (a person labels; saves after every review)
   trace      one review traced source -> enrich -> verify -> membership -> rank -> memo (saved artifacts only)
   analyze    recompute descriptive trends/intervals/robustness from saved outputs (no model calls)
@@ -68,8 +68,8 @@ def project_spend(exclude_run_dir=None, runs_root=None):
                 " COALESCE(SUM(CASE WHEN outcome IN ('unknown','dispatched') THEN reserved_usd ELSE 0 END),0) "
                 f"FROM calls WHERE model NOT LIKE 'stub-%' {billing}").fetchone()
             con.close()
-        except sqlite3.Error:
-            continue
+        except sqlite3.Error as e:  # fail closed: an unreadable run must never count as $0
+            raise RuntimeError(f"cannot read spend from {db}: {e}") from e
         amount = float(row[0]) + float(row[1])
         if amount:
             per_run[rel(db.parent)] = round(amount, 6)
@@ -163,10 +163,12 @@ def result_summary(store, cfg):
 def _config_summary(cfg):
     """Per-stage processing tier and batch size (cost-relevant settings shown by the calculator)."""
     e = cfg["enrich"]
-    llm = e["backend"] == "llm"
+    llm = e["backend"] in ("llm", "hybrid")
     return {
         "enrich_primary": {"service_tier": e["llm"].get("service_tier", "standard") if llm else "standard",
                            "batch": f"{e['llm_batch_size']} reviews/request" if llm else "1 review/request"},
+        "crosscheck": {"service_tier": "standard", "batch": "1 review/request",
+                       "fields": ",".join(e["crosscheck"]["fields"]) if e["backend"] == "hybrid" else "off"},
         "fallback1": {"service_tier": e["fallback1"].get("service_tier", "standard"), "batch": "1 review/request"},
         "fallback2": {"service_tier": e["fallback2"].get("service_tier", "subscription"
                                                          if cfg.provider(e["fallback2"]["provider"])["kind"] == "claude_code"
@@ -227,17 +229,19 @@ def cmd_run(args):
             stub.capture_bodies = bool(os.environ.get("INSIGHT_STUB_CAPTURE"))
             base_urls = stub.base_urls()
         registry = ProviderRegistry(cfg, base_urls)
-        missing = registry.missing_keys()
+        missing = registry.missing_keys(set(stages))
         if missing:
             _say(f"Missing API keys: {', '.join(missing)}. Put them in final-assignment/.env (names in .env.example).")
             return 2
-        not_ready = registry.readiness_problems()
+        not_ready = registry.readiness_problems(set(stages))
         if not_ready:
             _say("Provider not ready: " + "; ".join(not_ready))
             return 2
-        for role in ("enrich_primary", "fallback1", "fallback2", "verify", "group", "memo"):
+        for role in ("enrich_primary", "crosscheck", "fallback1", "fallback2", "verify", "group", "memo"):
             r = cfg.role_settings(role)
             if role.startswith("fallback") and not (r["enabled"] and r["max_fraction"] > 0):
+                continue
+            if role == "crosscheck" and not r["enabled"]:
                 continue
             if not rates.has(r["provider"], r["model"]):
                 _say(f"No price for {r['provider']}/{r['model']} in cost/rates.csv; the spend cap cannot be enforced.")
@@ -250,8 +254,23 @@ def cmd_run(args):
     project = None
     if needs_models and not cfg.offline_stub:
         # Project-wide hard cap: this run may only use what other runs have left under project_cap_usd.
+        runs_root = Path(os.environ.get("INSIGHT_RUNS_ROOT") or PROJECT_ROOT / "runs").resolve()
+        if runs_root not in run_dir.resolve().parents:
+            _say(f"Refusing live calls: the run directory must be under {rel(runs_root)} so the project cap counts it.")
+            return 2
+        runs_root.mkdir(parents=True, exist_ok=True)
+        project_lock = open(runs_root / ".live.lock", "w")  # one live run at a time: the cap is read once at start
+        try:
+            fcntl.flock(project_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            _say("Refusing: another live run is in progress (runs/.live.lock); the project cap allows one at a time.")
+            return 2
         cap = float(cfg["run"].get("project_cap_usd", 0) or 0)
-        others, per_run = project_spend(exclude_run_dir=run_dir)
+        try:
+            others, per_run = project_spend(exclude_run_dir=run_dir)
+        except RuntimeError as e:
+            _say(f"Refusing: {e}")
+            return 2
         allowed = max(0.0, cap - others) if cap else budget
         project = {"project_cap_usd": cap, "other_runs_billed_usd": others, "per_run": per_run,
                    "requested_budget_usd": budget, "effective_budget_usd": round(min(budget, allowed), 8)}
@@ -351,7 +370,8 @@ def cmd_run(args):
             "run_id": run_id, "phase": phase, "status": status, "stop_reason": ctx.stop_reason,
             "offline_stub": cfg.offline_stub, "input": store.get_meta("input"), "label_config": lc,
             "stage_configs": {s: cfg.stage_config(s) for s in ("verify", "group", "memo")},
-            "models": {r: cfg.role_settings(r) for r in ("enrich_primary", "fallback1", "fallback2", "verify", "group", "memo")},
+            "models": {r: cfg.role_settings(r) for r in ("enrich_primary", "crosscheck", "fallback1", "fallback2", "verify",
+                                                         "group", "memo")},
             "config_summary": _config_summary(cfg),
             "project_spend": project,
             "workers": int(cfg["run"]["workers"]), "wall_clock_s": wall, "stage_seconds": stage_s,
@@ -447,8 +467,8 @@ def cmd_preflight(args):
     pending = store.pending_representatives(lc)
     e = cfg["enrich"]
     sizes = []
-    if e["backend"] == "jev":
-        q = prompts.load_jev_questions(config_mod.project_path(e["jev"]["questions"]))
+    if e["backend"] in config_mod.CLASSIFIER_BACKENDS:
+        q = prompts.load_jev_questions(config_mod.project_path(e[e["backend"]]["questions"]))
         for r in pending:
             segs = [r["review_text"][s:t] for s, t in segment_spans(r["review_text"])]
             sizes.append(len(json.dumps(prompts.jev_request(q, r["review_text"], segs), ensure_ascii=False)))
@@ -582,6 +602,8 @@ def cmd_render_prompts(args):
     from . import prompts
     prompts.render_jev_questions_file()
     _say(f"wrote {rel(prompts.JEV_QUESTIONS_FILE)}")
+    prompts.render_decisions_questions_file()
+    _say(f"wrote {rel(prompts.DECISIONS_QUESTIONS_FILE)}")
     return 0
 
 
@@ -632,7 +654,7 @@ def main(argv=None):
     gd.add_argument("--run-dir", required=True, help="run whose input included the golden reviews")
     gd.add_argument("--out", default=None)
 
-    sub.add_parser("render-prompts", help="regenerate prompts/jev_enrich_v1.json")
+    sub.add_parser("render-prompts", help="regenerate the typed-question files in prompts/")
 
     tr = sub.add_parser("trace", help="trace one review through every stage from saved artifacts (no model calls)")
     tr.add_argument("--run-dir", required=True)

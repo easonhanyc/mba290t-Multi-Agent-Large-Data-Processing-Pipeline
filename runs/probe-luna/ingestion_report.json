@@ -1,0 +1,64 @@
+{
+  "counts": {
+    "distinct_nonempty_texts": 5,
+    "duplicate_review_id_rows": 0,
+    "empty_review_text": 0,
+    "exact_text_cache_aliases": 0,
+    "first_pass_model_work_units": 5,
+    "invalid_rating": 0,
+    "missing_app_version": 1,
+    "mostly_non_latin_text": 0,
+    "multiline_text": 0,
+    "no_letter_text": 0,
+    "nonempty_to_classify": 5,
+    "records": 5,
+    "rows_in_exact_duplicate_text_groups": 0,
+    "unique_review_ids": 5
+  },
+  "exact_text_reuse": true,
+  "finished_at": "2026-10-12T22:47:06.596Z",
+  "first_review": "2022-07-04 17:50:12",
+  "handling": {
+    "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
+    "duplicate_review_id": "first occurrence kept; later rows reported here and excluded",
+    "empty_text": "quarantined with reason empty_review_text; never sent to a model",
+    "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
+    "missing_app_version": "kept; app_version is metadata and never used for classification"
+  },
+  "helper_profile": "ingestion.json: full-file profile of data/probe_dev_5.csv produced by the provided check_submission.py profile helper",
+  "input": {
+    "bytes": 965,
+    "ignored_columns": [],
+    "note": "Only the six source fields are stored; ignored columns never reach any model.",
+    "path": "data/probe_dev_5.csv",
+    "sha256": "3a22d6f45e57f7e43b00f1e102604b263a494528f9c2d8ffab0ad0cd719104e1"
+  },
+  "last_review": "2023-11-06 15:34:31",
+  "owner": "code",
+  "reviews_by_month": {
+    "2022-07": 2,
+    "2023-01": 1,
+    "2023-10": 1,
+    "2023-11": 1
+  },
+  "reviews_by_rating": {
+    "1": 3,
+    "3": 1,
+    "5": 1
+  },
+  "run_id": "run-20261012T224706.575Z-2e50",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "stage": "ingest",
+  "started_at": "2026-10-12T22:47:06.595Z",
+  "text_length_chars": {
+    "max": 170,
+    "mean": 101.4,
+    "median": 81,
+    "min": 71,
+    "p90": 105
+  },
+  "top_duplicate_texts": []
+}

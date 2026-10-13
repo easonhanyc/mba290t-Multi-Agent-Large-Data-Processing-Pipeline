@@ -85,7 +85,7 @@ class TestProjectCap(unittest.TestCase):
             self.assertAlmostEqual(total, 9.60)
             os.environ.update({"INSIGHT_RUNS_ROOT": str(Path(d) / "runs"), "OPENAI_API_KEY": "sk-test-not-used"})
             try:
-                code, out = _run("run", "--input", FIXTURE, "--run-dir", Path(d) / "new", "--allow-paid", "--budget-usd", "0.5",
+                code, out = _run("run", "--input", FIXTURE, "--run-dir", Path(d) / "runs" / "new", "--allow-paid", "--budget-usd", "0.5",
                                  "--set", "verify.provider=openai", "--set", "group.provider=openai", "--set", "memo.provider=openai",
                                  "--set", "enrich.fallback2.enabled=false", "--set", "verify.model=gpt-6-luna",
                                  "--set", "group.model=gpt-6-luna", "--set", "memo.model=gpt-6-luna")
@@ -94,6 +94,19 @@ class TestProjectCap(unittest.TestCase):
                 os.environ.pop("OPENAI_API_KEY")
             self.assertEqual(code, 2, out)
             self.assertIn("project spending cap", out)
+            os.environ.update({"INSIGHT_RUNS_ROOT": str(Path(d) / "runs"), "OPENAI_API_KEY": "sk-test-not-used"})
+            try:  # live runs outside the runs root are refused (their spend would escape the cap) ...
+                code, out = _run("run", "--input", FIXTURE, "--run-dir", Path(d) / "elsewhere", "--allow-paid",
+                                 "--budget-usd", "0.5", "--stages", "ingest,enrich", "--set", "enrich.fallback2.enabled=false")
+                self.assertEqual(code, 2, out)
+                self.assertIn("must be under", out)
+                (Path(d) / "runs" / "broken").mkdir()  # ... and an unreadable run database fails closed, never $0
+                (Path(d) / "runs" / "broken" / "state.sqlite").write_bytes(b"not a database")
+                with self.assertRaises(RuntimeError):
+                    cli.project_spend(runs_root=Path(d) / "runs")
+            finally:
+                os.environ.pop("INSIGHT_RUNS_ROOT")
+                os.environ.pop("OPENAI_API_KEY")
 
 
 def _run(*argv):
@@ -160,3 +173,47 @@ class TestAnalysisWebAndApi(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestDecisionsAdapter(unittest.TestCase):
+    def test_question_translation_round_trip(self):
+        from insight import prompts
+        from insight.providers.openai_decisions import from_decisions_answers, to_decisions_questions
+        req = prompts.jev_request(prompts.load_jev_questions(), "Charged twice. Support ignored me.",
+                                  ["Charged twice.", "Support ignored me."])
+        qs = {q["name"]: q for q in to_decisions_questions(req["questions"])}
+        self.assertEqual(set(qs), {"issue", "intent", "severity", "sentiment", "unclear", "evidence"})
+        self.assertEqual(qs["intent"]["type"], "choice")
+        self.assertEqual([c["value"] for c in qs["evidence"]["choices"]], ["s1", "s2"])
+        self.assertEqual(qs["sentiment"]["type"], "score")
+        self.assertEqual(len(qs["sentiment"]["levels"]), 5)
+        self.assertEqual(qs["unclear"]["type"], "predicate")
+        answers, refused = from_decisions_answers([
+            {"type": "choice", "name": "intent", "choice": "complaint", "confidence": 0.9,
+             "probabilities": [{"value": "complaint", "probability": 0.9}, {"value": "praise", "probability": 0.1}]},
+            {"type": "score", "name": "sentiment", "score": 0.4, "confidence": 0.7, "probabilities": []},
+            {"type": "predicate", "name": "unclear", "probability": 0.05},
+            {"type": "refusal", "name": "issue"}])
+        self.assertEqual(answers["intent"]["choice"], "complaint")
+        self.assertEqual(answers["intent"]["probabilities"]["praise"], 0.1)
+        self.assertEqual(answers["sentiment"]["score"], 0.4)
+        self.assertEqual(answers["unclear"], {"type": "noul", "noul": 0.05})
+        self.assertEqual(refused, ["issue"])
+        self.assertNotIn("issue", answers)
+
+    def test_insufficient_quota_is_systemic(self):
+        import httpx2
+        import openai
+        from insight.providers import ProviderError
+        from insight.providers.openai_responses import raise_mapped
+        req = httpx2.Request("POST", "https://api.openai.com/v1/decisions")
+        def err(code):
+            body = {"error": {"message": "x", "type": "insufficient_quota" if code else "rate_limit", "code": code}}
+            return openai.RateLimitError("x", response=httpx2.Response(429, request=req, json=body), body=body["error"])
+        for code in ("insufficient_quota", "credit_balance_exhausted"):  # the second is what the live API returned
+            with self.assertRaises(ProviderError) as cm:
+                raise_mapped(openai, err(code))
+            self.assertEqual(cm.exception.kind, "systemic")
+        with self.assertRaises(ProviderError) as cm:
+            raise_mapped(openai, err(None))
+        self.assertEqual(cm.exception.kind, "transient")

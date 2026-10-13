@@ -1,0 +1,15 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 100,
+  "analysis_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-12T22:51:41.834Z",
+  "full_source": null,
+  "input_file": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "offline_stub": false,
+  "scope_note": "Development checkpoint export, not the final submission.",
+  "version": "a5-audit-v1"
+}

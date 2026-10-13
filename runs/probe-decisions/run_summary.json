@@ -1,0 +1,205 @@
+{
+  "history": [
+    {
+      "completed_ids_saved": 5,
+      "phase": "initial",
+      "run_id": "run-20261012T224612.433Z-41cc",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 1.262
+    }
+  ],
+  "latest": {
+    "calls_all_invocations": {
+      "enrich:primary": {
+        "attempts": 5,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.000943,
+        "input_tokens": 9424,
+        "invalid_output_retries": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 5
+      }
+    },
+    "calls_this_invocation": {
+      "enrich:primary": {
+        "attempts": 5,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.000943,
+        "input_tokens": 9424,
+        "invalid_output_retries": 0,
+        "output_tokens": 0,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 5
+      }
+    },
+    "completed_ids_saved": 5,
+    "config_summary": {
+      "crosscheck": {
+        "batch": "1 review/request",
+        "fields": "off",
+        "service_tier": "standard"
+      },
+      "enrich_primary": {
+        "batch": "1 review/request",
+        "service_tier": "standard"
+      },
+      "fallback1": {
+        "batch": "1 review/request",
+        "service_tier": "flex"
+      },
+      "fallback2": {
+        "batch": "1 review/request",
+        "service_tier": "subscription"
+      },
+      "group": {
+        "batch": "<= 8 quotes/request",
+        "service_tier": "subscription"
+      },
+      "memo": {
+        "batch": "aggregates + evidence pack",
+        "service_tier": "subscription"
+      },
+      "verify": {
+        "batch": "25 reviews/request",
+        "service_tier": "subscription"
+      }
+    },
+    "finished_at": "2026-10-12T22:46:13.717Z",
+    "input": {
+      "bytes": 965,
+      "ingested_at": "2026-10-12T22:46:12.453Z",
+      "path": "data/probe_dev_5.csv",
+      "rows": 5,
+      "sha256": "3a22d6f45e57f7e43b00f1e102604b263a494528f9c2d8ffab0ad0cd719104e1"
+    },
+    "label_config": "gpt-6-luna[decisions]|enrich-v2|schema-v2|cfg-9ba1620527",
+    "ledger": {
+      "cap_usd": 0.01,
+      "denials": 0,
+      "reserved_usd": 0.0,
+      "spent_usd": 0.0009424,
+      "unknown_usd": 0.0
+    },
+    "models": {
+      "crosscheck": {
+        "effort": "n/a",
+        "enabled": false,
+        "fields": [
+          "intent",
+          "severity"
+        ],
+        "model": "gpt-6-luna",
+        "provider": "openai_decisions"
+      },
+      "enrich_primary": {
+        "effort": "n/a",
+        "model": "gpt-6-luna",
+        "provider": "openai_decisions"
+      },
+      "fallback1": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.0,
+        "model": "gpt-6-luna",
+        "provider": "openai"
+      },
+      "fallback2": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.0,
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "group": {
+        "effort": "low",
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "memo": {
+        "effort": "low",
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "verify": {
+        "effort": "n/a",
+        "model": "haiku",
+        "provider": "claude_code"
+      }
+    },
+    "offline_stub": false,
+    "phase": "initial",
+    "project_spend": {
+      "effective_budget_usd": 0.01,
+      "other_runs_billed_usd": 0.0,
+      "per_run": {},
+      "project_cap_usd": 9.0,
+      "requested_budget_usd": 0.01
+    },
+    "reconciled_unknown_calls": 0,
+    "results": {
+      "by_status_and_tier": {
+        "completed:primary": 5
+      },
+      "completed": 5,
+      "exact_text_cache_reuses": 0,
+      "needs_review": 3,
+      "quarantined": 0,
+      "quarantined_empty_text": 0,
+      "scope": {
+        "distinct_nonempty_texts": 5,
+        "duplicate_id_rows": 0,
+        "empty_texts": 0,
+        "nonempty": 5,
+        "representatives": 5,
+        "rows": 5,
+        "unique_ids": 5
+      },
+      "unfinished": 0
+    },
+    "run_id": "run-20261012T224612.433Z-41cc",
+    "stage_configs": {
+      "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+      "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+      "verify": "haiku@n/a|verify-v1|cfg-e6ab73d745"
+    },
+    "stage_seconds": {
+      "enrich": 1.248,
+      "ingest": 0.006
+    },
+    "stages": {
+      "enrich": {
+        "aliases_written": 0,
+        "caps": {
+          "fallback1": 0,
+          "fallback2": 0
+        },
+        "difficult": 3,
+        "fallback_not_selected_cap": 3,
+        "invalid_output_retries": 0,
+        "invalid_outputs": 0,
+        "left_pending_stopping": 0,
+        "left_pending_transient": 0,
+        "quarantined": 0,
+        "routed": {
+          "fallback1": 0,
+          "fallback2": 0
+        },
+        "saved_fallback1": 0,
+        "saved_fallback2": 0,
+        "saved_primary": 5,
+        "staged": 0,
+        "still_pending": 0,
+        "stop_reason": null,
+        "transient_requeued": 0
+      }
+    },
+    "status": "completed",
+    "stop_reason": null,
+    "wall_clock_s": 1.262,
+    "workers": 1
+  }
+}

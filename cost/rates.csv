@@ -7,6 +7,10 @@ api,openai,gpt-6-luna,flex,input_uncached,token,0.05,USD,listed,2026-10-10,https
 api,openai,gpt-6-luna,flex,input_cached,token,0.005,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Flex cached input (50% of Standard)
 api,openai,gpt-6-luna,flex,input_cache_write,token,0.0625,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Flex cache write (50% of Standard)
 api,openai,gpt-6-luna,flex,output,token,0.25,USD,listed,2026-10-10,https://developers.openai.com/api/docs/models/gpt-6-luna,Flex output (50% of Standard)
+api,openai_decisions,gpt-6-luna,standard,input_uncached,token,0.10,USD,listed,2026-10-12,https://developers.openai.com/api/docs/guides/decisions,"Decisions API (beta): input only, $0.10 per 1M"
+api,openai_decisions,gpt-6-luna,standard,input_cached,token,0.10,USD,assumed,2026-10-12,https://developers.openai.com/api/docs/guides/decisions,"guide says no separate cache-read charge; conservatively billed as full input until the usage page confirms"
+api,openai_decisions,gpt-6-luna,standard,input_cache_write,token,0,USD,listed,2026-10-12,https://developers.openai.com/api/docs/guides/decisions,no cache-write charge
+api,openai_decisions,gpt-6-luna,standard,output,token,0,USD,listed,2026-10-12,https://developers.openai.com/api/docs/guides/decisions,no output-token charge
 api,typesafe,jev-1.13.0,standard,input_uncached,token,0.042,USD,listed,2026-10-01,https://docs.typesafe.ai/models,$42 per billion input tokens
 api,typesafe,jev-1.13.0,standard,input_cached,token,0.042,USD,listed,2026-10-01,https://docs.typesafe.ai/models,no cached-input discount listed; same as input
 api,typesafe,jev-1.13.0,standard,output,token,0,USD,listed,2026-10-01,https://docs.typesafe.ai/models,output tokens are free

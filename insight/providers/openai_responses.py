@@ -36,28 +36,16 @@ class OpenAIResponsesProvider:
         if self.effort and self.effort != "n/a":
             kwargs["reasoning"] = {"effort": self.effort}  # "none" is supported and cheapest for GPT-6 Luna
         try:
-            resp = self.client.responses.create(**kwargs)
-        except o.APIResponseValidationError as e:
-            raise ProviderError("invalid_output", f"response failed SDK validation: {e}") from e
-        except o.RateLimitError as e:
-            raise ProviderError("transient", f"rate limited: {e}", status=429,
-                                retry_after=_retry_after(getattr(e, "response", None))) from e
-        except (o.InternalServerError, o.ConflictError) as e:
-            raise ProviderError("transient", f"server error: {e}", status=getattr(e, "status_code", None)) from e
-        except (o.AuthenticationError, o.PermissionDeniedError, o.NotFoundError) as e:
-            raise ProviderError("systemic", f"{type(e).__name__}: {e}", status=getattr(e, "status_code", None)) from e
-        except (o.BadRequestError, o.UnprocessableEntityError) as e:
-            raise ProviderError("permanent_input", f"{type(e).__name__}: {e}", status=getattr(e, "status_code", None)) from e
-        except o.APITimeoutError as e:
-            raise ProviderError("transient", f"timeout: {e}", unknown_charge=True) from e
-        except o.APIConnectionError as e:
-            raise ProviderError("transient", f"connection error: {e}") from e
-        except o.APIStatusError as e:
-            kind = "transient" if e.status_code in (408, 409, 429) or e.status_code >= 500 else "permanent_input"
-            raise ProviderError(kind, f"HTTP {e.status_code}: {e}", status=e.status_code) from e
+            raw_resp = self.client.responses.with_raw_response.create(**kwargs)
+            resp = raw_resp.parse()
+        except o.OpenAIError as e:
+            raise_mapped(o, e)
+        headers = getattr(raw_resp, "headers", None) or {}
 
         usage = empty_usage()
-        if resp.usage is not None:
+        if resp.usage is None:
+            usage["usage_missing"] = True  # charged at the reservation by control.execute (never assumed free)
+        else:
             usage["input_tokens"] = int(resp.usage.input_tokens or 0)
             usage["output_tokens"] = int(resp.usage.output_tokens or 0)
             details = getattr(resp.usage, "input_tokens_details", None)
@@ -72,9 +60,10 @@ class OpenAIResponsesProvider:
                 usage["raw"] = resp.usage.model_dump()
             except Exception:  # raw usage is evidence only; never fail a call over it
                 usage["raw"] = None
+        usage["rate_limits"] = {k: v for k, v in headers.items() if str(k).lower().startswith("x-ratelimit")} or None
         tier = getattr(resp, "service_tier", None)
         tier = "standard" if tier in (None, "default", "auto") else str(tier)
-        rid = getattr(resp, "_request_id", None) or resp.id
+        rid = getattr(resp, "_request_id", None) or headers.get("x-request-id") or resp.id
         finish = "complete"
         if resp.status == "incomplete":
             reason = getattr(resp.incomplete_details, "reason", None) or "incomplete"
@@ -98,6 +87,37 @@ class OpenAIResponsesProvider:
                 finish = "malformed_json"
         return Result(data=data, text=text, usage=usage, provider_request_id=rid,
                       model_reported=resp.model, finish=finish, service_tier=tier)
+
+
+QUOTA_CODES = {"insufficient_quota", "credit_balance_exhausted", "billing_hard_limit_reached"}
+
+
+def raise_mapped(o, e):
+    """Map an OpenAI SDK exception to ProviderError (shared by the Responses and Decisions adapters)."""
+    status = getattr(e, "status_code", None)
+    if isinstance(e, o.APIResponseValidationError):
+        raise ProviderError("invalid_output", f"response failed SDK validation: {e}") from e
+    if isinstance(e, o.RateLimitError):
+        if getattr(e, "type", None) in QUOTA_CODES or getattr(e, "code", None) in QUOTA_CODES:
+            # prepaid credit used up (observed live: type insufficient_quota, code credit_balance_exhausted): stop now
+            raise ProviderError("systemic", f"insufficient_quota: {e}", status=429) from e
+        raise ProviderError("transient", f"rate limited: {e}", status=429,
+                            retry_after=_retry_after(getattr(e, "response", None))) from e
+    if isinstance(e, (o.InternalServerError, o.ConflictError)):
+        raise ProviderError("transient", f"server error: {e}", status=status) from e
+    if isinstance(e, (o.AuthenticationError, o.PermissionDeniedError, o.NotFoundError)):
+        raise ProviderError("systemic", f"{type(e).__name__}: {e}", status=status) from e
+    if isinstance(e, (o.BadRequestError, o.UnprocessableEntityError)):
+        raise ProviderError("permanent_input", f"{type(e).__name__}: {e}", status=status) from e
+    if isinstance(e, o.APITimeoutError):
+        raise ProviderError("transient", f"timeout: {e}", unknown_charge=True) from e
+    if isinstance(e, o.APIConnectionError):
+        # The request may have reached the server before the connection dropped: keep the reservation.
+        raise ProviderError("transient", f"connection error: {e}", unknown_charge=True) from e
+    if isinstance(e, o.APIStatusError):
+        kind = "transient" if status in (408, 409, 429) or status >= 500 else "permanent_input"
+        raise ProviderError(kind, f"HTTP {status}: {e}", status=status) from e
+    raise e
 
 
 def _retry_after(response):

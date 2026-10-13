@@ -1,0 +1,15 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 8,
+  "analysis_sha256": "a958444e87ee32d03dd23d1355aafd027a8ce8da7ccba62530b3d7dc5bd2b382",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-12T23:07:54.841Z",
+  "full_source": null,
+  "input_file": "evals/synthetic/injection_cases.csv",
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "offline_stub": false,
+  "scope_note": "Development checkpoint export, not the final submission.",
+  "version": "a5-audit-v1"
+}

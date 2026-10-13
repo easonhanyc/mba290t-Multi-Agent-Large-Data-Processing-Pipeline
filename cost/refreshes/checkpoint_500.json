@@ -1,0 +1,15 @@
+{
+  "label": "checkpoint_500",
+  "run_dir": "runs/live-checkpoint500",
+  "offline_stub": false,
+  "rows": 500,
+  "distinct_texts": 479,
+  "completed": 500,
+  "quarantined": 0,
+  "unfinished": 0,
+  "workers": 1,
+  "invocations": 1,
+  "wall_clock_s": 396.63,
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "saved_at": "2026-10-12T23:01:54+00:00"
+}

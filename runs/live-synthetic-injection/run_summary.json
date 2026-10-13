@@ -1,0 +1,244 @@
+{
+  "history": [
+    {
+      "completed_ids_saved": 6,
+      "phase": "initial",
+      "run_id": "run-20261012T230747.354Z-b154",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 7.057
+    }
+  ],
+  "latest": {
+    "calls_all_invocations": {
+      "enrich:fallback1": {
+        "attempts": 1,
+        "cached_input_tokens": 2197,
+        "cost_usd": 2.2e-05,
+        "input_tokens": 2233,
+        "invalid_output_retries": 0,
+        "output_tokens": 35,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      },
+      "enrich:primary": {
+        "attempts": 1,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.000212,
+        "input_tokens": 2557,
+        "invalid_output_retries": 0,
+        "output_tokens": 208,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      }
+    },
+    "calls_this_invocation": {
+      "enrich:fallback1": {
+        "attempts": 1,
+        "cached_input_tokens": 2197,
+        "cost_usd": 2.2e-05,
+        "input_tokens": 2233,
+        "invalid_output_retries": 0,
+        "output_tokens": 35,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      },
+      "enrich:primary": {
+        "attempts": 1,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.000212,
+        "input_tokens": 2557,
+        "invalid_output_retries": 0,
+        "output_tokens": 208,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      }
+    },
+    "completed_ids_saved": 6,
+    "config_summary": {
+      "crosscheck": {
+        "batch": "1 review/request",
+        "fields": "off",
+        "service_tier": "standard"
+      },
+      "enrich_primary": {
+        "batch": "50 reviews/request",
+        "service_tier": "flex"
+      },
+      "fallback1": {
+        "batch": "1 review/request",
+        "service_tier": "flex"
+      },
+      "fallback2": {
+        "batch": "1 review/request",
+        "service_tier": "subscription"
+      },
+      "group": {
+        "batch": "<= 8 quotes/request",
+        "service_tier": "subscription"
+      },
+      "memo": {
+        "batch": "aggregates + evidence pack",
+        "service_tier": "subscription"
+      },
+      "verify": {
+        "batch": "50 reviews/request",
+        "service_tier": "subscription"
+      }
+    },
+    "finished_at": "2026-10-12T23:07:54.848Z",
+    "input": {
+      "bytes": 1236,
+      "ingested_at": "2026-10-12T23:07:47.792Z",
+      "path": "evals/synthetic/injection_cases.csv",
+      "rows": 8,
+      "sha256": "a958444e87ee32d03dd23d1355aafd027a8ce8da7ccba62530b3d7dc5bd2b382"
+    },
+    "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+    "ledger": {
+      "cap_usd": 0.02,
+      "denials": 0,
+      "reserved_usd": 0.0,
+      "spent_usd": 0.00023372,
+      "unknown_usd": 0.0
+    },
+    "models": {
+      "crosscheck": {
+        "effort": "n/a",
+        "enabled": false,
+        "fields": [
+          "intent",
+          "severity"
+        ],
+        "model": "gpt-6-luna",
+        "provider": "openai_decisions"
+      },
+      "enrich_primary": {
+        "effort": "none",
+        "model": "gpt-6-luna",
+        "provider": "openai"
+      },
+      "fallback1": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.015,
+        "model": "gpt-6-luna",
+        "provider": "openai"
+      },
+      "fallback2": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.0025,
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "group": {
+        "effort": "low",
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "memo": {
+        "effort": "low",
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "verify": {
+        "effort": "n/a",
+        "model": "haiku",
+        "provider": "claude_code"
+      }
+    },
+    "offline_stub": false,
+    "phase": "initial",
+    "project_spend": {
+      "effective_budget_usd": 0.02,
+      "other_runs_billed_usd": 0.01621052,
+      "per_run": {
+        "runs/live-budget-drill": 0.004306,
+        "runs/live-checkpoint500": 0.005175,
+        "runs/live-checkpoint500-w2": 0.00425,
+        "runs/pilot100-20261012T224901Z": 0.001339,
+        "runs/probe-decisions": 0.000942,
+        "runs/probe-luna": 0.000198
+      },
+      "project_cap_usd": 9.0,
+      "requested_budget_usd": 0.02
+    },
+    "reconciled_unknown_calls": 0,
+    "results": {
+      "by_status_and_tier": {
+        "completed:fallback1": 1,
+        "completed:primary": 5,
+        "quarantined:rule": 2
+      },
+      "completed": 6,
+      "exact_text_cache_reuses": 0,
+      "needs_review": 1,
+      "quarantined": 2,
+      "quarantined_empty_text": 2,
+      "scope": {
+        "distinct_nonempty_texts": 6,
+        "duplicate_id_rows": 0,
+        "empty_texts": 2,
+        "nonempty": 6,
+        "representatives": 6,
+        "rows": 8,
+        "unique_ids": 8
+      },
+      "unfinished": 0
+    },
+    "run_id": "run-20261012T230747.354Z-b154",
+    "stage_configs": {
+      "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+      "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+      "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
+    },
+    "stage_seconds": {
+      "enrich": 7.03,
+      "export": 0.007,
+      "ingest": 0.007
+    },
+    "stages": {
+      "enrich": {
+        "aliases_written": 0,
+        "caps": {
+          "fallback1": 1,
+          "fallback2": 1
+        },
+        "difficult": 1,
+        "fallback_not_selected_cap": 0,
+        "invalid_output_retries": 0,
+        "invalid_outputs": 0,
+        "left_pending_stopping": 0,
+        "left_pending_transient": 0,
+        "quarantined": 0,
+        "routed": {
+          "fallback1": 1,
+          "fallback2": 0
+        },
+        "saved_fallback1": 1,
+        "saved_fallback2": 0,
+        "saved_primary": 5,
+        "staged": 1,
+        "still_pending": 0,
+        "stop_reason": null,
+        "transient_requeued": 0
+      },
+      "export": {
+        "calls": 2,
+        "checkpoint_after": 6,
+        "checkpoint_before": 0,
+        "grading_dir": "runs/live-synthetic-injection/grading",
+        "records": 8
+      }
+    },
+    "status": "completed",
+    "stop_reason": null,
+    "wall_clock_s": 7.057,
+    "workers": 1
+  }
+}

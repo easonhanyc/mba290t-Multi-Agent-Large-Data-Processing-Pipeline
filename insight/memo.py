@@ -29,10 +29,10 @@ def _trend_section(analysis, tokens):
     """Descriptive trend/robustness facts for the memo, each number behind a T## token."""
     if not analysis:
         return {}
-    def tok(value):
+    def tok(value):  # value shown to the model (so it can describe direction); the token is what it must write
         tid = f"T{len([t for t in tokens if t.startswith('T')]) + 1:02d}"
         tokens[tid] = str(value)
-        return "{" + tid + "}"
+        return {"value": str(value), "token": "{" + tid + "}"}
     out = {}
     pc = analysis.get("period_comparison") or {}
     periods = pc.get("periods", {})
@@ -62,9 +62,13 @@ def _trend_section(analysis, tokens):
     rb = analysis.get("robustness") or {}
     if rb.get("sample"):
         out["verifier_robustness"] = {"sample_reviews": tok(rb["sample"]),
+                                      "metric": rb.get("metric", "complaint count"),
                                       "top_decision_area_enricher_labels": rb.get("top_decision_area_enricher"),
                                       "top_decision_area_verifier_labels": rb.get("top_decision_area_verifier"),
-                                      "same_top_area": rb.get("same_top_decision_area")}
+                                      "decision_area_order_enricher_labels": rb.get("decision_area_order_enricher"),
+                                      "decision_area_order_verifier_labels": rb.get("decision_area_order_verifier"),
+                                      "same_top_area": rb.get("same_top_decision_area"),
+                                      "top_by_complaint_count": rb.get("by_complaint_count")}
     return out
 
 
@@ -241,7 +245,7 @@ class MemoStage:
         return None, "none", problems_log
 
     def render(self, data, payload, tokens, meta, source):
-        f = lambda s: fill(s, tokens)
+        f = lambda s: fill(s["token"] if isinstance(s, dict) else s, tokens)
         lines = ["# Decision memo: where to focus next quarter", ""]
         if meta.get("offline_stub"):
             lines += ["> **OFFLINE STUB RUN - NOT FINDINGS.** Every label and name below came from a local test server "
@@ -297,9 +301,10 @@ class MemoStage:
                              f"{f(x['median_full_month_reviews'])}); largest increases in share: {inc}.")
             rb = tr.get("verifier_robustness")
             if rb:
-                lines.append(f"- Verifier robustness on {f(rb['sample_reviews'])} sampled reviews: top decision area under "
-                             f"enricher labels **{rb['top_decision_area_enricher_labels']}**, under independent verifier labels "
-                             f"**{rb['top_decision_area_verifier_labels']}** ({'same' if rb['same_top_area'] else 'different'}).")
+                lines.append(f"- Verifier robustness on {f(rb['sample_reviews'])} sampled reviews ({rb.get('metric')}): decision "
+                             f"areas in order under enricher labels **{', '.join(rb.get('decision_area_order_enricher_labels') or [])}**; "
+                             f"under independent verifier labels **{', '.join(rb.get('decision_area_order_verifier_labels') or [])}** "
+                             f"(top area {'same' if rb['same_top_area'] else 'different'}).")
         lines += ["", "## Representative evidence (exact quotes from the reviews)", ""]
         cited = set(data.get("cited_reviews") or [])
         for e in payload["evidence"]:

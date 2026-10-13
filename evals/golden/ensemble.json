@@ -1,0 +1,38 @@
+{
+  "cases_labelled": 50,
+  "cases_with_both_predictions": 50,
+  "threshold": 0.8,
+  "fields": {
+    "topic": {
+      "luna_accuracy": 0.74,
+      "decisions_accuracy": 0.76,
+      "agreement_rate": 0.96,
+      "accuracy_when_agree": 0.7708,
+      "disagreements": 2,
+      "luna_right_on_disagreement": 0,
+      "decisions_right_on_disagreement": 1,
+      "rule_accuracy": 0.74
+    },
+    "intent": {
+      "luna_accuracy": 0.7,
+      "decisions_accuracy": 0.74,
+      "agreement_rate": 0.92,
+      "accuracy_when_agree": 0.7391,
+      "disagreements": 4,
+      "luna_right_on_disagreement": 1,
+      "decisions_right_on_disagreement": 3,
+      "rule_accuracy": 0.74
+    },
+    "severity": {
+      "luna_accuracy": 0.72,
+      "decisions_accuracy": 0.68,
+      "agreement_rate": 0.84,
+      "accuracy_when_agree": 0.7619,
+      "disagreements": 8,
+      "luna_right_on_disagreement": 4,
+      "decisions_right_on_disagreement": 2,
+      "rule_accuracy": 0.7
+    }
+  },
+  "note": "Diagnostic on at most 50 cases; differences of one or two cases are noise. Decisions answered the full Jev-style question set (one review per request), Luna the batched production prompt."
+}

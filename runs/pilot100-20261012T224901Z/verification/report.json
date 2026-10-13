@@ -1,0 +1,152 @@
+{
+  "agreement": {
+    "intent": {
+      "agree": 10,
+      "of": 10,
+      "rate": 1.0
+    },
+    "sentiment_within_tolerance": {
+      "agree": 10,
+      "of": 10,
+      "rate": 1.0
+    },
+    "severity": {
+      "agree": 7,
+      "of": 10,
+      "rate": 0.7
+    },
+    "topic": {
+      "agree": 9,
+      "of": 10,
+      "rate": 0.9
+    }
+  },
+  "by_enricher_tier": {
+    "primary": {
+      "all_three_agree": 6,
+      "n": 10
+    }
+  },
+  "compared": 10,
+  "disagreements": [
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "035213ba-b1b9-411c-b028-70296e5f0e73",
+      "severity_abs_diff": 1,
+      "text": "I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .",
+      "verifier": {
+        "confidence": "high",
+        "intent": "cancellation",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 2,
+        "topic": "other"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic"
+      ],
+      "review_id": "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+      "severity_abs_diff": 0,
+      "text": "RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 2,
+        "topic": "support"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 3,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+      "severity_abs_diff": 1,
+      "text": "Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time.",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 3,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "a1a28752-3256-4f81-b888-3e943343529f",
+      "severity_abs_diff": 1,
+      "text": "It's nice but gospel music isn't much",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 2,
+        "topic": "catalog"
+      }
+    }
+  ],
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "note": "Agreement between two models is a consistency check, not accuracy. Disagreements are reported for inspection; enriched labels are never overwritten by the verifier.",
+  "owner": "independent model + code",
+  "sample": {
+    "fraction": 0.1,
+    "max": 2000,
+    "method": "lowest SHA-256(seed + ':' + review_id) among distinct completed texts",
+    "min": 10,
+    "population": 100,
+    "sample_size": 10,
+    "seed": "berkeley-fa-2026-insight-v1"
+  },
+  "sentiment_mean_abs_diff": 0.2,
+  "sentiment_tolerance": 0.5,
+  "severity_abs_diff_counts": {
+    "0": 7,
+    "1": 3
+  },
+  "stage": "verify",
+  "top_confusions": {
+    "intent": {},
+    "topic": {
+      "other -> support": 1
+    }
+  },
+  "verifier_config": "haiku@n/a|verify-v1|cfg-e6ab73d745",
+  "verifier_failures": 0
+}

@@ -1,0 +1,983 @@
+{
+  "pilot_id": "pilot100-20261012T224901Z",
+  "offline_stub": false,
+  "executed_at": "2026-10-12T22:51:41.853281+00:00",
+  "run_dir": "runs/pilot100-20261012T224901Z",
+  "input": {
+    "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+    "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+    "manifest_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
+    "matches_manifest": true,
+    "review_ids": [
+      "084077ee-f9be-446a-9935-9e58550d5153",
+      "ff14ea84-fdec-4363-9b1b-a23dcab287c5",
+      "dc73ecd9-3293-4ede-90d5-dd6cd1e8d087",
+      "a78d831a-69f4-428a-9235-cfdd9775c509",
+      "d146397f-4a94-4980-be00-ae9212eca3a7",
+      "4c0242ca-099a-4c89-b11b-219ef28f1e16",
+      "42f0c9d1-088c-437b-bfc8-c1c36114a8f0",
+      "5bc203df-dac3-41ae-8b8d-ee0e8b9d9f50",
+      "b39971d2-e3f0-4559-96da-a609f54d9cb4",
+      "797d12c7-78dd-4805-a066-342ace701805",
+      "9d851b7f-a738-449b-a841-de8076f13276",
+      "ad730d1a-829a-4dc4-9561-7e1cd07e2c30",
+      "f44b3617-a645-4375-ae2d-44b742a1a306",
+      "5d4d3f47-4b3c-4be4-8f11-6cca41d27068",
+      "84353026-5e56-4ca4-bfa4-e006d021ef44",
+      "178c3b49-b689-4fe4-92a2-2257a58e6d95",
+      "b92a7381-b5cd-4c77-9176-e5c4b4818c8a",
+      "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+      "e25cf0b6-0285-4cc9-9a4a-5a8a05be929e",
+      "9f46904c-4ed3-4799-8949-379b949c7344",
+      "618d1dbb-0186-4537-923a-7b4dabf19afb",
+      "277c75cb-ec6a-4387-902d-eb721d038db6",
+      "45c561b9-cc47-4d80-95d3-f0d20bc84af3",
+      "ba274609-2cbc-4d6a-9624-276d1c8246e8",
+      "a3605554-5c3a-441d-836e-e9fdea83eb2e",
+      "7e91d976-20e5-40f0-a6f5-7312eadf7e78",
+      "8cb9d355-e14c-4f55-b026-c6abd7bbce0d",
+      "4ab2089a-ffa8-49e7-a8a3-aeb583a96796",
+      "b47c203f-366e-4409-922d-cd52aa8bbef6",
+      "9c9757da-6b99-4c95-a0e7-0661ee858027",
+      "23de7958-ccb0-4356-bc12-094935e6857d",
+      "0f2b7fd2-71a6-4657-998e-da44f5893956",
+      "55cc3abf-c295-4591-8c3a-78085cfdefaa",
+      "88439ec2-7c49-4c57-bedb-c5e098692aff",
+      "3e8bdc92-4934-457e-85cc-8b9d14bf51c0",
+      "c1fe1a70-f5ec-4009-bad6-b75437ba1c0b",
+      "2be2ae92-6ad1-4c93-8589-65a0ce68fe46",
+      "c2738a4f-e57c-46bc-a4ad-8ec5a4b5d5cd",
+      "21915fcd-9a35-48ba-b277-6296c4154603",
+      "7084ced1-0428-4093-9328-442f74719b4f",
+      "4aee0d75-6901-426e-b0f7-11d042ccc73e",
+      "2ffdf599-a0d5-4c01-bf26-025215d44c06",
+      "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+      "51bfd887-24a0-4741-8b59-68e0a726dd7a",
+      "5c9c17d3-9d6a-4fa1-a2a4-ae98eefbbd25",
+      "e575daac-46ab-4da3-b9f5-723bf4000234",
+      "8737ac88-7e76-45ba-aa42-4eb97e3300ec",
+      "3e82cf28-6b0a-4980-902c-b6aa154d353a",
+      "ed15bb17-865a-492b-ba1b-268f4cab78f6",
+      "ca16e65d-d2ff-4453-a495-b8c422809330",
+      "10f09c93-34ef-4a3b-8ee2-97d7c00d44e0",
+      "8decb2ac-5860-49e3-8dce-9ca198ad061e",
+      "035213ba-b1b9-411c-b028-70296e5f0e73",
+      "486d1d7a-d6f6-41ea-81ad-ed875452729c",
+      "dcff57c6-abd6-413b-b255-aec3dc34fcbd",
+      "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+      "8b6e028a-5f63-4011-9841-cbbade4830eb",
+      "67b21b33-e6b9-4d1a-b874-86bc182b9ada",
+      "53e95a47-d326-4579-945d-a7aabd780b12",
+      "85383985-844d-4f9b-bcd9-d6016ac35f6b",
+      "9e5f9745-f8be-48d3-b9de-4d118507d94a",
+      "0658feaa-5bec-416e-b6b0-3de2a4c14580",
+      "b9a3e661-0eac-4cc9-a30e-7b1e11ef1315",
+      "85ccf50b-7e85-4068-8765-5c122d61580f",
+      "23d905f8-8684-41b3-8faa-42571f3eaeee",
+      "2b57a12b-bbbe-457c-83a8-1bec297a5f63",
+      "89ea2c30-db8b-459d-8ab7-bbcb7f92c774",
+      "d7b04025-054b-4929-a507-15b751c39fdc",
+      "7a833667-4fcb-4a40-a88d-c55cfeca3d16",
+      "89a8e180-7846-4421-a2b6-fa7787e9d0d2",
+      "0b52ac4e-1982-46ed-aeaa-74eedaefb5c9",
+      "ab67a772-c3b7-42ba-9b80-8d21d3857018",
+      "cf6166ae-d71a-4839-9add-088645ad3b78",
+      "dd90623c-dcd8-45a2-bb5b-3ace2b383667",
+      "6c257eba-3dca-49f6-b7f0-4c4484d81e26",
+      "1d9f396e-7a8a-414b-a622-3ad6f9570abe",
+      "de0a9cdf-8974-48bc-802f-331228df4619",
+      "06a45bd5-3ed9-43af-b7f2-8b9487e2ffff",
+      "5db4a676-1f15-48cf-b989-a0a0fdb1c7a3",
+      "916d1cb1-3a9f-42c0-9c36-fee4b1983c68",
+      "ebc64fe2-9553-4528-87d5-cb4bb9783be6",
+      "d455c11e-c530-4c03-a395-38f5a5cdb8d3",
+      "1807cc68-ba99-4edc-b6f1-2a1478e69109",
+      "e16a4550-43e7-4ae1-b538-a65cc652c31b",
+      "2d5cdd20-3094-40a5-bc6e-653302b59b56",
+      "9e3a706c-f502-4664-a23f-33f3480eca64",
+      "e0127547-4edd-44a0-8d5e-e8398bc07086",
+      "66a29b3c-c14d-440e-b722-b23e0c99ae82",
+      "32fb340f-4f9f-4551-8dae-755221e58d6a",
+      "ee3e2bd4-f94d-4e76-b2a6-5f6533d74c7c",
+      "0a5ff524-27b1-4f3b-a761-17ca48ee731d",
+      "47becad0-8ae5-4a10-9731-fde8f2091862",
+      "a1a28752-3256-4f81-b888-3e943343529f",
+      "a7aebec4-11e0-40d6-abf5-7a4798ebbb98",
+      "aeee488a-2077-489d-8914-1e01d5f7672f",
+      "884e8712-da13-4890-a39e-731b69f42d6c",
+      "c1ab120a-f91f-4ee3-87f5-66f352e2d47f",
+      "9f3794ed-4f4b-4430-a548-9cfd2d0c0084",
+      "def34476-7bdc-443a-ab3d-475cdd5ca2f6",
+      "e5e6c55f-3069-4b7c-9807-f8b5d5bf2726"
+    ]
+  },
+  "settings": {
+    "workers": 1,
+    "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+    "stages": {
+      "enrich_primary": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "effort": "none",
+        "tier": "flex",
+        "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+        "batch": "50 reviews/request"
+      },
+      "crosscheck": {
+        "provider": "openai_decisions",
+        "model": "gpt-6-luna",
+        "effort": "n/a",
+        "tier": "standard",
+        "config": null,
+        "batch": "1 review/request"
+      },
+      "fallback1": {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "tier": "flex",
+        "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+        "batch": "1 review/request"
+      },
+      "fallback2": {
+        "provider": "claude_code",
+        "model": "sonnet",
+        "effort": "low",
+        "tier": "subscription",
+        "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+        "batch": "1 review/request"
+      },
+      "verify": {
+        "provider": "claude_code",
+        "model": "haiku",
+        "effort": "n/a",
+        "tier": "subscription",
+        "config": "haiku@n/a|verify-v1|cfg-e6ab73d745",
+        "batch": "25 reviews/request"
+      },
+      "group": {
+        "provider": "claude_code",
+        "model": "sonnet",
+        "effort": "low",
+        "tier": "subscription",
+        "config": "sonnet@low|group-v1|cfg-df12b8e8c6",
+        "batch": "<= 8 quotes/request"
+      },
+      "memo": {
+        "provider": "claude_code",
+        "model": "sonnet",
+        "effort": "low",
+        "tier": "subscription",
+        "config": "sonnet@low|memo-v1|cfg-7897f460ec",
+        "batch": "aggregates + evidence pack"
+      }
+    }
+  },
+  "process_wall_clock_s": {
+    "cold": 160.006,
+    "warm": 0.314
+  },
+  "runs": {
+    "cold": {
+      "calls_all_invocations": {
+        "enrich:fallback1": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.000148,
+          "input_tokens": 2230,
+          "invalid_output_retries": 0,
+          "output_tokens": 35,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 1
+        },
+        "enrich:primary": {
+          "attempts": 2,
+          "cached_input_tokens": 2368,
+          "cost_usd": 0.001191,
+          "input_tokens": 8315,
+          "invalid_output_retries": 0,
+          "output_tokens": 3231,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 2
+        },
+        "group": {
+          "attempts": 12,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 19418,
+          "invalid_output_retries": 0,
+          "output_tokens": 1753,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 12
+        },
+        "memo": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 7932,
+          "invalid_output_retries": 0,
+          "output_tokens": 2861,
+          "reasoning_tokens": 1352,
+          "retries": 0,
+          "succeeded": 1
+        },
+        "verify": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 2646,
+          "invalid_output_retries": 0,
+          "output_tokens": 2115,
+          "reasoning_tokens": 1489,
+          "retries": 0,
+          "succeeded": 1
+        }
+      },
+      "calls_this_invocation": {
+        "enrich:fallback1": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.000148,
+          "input_tokens": 2230,
+          "invalid_output_retries": 0,
+          "output_tokens": 35,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 1
+        },
+        "enrich:primary": {
+          "attempts": 2,
+          "cached_input_tokens": 2368,
+          "cost_usd": 0.001191,
+          "input_tokens": 8315,
+          "invalid_output_retries": 0,
+          "output_tokens": 3231,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 2
+        },
+        "group": {
+          "attempts": 12,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 19418,
+          "invalid_output_retries": 0,
+          "output_tokens": 1753,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 12
+        },
+        "memo": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 7932,
+          "invalid_output_retries": 0,
+          "output_tokens": 2861,
+          "reasoning_tokens": 1352,
+          "retries": 0,
+          "succeeded": 1
+        },
+        "verify": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 2646,
+          "invalid_output_retries": 0,
+          "output_tokens": 2115,
+          "reasoning_tokens": 1489,
+          "retries": 0,
+          "succeeded": 1
+        }
+      },
+      "completed_ids_saved": 100,
+      "config_summary": {
+        "crosscheck": {
+          "batch": "1 review/request",
+          "fields": "off",
+          "service_tier": "standard"
+        },
+        "enrich_primary": {
+          "batch": "50 reviews/request",
+          "service_tier": "flex"
+        },
+        "fallback1": {
+          "batch": "1 review/request",
+          "service_tier": "flex"
+        },
+        "fallback2": {
+          "batch": "1 review/request",
+          "service_tier": "subscription"
+        },
+        "group": {
+          "batch": "<= 8 quotes/request",
+          "service_tier": "subscription"
+        },
+        "memo": {
+          "batch": "aggregates + evidence pack",
+          "service_tier": "subscription"
+        },
+        "verify": {
+          "batch": "25 reviews/request",
+          "service_tier": "subscription"
+        }
+      },
+      "finished_at": "2026-10-12T22:51:41.473Z",
+      "input": {
+        "bytes": 15466,
+        "ingested_at": "2026-10-12T22:49:01.983Z",
+        "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+        "rows": 100,
+        "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
+      },
+      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "ledger": {
+        "cap_usd": 0.1,
+        "denials": 0,
+        "reserved_usd": 0.0,
+        "spent_usd": 0.00133929,
+        "unknown_usd": 0.0
+      },
+      "models": {
+        "crosscheck": {
+          "effort": "n/a",
+          "enabled": false,
+          "fields": [
+            "intent",
+            "severity"
+          ],
+          "model": "gpt-6-luna",
+          "provider": "openai_decisions"
+        },
+        "enrich_primary": {
+          "effort": "none",
+          "model": "gpt-6-luna",
+          "provider": "openai"
+        },
+        "fallback1": {
+          "effort": "low",
+          "enabled": true,
+          "max_fraction": 0.015,
+          "model": "gpt-6-luna",
+          "provider": "openai"
+        },
+        "fallback2": {
+          "effort": "low",
+          "enabled": true,
+          "max_fraction": 0.0025,
+          "model": "sonnet",
+          "provider": "claude_code"
+        },
+        "group": {
+          "effort": "low",
+          "model": "sonnet",
+          "provider": "claude_code"
+        },
+        "memo": {
+          "effort": "low",
+          "model": "sonnet",
+          "provider": "claude_code"
+        },
+        "verify": {
+          "effort": "n/a",
+          "model": "haiku",
+          "provider": "claude_code"
+        }
+      },
+      "offline_stub": false,
+      "phase": "initial",
+      "project_spend": {
+        "effective_budget_usd": 0.1,
+        "other_runs_billed_usd": 0.00114055,
+        "per_run": {
+          "runs/probe-decisions": 0.000942,
+          "runs/probe-luna": 0.000198
+        },
+        "project_cap_usd": 9.0,
+        "requested_budget_usd": 0.1
+      },
+      "reconciled_unknown_calls": 0,
+      "results": {
+        "by_status_and_tier": {
+          "completed:fallback1": 1,
+          "completed:primary": 99
+        },
+        "completed": 100,
+        "exact_text_cache_reuses": 0,
+        "needs_review": 4,
+        "quarantined": 0,
+        "quarantined_empty_text": 0,
+        "scope": {
+          "distinct_nonempty_texts": 100,
+          "duplicate_id_rows": 0,
+          "empty_texts": 0,
+          "nonempty": 100,
+          "representatives": 100,
+          "rows": 100,
+          "unique_ids": 100
+        },
+        "unfinished": 0
+      },
+      "run_id": "run-20261012T224901.597Z-55e5",
+      "stage_configs": {
+        "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+        "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+        "verify": "haiku@n/a|verify-v1|cfg-e6ab73d745"
+      },
+      "stage_seconds": {
+        "enrich": 61.262,
+        "export": 0.012,
+        "group": 42.729,
+        "ingest": 0.009,
+        "memo": 36.601,
+        "rank": 0.019,
+        "verify": 18.834
+      },
+      "stages": {
+        "analysis": {
+          "robustness": {
+            "enricher_labels": {
+              "areas": {
+                "catalog/content": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "general/unspecified": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "playback/performance": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "usability": {
+                  "complaints": 3,
+                  "share_of_complaints": 0.5
+                }
+              },
+              "complaints": 6
+            },
+            "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+            "same_top_decision_area": true,
+            "sample": 10,
+            "top_decision_area_enricher": "usability",
+            "top_decision_area_verifier": "usability",
+            "verifier_labels": {
+              "areas": {
+                "billing/support": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "catalog/content": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "playback/performance": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "usability": {
+                  "complaints": 3,
+                  "share_of_complaints": 0.5
+                }
+              },
+              "complaints": 6
+            }
+          }
+        },
+        "enrich": {
+          "aliases_written": 0,
+          "caps": {
+            "fallback1": 1,
+            "fallback2": 1
+          },
+          "difficult": 4,
+          "fallback_not_selected_cap": 3,
+          "invalid_output_retries": 0,
+          "invalid_outputs": 0,
+          "left_pending_stopping": 0,
+          "left_pending_transient": 0,
+          "quarantined": 0,
+          "routed": {
+            "fallback1": 1,
+            "fallback2": 0
+          },
+          "saved_fallback1": 1,
+          "saved_fallback2": 0,
+          "saved_primary": 99,
+          "staged": 4,
+          "still_pending": 0,
+          "stop_reason": null,
+          "transient_requeued": 0
+        },
+        "export": {
+          "calls": 17,
+          "checkpoint_after": 100,
+          "checkpoint_before": 0,
+          "grading_dir": "runs/pilot100-20261012T224901Z/grading",
+          "records": 100
+        },
+        "group": {
+          "issues": 15,
+          "memberships": 52,
+          "named_calls": 12
+        },
+        "memo": {
+          "claims": 40,
+          "source": "model"
+        },
+        "rank": {
+          "complaints": 52,
+          "issues": 15,
+          "top": [
+            {
+              "complaint_count": 13,
+              "issue_id": "billing.premium_only",
+              "mean_severity": "3.000000",
+              "priority_score": 39,
+              "rank": 1,
+              "severity_sum": 39
+            },
+            {
+              "complaint_count": 14,
+              "issue_id": "other.general",
+              "mean_severity": "2.000000",
+              "priority_score": 28,
+              "rank": 2,
+              "severity_sum": 28
+            },
+            {
+              "complaint_count": 7,
+              "issue_id": "usability.ads",
+              "mean_severity": "2.142857",
+              "priority_score": 15,
+              "rank": 3,
+              "severity_sum": 15
+            },
+            {
+              "complaint_count": 2,
+              "issue_id": "access.login",
+              "mean_severity": "4.000000",
+              "priority_score": 8,
+              "rank": 4,
+              "severity_sum": 8
+            },
+            {
+              "complaint_count": 2,
+              "issue_id": "playback.crash",
+              "mean_severity": "4.000000",
+              "priority_score": 8,
+              "rank": 5,
+              "severity_sum": 8
+            }
+          ]
+        },
+        "verify": {
+          "agreement": {
+            "intent": {
+              "agree": 10,
+              "of": 10,
+              "rate": 1.0
+            },
+            "sentiment_within_tolerance": {
+              "agree": 10,
+              "of": 10,
+              "rate": 1.0
+            },
+            "severity": {
+              "agree": 7,
+              "of": 10,
+              "rate": 0.7
+            },
+            "topic": {
+              "agree": 9,
+              "of": 10,
+              "rate": 0.9
+            }
+          },
+          "completed": 10,
+          "sample": 10
+        }
+      },
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 159.495,
+      "workers": 1
+    },
+    "warm": {
+      "calls_all_invocations": {
+        "enrich:fallback1": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.000148,
+          "input_tokens": 2230,
+          "invalid_output_retries": 0,
+          "output_tokens": 35,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 1
+        },
+        "enrich:primary": {
+          "attempts": 2,
+          "cached_input_tokens": 2368,
+          "cost_usd": 0.001191,
+          "input_tokens": 8315,
+          "invalid_output_retries": 0,
+          "output_tokens": 3231,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 2
+        },
+        "group": {
+          "attempts": 12,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 19418,
+          "invalid_output_retries": 0,
+          "output_tokens": 1753,
+          "reasoning_tokens": 0,
+          "retries": 0,
+          "succeeded": 12
+        },
+        "memo": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 7932,
+          "invalid_output_retries": 0,
+          "output_tokens": 2861,
+          "reasoning_tokens": 1352,
+          "retries": 0,
+          "succeeded": 1
+        },
+        "verify": {
+          "attempts": 1,
+          "cached_input_tokens": 0,
+          "cost_usd": 0.0,
+          "input_tokens": 2646,
+          "invalid_output_retries": 0,
+          "output_tokens": 2115,
+          "reasoning_tokens": 1489,
+          "retries": 0,
+          "succeeded": 1
+        }
+      },
+      "calls_this_invocation": {},
+      "completed_ids_saved": 100,
+      "config_summary": {
+        "crosscheck": {
+          "batch": "1 review/request",
+          "fields": "off",
+          "service_tier": "standard"
+        },
+        "enrich_primary": {
+          "batch": "50 reviews/request",
+          "service_tier": "flex"
+        },
+        "fallback1": {
+          "batch": "1 review/request",
+          "service_tier": "flex"
+        },
+        "fallback2": {
+          "batch": "1 review/request",
+          "service_tier": "subscription"
+        },
+        "group": {
+          "batch": "<= 8 quotes/request",
+          "service_tier": "subscription"
+        },
+        "memo": {
+          "batch": "aggregates + evidence pack",
+          "service_tier": "subscription"
+        },
+        "verify": {
+          "batch": "25 reviews/request",
+          "service_tier": "subscription"
+        }
+      },
+      "finished_at": "2026-10-12T22:51:41.841Z",
+      "input": {
+        "bytes": 15466,
+        "ingested_at": "2026-10-12T22:49:01.983Z",
+        "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+        "rows": 100,
+        "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
+      },
+      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "ledger": {
+        "cap_usd": 0.1,
+        "denials": 0,
+        "reserved_usd": 0.0,
+        "spent_usd": 0.00133929,
+        "unknown_usd": 0.0
+      },
+      "models": {
+        "crosscheck": {
+          "effort": "n/a",
+          "enabled": false,
+          "fields": [
+            "intent",
+            "severity"
+          ],
+          "model": "gpt-6-luna",
+          "provider": "openai_decisions"
+        },
+        "enrich_primary": {
+          "effort": "none",
+          "model": "gpt-6-luna",
+          "provider": "openai"
+        },
+        "fallback1": {
+          "effort": "low",
+          "enabled": true,
+          "max_fraction": 0.015,
+          "model": "gpt-6-luna",
+          "provider": "openai"
+        },
+        "fallback2": {
+          "effort": "low",
+          "enabled": true,
+          "max_fraction": 0.0025,
+          "model": "sonnet",
+          "provider": "claude_code"
+        },
+        "group": {
+          "effort": "low",
+          "model": "sonnet",
+          "provider": "claude_code"
+        },
+        "memo": {
+          "effort": "low",
+          "model": "sonnet",
+          "provider": "claude_code"
+        },
+        "verify": {
+          "effort": "n/a",
+          "model": "haiku",
+          "provider": "claude_code"
+        }
+      },
+      "offline_stub": false,
+      "phase": "resume",
+      "project_spend": {
+        "effective_budget_usd": 0.1,
+        "other_runs_billed_usd": 0.00114055,
+        "per_run": {
+          "runs/probe-decisions": 0.000942,
+          "runs/probe-luna": 0.000198
+        },
+        "project_cap_usd": 9.0,
+        "requested_budget_usd": 0.1
+      },
+      "reconciled_unknown_calls": 0,
+      "results": {
+        "by_status_and_tier": {
+          "completed:fallback1": 1,
+          "completed:primary": 99
+        },
+        "completed": 100,
+        "exact_text_cache_reuses": 0,
+        "needs_review": 4,
+        "quarantined": 0,
+        "quarantined_empty_text": 0,
+        "scope": {
+          "distinct_nonempty_texts": 100,
+          "duplicate_id_rows": 0,
+          "empty_texts": 0,
+          "nonempty": 100,
+          "representatives": 100,
+          "rows": 100,
+          "unique_ids": 100
+        },
+        "unfinished": 0
+      },
+      "run_id": "run-20261012T225141.618Z-d2d1",
+      "stage_configs": {
+        "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+        "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+        "verify": "haiku@n/a|verify-v1|cfg-e6ab73d745"
+      },
+      "stage_seconds": {
+        "enrich": 0.001,
+        "export": 0.007,
+        "group": 0.002,
+        "ingest": 0.0,
+        "memo": 0.005,
+        "rank": 0.007,
+        "verify": 0.002
+      },
+      "stages": {
+        "analysis": {
+          "robustness": {
+            "enricher_labels": {
+              "areas": {
+                "catalog/content": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "general/unspecified": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "playback/performance": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "usability": {
+                  "complaints": 3,
+                  "share_of_complaints": 0.5
+                }
+              },
+              "complaints": 6
+            },
+            "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+            "same_top_decision_area": true,
+            "sample": 10,
+            "top_decision_area_enricher": "usability",
+            "top_decision_area_verifier": "usability",
+            "verifier_labels": {
+              "areas": {
+                "billing/support": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "catalog/content": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "playback/performance": {
+                  "complaints": 1,
+                  "share_of_complaints": 0.166667
+                },
+                "usability": {
+                  "complaints": 3,
+                  "share_of_complaints": 0.5
+                }
+              },
+              "complaints": 6
+            }
+          }
+        },
+        "enrich": {
+          "aliases_written": 0,
+          "caps": {
+            "fallback1": 1,
+            "fallback2": 1
+          },
+          "difficult": 0,
+          "fallback_not_selected_cap": 0,
+          "invalid_output_retries": 0,
+          "invalid_outputs": 0,
+          "left_pending_stopping": 0,
+          "left_pending_transient": 0,
+          "quarantined": 0,
+          "routed": {
+            "fallback1": 1,
+            "fallback2": 0
+          },
+          "saved_fallback1": 0,
+          "saved_fallback2": 0,
+          "saved_primary": 0,
+          "staged": 0,
+          "still_pending": 0,
+          "stop_reason": null,
+          "transient_requeued": 0
+        },
+        "export": {
+          "calls": 17,
+          "checkpoint_after": 100,
+          "checkpoint_before": 0,
+          "grading_dir": "runs/pilot100-20261012T224901Z/grading",
+          "records": 100
+        },
+        "group": {
+          "issues": 15,
+          "memberships": 52,
+          "named_calls": 0
+        },
+        "memo": {
+          "claims": 40,
+          "source": "cache"
+        },
+        "rank": {
+          "complaints": 52,
+          "issues": 15,
+          "top": [
+            {
+              "complaint_count": 13,
+              "issue_id": "billing.premium_only",
+              "mean_severity": "3.000000",
+              "priority_score": 39,
+              "rank": 1,
+              "severity_sum": 39
+            },
+            {
+              "complaint_count": 14,
+              "issue_id": "other.general",
+              "mean_severity": "2.000000",
+              "priority_score": 28,
+              "rank": 2,
+              "severity_sum": 28
+            },
+            {
+              "complaint_count": 7,
+              "issue_id": "usability.ads",
+              "mean_severity": "2.142857",
+              "priority_score": 15,
+              "rank": 3,
+              "severity_sum": 15
+            },
+            {
+              "complaint_count": 2,
+              "issue_id": "access.login",
+              "mean_severity": "4.000000",
+              "priority_score": 8,
+              "rank": 4,
+              "severity_sum": 8
+            },
+            {
+              "complaint_count": 2,
+              "issue_id": "playback.crash",
+              "mean_severity": "4.000000",
+              "priority_score": 8,
+              "rank": 5,
+              "severity_sum": 8
+            }
+          ]
+        },
+        "verify": {
+          "agreement": {
+            "intent": {
+              "agree": 10,
+              "of": 10,
+              "rate": 1.0
+            },
+            "sentiment_within_tolerance": {
+              "agree": 10,
+              "of": 10,
+              "rate": 1.0
+            },
+            "severity": {
+              "agree": 7,
+              "of": 10,
+              "rate": 0.7
+            },
+            "topic": {
+              "agree": 9,
+              "of": 10,
+              "rate": 0.9
+            }
+          },
+          "sample": 10
+        }
+      },
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 0.038,
+      "workers": 1
+    }
+  }
+}

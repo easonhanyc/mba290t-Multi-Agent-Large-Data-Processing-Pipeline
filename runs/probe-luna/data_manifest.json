@@ -1,0 +1,29 @@
+{
+  "analysis_input": {
+    "bytes": 965,
+    "path": "data/probe_dev_5.csv",
+    "rows": 5,
+    "sha256": "3a22d6f45e57f7e43b00f1e102604b263a494528f9c2d8ffab0ad0cd719104e1"
+  },
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "ingestion_profile": {
+    "counts": {
+      "duplicate_review_ids": 0,
+      "empty_review_text": 0,
+      "missing_app_version": 1,
+      "records": 5
+    },
+    "file": "ingestion.json",
+    "file_sha256": "3a22d6f45e57f7e43b00f1e102604b263a494528f9c2d8ffab0ad0cd719104e1",
+    "parsed_rows_sha256": "bf44d876a91d52227afb19c1d7a90e416b6ddf572467354d4098058c2d67a090",
+    "profiled": "data/probe_dev_5.csv"
+  },
+  "run_id": "run-20261012T224706.575Z-2e50",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "written_at": "2026-10-12T22:47:06.601Z"
+}

@@ -5,6 +5,7 @@ ledger, cache, resume and exports can be exercised with zero network calls and z
   POST /v1/systemone   TypeSafe System One (Choice / Score / Noul answers)
   POST /v1/responses   OpenAI Responses API (json_schema output)
   POST /v1/messages    Anthropic Messages API (output_config json_schema)
+  POST /v1/decisions   OpenAI Decisions API (choice / score / predicate answers)
 
 Answers are chosen by hashing the request, so they are deterministic and MEANINGLESS as
 labels. Reported token counts are character-based placeholders. The pipeline renames every
@@ -66,6 +67,30 @@ def jev_answers(body):
         elif q.get("type") == "noul":
             answers[qid] = {"type": "noul", "noul": round((_h(seed, "noul") % 60) / 100.0, 2)}
     return answers
+
+
+def decisions_answers(body):
+    """Decisions request -> answers list, reusing the Jev stub on the equivalent typed questions."""
+    qs = {}
+    for q in body.get("questions", []):
+        if q["type"] == "choice":
+            qs[q["name"]] = {"type": "choice", "criteria": {c["value"]: c["description"] for c in q["choices"]}}
+        elif q["type"] == "score":
+            qs[q["name"]] = {"type": "score", "criteria": [lv["description"] for lv in q["levels"]]}
+        elif q["type"] == "predicate":
+            qs[q["name"]] = {"type": "noul", "criteria": {}}
+    out = []
+    for name, a in jev_answers({"model": body.get("model"), "state": body.get("input"), "questions": qs}).items():
+        if a["type"] == "choice":
+            out.append({"type": "choice", "name": name, "choice": a["choice"], "confidence": a["confidence"],
+                        "probabilities": [{"value": v, "probability": p} for v, p in a["probabilities"].items()]})
+        elif a["type"] == "score":
+            out.append({"type": "score", "name": name, "score": a["score"], "confidence": a["confidence"],
+                        "probabilities": [{"value": int(v), "label": f"level_{v}", "probability": p}
+                                          for v, p in a["probabilities"].items()]})
+        else:
+            out.append({"type": "predicate", "name": name, "probability": a["noul"]})
+    return out
 
 
 def instance(schema, seed, path="$", context=""):
@@ -146,7 +171,8 @@ class _Handler(BaseHTTPRequestHandler):
         except json.JSONDecodeError:
             return self._send(400, {"error": {"message": "invalid JSON"}})
         srv = self.server.stub
-        provider = {"/v1/systemone": "typesafe", "/v1/responses": "openai", "/v1/messages": "anthropic"}.get(self.path)
+        provider = {"/v1/systemone": "typesafe", "/v1/responses": "openai", "/v1/messages": "anthropic",
+                    "/v1/decisions": "openai_decisions"}.get(self.path)
         if provider is None:
             return self._send(404, {"error": {"message": f"unknown path {self.path}"}})
         n = srv.count(provider)
@@ -169,6 +195,13 @@ class _Handler(BaseHTTPRequestHandler):
             return self._send(200, {"model": body.get("model"), "answers": answers,
                                     "usage": {"input_tokens": tokens_in, "output_tokens": 8 * len(answers)}},
                               {"x-typesafe-request-id": f"stub-ts-{n}"})
+        if provider == "openai_decisions":
+            answers = decisions_answers(body)
+            if fault == "malformed" and answers:
+                answers.pop(0)
+            return self._send(200, {"id": f"dec_stub_{n}", "object": "decision", "model": body.get("model"),
+                                    "answers": answers, "usage": {"input_tokens": tokens_in, "output_tokens": 0}},
+                              {"x-request-id": f"stub-dec-{n}"})
         if provider == "openai":
             schema = body["text"]["format"]["schema"]
             data = instance(schema, body.get("input", ""), context=body.get("input", ""))
@@ -226,7 +259,8 @@ class StubServer:
         return f"http://{host}:{port}"
 
     def base_urls(self):
-        return {"typesafe": self.base, "openai": self.base + "/v1", "anthropic": self.base}
+        return {"typesafe": self.base, "openai": self.base + "/v1", "anthropic": self.base,
+                "openai_decisions": self.base + "/v1"}
 
     def start(self):
         self.thread.start()

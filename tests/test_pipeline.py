@@ -44,6 +44,7 @@ def temp_config(tmp, **edits):
             line = f"{key} = {edits[key]}"
         lines.append(line)
     path = Path(tmp) / "pipeline.toml"
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n")
     return path
 
@@ -74,6 +75,10 @@ class TestOfflinePipeline(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = Path(self.tmp.name)
         self.fast = temp_config(self.tmp.name, backoff_initial_s="0.01", backoff_max_s="0.05", llm_batch_size="4")
+        # The stub's typed answers are random, so a hybrid cross-check disagrees with most stub LLM labels and
+        # stages nearly everything; resume tests that need saved progress before a stop use the plain LLM path.
+        self.fast_llm = temp_config(Path(self.tmp.name) / "llm", backend='"llm"', backoff_initial_s="0.01",
+                                    backoff_max_s="0.05", llm_batch_size="4")
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -163,14 +168,14 @@ class TestOfflinePipeline(unittest.TestCase):
 
     def test_budget_cap_stops_admission_then_resume_finishes(self):
         rd = self.dir / "budget"
-        code, out = run_cli("--config", self.fast, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub",
+        code, out = run_cli("--config", self.fast_llm, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub",
                             "--shadow-rates", "--budget-usd", "0.0009")
         self.assertEqual(code, 3, out)
         self.assertIn("budget_cap", out)
         latest = json.loads((rd / "run_summary.json").read_text())["latest"]
         self.assertGreater(latest["ledger"]["denials"], 0)
         self.assertLessEqual(latest["ledger"]["spent_usd"], 0.0009)
-        code, out = run_cli("--config", self.fast, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub",
+        code, out = run_cli("--config", self.fast_llm, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub",
                             "--shadow-rates", "--budget-usd", "1.0")
         self.assertEqual(code, 0, out)
         self.assertEqual(checker(rd)["status"], "pass")
@@ -204,6 +209,47 @@ class TestOfflinePipeline(unittest.TestCase):
         self.assertTrue(all(1 <= len(c["review_ids"]) <= 4 for c in enrich))
         self.assertEqual(checker(rd)["issue_counts"].keys() - {"resume_call_evidence", "resume_snapshot_mismatch"}, set())
 
+    def test_decisions_backend_offline(self):
+        """OpenAI Decisions classifier: one review per request, typed answers, faults retried, checker passes."""
+        rd = self.dir / "decisions"
+        cfg = temp_config(self.tmp.name, backend='"decisions"', backoff_initial_s="0.01", backoff_max_s="0.05")
+        code, out = run_cli("--config", cfg, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub",
+                            "--stub-faults", "openai_decisions:2=429,openai_decisions:5=malformed")
+        self.assertEqual(code, 0, out)
+        enrich = [c for c in calls(rd) if c["role"] == "enrich" and c["tier"] == "primary"]
+        self.assertTrue(enrich and all(len(c["review_ids"]) == 1 for c in enrich))
+        self.assertTrue(all(c["model"] == "stub-gpt-6-luna" for c in enrich))
+        self.assertTrue(any((c["error"] or "").startswith("invalid_output") for c in enrich), "malformed answer must be caught")
+        self.assertTrue(any(c["task_attempt"] == 2 for c in enrich), "invalid answer gets one retry")
+        self.assertEqual(checker(rd)["issue_counts"].keys() - {"resume_call_evidence", "resume_snapshot_mismatch"}, set())
+
+    def test_hybrid_crosscheck_routes_disagreements_and_resumes(self):
+        """Hybrid: every primary-labelled text gets one Decisions cross-check; interruption then resume passes."""
+        rd = self.dir / "hybrid"
+        agree = temp_config(Path(self.tmp.name) / "agree", backend='"hybrid"', backoff_initial_s="0.01", backoff_max_s="0.05",
+                            llm_batch_size="2", fields='["severity"]', severity_tolerance="4")
+        self.assertEqual(run_cli("--config", agree, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub",
+                                 "--stop-after", "2")[0], 3)
+        self.assertEqual(run_cli("--config", agree, "run", "--input", FIXTURE, "--run-dir", rd, "--offline-stub")[0], 0)
+        cs = calls(rd)
+        xc = [c for c in cs if c["role"] == "enrich" and c["tier"] == "crosscheck"]
+        self.assertTrue(xc and all(len(c["review_ids"]) == 1 for c in xc))
+        prim = [c for c in cs if c["role"] == "enrich" and c["tier"] == "primary"]
+        self.assertTrue(any(len(c["review_ids"]) > 1 for c in prim), "hybrid primary must batch (review C1)")
+        self.assertTrue(all(len(c["review_ids"]) <= 2 for c in prim))
+        self.assertEqual(checker(rd)["issue_counts"].keys() - {"resume_call_evidence"}, set())
+        # Default config: random stub answers disagree, so disagreements are staged and reach the capped fallback.
+        rd2 = self.dir / "hybrid-default"
+        hyb = temp_config(Path(self.tmp.name) / "hyb", backend='"hybrid"', backoff_initial_s="0.01", backoff_max_s="0.05",
+                          llm_batch_size="4")
+        self.assertEqual(run_cli("--config", hyb, "run", "--input", FIXTURE, "--run-dir", rd2, "--offline-stub")[0], 0)
+        import sqlite3
+        con = sqlite3.connect(rd2 / "state.sqlite")
+        details = [json.loads(d) for (d,) in con.execute(
+            "SELECT detail FROM results WHERE status='completed' AND labeled_by != 'cache'")]
+        con.close()
+        self.assertTrue(any("cross-check" in " ".join(d.get("difficulty") or []) for d in details))
+
     def test_live_calls_refused_without_allow_paid(self):
         code, out = run_cli("run", "--input", FIXTURE, "--run-dir", self.dir / "live")
         self.assertEqual(code, 2)
@@ -219,12 +265,26 @@ class TestOfflinePipeline(unittest.TestCase):
 
     def test_real_sigint_then_resume(self):
         rd = self.dir / "sigint"
-        one = temp_config(self.tmp.name, backoff_initial_s="0.01", backoff_max_s="0.05", llm_batch_size="1")
+        one = temp_config(self.tmp.name, backend='"llm"', backoff_initial_s="0.01", backoff_max_s="0.05",
+                          llm_batch_size="1")
         proc = subprocess.Popen([PY, "-m", "insight", "--config", str(one), "run", "--input", str(FIXTURE),
                                  "--run-dir", str(rd), "--offline-stub", "--stub-faults", "openai:1-50=slow",
                                  "--stub-timeout-sleep", "0.4"], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 text=True)
-        time.sleep(1.5)
+        # Interrupt only after saved progress (as the recorded live run does): queued requests that have not
+        # started are cancelled on stop, so a fixed sleep could interrupt before anything was saved.
+        import sqlite3
+        deadline = time.time() + 30
+        while time.time() < deadline:
+            try:
+                con = sqlite3.connect(f"file:{rd / 'state.sqlite'}?mode=ro", uri=True)
+                done = con.execute("SELECT COUNT(*) FROM results WHERE status='completed'").fetchone()[0]
+                con.close()
+                if done:
+                    break
+            except sqlite3.Error:
+                pass
+            time.sleep(0.1)
         proc.send_signal(signal.SIGINT)
         out, _ = proc.communicate(timeout=60)
         self.assertEqual(proc.returncode, 130, out)
@@ -237,7 +297,8 @@ class TestOfflinePipeline(unittest.TestCase):
 
     def test_second_invocation_on_same_run_dir_is_refused(self):
         rd = self.dir / "locked"
-        one = temp_config(self.tmp.name, backoff_initial_s="0.01", backoff_max_s="0.05", llm_batch_size="1")
+        one = temp_config(self.tmp.name, backend='"llm"', backoff_initial_s="0.01", backoff_max_s="0.05",
+                          llm_batch_size="1")
         proc = subprocess.Popen([PY, "-m", "insight", "--config", str(one), "run", "--input", str(FIXTURE),
                                  "--run-dir", str(rd), "--offline-stub", "--stub-faults", "openai:1-50=slow",
                                  "--stub-timeout-sleep", "0.5"], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)

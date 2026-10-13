@@ -18,14 +18,16 @@
   },
   "controls": {
     "max_workers": 4,
-    "output_token_cap_per_review": 60,
-    "max_fallback1_fraction": 0.015,
+    "output_token_cap_per_review": 70,
+    "max_fallback1_fraction": 0.1,
     "max_fallback2_fraction": 0.0025,
     "verify_sample_fraction": 0.1,
     "verify_min_sample": 10,
     "verify_max_sample": 2000,
     "project_cap_usd": 9.0,
-    "source": "config/pipeline.toml (run, enrich.fallback*, verify)"
+    "source": "config/pipeline.toml (run, enrich.fallback*, verify)",
+    "crosscheck_fraction": 0.0,
+    "_crosscheck_fraction_doc": "share of distinct texts cross-checked by the OpenAI Decisions API (hybrid backend). 0: production uses backend=llm because the Decisions beta allows this account 50 requests/day (measured: x-ratelimit-limit-requests 50, refill 28m48s per request, runs/probe-decisions); measured Decisions input 1,812-2,018 tokens/request, no cached tokens"
   },
   "scenarios": {
     "base": {
@@ -75,6 +77,29 @@
         "source": "config (Build tier allows 5,000 RPM)"
       }
     },
+    "crosscheck": {
+      "provider": "openai_decisions",
+      "model": "gpt-6-luna",
+      "tier": "standard",
+      "reviews_per_request": 1,
+      "workers": 8,
+      "input_uncached_tokens_per_request": {
+        "value": 367,
+        "source": "estimate: compact intent+severity Decisions request, 1,469 characters / 4 (prompts/decisions_crosscheck_v1.json)"
+      },
+      "output_tokens_per_request": {
+        "value": 0,
+        "source": "Decisions API bills input only"
+      },
+      "seconds_per_request": {
+        "value": 0.6,
+        "source": "assumption (vendor claims up to 10x faster than Responses); not measured"
+      },
+      "provider_requests_per_minute_limit": {
+        "value": 0.0347,
+        "source": "measured 2026-10-12: 50 requests/day (x-ratelimit headers)"
+      }
+    },
     "fallback1": {
       "provider": "openai",
       "model": "gpt-6-luna",
@@ -104,7 +129,7 @@
     "fallback2": {
       "provider": "claude_code",
       "model": "sonnet",
-      "api_equivalent_model": "claude-sonnet-5-5",
+      "api_equivalent_model": "claude-sonnet-5",
       "reviews_per_request": 1,
       "input_uncached_tokens_per_request": {
         "value": 2600,
@@ -148,7 +173,7 @@
     "group": {
       "provider": "claude_code",
       "model": "sonnet",
-      "api_equivalent_model": "claude-sonnet-5-5",
+      "api_equivalent_model": "claude-sonnet-5",
       "fixed_calls": 12,
       "reviews_per_request": 1,
       "input_uncached_tokens_per_request": {
@@ -171,7 +196,7 @@
     "memo": {
       "provider": "claude_code",
       "model": "sonnet",
-      "api_equivalent_model": "claude-sonnet-5-5",
+      "api_equivalent_model": "claude-sonnet-5",
       "fixed_calls": 2,
       "reviews_per_request": 1,
       "input_uncached_tokens_per_request": {
@@ -239,7 +264,7 @@
         "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4"
       },
       {
-        "name": "Jev 1.13, one review per request",
+        "name": "Jev 1.13, one review per request (not run: $5 minimum purchase)",
         "provider": "typesafe",
         "model": "jev-1.13.0",
         "tier": "standard",
@@ -248,6 +273,17 @@
         "output_tokens_per_request": 48,
         "seconds_per_request": 0.6,
         "source": "preflight estimate on checkpoint_500 with the Jev question set (6,665 characters / 4); output free"
+      },
+      {
+        "name": "OpenAI Decisions API (gpt-6-luna), one review per request",
+        "provider": "openai_decisions",
+        "model": "gpt-6-luna",
+        "tier": "standard",
+        "reviews_per_request": 1,
+        "input_uncached_tokens_per_request": 1939,
+        "output_tokens_per_request": 0,
+        "seconds_per_request": 0.6,
+        "source": "preflight estimate on checkpoint_500: Decisions request body 7,755 characters / 4; output free; cached input conservatively billed in full until the pilot's usage and the OpenAI usage page show otherwise"
       },
       {
         "name": "Claude Haiku 5.5, 50 reviews/request, Standard",

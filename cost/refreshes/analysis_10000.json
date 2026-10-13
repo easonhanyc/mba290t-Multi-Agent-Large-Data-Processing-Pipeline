@@ -1,0 +1,15 @@
+{
+  "label": "analysis_10000",
+  "run_dir": "runs/live-analysis10000",
+  "offline_stub": false,
+  "rows": 10000,
+  "distinct_texts": 8448,
+  "completed": 10000,
+  "quarantined": 0,
+  "unfinished": 0,
+  "workers": 8,
+  "invocations": 1,
+  "wall_clock_s": 931.56,
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "saved_at": "2026-10-12T23:25:23+00:00"
+}

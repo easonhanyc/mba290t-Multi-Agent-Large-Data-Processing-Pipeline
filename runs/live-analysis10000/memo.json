@@ -1,0 +1,698 @@
+{
+  "generated_at": "2026-10-12T23:25:23.102Z",
+  "memo_config": "sonnet@low|memo-v1|cfg-7897f460ec",
+  "output": {
+    "alternatives": [
+      {
+        "area": "billing/support",
+        "why_not_first": "Billing/support carries the highest raw baseline priority ({A02} severity-sum, led by issue {C04} for premium-gated playback with {C01} complaints and mean severity {C03}), but the independent verifier's labels do not put it in the top spot, and no concrete trend figures are resolved in this pack to support prioritizing it over usability."
+      },
+      {
+        "area": "playback/performance",
+        "why_not_first": "Playback/performance has a lower baseline severity-sum ({A08}) than both billing/support and usability, driven by {C16} (playback stalls, {C13} complaints, mean severity {C15}) and {C20} (crashes, {C17} complaints, mean severity {C19}); it ranks third on the decision rule."
+      },
+      {
+        "area": "access/onboarding",
+        "why_not_first": "Access/onboarding has by far the smallest baseline priority ({A17} severity-sum, {A16} complaints), anchored by login failures ({C32}, {C29} complaints, mean severity {C31}); its share of complaints ({A18}) is the lowest of all four decision areas."
+      }
+    ],
+    "cited_reviews": [
+      "1cb86bb1-776a-4ec6-9844-6f706a734847",
+      "999448c0-5851-4ea1-bf9e-7db84bd9e7c6"
+    ],
+    "limitations": [
+      "These are self-selected public app reviews, not a census of all customers, so counts and shares describe labeled reviews in scope ({S07} complaint/cancellation reviews out of {S02} classified), not the full user base.",
+      "Cancellation language in these reviews reflects expressed intent to cancel, not observed or confirmed churn.",
+      "Several trend and interval tokens in the pack are unresolved placeholders, so this memo cannot state concrete year-over-year growth/shrinkage figures or confidence-interval bounds for the recommended area.",
+      "{S06} completed records were flagged needs_review, and verifier exact-severity agreement is only {S11}, so severity scores carry some measurement uncertainty."
+    ],
+    "rationale": [
+      "Usability has the second-highest baseline priority among areas ({A05} severity-sum across {A04} complaints, share {A06}), close behind billing/support ({A02}).",
+      "Its largest issue is excessive ad interruptions ({C12}, {C09} complaints, mean severity {C11}), followed by confusing navigation ({C24}), lost/inaccessible library items ({C28}), and misbehaving settings ({C36}).",
+      "The independent verifier's labels agree with the enricher that usability is the top decision area (top_decision_area_enricher_labels and top_decision_area_verifier_labels both 'usability', same_top_area true), giving this recommendation cross-check robustness that billing/support lacks in this pack.",
+      "Billing/support's raw severity-sum ({A02}) is nominally higher, but since no resolved trend or interval figures in this pack contradict the verifier's agreement on usability, the robustness check is used to depart from the raw top-ranked area as instructed.",
+      "Usability issues span multiple distinct problems (ads, navigation, library access, settings), suggesting broad-based friction across many user touchpoints rather than a single narrow pain point."
+    ],
+    "recommendation": "Prioritize usability for the next quarter, focusing on excessive ad interruptions ({C12}) and the confusing redesigned navigation and lost library items ({C24}, {C28}). These issues, together with settings/toggle problems ({C36}), make usability the area with the second-highest baseline severity ({A05}) and the one confirmed as top priority by independent verifier labels.",
+    "recommended_area": "usability"
+  },
+  "payload": {
+    "areas": [
+      {
+        "area": "billing/support",
+        "complaint_count": {
+          "token": "{A01}",
+          "value": 1035
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A02}",
+          "value": 3040
+        },
+        "share_of_complaints": {
+          "token": "{A03}",
+          "value": "0.226626"
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{A04}",
+          "value": 1201
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A05}",
+          "value": 2840
+        },
+        "share_of_complaints": {
+          "token": "{A06}",
+          "value": "0.262974"
+        }
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{A07}",
+          "value": 719
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A08}",
+          "value": 2398
+        },
+        "share_of_complaints": {
+          "token": "{A09}",
+          "value": "0.157434"
+        }
+      },
+      {
+        "area": "general/unspecified",
+        "complaint_count": {
+          "token": "{A10}",
+          "value": 1149
+        },
+        "decision_option": false,
+        "severity_sum": {
+          "token": "{A11}",
+          "value": 2286
+        },
+        "share_of_complaints": {
+          "token": "{A12}",
+          "value": "0.251587"
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{A13}",
+          "value": 317
+        },
+        "decision_option": false,
+        "severity_sum": {
+          "token": "{A14}",
+          "value": 933
+        },
+        "share_of_complaints": {
+          "token": "{A15}",
+          "value": "0.069411"
+        }
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{A16}",
+          "value": 146
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A17}",
+          "value": 572
+        },
+        "share_of_complaints": {
+          "token": "{A18}",
+          "value": "0.031968"
+        }
+      }
+    ],
+    "decision_rule": "baseline priority = severity_sum over complaint and cancellation reviews; areas sum their issues",
+    "evidence": [
+      {
+        "issue_id": "billing.premium_only",
+        "quote": "lol need prem to play music",
+        "review_id": "fbb8cab0-eb66-49de-9624-a06015514118"
+      },
+      {
+        "issue_id": "billing.premium_only",
+        "quote": "If you don't have premium you can no longer preview a song in anyway, not even in your personal playlist, to make sure that it is the song you want or a song you'd like.",
+        "review_id": "d370e58b-26db-4d7f-9a03-69f4f5cd84f4"
+      },
+      {
+        "issue_id": "other.general",
+        "quote": "Collects too much personal information",
+        "review_id": "21ddfe12-8433-4bad-b0f8-e7f605c056ae"
+      },
+      {
+        "issue_id": "other.general",
+        "quote": "I can't use it in iran",
+        "review_id": "6263d7a9-a576-4005-b2f1-f863610ada44"
+      },
+      {
+        "issue_id": "usability.ads",
+        "quote": "One of the worst app I have ever used in I couldn't listen even one song without adds better guys install wynk music app",
+        "review_id": "1cb86bb1-776a-4ec6-9844-6f706a734847"
+      },
+      {
+        "issue_id": "usability.ads",
+        "quote": "I have premium, and when I watch or listen to a podcast, there are always ads.",
+        "review_id": "999448c0-5851-4ea1-bf9e-7db84bd9e7c6"
+      },
+      {
+        "issue_id": "playback.stops",
+        "quote": "The update honestly sucks, I don't know why but it just doesn't let me play the music i wanted!",
+        "review_id": "a66cc931-d7eb-4cad-9c34-c60cd16e0684"
+      },
+      {
+        "issue_id": "playback.stops",
+        "quote": "half the time the player you get on the home screen doesn't appear then when you go on the app you can hear music but there is no way to stop it without force closing the app, and there are so many small UX issues, eg.",
+        "review_id": "290ef99c-7821-4255-818f-bbe28357826f"
+      },
+      {
+        "issue_id": "playback.crash",
+        "quote": "The screen suddenly closes within a second of playing the first song, so practically it doesn't work..",
+        "review_id": "729e90cf-260c-4b67-880a-75cb08b31df4"
+      },
+      {
+        "issue_id": "playback.crash",
+        "quote": "It just doesn't load 90% of the time, or will only play what I've downloaded.",
+        "review_id": "6ff20c19-fe45-41af-b658-6141dc220fba"
+      }
+    ],
+    "question": "Where should the next quarter of product-improvement effort go: access/onboarding, usability, playback/performance, or billing/support?",
+    "scope_figures": {
+      "S01": {
+        "label": "Reviews in scope (unique IDs ingested)",
+        "source": "ingestion_report.json",
+        "token": "{S01}",
+        "value": 10000
+      },
+      "S02": {
+        "label": "Completed classifications",
+        "source": "grading/records.jsonl",
+        "token": "{S02}",
+        "value": 10000
+      },
+      "S03": {
+        "label": "Quarantined: empty text",
+        "source": "quarantine.jsonl",
+        "token": "{S03}",
+        "value": 0
+      },
+      "S04": {
+        "label": "Quarantined: other reasons",
+        "source": "quarantine.jsonl",
+        "token": "{S04}",
+        "value": 0
+      },
+      "S05": {
+        "label": "Unfinished",
+        "source": "run_summary.json",
+        "token": "{S05}",
+        "value": 0
+      },
+      "S06": {
+        "label": "Completed records flagged needs_review",
+        "source": "enriched.jsonl",
+        "token": "{S06}",
+        "value": 1001
+      },
+      "S07": {
+        "label": "Complaint and cancellation records ranked",
+        "source": "membership.csv",
+        "token": "{S07}",
+        "value": 4567
+      },
+      "S08": {
+        "label": "Verification sample compared",
+        "source": "verification/report.json",
+        "token": "{S08}",
+        "value": 845
+      },
+      "S09": {
+        "label": "Verifier topic agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S09}",
+        "value": 0.8024
+      },
+      "S10": {
+        "label": "Verifier intent agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S10}",
+        "value": 0.903
+      },
+      "S11": {
+        "label": "Verifier exact severity agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S11}",
+        "value": 0.7751
+      }
+    },
+    "top_issues": [
+      {
+        "area": "billing/support",
+        "complaint_count": {
+          "token": "{C01}",
+          "value": 924
+        },
+        "issue_id": "billing.premium_only",
+        "mean_severity": {
+          "token": "{C03}",
+          "value": "2.944805"
+        },
+        "name": "Playback blocked entirely without Premium",
+        "priority_score": {
+          "token": "{C04}",
+          "value": 2721
+        },
+        "severity_sum": {
+          "token": "{C02}",
+          "value": 2721
+        }
+      },
+      {
+        "area": "general/unspecified",
+        "complaint_count": {
+          "token": "{C05}",
+          "value": 1149
+        },
+        "issue_id": "other.general",
+        "mean_severity": {
+          "token": "{C07}",
+          "value": "1.989556"
+        },
+        "name": "Vague app dissatisfaction/unusable complaints",
+        "priority_score": {
+          "token": "{C08}",
+          "value": 2286
+        },
+        "severity_sum": {
+          "token": "{C06}",
+          "value": 2286
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C09}",
+          "value": 605
+        },
+        "issue_id": "usability.ads",
+        "mean_severity": {
+          "token": "{C11}",
+          "value": "2.125620"
+        },
+        "name": "Excessive and frequent ad interruptions",
+        "priority_score": {
+          "token": "{C12}",
+          "value": 1286
+        },
+        "severity_sum": {
+          "token": "{C10}",
+          "value": 1286
+        }
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C13}",
+          "value": 252
+        },
+        "issue_id": "playback.stops",
+        "mean_severity": {
+          "token": "{C15}",
+          "value": "3.309524"
+        },
+        "name": "Playback fails to start or stalls",
+        "priority_score": {
+          "token": "{C16}",
+          "value": 834
+        },
+        "severity_sum": {
+          "token": "{C14}",
+          "value": 834
+        }
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C17}",
+          "value": 166
+        },
+        "issue_id": "playback.crash",
+        "mean_severity": {
+          "token": "{C19}",
+          "value": "3.716867"
+        },
+        "name": "App Crashes and Freezes During Playback",
+        "priority_score": {
+          "token": "{C20}",
+          "value": 617
+        },
+        "severity_sum": {
+          "token": "{C18}",
+          "value": 617
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C21}",
+          "value": 243
+        },
+        "issue_id": "usability.navigation",
+        "mean_severity": {
+          "token": "{C23}",
+          "value": "2.415638"
+        },
+        "name": "Confusing redesigned navigation and home screen",
+        "priority_score": {
+          "token": "{C24}",
+          "value": 587
+        },
+        "severity_sum": {
+          "token": "{C22}",
+          "value": 587
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C25}",
+          "value": 197
+        },
+        "issue_id": "usability.library",
+        "mean_severity": {
+          "token": "{C27}",
+          "value": "2.974619"
+        },
+        "name": "Playlists and liked songs inaccessible or lost",
+        "priority_score": {
+          "token": "{C28}",
+          "value": 586
+        },
+        "severity_sum": {
+          "token": "{C26}",
+          "value": 586
+        }
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{C29}",
+          "value": 126
+        },
+        "issue_id": "access.login",
+        "mean_severity": {
+          "token": "{C31}",
+          "value": "3.944444"
+        },
+        "name": "Login failures",
+        "priority_score": {
+          "token": "{C32}",
+          "value": 497
+        },
+        "severity_sum": {
+          "token": "{C30}",
+          "value": 497
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C33}",
+          "value": 156
+        },
+        "issue_id": "usability.other",
+        "mean_severity": {
+          "token": "{C35}",
+          "value": "2.442308"
+        },
+        "name": "Settings and toggles not working as expected",
+        "priority_score": {
+          "token": "{C36}",
+          "value": 381
+        },
+        "severity_sum": {
+          "token": "{C34}",
+          "value": 381
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{C37}",
+          "value": 117
+        },
+        "issue_id": "catalog.recommendations",
+        "mean_severity": {
+          "token": "{C39}",
+          "value": "2.880342"
+        },
+        "name": "Repetitive and poor song recommendations",
+        "priority_score": {
+          "token": "{C40}",
+          "value": 337
+        },
+        "severity_sum": {
+          "token": "{C38}",
+          "value": 337
+        }
+      }
+    ],
+    "trends_and_robustness": {
+      "area_shares_with_95pct_intervals": [
+        {
+          "area": "usability",
+          "ci_high": "{T19}",
+          "ci_low": "{T18}",
+          "share_of_complaints": "{T17}"
+        },
+        {
+          "area": "billing/support",
+          "ci_high": "{T22}",
+          "ci_low": "{T21}",
+          "share_of_complaints": "{T20}"
+        },
+        {
+          "area": "playback/performance",
+          "ci_high": "{T25}",
+          "ci_low": "{T24}",
+          "share_of_complaints": "{T23}"
+        },
+        {
+          "area": "access/onboarding",
+          "ci_high": "{T28}",
+          "ci_low": "{T27}",
+          "share_of_complaints": "{T26}"
+        }
+      ],
+      "period_comparison": {
+        "areas": [
+          {
+            "area": "access/onboarding",
+            "change_pp": "{T03}",
+            "share_of_reviews_2022_jun_oct": "{T01}",
+            "share_of_reviews_2023_jun_oct": "{T02}"
+          },
+          {
+            "area": "billing/support",
+            "change_pp": "{T06}",
+            "share_of_reviews_2022_jun_oct": "{T04}",
+            "share_of_reviews_2023_jun_oct": "{T05}"
+          },
+          {
+            "area": "playback/performance",
+            "change_pp": "{T09}",
+            "share_of_reviews_2022_jun_oct": "{T07}",
+            "share_of_reviews_2023_jun_oct": "{T08}"
+          },
+          {
+            "area": "usability",
+            "change_pp": "{T12}",
+            "share_of_reviews_2022_jun_oct": "{T10}",
+            "share_of_reviews_2023_jun_oct": "{T11}"
+          }
+        ],
+        "denominators": {
+          "2022 Jun-Oct": {
+            "complaint_share": "{T14}",
+            "reviews": "{T13}"
+          },
+          "2023 Jun-Oct": {
+            "complaint_share": "{T16}",
+            "reviews": "{T15}"
+          }
+        },
+        "method": "share = complaint/cancellation reviews in the area / all classified reviews in the period; Wilson 95% intervals; identical calendar months one year apart avoid the partial first/last months and seasonal mix. Descriptive only: reviews are self-selected, not a customer census."
+      },
+      "spike_months": [
+        {
+          "largest_increases": [
+            {
+              "issue_id": "other.general",
+              "pp_difference": "{T31}"
+            },
+            {
+              "issue_id": "billing.price",
+              "pp_difference": "{T32}"
+            },
+            {
+              "issue_id": "access.login",
+              "pp_difference": "{T33}"
+            }
+          ],
+          "median_full_month_reviews": "{T30}",
+          "month": "2023-07",
+          "reviews": "{T29}"
+        },
+        {
+          "largest_increases": [
+            {
+              "issue_id": "billing.premium_only",
+              "pp_difference": "{T36}"
+            },
+            {
+              "issue_id": "other.general",
+              "pp_difference": "{T37}"
+            },
+            {
+              "issue_id": "usability.navigation",
+              "pp_difference": "{T38}"
+            }
+          ],
+          "median_full_month_reviews": "{T35}",
+          "month": "2023-10",
+          "reviews": "{T34}"
+        }
+      ],
+      "verifier_robustness": {
+        "same_top_area": true,
+        "sample_reviews": "{T39}",
+        "top_decision_area_enricher_labels": "usability",
+        "top_decision_area_verifier_labels": "usability"
+      }
+    }
+  },
+  "source": "model",
+  "tokens": {
+    "A01": "1035",
+    "A02": "3040",
+    "A03": "0.226626",
+    "A04": "1201",
+    "A05": "2840",
+    "A06": "0.262974",
+    "A07": "719",
+    "A08": "2398",
+    "A09": "0.157434",
+    "A10": "1149",
+    "A11": "2286",
+    "A12": "0.251587",
+    "A13": "317",
+    "A14": "933",
+    "A15": "0.069411",
+    "A16": "146",
+    "A17": "572",
+    "A18": "0.031968",
+    "C01": "924",
+    "C02": "2721",
+    "C03": "2.944805",
+    "C04": "2721",
+    "C05": "1149",
+    "C06": "2286",
+    "C07": "1.989556",
+    "C08": "2286",
+    "C09": "605",
+    "C10": "1286",
+    "C11": "2.125620",
+    "C12": "1286",
+    "C13": "252",
+    "C14": "834",
+    "C15": "3.309524",
+    "C16": "834",
+    "C17": "166",
+    "C18": "617",
+    "C19": "3.716867",
+    "C20": "617",
+    "C21": "243",
+    "C22": "587",
+    "C23": "2.415638",
+    "C24": "587",
+    "C25": "197",
+    "C26": "586",
+    "C27": "2.974619",
+    "C28": "586",
+    "C29": "126",
+    "C30": "497",
+    "C31": "3.944444",
+    "C32": "497",
+    "C33": "156",
+    "C34": "381",
+    "C35": "2.442308",
+    "C36": "381",
+    "C37": "117",
+    "C38": "337",
+    "C39": "2.880342",
+    "C40": "337",
+    "S01": "10000",
+    "S02": "10000",
+    "S03": "0",
+    "S04": "0",
+    "S05": "0",
+    "S06": "1001",
+    "S07": "4567",
+    "S08": "845",
+    "S09": "0.8024",
+    "S10": "0.903",
+    "S11": "0.7751",
+    "T01": "1.1%",
+    "T02": "1.7%",
+    "T03": "+0.6 pp",
+    "T04": "4.9%",
+    "T05": "16.4%",
+    "T06": "+11.5 pp",
+    "T07": "9.0%",
+    "T08": "5.1%",
+    "T09": "-3.9 pp",
+    "T10": "10.8%",
+    "T11": "11.0%",
+    "T12": "+0.2 pp",
+    "T13": "2243",
+    "T14": "31.1%",
+    "T15": "4102",
+    "T16": "58.8%",
+    "T17": "26.3%",
+    "T18": "25.0%",
+    "T19": "27.6%",
+    "T20": "22.7%",
+    "T21": "21.5%",
+    "T22": "23.9%",
+    "T23": "15.7%",
+    "T24": "14.7%",
+    "T25": "16.8%",
+    "T26": "3.2%",
+    "T27": "2.7%",
+    "T28": "3.7%",
+    "T29": "1246",
+    "T30": "438",
+    "T31": "+37.4 pp",
+    "T32": "+0.2 pp",
+    "T33": "+0.1 pp",
+    "T34": "1381",
+    "T35": "438",
+    "T36": "+27.9 pp",
+    "T37": "+7.6 pp",
+    "T38": "+3.1 pp",
+    "T39": "845"
+  },
+  "validation_problems": []
+}

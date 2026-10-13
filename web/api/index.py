@@ -12,11 +12,25 @@ import sqlite3
 import threading
 from decimal import ROUND_HALF_UP, Decimal
 
-from fastapi import FastAPI, HTTPException, Query
+from urllib.parse import parse_qsl, urlencode
+
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 
 app = FastAPI(title="Spotify review insight API", version="1.0",
               description="Read-only access to the processed reviews, aggregates and AI recommendation of one pipeline run.")
+
+
+@app.middleware("http")
+async def _restore_rewritten_path(request: Request, call_next):
+    """vercel.json rewrites /api/<rest> to /api/index?__path=<rest>; restore /api/<rest> before routing."""
+    pairs = parse_qsl(request.scope.get("query_string", b"").decode(), keep_blank_values=True)
+    rest = [v for k, v in pairs if k == "__path"]
+    if rest:
+        request.scope["path"] = "/api/" + rest[0].lstrip("/")
+        request.scope["raw_path"] = request.scope["path"].encode()
+        request.scope["query_string"] = urlencode([(k, v) for k, v in pairs if k != "__path"]).encode()
+    return await call_next(request)
 
 _lock = threading.Lock()
 _conn = {"c": None, "kind": None}

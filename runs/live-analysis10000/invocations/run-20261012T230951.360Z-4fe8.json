@@ -1,0 +1,456 @@
+{
+  "calls_all_invocations": {
+    "enrich:fallback1": {
+      "attempts": 126,
+      "cached_input_tokens": 259298,
+      "cost_usd": 0.005065,
+      "input_tokens": 282515,
+      "invalid_output_retries": 0,
+      "output_tokens": 9286,
+      "reasoning_tokens": 4717,
+      "retries": 0,
+      "succeeded": 126
+    },
+    "enrich:primary": {
+      "attempts": 173,
+      "cached_input_tokens": 420046,
+      "cost_usd": 0.091257,
+      "failed": 3,
+      "input_tokens": 718556,
+      "invalid_output_retries": 4,
+      "output_tokens": 282045,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 170
+    },
+    "group": {
+      "attempts": 12,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 21786,
+      "invalid_output_retries": 0,
+      "output_tokens": 1921,
+      "reasoning_tokens": 60,
+      "retries": 0,
+      "succeeded": 12
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 8021,
+      "invalid_output_retries": 0,
+      "output_tokens": 2132,
+      "reasoning_tokens": 807,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 17,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 72569,
+      "invalid_output_retries": 0,
+      "output_tokens": 113062,
+      "reasoning_tokens": 77042,
+      "retries": 0,
+      "succeeded": 17
+    }
+  },
+  "calls_this_invocation": {
+    "enrich:fallback1": {
+      "attempts": 126,
+      "cached_input_tokens": 259298,
+      "cost_usd": 0.005065,
+      "input_tokens": 282515,
+      "invalid_output_retries": 0,
+      "output_tokens": 9286,
+      "reasoning_tokens": 4717,
+      "retries": 0,
+      "succeeded": 126
+    },
+    "enrich:primary": {
+      "attempts": 173,
+      "cached_input_tokens": 420046,
+      "cost_usd": 0.091257,
+      "failed": 3,
+      "input_tokens": 718556,
+      "invalid_output_retries": 4,
+      "output_tokens": 282045,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 170
+    },
+    "group": {
+      "attempts": 12,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 21786,
+      "invalid_output_retries": 0,
+      "output_tokens": 1921,
+      "reasoning_tokens": 60,
+      "retries": 0,
+      "succeeded": 12
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 8021,
+      "invalid_output_retries": 0,
+      "output_tokens": 2132,
+      "reasoning_tokens": 807,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 17,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 72569,
+      "invalid_output_retries": 0,
+      "output_tokens": 113062,
+      "reasoning_tokens": 77042,
+      "retries": 0,
+      "succeeded": 17
+    }
+  },
+  "completed_ids_saved": 10000,
+  "config_summary": {
+    "crosscheck": {
+      "batch": "1 review/request",
+      "fields": "off",
+      "service_tier": "standard"
+    },
+    "enrich_primary": {
+      "batch": "50 reviews/request",
+      "service_tier": "flex"
+    },
+    "fallback1": {
+      "batch": "1 review/request",
+      "service_tier": "flex"
+    },
+    "fallback2": {
+      "batch": "1 review/request",
+      "service_tier": "subscription"
+    },
+    "group": {
+      "batch": "<= 8 quotes/request",
+      "service_tier": "subscription"
+    },
+    "memo": {
+      "batch": "aggregates + evidence pack",
+      "service_tier": "subscription"
+    },
+    "verify": {
+      "batch": "50 reviews/request",
+      "service_tier": "subscription"
+    }
+  },
+  "finished_at": "2026-10-12T23:25:23.507Z",
+  "input": {
+    "bytes": 1477793,
+    "ingested_at": "2026-10-12T23:09:52.055Z",
+    "path": "Final Assignment - Spotify Reviews Dataset/analysis_10000.csv",
+    "rows": 10000,
+    "sha256": "eaa62ca6d44d717302904a9c922e99b0b4584d174309cb45295ecbc2ba2a91b5"
+  },
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "ledger": {
+    "cap_usd": 0.5,
+    "denials": 0,
+    "reserved_usd": -0.0,
+    "spent_usd": 0.0963262,
+    "unknown_usd": 0.0
+  },
+  "models": {
+    "crosscheck": {
+      "effort": "n/a",
+      "enabled": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "model": "gpt-6-luna",
+      "provider": "openai_decisions"
+    },
+    "enrich_primary": {
+      "effort": "none",
+      "model": "gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback1": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.015,
+      "model": "gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback2": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.0025,
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "group": {
+      "effort": "low",
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "memo": {
+      "effort": "low",
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "verify": {
+      "effort": "n/a",
+      "model": "haiku",
+      "provider": "claude_code"
+    }
+  },
+  "offline_stub": false,
+  "phase": "initial",
+  "project_spend": {
+    "effective_budget_usd": 0.5,
+    "other_runs_billed_usd": 0.02707013,
+    "per_run": {
+      "runs/golden-decisions": 0.00909,
+      "runs/golden-luna-low": 0.000866,
+      "runs/golden-luna-none": 0.00067,
+      "runs/live-budget-drill": 0.004306,
+      "runs/live-checkpoint500": 0.005175,
+      "runs/live-checkpoint500-w2": 0.00425,
+      "runs/live-synthetic-injection": 0.000234,
+      "runs/pilot100-20261012T224901Z": 0.001339,
+      "runs/probe-decisions": 0.000942,
+      "runs/probe-luna": 0.000198
+    },
+    "project_cap_usd": 9.0,
+    "requested_budget_usd": 0.5
+  },
+  "reconciled_unknown_calls": 0,
+  "results": {
+    "by_status_and_tier": {
+      "completed:cache": 1552,
+      "completed:fallback1": 126,
+      "completed:primary": 8322
+    },
+    "completed": 10000,
+    "exact_text_cache_reuses": 1552,
+    "needs_review": 1001,
+    "quarantined": 0,
+    "quarantined_empty_text": 0,
+    "scope": {
+      "distinct_nonempty_texts": 8448,
+      "duplicate_id_rows": 0,
+      "empty_texts": 0,
+      "nonempty": 10000,
+      "representatives": 8448,
+      "rows": 10000,
+      "unique_ids": 10000
+    },
+    "unfinished": 0
+  },
+  "run_id": "run-20261012T230951.360Z-4fe8",
+  "stage_configs": {
+    "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+    "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+    "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
+  },
+  "stage_seconds": {
+    "enrich": 728.406,
+    "export": 0.34,
+    "group": 34.518,
+    "ingest": 0.278,
+    "memo": 31.9,
+    "rank": 0.101,
+    "verify": 135.946
+  },
+  "stages": {
+    "analysis": {
+      "robustness": {
+        "enricher_labels": {
+          "areas": {
+            "access/onboarding": {
+              "complaints": 12,
+              "share_of_complaints": 0.027149
+            },
+            "billing/support": {
+              "complaints": 109,
+              "share_of_complaints": 0.246606
+            },
+            "catalog/content": {
+              "complaints": 36,
+              "share_of_complaints": 0.081448
+            },
+            "general/unspecified": {
+              "complaints": 83,
+              "share_of_complaints": 0.187783
+            },
+            "playback/performance": {
+              "complaints": 73,
+              "share_of_complaints": 0.165158
+            },
+            "usability": {
+              "complaints": 129,
+              "share_of_complaints": 0.291855
+            }
+          },
+          "complaints": 442
+        },
+        "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+        "same_top_decision_area": true,
+        "sample": 845,
+        "top_decision_area_enricher": "usability",
+        "top_decision_area_verifier": "usability",
+        "verifier_labels": {
+          "areas": {
+            "access/onboarding": {
+              "complaints": 16,
+              "share_of_complaints": 0.037037
+            },
+            "billing/support": {
+              "complaints": 86,
+              "share_of_complaints": 0.199074
+            },
+            "catalog/content": {
+              "complaints": 18,
+              "share_of_complaints": 0.041667
+            },
+            "general/unspecified": {
+              "complaints": 89,
+              "share_of_complaints": 0.206019
+            },
+            "playback/performance": {
+              "complaints": 87,
+              "share_of_complaints": 0.201389
+            },
+            "usability": {
+              "complaints": 136,
+              "share_of_complaints": 0.314815
+            }
+          },
+          "complaints": 432
+        }
+      }
+    },
+    "enrich": {
+      "aliases_written": 1552,
+      "caps": {
+        "fallback1": 126,
+        "fallback2": 21
+      },
+      "difficult": 821,
+      "fallback_not_selected_cap": 745,
+      "invalid_output_retries": 4,
+      "invalid_outputs": 3,
+      "left_pending_stopping": 0,
+      "left_pending_transient": 0,
+      "quarantined": 0,
+      "routed": {
+        "fallback1": 126,
+        "fallback2": 0
+      },
+      "saved_fallback1": 126,
+      "saved_fallback2": 0,
+      "saved_primary": 8322,
+      "staged": 871,
+      "still_pending": 0,
+      "stop_reason": null,
+      "transient_requeued": 0
+    },
+    "export": {
+      "calls": 329,
+      "checkpoint_after": 10000,
+      "checkpoint_before": 0,
+      "grading_dir": "runs/live-analysis10000/grading",
+      "records": 10000
+    },
+    "group": {
+      "issues": 22,
+      "memberships": 4567,
+      "named_calls": 12
+    },
+    "memo": {
+      "claims": 40,
+      "source": "model"
+    },
+    "rank": {
+      "complaints": 4567,
+      "issues": 22,
+      "top": [
+        {
+          "complaint_count": 924,
+          "issue_id": "billing.premium_only",
+          "mean_severity": "2.944805",
+          "priority_score": 2721,
+          "rank": 1,
+          "severity_sum": 2721
+        },
+        {
+          "complaint_count": 1149,
+          "issue_id": "other.general",
+          "mean_severity": "1.989556",
+          "priority_score": 2286,
+          "rank": 2,
+          "severity_sum": 2286
+        },
+        {
+          "complaint_count": 605,
+          "issue_id": "usability.ads",
+          "mean_severity": "2.125620",
+          "priority_score": 1286,
+          "rank": 3,
+          "severity_sum": 1286
+        },
+        {
+          "complaint_count": 252,
+          "issue_id": "playback.stops",
+          "mean_severity": "3.309524",
+          "priority_score": 834,
+          "rank": 4,
+          "severity_sum": 834
+        },
+        {
+          "complaint_count": 166,
+          "issue_id": "playback.crash",
+          "mean_severity": "3.716867",
+          "priority_score": 617,
+          "rank": 5,
+          "severity_sum": 617
+        }
+      ]
+    },
+    "verify": {
+      "agreement": {
+        "intent": {
+          "agree": 763,
+          "of": 845,
+          "rate": 0.903
+        },
+        "sentiment_within_tolerance": {
+          "agree": 835,
+          "of": 845,
+          "rate": 0.9882
+        },
+        "severity": {
+          "agree": 655,
+          "of": 845,
+          "rate": 0.7751
+        },
+        "topic": {
+          "agree": 678,
+          "of": 845,
+          "rate": 0.8024
+        }
+      },
+      "completed": 845,
+      "sample": 845
+    }
+  },
+  "status": "completed",
+  "stop_reason": null,
+  "wall_clock_s": 931.56,
+  "workers": 8
+}

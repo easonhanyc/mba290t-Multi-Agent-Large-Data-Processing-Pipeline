@@ -1,0 +1,97 @@
+{
+  "areas": [
+    {
+      "area": "general/unspecified",
+      "complaints": 14,
+      "decision_option": false,
+      "share_of_complaints": 0.269231,
+      "share_of_complaints_ci95": [
+        0.167688,
+        0.402525
+      ],
+      "share_of_reviews": 0.14,
+      "share_of_reviews_ci95": [
+        0.085263,
+        0.221374
+      ]
+    },
+    {
+      "area": "billing/support",
+      "complaints": 13,
+      "decision_option": true,
+      "share_of_complaints": 0.25,
+      "share_of_complaints_ci95": [
+        0.15233,
+        0.382067
+      ],
+      "share_of_reviews": 0.13,
+      "share_of_reviews_ci95": [
+        0.077571,
+        0.209805
+      ]
+    },
+    {
+      "area": "usability",
+      "complaints": 9,
+      "decision_option": true,
+      "share_of_complaints": 0.173077,
+      "share_of_complaints_ci95": [
+        0.093824,
+        0.297311
+      ],
+      "share_of_reviews": 0.09,
+      "share_of_reviews_ci95": [
+        0.048072,
+        0.162264
+      ]
+    },
+    {
+      "area": "playback/performance",
+      "complaints": 8,
+      "decision_option": true,
+      "share_of_complaints": 0.153846,
+      "share_of_complaints_ci95": [
+        0.080076,
+        0.275243
+      ],
+      "share_of_reviews": 0.08,
+      "share_of_reviews_ci95": [
+        0.041093,
+        0.149983
+      ]
+    },
+    {
+      "area": "catalog/content",
+      "complaints": 6,
+      "decision_option": false,
+      "share_of_complaints": 0.115385,
+      "share_of_complaints_ci95": [
+        0.053969,
+        0.229719
+      ],
+      "share_of_reviews": 0.06,
+      "share_of_reviews_ci95": [
+        0.027786,
+        0.12477
+      ]
+    },
+    {
+      "area": "access/onboarding",
+      "complaints": 2,
+      "decision_option": true,
+      "share_of_complaints": 0.038462,
+      "share_of_complaints_ci95": [
+        0.010611,
+        0.129814
+      ],
+      "share_of_reviews": 0.02,
+      "share_of_reviews_ci95": [
+        0.005502,
+        0.070013
+      ]
+    }
+  ],
+  "complaints": 52,
+  "note": "Sampling intervals for a uniform random sample of the corpus; they do not include labelling error (see the golden-set and verifier results for that).",
+  "reviews": 100
+}

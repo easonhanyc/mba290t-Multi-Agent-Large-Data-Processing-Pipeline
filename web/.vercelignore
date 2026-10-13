@@ -4,3 +4,6 @@ schema.sql
 *.db
 __pycache__
 README.md
+.env*
+make_readonly_role.py
+.vercel

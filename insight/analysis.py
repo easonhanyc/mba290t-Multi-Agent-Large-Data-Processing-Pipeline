@@ -223,18 +223,40 @@ def robustness(store, cfg, rows_by_id):
             pairs.append((r, v))
     if not pairs:
         return {"status": "no verifier sample"}
-    def shares(get):
-        c = Counter(labels.AREA_OF_TOPIC[get(x)[0]] for x in pairs if get(x)[1] in labels.COMPLAINT_INTENTS)
-        tot = sum(c.values())
-        return {a: {"complaints": k, "share_of_complaints": r6(k / tot)} for a, k in c.most_common()}, tot
-    enr, ne = shares(lambda p: (p[0]["topic"], p[0]["intent"]))
-    ver, nv = shares(lambda p: (p[1]["topic"], p[1]["intent"]))
-    top = lambda d: next((a for a in d if a in labels.DECISION_AREAS), None)
-    return {"sample": len(pairs), "enricher_labels": {"complaints": ne, "areas": enr},
-            "verifier_labels": {"complaints": nv, "areas": ver},
-            "top_decision_area_enricher": top(enr), "top_decision_area_verifier": top(ver),
-            "same_top_decision_area": top(enr) == top(ver),
-            "note": "Same reviews (the declared verification sample), labelled independently by two model roles."}
+    # The sample is of distinct texts; weight each by the rows that share its text so area totals are row-based
+    # like the baseline ranking (exact-text aliases point at their representative via cache_source_id).
+    weight = Counter()
+    for rid, src in store.conn.execute("SELECT review_id, cache_source_id FROM results WHERE label_config = ? AND "
+                                       "status = 'completed'", (cfg.label_config(),)):
+        weight[src or rid] += 1
+
+    def tally(get):
+        cnt, sev = Counter(), Counter()
+        for p in pairs:
+            topic, intent, severity = get(p)
+            if intent in labels.COMPLAINT_INTENTS:
+                w = weight[p[0]["review_id"]] or 1
+                cnt[labels.AREA_OF_TOPIC[topic]] += w
+                sev[labels.AREA_OF_TOPIC[topic]] += w * int(severity)
+        tot = sum(cnt.values())
+        areas = {a: {"complaints": cnt[a], "share_of_complaints": r6(cnt[a] / tot), "severity_sum": sev[a]}
+                 for a, _ in sev.most_common()}
+        return areas, tot
+
+    enr, ne = tally(lambda p: (p[0]["topic"], p[0]["intent"], p[0]["severity"]))
+    ver, nv = tally(lambda p: (p[1]["topic"], p[1]["intent"], p[1]["severity"]))
+    order = lambda d, key: [a for a in sorted(d, key=lambda a: -d[a][key]) if a in labels.DECISION_AREAS]
+    te, tv = order(enr, "severity_sum"), order(ver, "severity_sum")
+    ce, cv = order(enr, "complaints"), order(ver, "complaints")
+    return {"sample": len(pairs), "row_weighted_reviews": sum(weight[p[0]["review_id"]] or 1 for p in pairs),
+            "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+            "enricher_labels": {"complaints": ne, "areas": enr}, "verifier_labels": {"complaints": nv, "areas": ver},
+            "decision_area_order_enricher": te, "decision_area_order_verifier": tv,
+            "top_decision_area_enricher": te[0] if te else None, "top_decision_area_verifier": tv[0] if tv else None,
+            "same_top_decision_area": bool(te and tv and te[0] == tv[0]),
+            "by_complaint_count": {"top_enricher": ce[0] if ce else None, "top_verifier": cv[0] if cv else None},
+            "note": "Same reviews (the declared verification sample, distinct texts weighted by the rows sharing each "
+                    "text), labelled independently by two model roles. Sampling error is not included."}
 
 
 def _csv(rows, columns=None):

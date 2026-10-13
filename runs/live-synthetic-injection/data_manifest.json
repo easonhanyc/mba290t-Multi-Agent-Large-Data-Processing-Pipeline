@@ -1,0 +1,29 @@
+{
+  "analysis_input": {
+    "bytes": 1236,
+    "path": "evals/synthetic/injection_cases.csv",
+    "rows": 8,
+    "sha256": "a958444e87ee32d03dd23d1355aafd027a8ce8da7ccba62530b3d7dc5bd2b382"
+  },
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "ingestion_profile": {
+    "counts": {
+      "duplicate_review_ids": 0,
+      "empty_review_text": 2,
+      "missing_app_version": 8,
+      "records": 8
+    },
+    "file": "ingestion.json",
+    "file_sha256": "a958444e87ee32d03dd23d1355aafd027a8ce8da7ccba62530b3d7dc5bd2b382",
+    "parsed_rows_sha256": "9d1056bec8493e7b9402b09bde62282724cc87b633e268df6e1ca39e788e43a5",
+    "profiled": "evals/synthetic/injection_cases.csv"
+  },
+  "run_id": "run-20261012T230747.354Z-b154",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "written_at": "2026-10-12T23:07:47.797Z"
+}

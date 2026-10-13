@@ -167,6 +167,8 @@ def execute(task: Task, ctx: Context) -> Outcome:
     est_in = estimate_tokens(task.prompt_chars)
     max_attempts = int(ctx.retry["max_attempts"])
     last = None
+    if ctx.stop_admitting.is_set():  # queued before a stop (Ctrl-C, budget, systemic error): never sent
+        return Outcome("cancelled", error="run stopping before this request started", attempts=0)
     for attempt in range(1, max_attempts + 1):
         try:
             worst = ctx.rates.worst_case(provider.name, provider.model, est_in, task.max_output_tokens)
@@ -199,10 +201,13 @@ def execute(task: Task, ctx: Context) -> Outcome:
             cost = ctx.rates.cost(provider.name, provider.model, e.usage) if e.usage else 0.0
             ctx.ledger.settle(res, cost, unknown=e.unknown_charge)
             ctx.store.call_settled(call_id, {
-                "outcome": "failed", "error": f"{e.kind}: {str(e)[:400]}", "http_status": e.status,
+                # "unknown": the reservation keeps counting in this run, on resume and against the project cap
+                "outcome": "unknown" if e.unknown_charge else "failed",
+                "error": f"{e.kind}: {str(e)[:400]}", "http_status": e.status,
                 "cost_usd": cost, "ended_at": utc_now(), "duration_s": round(duration, 4),
                 "provider_request_id": e.provider_request_id,
-                "notes": "timeout: charge unknown, reservation kept against the cap" if e.unknown_charge else None,
+                "notes": "charge unknown (timeout or dropped connection): reservation kept against the cap"
+                         if e.unknown_charge else None,
             })
             if e.kind == "transient" and attempt < max_attempts and not ctx.stop_admitting.is_set():
                 if ctx.stop_admitting.wait(backoff_delay(attempt, ctx.retry, e.retry_after)):
@@ -212,7 +217,7 @@ def execute(task: Task, ctx: Context) -> Outcome:
         except Exception as e:  # unexpected adapter bug: record it, never swallow silently
             duration = monotonic() - t0
             ctx.ledger.settle(res, 0.0, unknown=True)
-            ctx.store.call_settled(call_id, {"outcome": "failed", "error": f"unexpected: {type(e).__name__}: {e}"[:400],
+            ctx.store.call_settled(call_id, {"outcome": "unknown", "error": f"unexpected: {type(e).__name__}: {e}"[:400],
                                              "ended_at": utc_now(), "duration_s": round(duration, 4),
                                              "notes": "unexpected client error; charge unknown"})
             return Outcome("systemic", error=f"{type(e).__name__}: {e}", request_id=call_id, attempts=attempt)
@@ -223,6 +228,9 @@ def execute(task: Task, ctx: Context) -> Outcome:
         except KeyError:  # tier without a dated rate: price at standard (the conservative choice) and say so
             cost = ctx.rates.cost(provider.name, provider.model, u, "standard")
         api_equiv = (ctx.rates.api_equivalent(result.model_reported, u) if result.billing == "subscription" else None)
+        note = None
+        if result.billing == "api" and provider.paid and u.get("usage_missing"):
+            cost, note = worst, "provider reported no usage: charged at the worst-case reservation (conservative)"
         ctx.ledger.settle(res, cost)
         ctx.store.call_settled(call_id, {
             "outcome": "succeeded", "input_tokens": u.get("input_tokens"), "cached_input_tokens": u.get("cached_input_tokens"),
@@ -231,7 +239,7 @@ def execute(task: Task, ctx: Context) -> Outcome:
             "usage_raw": json.dumps(u, default=str), "cost_usd": cost, "ended_at": utc_now(),
             "duration_s": round(duration, 4), "provider_request_id": result.provider_request_id,
             "model_reported": result.model_reported, "finish": result.finish, "service_tier": result.service_tier,
-            "billing": result.billing, "api_equiv_usd": api_equiv,
+            "billing": result.billing, "api_equiv_usd": api_equiv, "notes": note,
         })
         return Outcome("ok", result=result, request_id=call_id, attempts=attempt)
     return Outcome("transient", error="retries exhausted", request_id=last, attempts=max_attempts)
@@ -239,17 +247,28 @@ def execute(task: Task, ctx: Context) -> Outcome:
 
 
 class Dispatcher:
-    def __init__(self, ctx: Context, workers: int, per_worker: int):
+    """Worker pools sharing one context (ledger, limiters). Cross-check tasks get their own pool so fast
+    one-review calls never queue behind slow batched LLM calls; capacity() counts the main pool only."""
+
+    SIDE_TIERS = ("crosscheck",)
+
+    def __init__(self, ctx: Context, workers: int, per_worker: int, side_workers: int = 0):
         self.ctx = ctx
         self.capacity_total = max(1, workers * per_worker)
         self.pool = ThreadPoolExecutor(max_workers=workers, thread_name_prefix="worker")
+        self.side_pool = (ThreadPoolExecutor(max_workers=side_workers, thread_name_prefix="xcheck")
+                          if side_workers > 0 else None)
         self.in_flight = {}
 
     def capacity(self):
-        return self.capacity_total - len(self.in_flight)
+        return self.capacity_total - sum(1 for t in self.in_flight.values() if t.tier not in self.SIDE_TIERS)
+
+    def count(self, tier):
+        return sum(1 for t in self.in_flight.values() if t.tier == tier)
 
     def submit(self, task: Task):
-        fut = self.pool.submit(execute, task, self.ctx)
+        pool = self.side_pool if (self.side_pool and task.tier in self.SIDE_TIERS) else self.pool
+        fut = pool.submit(execute, task, self.ctx)
         self.in_flight[fut] = task
 
     def wait_some(self, timeout=0.5):
@@ -264,3 +283,5 @@ class Dispatcher:
 
     def shutdown(self):
         self.pool.shutdown(wait=True, cancel_futures=False)
+        if self.side_pool:
+            self.side_pool.shutdown(wait=True, cancel_futures=False)

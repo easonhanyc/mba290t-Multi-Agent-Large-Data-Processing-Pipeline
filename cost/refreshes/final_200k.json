@@ -1,0 +1,15 @@
+{
+  "label": "final_200k",
+  "run_dir": "runs/final-200k",
+  "offline_stub": false,
+  "rows": 200013,
+  "distinct_texts": 152363,
+  "completed": 200000,
+  "quarantined": 13,
+  "unfinished": 0,
+  "workers": 4,
+  "invocations": 5,
+  "wall_clock_s": 9156.131,
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790",
+  "saved_at": "2026-10-13T02:10:46+00:00"
+}

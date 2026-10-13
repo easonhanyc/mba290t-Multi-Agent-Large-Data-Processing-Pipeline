@@ -1,0 +1,61 @@
+{
+  "enricher_labels": {
+    "areas": {
+      "billing/support": {
+        "complaints": 3,
+        "share_of_complaints": 0.111111
+      },
+      "catalog/content": {
+        "complaints": 1,
+        "share_of_complaints": 0.037037
+      },
+      "general/unspecified": {
+        "complaints": 4,
+        "share_of_complaints": 0.148148
+      },
+      "playback/performance": {
+        "complaints": 5,
+        "share_of_complaints": 0.185185
+      },
+      "usability": {
+        "complaints": 14,
+        "share_of_complaints": 0.518519
+      }
+    },
+    "complaints": 27
+  },
+  "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+  "same_top_decision_area": true,
+  "sample": 48,
+  "top_decision_area_enricher": "usability",
+  "top_decision_area_verifier": "usability",
+  "verifier_labels": {
+    "areas": {
+      "access/onboarding": {
+        "complaints": 2,
+        "share_of_complaints": 0.08
+      },
+      "billing/support": {
+        "complaints": 4,
+        "share_of_complaints": 0.16
+      },
+      "catalog/content": {
+        "complaints": 1,
+        "share_of_complaints": 0.04
+      },
+      "general/unspecified": {
+        "complaints": 5,
+        "share_of_complaints": 0.2
+      },
+      "playback/performance": {
+        "complaints": 3,
+        "share_of_complaints": 0.12
+      },
+      "usability": {
+        "complaints": 10,
+        "share_of_complaints": 0.4
+      }
+    },
+    "complaints": 25
+  }
+}

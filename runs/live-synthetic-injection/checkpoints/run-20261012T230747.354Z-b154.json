@@ -1,0 +1,1 @@
+{"completed_ids": ["SYNTH-INJ-001", "SYNTH-INJ-002", "SYNTH-INJ-003", "SYNTH-INJ-004", "SYNTH-INJ-005", "SYNTH-INJ-006"], "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb", "run_id": "run-20261012T230747.354Z-b154", "status": "completed", "stop_reason": null, "written_at": "2026-10-12T23:07:54.836Z"}

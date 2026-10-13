@@ -14,7 +14,7 @@ import json
 from . import labels, prompts
 from .control import Dispatcher, Task
 from .rank import compute_ranking
-from .util import atomic_write_json, atomic_write_text, short_hash
+from .util import atomic_write_json, atomic_write_text, sha256_text, short_hash
 
 
 def load_completed(store, label_config):
@@ -42,20 +42,27 @@ def membership_csv(pairs) -> str:
     return buf.getvalue()
 
 
-def evidence_pack(store, label_config, issue_id, k):
-    """Up to k distinct member quotes: highest severity first, then most helpful votes, then source order.
+def evidence_pack(store, label_config, issue_id, k, order="sample"):
+    """Up to k distinct member quotes for naming an issue and for the memo's evidence.
 
-    Identical texts are represented once (cache aliases are skipped). Likes only order the examples;
-    they never affect a label or a score.
+    order="sample" (default): a deterministic uniform sample of the issue's distinct member texts
+    (sha256 of issue_id:review_id), so names describe the typical member. order="severity" (the
+    first version): highest severity first, then most helpful votes. On the final run it named the
+    catch-all `other.general` after its rare privacy complaints (8 of 14,796 distinct texts mention
+    privacy), so it is kept only for comparison. Identical texts are represented once.
     """
     topic, subtopic = issue_id.split(".", 1)
     rows = store.conn.execute(
-        "SELECT x.review_id, x.evidence_quote FROM results x JOIN reviews r ON r.review_id = x.review_id AND r.duplicate_id = 0 "
+        "SELECT x.review_id, x.evidence_quote, x.severity, "
+        "CASE WHEN r.review_likes GLOB '[0-9]*' THEN CAST(r.review_likes AS INTEGER) ELSE 0 END, r.row_num "
+        "FROM results x JOIN reviews r ON r.review_id = x.review_id AND r.duplicate_id = 0 "
         "WHERE x.label_config = ? AND x.status = 'completed' AND x.cache_source_id IS NULL AND x.topic = ? AND x.subtopic = ? "
-        "AND x.intent IN ('complaint', 'cancellation') "
-        "ORDER BY x.severity DESC, CASE WHEN r.review_likes GLOB '[0-9]*' THEN CAST(r.review_likes AS INTEGER) ELSE 0 END DESC, "
-        "r.row_num ASC LIMIT ?", (label_config, topic, subtopic, k)).fetchall()
-    return [{"review_id": r[0], "quote": r[1]} for r in rows]
+        "AND x.intent IN ('complaint', 'cancellation')", (label_config, topic, subtopic)).fetchall()
+    if order == "severity":
+        rows.sort(key=lambda r: (-r[2], -r[3], r[4]))
+    else:
+        rows.sort(key=lambda r: sha256_text(f"{issue_id}:{r[0]}"))
+    return [{"review_id": r[0], "quote": r[1]} for r in rows[:k]]
 
 
 class GroupStage:
@@ -77,13 +84,17 @@ class GroupStage:
         for row in ranking:
             iid = row["issue_id"]
             base = labels.ISSUE_BY_ID[iid]
-            pack = evidence_pack(store, self.label_config, iid, int(self.g["evidence_per_issue"]))
+            pack = evidence_pack(store, self.label_config, iid, int(self.g["evidence_per_issue"]),
+                                 self.g.get("evidence_order", "sample"))
             issues[iid] = {"issue_id": iid, "topic": base["topic"], "subtopic": base["subtopic"],
                            "area": labels.AREA_OF_TOPIC[base["topic"]], "default_name": base["name"],
                            "definition": base["definition"], "complaint_count": row["complaint_count"],
                            "evidence": pack, "name": base["name"], "summary": None, "named_by": "taxonomy default",
                            "misfit_review_ids": []}
-            if iid in top and pack:
+            catch_all = iid in tuple(self.g.get("taxonomy_named", ()))
+            if catch_all:  # by definition no specific feature: a model name from a few quotes would overstate it
+                issues[iid]["named_by"] = "taxonomy (catch-all issue: never model-named)"
+            if iid in top and pack and not catch_all:
                 key = short_hash({"issue": iid, "pack": pack, "config": self.gconf}, 20)
                 cached = store.cache_get("group", key)
                 if cached:

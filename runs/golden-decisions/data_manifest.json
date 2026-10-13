@@ -1,0 +1,29 @@
+{
+  "analysis_input": {
+    "bytes": 7905,
+    "path": "Final Assignment - Spotify Reviews Dataset/golden_50_to_label.csv",
+    "rows": 50,
+    "sha256": "1a125c3e509f58b0246ba16d0ea332675a53ffadb1928be4338a0bd7053a11c7"
+  },
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "ingestion_profile": {
+    "counts": {
+      "duplicate_review_ids": 0,
+      "empty_review_text": 0,
+      "missing_app_version": 12,
+      "records": 50
+    },
+    "file": "ingestion.json",
+    "file_sha256": "1a125c3e509f58b0246ba16d0ea332675a53ffadb1928be4338a0bd7053a11c7",
+    "parsed_rows_sha256": "32f9562d48193e1ac3f4c4dc44d4e3c46922019f21848b8342f46b4de3ac4a50",
+    "profiled": "Final Assignment - Spotify Reviews Dataset/golden_50_to_label.csv"
+  },
+  "run_id": "run-20261012T230826.363Z-f20e",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "written_at": "2026-10-12T23:08:26.397Z"
+}

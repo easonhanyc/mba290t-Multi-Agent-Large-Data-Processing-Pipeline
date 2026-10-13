@@ -1,0 +1,15 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 10000,
+  "analysis_sha256": "eaa62ca6d44d717302904a9c922e99b0b4584d174309cb45295ecbc2ba2a91b5",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-12T23:25:23.139Z",
+  "full_source": null,
+  "input_file": "Final Assignment - Spotify Reviews Dataset/analysis_10000.csv",
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "offline_stub": false,
+  "scope_note": "Development checkpoint export, not the final submission.",
+  "version": "a5-audit-v1"
+}

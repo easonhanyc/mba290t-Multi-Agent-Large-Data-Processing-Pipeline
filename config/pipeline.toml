@@ -11,6 +11,7 @@ rates = "cost/rates.csv"
 seed = "berkeley-fa-2026-insight-v1"   # verification sampling seed
 workers = 1                  # start at one worker; raise only after a measured comparison
 max_in_flight_per_worker = 2 # queued requests per worker
+crosscheck_workers = 8       # separate pool for the fast one-review Decisions cross-checks (hybrid backend)
 budget_usd = 1.00            # hard cap per run directory, cumulative across resumes (--budget-usd overrides)
 project_cap_usd = 9.00       # hard cap on billed API spend summed over EVERY run directory under runs/ (Eason's $10 limit, $1 margin)
 circuit_breaker_failures = 5 # consecutive requests that exhaust their retries -> stop and save
@@ -22,7 +23,10 @@ backoff_max_s = 30.0
 invalid_output_retries = 1   # contract: at most one retry for invalid output
 
 [enrich]
-backend = "llm"              # "llm": batched LLM, <= 50 reviews | "jev": classifier, one review per request (measured candidate)
+backend = "llm"              # "llm": batched LLM (production) | "hybrid": + OpenAI Decisions cross-check per selected text
+                             # | "decisions" / "jev": typed classifier only, one review per request (measured candidates).
+                             # Hybrid is built and tested but not used at scale: the Decisions beta allowed this account
+                             # 50 requests/day (x-ratelimit headers, runs/probe-decisions, 2026-10-12).
 prompt_version = "enrich-v2"
 schema_version = "schema-v2"
 dispatch_batch = 25          # reviews admitted together; each review is saved as soon as it resolves
@@ -40,12 +44,32 @@ min_confidence_intent = 0.60
 min_confidence_severity = 0.50
 max_unclear_probability = 0.50
 
+[enrich.decisions]           # OpenAI Decisions API (public beta since 2026-10-06): same typed questions as Jev, billed on OpenAI
+provider = "openai_decisions"
+model = "gpt-6-luna"         # the only model the endpoint supports
+questions = "prompts/jev_enrich_v1.json"   # the same question set as Jev, translated to choice/score/predicate
+min_confidence_issue = 0.55
+min_confidence_intent = 0.60
+min_confidence_severity = 0.50
+max_unclear_probability = 0.50
+
+[enrich.crosscheck]          # backend = "hybrid": independent typed classifier on every distinct text
+provider = "openai_decisions"
+model = "gpt-6-luna"
+questions = "prompts/decisions_crosscheck_v1.json"   # compact wording: these tokens are billed on every request
+fields = ["intent", "severity"]                       # subset of issue / intent / severity; chosen from measured cost
+severity_tolerance = 0       # |primary - cross-check| above this is a disagreement
+sample_fraction = 0.10       # deterministic random share cross-checked: sha256(seed:review_id) < fraction (unbiased agreement estimate)
+high_stakes = true           # also cross-check every text the LLM labels cancellation, severity >= 4, or flags as ambiguous
+sample_seed = "insight-crosscheck-v1"
+backlog_max = 400            # pause new LLM batches while this many cross-checks wait (memory and rate backpressure)
+
 [enrich.llm]                 # prompt for backend = "llm" and for the fallback tiers
 prompt = "prompts/llm_enrich_v2.md"
 provider = "openai"          # used only when backend = "llm"
 model = "gpt-6-luna"
 effort = "none"              # cheapest supported reasoning setting for GPT-6 Luna
-max_output_tokens_per_review = 60
+max_output_tokens_per_review = 70   # 10k: mean 32 output tokens/review; 3 of 173 batches truncated at 60
 service_tier = "flex"        # cost-only (not in label_config): Flex is 50% of Standard, slower, may return 429
 timeout_s = 900              # Flex requests can queue; OpenAI suggests long client timeouts
 
@@ -54,7 +78,7 @@ enabled = true
 provider = "openai"
 model = "gpt-6-luna"
 effort = "low"
-max_fraction = 0.015
+max_fraction = 0.10           # 10k: 9.6% of texts flagged ambiguous; measured ~$0.00004 per routed review
 max_output_tokens = 600
 service_tier = "flex"
 timeout_s = 900
@@ -72,11 +96,11 @@ provider = "claude_code"     # different model family from the enricher; blind t
 model = "haiku"
 effort = "n/a"
 prompt = "prompts/verify_v2.md"
-batch_size = 25              # reviews per verifier request (each judged independently)
+batch_size = 50              # reviews per verifier request (each judged independently); 50 halves Pro-plan calls
 sample_fraction = 0.10       # of distinct completed texts; declared before the run
 min_sample = 10
 max_sample = 2000
-max_output_tokens = 4000
+max_output_tokens = 9000     # measured ~143 output tokens per review (runs/live-checkpoint500): 50 x 143 = 7,150
 
 [group]
 provider = "claude_code"
@@ -84,7 +108,9 @@ model = "sonnet"
 effort = "low"
 prompt = "prompts/group_v1.md"
 name_top_k = 12              # only the top-ranked issues are named by the model
-evidence_per_issue = 8
+evidence_per_issue = 12
+evidence_order = "sample"    # deterministic uniform sample of member texts (names describe the typical member)
+taxonomy_named = ["other.general", "usability.other"]   # catch-all issues keep their taxonomy name
 max_output_tokens = 1500
 
 [memo]
@@ -112,6 +138,14 @@ base_url = "https://api.openai.com/v1"
 timeout_s = 120
 requests_per_minute = 1000   # gpt-6-luna Build tier: 5,000 RPM / 2M TPM (model page, checked 2026-10-10); stay well below
 tokens_per_minute = 1500000
+
+[providers.openai_decisions]
+kind = "openai_decisions"
+api_key_env = "OPENAI_API_KEY"
+base_url = "https://api.openai.com/v1"
+timeout_s = 30
+requests_per_minute = 300    # beta endpoint, limits not published for it; stay low
+tokens_per_minute = 600000
 
 [providers.anthropic]
 kind = "anthropic"

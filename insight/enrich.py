@@ -2,7 +2,7 @@
 
 Control flow (code decides every next step; models only answer bounded questions):
 
-Phase A - primary pass over pending distinct texts (Jev: 1 review/request | LLM: <=50 reviews/request)
+Phase A - primary pass over pending distinct texts (Jev / Decisions: 1 review/request | LLM: <=50 reviews/request)
    ok + valid + confident ............................ save now (labeled_by=primary)
    ok + valid + difficult (Jev: low confidence or unclear; LLM: the model's own flag; both: an
       intent/severity contradiction) ................. stage: primary saved aside, fallback decision deferred
@@ -11,6 +11,13 @@ Phase A - primary pass over pending distinct texts (Jev: 1 review/request | LLM:
    transient errors ................................... bounded backoff in the worker; if exhausted, re-queued
                                                         once; N in a row stops the run
    budget cap / interrupt ............................. stop admitting, finish in-flight, save, exit
+Hybrid backend - every valid LLM primary label is also sent, one review per request, to an independent
+   typed classifier (OpenAI Decisions) for the configured fields (intent / severity / issue):
+   agree ............................................... save now (labeled_by=primary, cross-check kept in detail)
+   disagree ............................................ stage like any difficult review (disagreements are
+                                                         routed first after contradictions)
+   cross-check invalid twice, unavailable, or refused by
+   the budget ......................................... decide on the paid LLM label alone (recorded in detail)
 Phase B - only after every primary result is in: staged reviews are ranked (no usable primary first,
    then lowest confidence, then review_id) and the first ones up to the fallback1 cap are routed;
    the rest are saved with their primary label and needs_review, or quarantined if they have none.
@@ -28,7 +35,7 @@ import time
 from collections import deque
 
 from . import labels, prompts
-from .config import project_path
+from .config import CLASSIFIER_BACKENDS, project_path
 from .control import Dispatcher, Task
 from .segment import segment_spans
 from .util import sha256_text, utc_now
@@ -57,8 +64,17 @@ class EnrichStage:
                       "invalid_outputs": 0, "invalid_output_retries": 0, "transient_requeued": 0,
                       "left_pending_transient": 0, "left_pending_stopping": 0}
         self.disabled_tiers = set()
-        if self.backend == "jev":
-            self.questions = prompts.load_jev_questions(project_path(self.e["jev"]["questions"]))
+        self.classifier = self.backend in CLASSIFIER_BACKENDS  # typed-question classifier, one review per request
+        if self.classifier:
+            self.questions = prompts.load_jev_questions(project_path(self.e[self.backend]["questions"]))
+        self.hybrid = self.backend == "hybrid"
+        if self.hybrid:
+            self.cc = self.e["crosscheck"]
+            self.cc_fields = list(self.cc["fields"])
+            self.cc_questions = prompts.load_decisions_questions(project_path(self.cc["questions"]))
+            for k in ("crosscheck_valid", "crosscheck_agree", "crosscheck_disagree", "crosscheck_missing",
+                      "crosscheck_not_selected"):
+                self.stats[k] = 0
 
     # ---- setup -----------------------------------------------------------------------------------
     def _quarantine_empty_and_reconcile(self):
@@ -119,7 +135,7 @@ class EnrichStage:
     def _primary_task(self, reps, task_attempt=1, max_out_override=None):
         p = self.cfg.role_settings("enrich_primary")
         provider = self.registry.get(p["provider"], p["model"], p["effort"])
-        if self.backend == "jev":
+        if self.classifier:
             rc = reps[0]
             req = prompts.jev_request(self.questions, rc["text"], rc["segments"])
             return Task(role="enrich", tier="primary", provider=provider, request=req, review_ids=[rc["review_id"]],
@@ -135,6 +151,15 @@ class EnrichStage:
                     review_ids=[rc["review_id"] for rc in reps], max_output_tokens=max_out, prompt_chars=chars,
                     label_config=self.label_config, task_attempt=task_attempt,
                     context={"reps": reps, "aliases": {f"r{i + 1}": rc for i, rc in enumerate(reps)}})
+
+    def _crosscheck_task(self, rc, parsed, reasons, task_attempt=1):
+        r = self.cfg.role_settings("crosscheck")
+        provider = self.registry.get(r["provider"], r["model"], r["effort"])
+        req = prompts.crosscheck_request(self.cc_questions, rc["text"], self.cc_fields)
+        return Task(role="enrich", tier="crosscheck", provider=provider, request=req, review_ids=[rc["review_id"]],
+                    max_output_tokens=0, prompt_chars=len(json.dumps(req, ensure_ascii=False)) + 400,
+                    label_config=self.label_config, task_attempt=task_attempt,
+                    context={"reps": [rc], "parsed": parsed, "reasons": list(reasons)})
 
     def _fallback_task(self, tier, rc, task_attempt=1, max_out_override=None):
         r = self.cfg.role_settings(tier)
@@ -219,11 +244,72 @@ class EnrichStage:
         return {"issue": issue, "intent": intent, "severity": sev, "sentiment": round(sent / 2, 2),
                 "evidence_index": ev - 1, "confidence": None, "model_needs_review": nr}, []
 
+    def parse_crosscheck(self, data, rc):
+        """Decisions answers for the configured fields -> {field: label, ..., confidence: {...}}."""
+        answers = (data or {}).get("answers", {})
+        problems = [f"missing answer '{f}'" for f in self.cc_fields if f not in answers]
+        if problems:
+            return None, problems
+        out, conf = {}, {}
+        for f in self.cc_fields:
+            choice = answers[f].get("choice")
+            conf[f] = answers[f].get("confidence")
+            if f == "issue" and choice not in labels.ISSUE_BY_KEY:
+                problems.append(f"unknown issue {choice!r}")
+            elif f == "intent" and choice not in labels.INTENTS:
+                problems.append(f"unknown intent {choice!r}")
+            elif f == "severity":
+                if choice not in labels.SEVERITY_KEYS:
+                    problems.append(f"unknown severity {choice!r}")
+                else:
+                    choice = labels.SEVERITY_KEYS[choice]
+            out[f] = choice
+        if problems:
+            return None, problems
+        out["confidence"] = conf
+        return out, []
+
+    def _crosscheck_failed(self):
+        """Cross-check failures have their own breaker: a dead endpoint must not silently degrade a hybrid run."""
+        self.stats["crosscheck_missing"] += 1
+        self.cc_fail_streak = getattr(self, "cc_fail_streak", 0) + 1
+        if self.cc_fail_streak >= int(self.cfg["run"]["circuit_breaker_failures"]):
+            self.ctx.request_stop(f"circuit_breaker: {self.cc_fail_streak} cross-checks in a row failed")
+
+    def _crosscheck_reason(self, rc, parsed):
+        """Deterministic selection (independent of worker count and order): declared random sample + high stakes."""
+        u = int(sha256_text(f"{self.cc.get('sample_seed', 'insight-crosscheck-v1')}:{rc['review_id']}")[:12], 16) / 16 ** 12
+        if u < float(self.cc.get("sample_fraction", 1.0)):
+            return "random_sample"
+        if self.cc.get("high_stakes", True) and (parsed["intent"] == "cancellation" or parsed["severity"] >= 4
+                                                 or parsed.get("model_needs_review")):
+            return "high_stakes"
+        return None
+
+    def disagreements(self, parsed, cc):
+        """Predeclared comparison of the LLM label with the cross-check; returns (reasons, route priority)."""
+        reasons, prio = [], 1.0
+        conf = cc.get("confidence") or {}
+        for f in self.cc_fields:
+            a, b = parsed[f], cc[f]
+            if f == "severity":
+                gap = abs(int(a) - int(b))
+                if gap > int(self.cc.get("severity_tolerance", 0)):
+                    reasons.append(f"severity: primary {a} vs cross-check {b} (confidence {_fmt(conf.get(f))})")
+                    prio = min(prio, 0.2 if gap >= 2 or max(a, b) >= 4 else 0.4)
+            elif a != b:
+                reasons.append(f"{f}: primary {a} vs cross-check {b} (confidence {_fmt(conf.get(f))})")
+                if f == "intent":
+                    prio = min(prio, 0.05 if "cancellation" in (a, b) else 0.1)
+                else:
+                    prio = min(prio, 0.3)
+        return reasons, prio
+
     def difficulty(self, parsed):
         reasons = []
         c = parsed["confidence"]
         if c:
-            j = self.e["jev"]
+            j = self.e[self.backend]
             for field, key in (("issue", "min_confidence_issue"), ("intent", "min_confidence_intent"),
                                ("severity", "min_confidence_severity")):
                 if (c[field] or 0) < j[key]:
@@ -239,10 +325,11 @@ class EnrichStage:
         if parsed is None:
             return -1.0
         c = parsed.get("confidence")
-        if not c:  # LLM primary: contradictions first, then the model's own ambiguity flag
+        if not c:  # LLM primary: contradictions, then cross-check disagreements, then the model's own flag
             if labels.consistency_problems(parsed["intent"], parsed["severity"]):
                 return 0.0
-            return 0.5 if parsed.get("model_needs_review") else 1.0
+            flag = 0.5 if parsed.get("model_needs_review") else 1.0
+            return min(flag, float(parsed.get("route_priority", 1.0)))
         vals = [c.get("issue"), c.get("intent"), c.get("severity")]
         base = min(v if isinstance(v, (int, float)) else 0.0 for v in vals)
         if labels.consistency_problems(parsed["intent"], parsed["severity"]):
@@ -359,7 +446,8 @@ class EnrichStage:
         store.event(ctx.run_id, "enrich", "start", pending=len(pending), staged=staged_before, caps=self.caps,
                     routed={t: len(v) for t, v in self.routed.items()}, label_config=self.label_config,
                     empty_quarantined=quarantined_empty, aliases_reconciled=reconciled_aliases)
-        disp = Dispatcher(ctx, int(self.cfg["run"]["workers"]), int(self.cfg["run"]["max_in_flight_per_worker"]))
+        disp = Dispatcher(ctx, int(self.cfg["run"]["workers"]), int(self.cfg["run"]["max_in_flight_per_worker"]),
+                          side_workers=int(self.cfg["run"].get("crosscheck_workers", 4)) if self.hybrid else 0)
         try:
             self._phase_a(disp, deque(pending))
             if not ctx.stop_admitting.is_set():
@@ -389,12 +477,13 @@ class EnrichStage:
 
     def _phase_a(self, disp, queue):
         ctx = self.ctx
-        batch_n = int(self.e["llm_batch_size"]) if self.backend == "llm" else 1
+        batch_n = 1 if self.classifier else int(self.e["llm_batch_size"])  # llm and hybrid: <= 50 per request
         self._t0 = self._last_progress = time.monotonic()
         total = len(queue)
         while True:
             self._progress("primary", total)
-            while queue and disp.capacity() > 0 and not ctx.stop_admitting.is_set():
+            while (queue and disp.capacity() > 0 and not ctx.stop_admitting.is_set()
+                   and (not self.hybrid or disp.count("crosscheck") < int(self.cc.get("backlog_max", 400)))):
                 # queue items are DB rows (context built lazily, keeps memory flat) or re-queued contexts
                 items = [queue.popleft() for _ in range(min(batch_n, len(queue)))]
                 disp.submit(self._primary_task([i if isinstance(i, dict) else self._rep_context(i) for i in items]))
@@ -405,6 +494,8 @@ class EnrichStage:
                     ctx.consecutive_failures = 0
                 if task.tier == "primary":
                     self._on_primary(task, outcome, disp, queue)
+                elif task.tier == "crosscheck":
+                    self._on_crosscheck(task, outcome, disp)
                 else:
                     self._on_fallback(task, outcome, disp)
 
@@ -451,7 +542,7 @@ class EnrichStage:
     def _on_primary(self, task, outcome, disp, queue):
         reps = task.context["reps"]
         if outcome.status == "ok":
-            if self.backend == "jev":
+            if self.classifier:
                 self._jev_result(task, outcome, reps[0], disp)
             else:
                 self._llm_batch_result(task, outcome, disp)
@@ -490,7 +581,7 @@ class EnrichStage:
                 return
             self.stats["invalid_output_retries"] += 1
             bigger = task.max_output_tokens * 2 if truncated and task.max_output_tokens else None
-            if self.backend == "jev":
+            if self.classifier:
                 for rc in reps:
                     disp.submit(self._primary_task([rc], task_attempt=2))
             else:
@@ -542,14 +633,15 @@ class EnrichStage:
             reasons = labels.consistency_problems(parsed["intent"], parsed["severity"])
             if parsed["model_needs_review"]:
                 reasons = reasons + ["model flagged the review as ambiguous"]
-            rc["difficulty"] = reasons
-            if reasons:
-                self.stats["difficult"] += 1
-                self._needs_fallback(rc, parsed, reasons)
-                continue
-            self._finalize(rc, parsed, "primary", bool(rc["code_flags"]),
-                           {"trail": rc["trail"], "primary": rc["primary"], "difficulty": [],
-                            "code_flags": rc["code_flags"]})
+            if self.hybrid:
+                why = self._crosscheck_reason(rc, parsed)
+                if why:
+                    rc["crosscheck_reason"] = why
+                    disp.submit(self._crosscheck_task(rc, parsed, reasons))
+                    continue
+                self.stats["crosscheck_not_selected"] += 1
+                rc["crosscheck"] = {"not_selected": "outside the declared sample and not high-stakes"}
+            self._decide(rc, parsed, reasons)
         missing = [rc for a, rc in aliases.items() if a not in seen]
         if missing:
             problems_all.append(f"missing ids {[a for a in aliases if a not in seen]}")
@@ -564,6 +656,59 @@ class EnrichStage:
             rc["trail"].append({"tier": "primary", "status": "invalid", "request_id": outcome.request_id})
         if retry:
             self._retry_or_stage(task, retry, disp, truncated=result.finish == "truncated")
+
+    def _decide(self, rc, parsed, reasons):
+        """Save an LLM primary label now, or stage it when something makes it difficult."""
+        rc["difficulty"] = reasons
+        if reasons:
+            self.stats["difficult"] += 1
+            self._needs_fallback(rc, parsed, reasons)
+            return
+        detail = {"trail": rc["trail"], "primary": rc["primary"], "difficulty": [], "code_flags": rc["code_flags"]}
+        if self.hybrid:
+            detail["crosscheck"] = rc.get("crosscheck")
+        self._finalize(rc, parsed, "primary", bool(rc["code_flags"]), detail)
+
+    def _on_crosscheck(self, task, outcome, disp):
+        rc, parsed, reasons = task.context["reps"][0], task.context["parsed"], task.context["reasons"]
+        if outcome.status == "ok":
+            cc, problems = self.parse_crosscheck(outcome.result.data, rc)
+            if cc is None:
+                self._mark_invalid(outcome.request_id, problems)
+                rc["trail"].append({"tier": "crosscheck", "status": "invalid", "problems": problems,
+                                    "request_id": outcome.request_id})
+                if task.task_attempt == 1 and not self.ctx.stop_admitting.is_set():
+                    self.stats["invalid_output_retries"] += 1
+                    disp.submit(self._crosscheck_task(rc, parsed, reasons, task_attempt=2))
+                    return
+                self._crosscheck_failed()
+                rc["crosscheck"] = {"unavailable": "invalid output after one retry"}
+                self._decide(rc, parsed, reasons)
+                return
+            self.stats["crosscheck_valid"] += 1
+            self.cc_fail_streak = 0
+            rc["crosscheck"] = cc
+            rc["trail"].append({"tier": "crosscheck", "status": "valid", "request_id": outcome.request_id, "answer": cc,
+                                "selected_as": rc.get("crosscheck_reason")})
+            dis, prio = self.disagreements(parsed, cc)
+            self.stats["crosscheck_disagree" if dis else "crosscheck_agree"] += 1
+            if dis:
+                parsed = dict(parsed, route_priority=prio)
+            self._decide(rc, parsed, list(reasons) + dis)
+            return
+        rc["trail"].append({"tier": "crosscheck", "status": outcome.status, "error": outcome.error,
+                            "request_id": outcome.request_id})
+        if outcome.status in ("transient", "permanent_input"):
+            self._crosscheck_failed()
+        elif outcome.status == "budget":
+            self.ctx.request_stop("budget_cap")
+        elif outcome.status == "systemic":
+            self.ctx.request_stop(f"systemic_provider_error: {outcome.error}")
+        # The LLM label is already paid for: keep it rather than re-buying it in a resumed run.
+        if outcome.status not in ("transient", "permanent_input"):
+            self.stats["crosscheck_missing"] += 1
+        rc["crosscheck"] = {"unavailable": f"{outcome.status}: {(outcome.error or '')[:160]}"}
+        self._decide(rc, parsed, reasons)
 
     def _on_fallback(self, task, outcome, disp):
         rc, tier = task.context["reps"][0], task.tier

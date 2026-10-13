@@ -1,0 +1,429 @@
+{
+  "calls_all_invocations": {
+    "enrich:fallback1": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.000148,
+      "input_tokens": 2230,
+      "invalid_output_retries": 0,
+      "output_tokens": 35,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "enrich:primary": {
+      "attempts": 2,
+      "cached_input_tokens": 2368,
+      "cost_usd": 0.001191,
+      "input_tokens": 8315,
+      "invalid_output_retries": 0,
+      "output_tokens": 3231,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 2
+    },
+    "group": {
+      "attempts": 12,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 19418,
+      "invalid_output_retries": 0,
+      "output_tokens": 1753,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 12
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 7932,
+      "invalid_output_retries": 0,
+      "output_tokens": 2861,
+      "reasoning_tokens": 1352,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 2646,
+      "invalid_output_retries": 0,
+      "output_tokens": 2115,
+      "reasoning_tokens": 1489,
+      "retries": 0,
+      "succeeded": 1
+    }
+  },
+  "calls_this_invocation": {
+    "enrich:fallback1": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.000148,
+      "input_tokens": 2230,
+      "invalid_output_retries": 0,
+      "output_tokens": 35,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "enrich:primary": {
+      "attempts": 2,
+      "cached_input_tokens": 2368,
+      "cost_usd": 0.001191,
+      "input_tokens": 8315,
+      "invalid_output_retries": 0,
+      "output_tokens": 3231,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 2
+    },
+    "group": {
+      "attempts": 12,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 19418,
+      "invalid_output_retries": 0,
+      "output_tokens": 1753,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 12
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 7932,
+      "invalid_output_retries": 0,
+      "output_tokens": 2861,
+      "reasoning_tokens": 1352,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 2646,
+      "invalid_output_retries": 0,
+      "output_tokens": 2115,
+      "reasoning_tokens": 1489,
+      "retries": 0,
+      "succeeded": 1
+    }
+  },
+  "completed_ids_saved": 100,
+  "config_summary": {
+    "crosscheck": {
+      "batch": "1 review/request",
+      "fields": "off",
+      "service_tier": "standard"
+    },
+    "enrich_primary": {
+      "batch": "50 reviews/request",
+      "service_tier": "flex"
+    },
+    "fallback1": {
+      "batch": "1 review/request",
+      "service_tier": "flex"
+    },
+    "fallback2": {
+      "batch": "1 review/request",
+      "service_tier": "subscription"
+    },
+    "group": {
+      "batch": "<= 8 quotes/request",
+      "service_tier": "subscription"
+    },
+    "memo": {
+      "batch": "aggregates + evidence pack",
+      "service_tier": "subscription"
+    },
+    "verify": {
+      "batch": "25 reviews/request",
+      "service_tier": "subscription"
+    }
+  },
+  "finished_at": "2026-10-12T22:51:41.473Z",
+  "input": {
+    "bytes": 15466,
+    "ingested_at": "2026-10-12T22:49:01.983Z",
+    "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+    "rows": 100,
+    "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
+  },
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+  "ledger": {
+    "cap_usd": 0.1,
+    "denials": 0,
+    "reserved_usd": 0.0,
+    "spent_usd": 0.00133929,
+    "unknown_usd": 0.0
+  },
+  "models": {
+    "crosscheck": {
+      "effort": "n/a",
+      "enabled": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "model": "gpt-6-luna",
+      "provider": "openai_decisions"
+    },
+    "enrich_primary": {
+      "effort": "none",
+      "model": "gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback1": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.015,
+      "model": "gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback2": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.0025,
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "group": {
+      "effort": "low",
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "memo": {
+      "effort": "low",
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "verify": {
+      "effort": "n/a",
+      "model": "haiku",
+      "provider": "claude_code"
+    }
+  },
+  "offline_stub": false,
+  "phase": "initial",
+  "project_spend": {
+    "effective_budget_usd": 0.1,
+    "other_runs_billed_usd": 0.00114055,
+    "per_run": {
+      "runs/probe-decisions": 0.000942,
+      "runs/probe-luna": 0.000198
+    },
+    "project_cap_usd": 9.0,
+    "requested_budget_usd": 0.1
+  },
+  "reconciled_unknown_calls": 0,
+  "results": {
+    "by_status_and_tier": {
+      "completed:fallback1": 1,
+      "completed:primary": 99
+    },
+    "completed": 100,
+    "exact_text_cache_reuses": 0,
+    "needs_review": 4,
+    "quarantined": 0,
+    "quarantined_empty_text": 0,
+    "scope": {
+      "distinct_nonempty_texts": 100,
+      "duplicate_id_rows": 0,
+      "empty_texts": 0,
+      "nonempty": 100,
+      "representatives": 100,
+      "rows": 100,
+      "unique_ids": 100
+    },
+    "unfinished": 0
+  },
+  "run_id": "run-20261012T224901.597Z-55e5",
+  "stage_configs": {
+    "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+    "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+    "verify": "haiku@n/a|verify-v1|cfg-e6ab73d745"
+  },
+  "stage_seconds": {
+    "enrich": 61.262,
+    "export": 0.012,
+    "group": 42.729,
+    "ingest": 0.009,
+    "memo": 36.601,
+    "rank": 0.019,
+    "verify": 18.834
+  },
+  "stages": {
+    "analysis": {
+      "robustness": {
+        "enricher_labels": {
+          "areas": {
+            "catalog/content": {
+              "complaints": 1,
+              "share_of_complaints": 0.166667
+            },
+            "general/unspecified": {
+              "complaints": 1,
+              "share_of_complaints": 0.166667
+            },
+            "playback/performance": {
+              "complaints": 1,
+              "share_of_complaints": 0.166667
+            },
+            "usability": {
+              "complaints": 3,
+              "share_of_complaints": 0.5
+            }
+          },
+          "complaints": 6
+        },
+        "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+        "same_top_decision_area": true,
+        "sample": 10,
+        "top_decision_area_enricher": "usability",
+        "top_decision_area_verifier": "usability",
+        "verifier_labels": {
+          "areas": {
+            "billing/support": {
+              "complaints": 1,
+              "share_of_complaints": 0.166667
+            },
+            "catalog/content": {
+              "complaints": 1,
+              "share_of_complaints": 0.166667
+            },
+            "playback/performance": {
+              "complaints": 1,
+              "share_of_complaints": 0.166667
+            },
+            "usability": {
+              "complaints": 3,
+              "share_of_complaints": 0.5
+            }
+          },
+          "complaints": 6
+        }
+      }
+    },
+    "enrich": {
+      "aliases_written": 0,
+      "caps": {
+        "fallback1": 1,
+        "fallback2": 1
+      },
+      "difficult": 4,
+      "fallback_not_selected_cap": 3,
+      "invalid_output_retries": 0,
+      "invalid_outputs": 0,
+      "left_pending_stopping": 0,
+      "left_pending_transient": 0,
+      "quarantined": 0,
+      "routed": {
+        "fallback1": 1,
+        "fallback2": 0
+      },
+      "saved_fallback1": 1,
+      "saved_fallback2": 0,
+      "saved_primary": 99,
+      "staged": 4,
+      "still_pending": 0,
+      "stop_reason": null,
+      "transient_requeued": 0
+    },
+    "export": {
+      "calls": 17,
+      "checkpoint_after": 100,
+      "checkpoint_before": 0,
+      "grading_dir": "runs/pilot100-20261012T224901Z/grading",
+      "records": 100
+    },
+    "group": {
+      "issues": 15,
+      "memberships": 52,
+      "named_calls": 12
+    },
+    "memo": {
+      "claims": 40,
+      "source": "model"
+    },
+    "rank": {
+      "complaints": 52,
+      "issues": 15,
+      "top": [
+        {
+          "complaint_count": 13,
+          "issue_id": "billing.premium_only",
+          "mean_severity": "3.000000",
+          "priority_score": 39,
+          "rank": 1,
+          "severity_sum": 39
+        },
+        {
+          "complaint_count": 14,
+          "issue_id": "other.general",
+          "mean_severity": "2.000000",
+          "priority_score": 28,
+          "rank": 2,
+          "severity_sum": 28
+        },
+        {
+          "complaint_count": 7,
+          "issue_id": "usability.ads",
+          "mean_severity": "2.142857",
+          "priority_score": 15,
+          "rank": 3,
+          "severity_sum": 15
+        },
+        {
+          "complaint_count": 2,
+          "issue_id": "access.login",
+          "mean_severity": "4.000000",
+          "priority_score": 8,
+          "rank": 4,
+          "severity_sum": 8
+        },
+        {
+          "complaint_count": 2,
+          "issue_id": "playback.crash",
+          "mean_severity": "4.000000",
+          "priority_score": 8,
+          "rank": 5,
+          "severity_sum": 8
+        }
+      ]
+    },
+    "verify": {
+      "agreement": {
+        "intent": {
+          "agree": 10,
+          "of": 10,
+          "rate": 1.0
+        },
+        "sentiment_within_tolerance": {
+          "agree": 10,
+          "of": 10,
+          "rate": 1.0
+        },
+        "severity": {
+          "agree": 7,
+          "of": 10,
+          "rate": 0.7
+        },
+        "topic": {
+          "agree": 9,
+          "of": 10,
+          "rate": 0.9
+        }
+      },
+      "completed": 10,
+      "sample": 10
+    }
+  },
+  "status": "completed",
+  "stop_reason": null,
+  "wall_clock_s": 159.495,
+  "workers": 1
+}

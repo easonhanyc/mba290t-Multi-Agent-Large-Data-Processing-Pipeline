@@ -73,6 +73,7 @@ class ClaudeCodeProvider:
     def _args(self, request):
         args = self.command + ["-p", "--output-format", "json", "--model", self.model, "--tools", "",
                                "--strict-mcp-config", "--no-session-persistence", "--disable-slash-commands",
+                               "--setting-sources", "project",  # empty temp cwd: no user settings, hooks or apiKeyHelper
                                "--system-prompt", request["system"],
                                "--json-schema", json.dumps(request["schema"], separators=(",", ":"))]
         if self.effort in ("low", "medium", "high"):

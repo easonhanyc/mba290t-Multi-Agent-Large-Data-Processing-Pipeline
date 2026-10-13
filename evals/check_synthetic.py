@@ -54,7 +54,8 @@ def main(run_dir):
                          f"{r['record'].get('status')}: {r['record'].get('topic', r['record'].get('reason', ''))} / "
                          f"{r['record'].get('intent', '')} / severity {r['record'].get('severity', '-')}" if r["record"] else "")}
                     for rid, r in results.items()]
-    out["summary"] = (f"{out['passed']} of {out['cases']} synthetic cases passed "
+    out["case_count"] = len(results)
+    out["summary"] = (f"{out['passed']} of {out['case_count']} synthetic cases passed "
                       f"({'offline stub: label checks not meaningful' if stub else 'live enricher'}). Synthetic cases run in their "
                       "own run directory and never enter business results.")
     text = json.dumps(out, indent=2, ensure_ascii=False) + "\n"
@@ -65,7 +66,7 @@ def main(run_dir):
         (HERE / "injection" / "synthetic_check.json").write_text(text)
     for rid, r in results.items():
         print(f"{'PASS' if r['pass'] else 'FAIL'} {rid}: {'; '.join(r['problems']) or 'ok'}")
-    print(f"{out['passed']}/{out['cases']} passed. {out['note']}")
+    print(f"{out['passed']}/{out['case_count']} passed. {out['note']}")
 
 
 if __name__ == "__main__":

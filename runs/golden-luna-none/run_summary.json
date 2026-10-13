@@ -1,0 +1,245 @@
+{
+  "history": [
+    {
+      "completed_ids_saved": 50,
+      "phase": "initial",
+      "run_id": "run-20261012T230755.018Z-570f",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 31.023
+    }
+  ],
+  "latest": {
+    "calls_all_invocations": {
+      "enrich:fallback1": {
+        "attempts": 1,
+        "cached_input_tokens": 2197,
+        "cost_usd": 2.3e-05,
+        "input_tokens": 2245,
+        "invalid_output_retries": 0,
+        "output_tokens": 35,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      },
+      "enrich:primary": {
+        "attempts": 1,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.000647,
+        "input_tokens": 4018,
+        "invalid_output_retries": 0,
+        "output_tokens": 1583,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      }
+    },
+    "calls_this_invocation": {
+      "enrich:fallback1": {
+        "attempts": 1,
+        "cached_input_tokens": 2197,
+        "cost_usd": 2.3e-05,
+        "input_tokens": 2245,
+        "invalid_output_retries": 0,
+        "output_tokens": 35,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      },
+      "enrich:primary": {
+        "attempts": 1,
+        "cached_input_tokens": 0,
+        "cost_usd": 0.000647,
+        "input_tokens": 4018,
+        "invalid_output_retries": 0,
+        "output_tokens": 1583,
+        "reasoning_tokens": 0,
+        "retries": 0,
+        "succeeded": 1
+      }
+    },
+    "completed_ids_saved": 50,
+    "config_summary": {
+      "crosscheck": {
+        "batch": "1 review/request",
+        "fields": "off",
+        "service_tier": "standard"
+      },
+      "enrich_primary": {
+        "batch": "50 reviews/request",
+        "service_tier": "flex"
+      },
+      "fallback1": {
+        "batch": "1 review/request",
+        "service_tier": "flex"
+      },
+      "fallback2": {
+        "batch": "1 review/request",
+        "service_tier": "subscription"
+      },
+      "group": {
+        "batch": "<= 8 quotes/request",
+        "service_tier": "subscription"
+      },
+      "memo": {
+        "batch": "aggregates + evidence pack",
+        "service_tier": "subscription"
+      },
+      "verify": {
+        "batch": "50 reviews/request",
+        "service_tier": "subscription"
+      }
+    },
+    "finished_at": "2026-10-12T23:08:26.233Z",
+    "input": {
+      "bytes": 7905,
+      "ingested_at": "2026-10-12T23:07:55.211Z",
+      "path": "Final Assignment - Spotify Reviews Dataset/golden_50_to_label.csv",
+      "rows": 50,
+      "sha256": "1a125c3e509f58b0246ba16d0ea332675a53ffadb1928be4338a0bd7053a11c7"
+    },
+    "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+    "ledger": {
+      "cap_usd": 0.05,
+      "denials": 0,
+      "reserved_usd": 0.0,
+      "spent_usd": 0.00066953,
+      "unknown_usd": 0.0
+    },
+    "models": {
+      "crosscheck": {
+        "effort": "n/a",
+        "enabled": false,
+        "fields": [
+          "intent",
+          "severity"
+        ],
+        "model": "gpt-6-luna",
+        "provider": "openai_decisions"
+      },
+      "enrich_primary": {
+        "effort": "none",
+        "model": "gpt-6-luna",
+        "provider": "openai"
+      },
+      "fallback1": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.015,
+        "model": "gpt-6-luna",
+        "provider": "openai"
+      },
+      "fallback2": {
+        "effort": "low",
+        "enabled": true,
+        "max_fraction": 0.0025,
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "group": {
+        "effort": "low",
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "memo": {
+        "effort": "low",
+        "model": "sonnet",
+        "provider": "claude_code"
+      },
+      "verify": {
+        "effort": "n/a",
+        "model": "haiku",
+        "provider": "claude_code"
+      }
+    },
+    "offline_stub": false,
+    "phase": "initial",
+    "project_spend": {
+      "effective_budget_usd": 0.05,
+      "other_runs_billed_usd": 0.01644425,
+      "per_run": {
+        "runs/live-budget-drill": 0.004306,
+        "runs/live-checkpoint500": 0.005175,
+        "runs/live-checkpoint500-w2": 0.00425,
+        "runs/live-synthetic-injection": 0.000234,
+        "runs/pilot100-20261012T224901Z": 0.001339,
+        "runs/probe-decisions": 0.000942,
+        "runs/probe-luna": 0.000198
+      },
+      "project_cap_usd": 9.0,
+      "requested_budget_usd": 0.05
+    },
+    "reconciled_unknown_calls": 0,
+    "results": {
+      "by_status_and_tier": {
+        "completed:cache": 1,
+        "completed:fallback1": 1,
+        "completed:primary": 48
+      },
+      "completed": 50,
+      "exact_text_cache_reuses": 1,
+      "needs_review": 5,
+      "quarantined": 0,
+      "quarantined_empty_text": 0,
+      "scope": {
+        "distinct_nonempty_texts": 49,
+        "duplicate_id_rows": 0,
+        "empty_texts": 0,
+        "nonempty": 50,
+        "representatives": 49,
+        "rows": 50,
+        "unique_ids": 50
+      },
+      "unfinished": 0
+    },
+    "run_id": "run-20261012T230755.018Z-570f",
+    "stage_configs": {
+      "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
+      "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
+      "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
+    },
+    "stage_seconds": {
+      "enrich": 30.988,
+      "export": 0.011,
+      "ingest": 0.008
+    },
+    "stages": {
+      "enrich": {
+        "aliases_written": 1,
+        "caps": {
+          "fallback1": 1,
+          "fallback2": 1
+        },
+        "difficult": 5,
+        "fallback_not_selected_cap": 4,
+        "invalid_output_retries": 0,
+        "invalid_outputs": 0,
+        "left_pending_stopping": 0,
+        "left_pending_transient": 0,
+        "quarantined": 0,
+        "routed": {
+          "fallback1": 1,
+          "fallback2": 0
+        },
+        "saved_fallback1": 1,
+        "saved_fallback2": 0,
+        "saved_primary": 48,
+        "staged": 5,
+        "still_pending": 0,
+        "stop_reason": null,
+        "transient_requeued": 0
+      },
+      "export": {
+        "calls": 2,
+        "checkpoint_after": 50,
+        "checkpoint_before": 0,
+        "grading_dir": "runs/golden-luna-none/grading",
+        "records": 50
+      }
+    },
+    "status": "completed",
+    "stop_reason": null,
+    "wall_clock_s": 31.023,
+    "workers": 1
+  }
+}

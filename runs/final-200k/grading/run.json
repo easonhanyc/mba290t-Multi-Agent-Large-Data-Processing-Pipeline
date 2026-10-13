@@ -1,0 +1,18 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 200013,
+  "analysis_sha256": "3c023c9dd47a577523dc2a74eb00ec69a79ae1300b80de13f2423256b7222fad",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-13T02:10:06.761Z",
+  "full_source": {
+    "path": "Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv",
+    "sha256": "1fc85de68a304dd8978b537cfa58793d5f41cbaf417fa32cb53899f83a2fcef6"
+  },
+  "input_file": "data/analysis_200k.csv",
+  "label_config": "gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790",
+  "offline_stub": false,
+  "scope_note": "Declared analysis scope: 200013 rows of data/analysis_200k.csv (a deterministic uniform sample of the full file plus every empty-text row; regenerate with scripts/make_analysis_subset.py). ingestion.json profiles the full file Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv. Rows outside the scope were ingested but not classified.",
+  "version": "a5-audit-v1"
+}

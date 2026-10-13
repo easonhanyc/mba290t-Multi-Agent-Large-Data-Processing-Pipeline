@@ -164,21 +164,21 @@ class ProviderRegistry:
             raise MissingKeyError(f"{spec['api_key_env']} is not set (needed for provider '{name}').")
         return key
 
-    def missing_keys(self):
+    def missing_keys(self, stages=None):
         missing = []
-        for name in self.cfg.active_providers():
+        for name in self.cfg.active_providers(stages):
             try:
                 self.api_key(name)
             except MissingKeyError:
                 missing.append(self.cfg.provider(name)["api_key_env"])
         return missing
 
-    def readiness_problems(self):
+    def readiness_problems(self, stages=None):
         """Non-key prerequisites, e.g. the `claude` CLI must be logged in with a subscription (live runs only)."""
         problems = []
         if self.cfg.offline_stub:
             return problems
-        for name in self.cfg.active_providers():
+        for name in self.cfg.active_providers(stages):
             spec = self.cfg.provider(name)
             if spec["kind"] == "claude_code":
                 from .claude_code import auth_problem
@@ -200,6 +200,8 @@ class ProviderRegistry:
                 from .jev import JevProvider as cls
             elif kind == "openai":
                 from .openai_responses import OpenAIResponsesProvider as cls
+            elif kind == "openai_decisions":
+                from .openai_decisions import OpenAIDecisionsProvider as cls
             elif kind == "anthropic":
                 from .anthropic_messages import AnthropicMessagesProvider as cls
             elif kind == "claude_code":

@@ -1,0 +1,59 @@
+{
+  "counts": {
+    "distinct_nonempty_texts": 6,
+    "duplicate_review_id_rows": 0,
+    "empty_review_text": 2,
+    "exact_text_cache_aliases": 0,
+    "first_pass_model_work_units": 6,
+    "invalid_rating": 0,
+    "missing_app_version": 8,
+    "mostly_non_latin_text": 0,
+    "multiline_text": 1,
+    "no_letter_text": 0,
+    "nonempty_to_classify": 6,
+    "records": 8,
+    "rows_in_exact_duplicate_text_groups": 0,
+    "unique_review_ids": 8
+  },
+  "exact_text_reuse": true,
+  "finished_at": "2026-10-12T23:07:47.792Z",
+  "first_review": "2026-10-01 00:00:00",
+  "handling": {
+    "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
+    "duplicate_review_id": "first occurrence kept; later rows reported here and excluded",
+    "empty_text": "quarantined with reason empty_review_text; never sent to a model",
+    "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
+    "missing_app_version": "kept; app_version is metadata and never used for classification"
+  },
+  "helper_profile": "ingestion.json: full-file profile of evals/synthetic/injection_cases.csv produced by the provided check_submission.py profile helper",
+  "input": {
+    "bytes": 1236,
+    "ignored_columns": [],
+    "note": "Only the six source fields are stored; ignored columns never reach any model.",
+    "path": "evals/synthetic/injection_cases.csv",
+    "sha256": "a958444e87ee32d03dd23d1355aafd027a8ce8da7ccba62530b3d7dc5bd2b382"
+  },
+  "last_review": "2026-10-01 00:00:00",
+  "owner": "code",
+  "reviews_by_month": {
+    "2026-10": 8
+  },
+  "reviews_by_rating": {
+    "3": 8
+  },
+  "run_id": "run-20261012T230747.354Z-b154",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "stage": "ingest",
+  "started_at": "2026-10-12T23:07:47.791Z",
+  "text_length_chars": {
+    "max": 170,
+    "mean": 134.3,
+    "median": 144.5,
+    "min": 59,
+    "p90": 151
+  },
+  "top_duplicate_texts": []
+}

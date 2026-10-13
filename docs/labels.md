@@ -69,11 +69,33 @@ Cancellation intent does not raise severity by itself. Missing context sets `nee
 
 Jev answers sentiment as a five-level Score (0-4); code maps it with `sentiment = score / 2 - 1` (TypeSafe docs) and rounds to two decimals. LLM roles answer an integer -2..2 that code divides by 2. Predeclared tolerance for agreement: 0.5 (one level).
 
-## Evidence quote, entities, needs_review
+## Evidence quote, entities, needs_review (contract field definitions)
 
-- `evidence_quote`: code splits the review into sentence-like segments that are exact slices of the original text (`insight/segment.py`); the classifier picks a segment number and code copies that slice, so the quote is always an exact substring. Single-sentence reviews use their whole (trimmed) text. Whether the quote *supports* the label is checked by people on the golden set.
-- `entities`: canonical product terms matched by code with word-bounded patterns (`ENTITY_PATTERNS`); a term is listed only if the text contains it. No model generates entities.
-- `needs_review`: true when the classifier was not confident (Jev confidence below the configured thresholds or the 'unclear' probability above 0.5, unless a fallback resolved it), when an LLM role says the text is ambiguous, when code reconciled an intent/severity contradiction, or when code sees emoji-only or mostly non-Latin text.
+| Field | Contract definition | How the pipeline fills it | How the golden labels encode it |
+|---|---|---|---|
+| `sentiment` | Number from -1 to 1; document its meaning | The anchors in the table above; an LLM answers -2..2 and code divides by 2 | Any value in [-1, 1] (Eason used the anchors plus ±0.25 / ±0.75); agreement = within 0.5 |
+| `entities` | List of features or product terms explicitly mentioned | Canonical product terms matched by code with word-bounded patterns (`ENTITY_PATTERNS` in `insight/labels.py`); a term is listed only if the text contains it, so no entity is invented. No model generates entities | The features Eason judged the review to be about, in his own words (e.g. "Many ads", "No lyric"); blank when none. Because these are descriptions rather than exact terms, entity agreement is reviewed case by case in `evals/golden/results_disagreements.md`, and the automatic check is that every predicted entity occurs in the text |
+| `evidence_quote` | Exact substring supporting the main label; flag insufficient evidence | Code splits the review into sentence-like segments that are exact slices of the text (`insight/segment.py`); the classifier picks a segment number and code copies that slice, so the quote is always an exact substring. Single-sentence reviews use the whole trimmed text. When no sentence supports a label the model flags the review, which sets `needs_review` | The number of the supporting sentence (1 = first sentence). `evals/golden/convert_labels.py` maps it to the exact sentence text; one review that Eason split at "..." is split the same way |
+| `needs_review` | Boolean indicating ambiguity or insufficient evidence | True when the LLM says the text is ambiguous or lacks evidence, when code reconciled an intent/severity contradiction, when a capped fallback was needed but not available, or when code sees emoji-only or mostly non-Latin text | TRUE/FALSE: TRUE when the review is ambiguous or the evidence is insufficient (6 of 50) |
+
+## Golden-set labelling (evals/golden)
+
+Eason labelled the 50 reviews by hand in `evals/golden/golden_50_labeled.numbers` (the course's
+golden_50_to_label.csv opened as a workbook, so the rating and other metadata columns were visible; the
+rubric asks for labels from the review text), before seeing any model output on these reviews. `convert_labels.py` turns its
+CSV export into `golden_50_labeled.csv` without changing any judgment. Format mappings: intent menu codes
+1-5 -> cancellation, complaint, request, praise, unclear; topics written as `catalog.catalog_missing` ->
+topic `catalog` (issue `catalog.missing`); "Praise" / "Criticism" used as a topic -> `other` (the contract's
+rule for general praise or criticism). Decisions Eason made on 2026-10-13 after re-reading the contract,
+recorded per review_id in the script: one blank intent filled (request), and four generic "hate this app /
+worst app" reviews changed from unclear to complaint.
+
+Known convention difference, kept on purpose: eight reviews that report a problem and ask for a fix
+("plz fix", "please reduce the ads") are labelled **request** by Eason. Under the contract precedence
+(complaint before request) the pipeline labels them complaint. They are counted as intent disagreements and
+discussed in the error analysis rather than relabelled. Likewise, a few praise reviews that name a feature
+(recommendations, ads, the song catalog) are labelled topic `other` by Eason, while the contract rule the
+models follow picks the first praised feature.
 
 ## Worked examples on development reviews
 
