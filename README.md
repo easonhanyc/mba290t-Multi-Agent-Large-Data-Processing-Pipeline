@@ -482,8 +482,8 @@ Details and commands: [evals/README.md](evals/README.md).
 - Star ratings are never used as labels. Many reviews have no app version (159,701 in the full file). The
   first and last months of the extract are partial: rows run from 2022-05-17 up to 2023-11-17 and the last
   review is dated 2023-11-15 (both from `Final Assignment - Spotify Reviews Dataset/README.md`).
-- The worked examples in `docs/labels.md` were drafted by the AI assistant from development rows 101-500
-  and are not human labels (the file says so).
+- The worked examples in `docs/labels.md` were drafted with the AI assistant from development rows 101-500
+  and reviewed by Eason; they illustrate the rubric only and are not part of the golden evaluation.
 
 ## Data source and license
 
