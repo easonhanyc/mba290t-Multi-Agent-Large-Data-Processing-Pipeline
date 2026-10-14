@@ -1,0 +1,30 @@
+[run] run-20261012T230239.441Z-ed1b | phase initial | run dir runs/live-budget-drill | budget $0.01 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 7, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 479 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.01 (reserved $0.0022)
+[enrich] primary: 48 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 2 | spent $0.0004 of $0.01 (reserved $0.0022)
+[enrich] primary: 48 distinct texts saved this invocation (of 479 pending at start) | 1.1/s | staged 2 | spent $0.0004 of $0.01 (reserved $0.0022)
+[enrich] primary: 95 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 5 | spent $0.0008 of $0.01 (reserved $0.0022)
+[enrich] primary: 95 distinct texts saved this invocation (of 479 pending at start) | 1.2/s | staged 5 | spent $0.0008 of $0.01 (reserved $0.0022)
+[enrich] primary: 144 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 6 | spent $0.0013 of $0.01 (reserved $0.0022)
+[enrich] primary: 144 distinct texts saved this invocation (of 479 pending at start) | 1.4/s | staged 6 | spent $0.0013 of $0.01 (reserved $0.0022)
+[enrich] primary: 192 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 8 | spent $0.0017 of $0.01 (reserved $0.0022)
+[enrich] primary: 192 distinct texts saved this invocation (of 479 pending at start) | 1.4/s | staged 8 | spent $0.0017 of $0.01 (reserved $0.0022)
+[enrich] primary: 237 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 13 | spent $0.0021 of $0.01 (reserved $0.0022)
+[enrich] primary: 237 distinct texts saved this invocation (of 479 pending at start) | 1.4/s | staged 13 | spent $0.0021 of $0.01 (reserved $0.0022)
+[enrich] primary: 286 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 14 | spent $0.0025 of $0.01 (reserved $0.0022)
+[enrich] primary: 286 distinct texts saved this invocation (of 479 pending at start) | 1.4/s | staged 14 | spent $0.0025 of $0.01 (reserved $0.0022)
+[enrich] primary: 286 distinct texts saved this invocation (of 479 pending at start) | 1.3/s | staged 14 | spent $0.0025 of $0.01 (reserved $0.0022)
+[run] stopped (budget_cap) in 213.8s | completed 353 | quarantined 0 | unfinished 147 | spend $0.002979
+[run] run-20261012T230613.843Z-a92c | phase resume | run dir runs/live-budget-drill | budget $0.05 (already spent $0.002979, unknown $0.000000) | LIVE
+[ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 129 | staged for a fallback decision: 16 | fallback caps {'fallback1': 7, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 129 pending at start) | 0.0/s | staged 0 | spent $0.0030 of $0.05 (reserved $0.0022)
+[enrich] primary: 0 distinct texts saved this invocation (of 129 pending at start) | 0.0/s | staged 0 | spent $0.0030 of $0.05 (reserved $0.0022)
+[enrich] primary: 46 distinct texts saved this invocation (of 129 pending at start) | 1.0/s | staged 4 | spent $0.0034 of $0.05 (reserved $0.0022)
+[enrich] primary: 46 distinct texts saved this invocation (of 129 pending at start) | 0.8/s | staged 4 | spent $0.0034 of $0.05 (reserved $0.0022)
+[enrich] fallback decisions: 24 staged | routing 7 to fallback1 (cap 7, already routed 0) | 17 keep their primary label
+[run] completed in 92.9s | completed 500 | quarantined 0 | unfinished 0 | spend $0.004306
+exit 0

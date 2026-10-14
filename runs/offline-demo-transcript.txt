@@ -1,36 +1,38 @@
-== 1. start, then a real SIGINT after ~4 s (each stub response is delayed 25 ms) ==
-[run] run-20261002T011149.953Z-9f84 | phase initial | run dir runs/offline-stub-checkpoint500 | budget $1.00 (already spent $0.000000, unknown $0.000000) | OFFLINE STUB
+== 1. start, then a real SIGINT after ~4 s (each stub LLM response is delayed 1 s; ~10 batches of 50) ==
+[run] run-20261013T234505.813Z-6934 | phase initial | run dir runs/offline-stub-checkpoint500 | budget $1.00 (already spent $0.000000, unknown $0.000000) | OFFLINE STUB
 [ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
-[enrich] label_config = stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1
-[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 47, 'fallback2': 4} | already routed {'fallback1': 0, 'fallback2': 0} | backend jev | workers 1
+[enrich] label_config = stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154
+[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 47, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
 
 [SIGINT] stopping: no new requests; finishing in-flight work and saving. Press Ctrl-C again to exit immediately (in-flight calls are reconciled on the next run).
 [run] enrichment incomplete (interrupted (SIGINT)); skipping verify/group/rank/memo until a resumed run finishes it
-[run] interrupted (interrupted (SIGINT)) in 4.0s | completed 66 | quarantined 0 | unfinished 434 | spend $0.000000
+[run] interrupted (interrupted (SIGINT)) in 4.6s | completed 75 | quarantined 0 | unfinished 425 | spend $0.000000
 exit code: 130
 
 == 2. resume (same command, same run dir) ==
-[run] run-20261002T011154.547Z-b2c9 | phase resume | run dir runs/offline-stub-checkpoint500 | budget $1.00 (already spent $0.000000, unknown $0.000000) | OFFLINE STUB
+[run] run-20261013T234510.996Z-9285 | phase resume | run dir runs/offline-stub-checkpoint500 | budget $1.00 (already spent $0.000000, unknown $0.000000) | OFFLINE STUB
 [ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
-[enrich] label_config = stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1
-[enrich] pending distinct texts: 377 | staged for a fallback decision: 48 | fallback caps {'fallback1': 47, 'fallback2': 4} | already routed {'fallback1': 0, 'fallback2': 0} | backend jev | workers 1
-[enrich] fallback decisions: 211 staged | routing 47 to fallback1 (cap 47, already routed 0) | 164 keep their primary label
+[enrich] label_config = stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154
+[enrich] pending distinct texts: 279 | staged for a fallback decision: 133 | fallback caps {'fallback1': 47, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] fallback decisions: 320 staged | routing 47 to fallback1 (cap 47, already routed 0) | 273 keep their primary label
 [verify] declared sample 48 of 479 distinct texts; 48 to call
-[group] 220 complaint/cancellation memberships in 22 issues; naming top 12 (12 new model calls, 0 cached or empty)
-[rank] 22 issues ranked from 220 complaint/cancellation records (no model calls)
-[memo] memo.md written (source: model); 40 issue-level claims in claims.csv
-[run] completed in 1.6s | completed 500 | quarantined 0 | unfinished 0 | spend $0.000000
+[group] 237 complaint/cancellation memberships in 22 issues; naming top 12 (11 new model calls, 1 cached or empty)
+[rank] 22 issues ranked from 237 complaint/cancellation records (no model calls)
+[analysis] 500 completed records: 19 months, 2 spike months, 6 app-version families; verifier robustness: False (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv; 120 tokens in memo_tokens.csv
+[run] completed in 38.2s | completed 500 | quarantined 0 | unfinished 0 | spend $0.000000
 exit code: 0
 
 == 3. warm rerun: everything cached, zero model calls ==
-[run] run-20261002T011156.736Z-b93d | phase resume | run dir runs/offline-stub-checkpoint500 | budget $1.00 (already spent $0.000000, unknown $0.000000) | OFFLINE STUB
+[run] run-20261013T234549.768Z-fee9 | phase resume | run dir runs/offline-stub-checkpoint500 | budget $1.00 (already spent $0.000000, unknown $0.000000) | OFFLINE STUB
 [ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
-[enrich] label_config = stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1
-[enrich] pending distinct texts: 0 | staged for a fallback decision: 0 | fallback caps {'fallback1': 47, 'fallback2': 4} | already routed {'fallback1': 47, 'fallback2': 0} | backend jev | workers 1
+[enrich] label_config = stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154
+[enrich] pending distinct texts: 0 | staged for a fallback decision: 0 | fallback caps {'fallback1': 47, 'fallback2': 1} | already routed {'fallback1': 47, 'fallback2': 0} | backend llm | workers 1
 [verify] declared sample 48 of 479 distinct texts; 0 to call
-[group] 220 complaint/cancellation memberships in 22 issues; naming top 12 (0 new model calls, 12 cached or empty)
-[rank] 22 issues ranked from 220 complaint/cancellation records (no model calls)
-[memo] memo.md written (source: cache); 40 issue-level claims in claims.csv
+[group] 237 complaint/cancellation memberships in 22 issues; naming top 12 (0 new model calls, 12 cached or empty)
+[rank] 22 issues ranked from 237 complaint/cancellation records (no model calls)
+[analysis] 500 completed records: 19 months, 2 spike months, 6 app-version families; verifier robustness: False (no model calls)
+[memo] memo.md written (source: cache); 40 issue-level claims in claims.csv; 120 tokens in memo_tokens.csv
 [run] completed in 0.1s | completed 500 | quarantined 0 | unfinished 0 | spend $0.000000
 exit code: 0
 
@@ -53,64 +55,41 @@ status: pass | issues: {} | coverage: {'expected': 500, 'valid_completed': 500, 
   "review_id": "00363dc8-2117-4565-9af9-efadf8fa90cf",
   "original": {
     "topic": "support",
-    "intent": "complaint",
-    "severity": 4,
-    "sentiment": 0.5
+    "intent": "cancellation",
+    "severity": 3,
+    "sentiment": -0.5
   },
   "planted": {
     "topic": "billing",
     "intent": "praise",
     "severity": 1,
-    "sentiment": -0.5
+    "sentiment": 0.5
   },
   "verifier": {
     "topic": "support",
-    "intent": "complaint",
-    "severity": 4,
-    "sentiment": 0.5,
+    "intent": "cancellation",
+    "severity": 3,
+    "sentiment": -0.5,
 
-== 7. fault drill: 429, 500, timeout, malformed Jev answer, malformed and truncated LLM output ==
-----------------------------------------
-Exception occurred during processing of request from ('127.0.0.1', 60760)
-Traceback (most recent call last):
-  File "/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socketserver.py", line 697, in process_request_thread
-    self.finish_request(request, client_address)
-  File "/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socketserver.py", line 362, in finish_request
-    self.RequestHandlerClass(request, client_address, self)
-  File "/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socketserver.py", line 766, in __init__
-    self.handle()
-  File "/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/server.py", line 440, in handle
-    self.handle_one_request()
-  File "/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/server.py", line 428, in handle_one_request
-    method()
-  File "/Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/insight/stub.py", line 169, in do_POST
-    return self._send(200, {"model": body.get("model"), "answers": answers,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/insight/stub.py", line 139, in _send
-    self.wfile.write(body)
-  File "/opt/homebrew/Cellar/python@3.12/3.12.14/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socketserver.py", line 845, in write
-    self._sock.sendall(b)
-BrokenPipeError: [Errno 32] Broken pipe
-----------------------------------------
-[group] 220 complaint/cancellation memberships in 22 issues; naming top 12 (12 new model calls, 0 cached or empty)
-[rank] 22 issues ranked from 220 complaint/cancellation records (no model calls)
-[memo] memo.md written (source: model); 40 issue-level claims in claims.csv
-[run] completed in 5.2s | completed 500 | quarantined 0 | unfinished 0 | spend $0.000000
-failed attempts: 7
-  enrich/primary attempt 1 task_attempt 1: transient: rate limited: POST http://127.0.0.1:60740/v1/systemone: 429 stub rate limit
-  enrich/primary attempt 2 task_attempt 1: transient: rate limited: POST http://127.0.0.1:60740/v1/systemone: 429 stub rate limit
-  enrich/primary attempt 1 task_attempt 1: transient: server error: POST http://127.0.0.1:60740/v1/systemone: 500 stub server error
-  enrich/primary attempt 1 task_attempt 1: transient: timeout: Request timed out (timeout=1.0).
-  enrich/primary attempt 1 task_attempt 1: invalid_output: missing answer 'evidence'
-  enrich/fallback1 attempt 1 task_attempt 1: invalid_output: unusable output: malformed_json
-  enrich/fallback1 attempt 1 task_attempt 1: invalid_output: unusable output: truncated
+== 7. fault drill on the LLM backend: malformed and truncated output, 429 twice, 500, timeout ==
+[rank] 22 issues ranked from 237 complaint/cancellation records (no model calls)
+[analysis] 500 completed records: 19 months, 2 spike months, 6 app-version families; verifier robustness: False (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv; 120 tokens in memo_tokens.csv
+[run] completed in 43.2s | completed 500 | quarantined 0 | unfinished 0 | spend $0.000000
+failed attempts: 6
+  enrich/primary attempt 1 task_attempt 1: invalid_output: no results array (malformed_json); missing ids ['r1', 'r2', 'r3', 'r4', 'r
+  enrich/primary attempt 1 task_attempt 1: transient: rate limited: Error code: 429 - {'error': {'type': 'rate_limit_error', 'message
+  enrich/primary attempt 2 task_attempt 1: transient: rate limited: Error code: 429 - {'error': {'type': 'rate_limit_error', 'message
+  enrich/primary attempt 3 task_attempt 1: invalid_output: no results array (truncated); missing ids ['r1', 'r2', 'r3', 'r4', 'r5', '
+  enrich/primary attempt 1 task_attempt 2: transient: server error: Error code: 500 - {'error': {'type': 'api_error', 'message': 'stu
+  enrich/primary attempt 1 task_attempt 1: transient: timeout: Request timed out.
 retried attempts (attempt>1): 4 | invalid-output retries: 3
 
 == 8. budget drill: stub calls shadow-priced at real rates, cap $0.005 ==
-[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 47, 'fallback2': 4} | already routed {'fallback1': 0, 'fallback2': 0} | backend jev | workers 1
+[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 47, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
 [run] enrichment incomplete (budget_cap); skipping verify/group/rank/memo until a resumed run finishes it
-[run] stopped (budget_cap) in 0.3s | completed 46 | quarantined 0 | unfinished 454 | spend $0.004971
-ledger: {'cap_usd': 0.005, 'denials': 1, 'reserved_usd': 0.0, 'spent_usd': 0.00497141, 'unknown_usd': 0.0} | unfinished: 454
+[run] stopped (budget_cap) in 0.4s | completed 57 | quarantined 0 | unfinished 443 | spend $0.003424
+ledger: {'cap_usd': 0.005, 'denials': 1, 'reserved_usd': 0.0, 'spent_usd': 0.0034243, 'unknown_usd': 0.0} | unfinished: 443
 resume with a larger cap:
-[memo] memo.md written (source: model); 40 issue-level claims in claims.csv
-[run] completed in 1.6s | completed 500 | quarantined 0 | unfinished 0 | spend $0.048908
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv; 120 tokens in memo_tokens.csv
+[run] completed in 38.1s | completed 500 | quarantined 0 | unfinished 0 | spend $0.023838

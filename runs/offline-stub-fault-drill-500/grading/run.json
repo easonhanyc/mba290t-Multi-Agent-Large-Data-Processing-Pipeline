@@ -5,10 +5,11 @@
   "classification_input_fields": [
     "review_text"
   ],
-  "exported_at": "2026-10-02T01:12:02.837Z",
+  "exported_at": "2026-10-13T23:46:33.853Z",
+  "full_source": null,
   "input_file": "Final Assignment - Spotify Reviews Dataset/checkpoint_500.csv",
-  "label_config": "stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1",
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154",
   "offline_stub": true,
-  "scope_note": "Development checkpoint export, not the full-corpus submission.",
+  "scope_note": "Development checkpoint export, not the final submission.",
   "version": "a5-audit-v1"
 }

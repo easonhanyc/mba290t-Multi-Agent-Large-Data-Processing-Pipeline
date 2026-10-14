@@ -99,7 +99,7 @@ models follow picks the first praised feature.
 
 ## Worked examples on development reviews
 
-Drafted by the assistant while building the rubric, from `checkpoint_500.csv` rows 101-500 (never the golden 50 and never used in any prompt). They illustrate how the shared definitions apply; they are not human golden labels. **Eason: review and correct these before relying on them.**
+Drafted by the assistant while building the rubric, from `checkpoint_500.csv` rows 101-500 (never the golden 50 and never used in any prompt). They illustrate how the shared definitions apply; they are not human golden labels. **They have not been reviewed by Eason.** No prompt, test or evaluation uses them, so they are illustrations only.
 
 | review_id | Text (abridged) | Stars | topic / issue | intent | sev | sentiment | needs_review | Why |
 |---|---|---:|---|---|---:|---:|---|---|

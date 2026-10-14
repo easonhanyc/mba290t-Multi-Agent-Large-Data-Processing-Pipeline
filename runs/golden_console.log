@@ -1,0 +1,38 @@
+[run] run-20261012T230755.018Z-570f | phase initial | run dir runs/golden-luna-none | budget $0.05 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 50 rows | 50 nonempty | 0 empty | 49 distinct texts (1 exact-text reuses) | 12 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 49 | staged for a fallback decision: 0 | fallback caps {'fallback1': 1, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 49 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.05 (reserved $0.0022)
+[enrich] fallback decisions: 5 staged | routing 1 to fallback1 (cap 1, already routed 0) | 4 keep their primary label
+[run] completed in 31.0s | completed 50 | quarantined 0 | unfinished 0 | spend $0.000670
+[run] run-20261012T230826.363Z-f20e | phase initial | run dir runs/golden-decisions | budget $0.05 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 50 rows | 50 nonempty | 0 empty | 49 distinct texts (1 exact-text reuses) | 12 missing app_version
+[enrich] label_config = gpt-6-luna[decisions]|enrich-v2|schema-v2|cfg-9ba1620527
+[enrich] pending distinct texts: 49 | staged for a fallback decision: 0 | fallback caps {'fallback1': 0, 'fallback2': 0} | already routed {'fallback1': 0, 'fallback2': 0} | backend decisions | workers 1
+[run] completed in 8.6s | completed 50 | quarantined 0 | unfinished 0 | spend $0.009090
+[run] run-20261012T230835.077Z-60a9 | phase initial | run dir runs/golden-luna-low | budget $0.05 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 50 rows | 50 nonempty | 0 empty | 49 distinct texts (1 exact-text reuses) | 12 missing app_version
+[enrich] label_config = gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247
+[enrich] pending distinct texts: 49 | staged for a fallback decision: 0 | fallback caps {'fallback1': 1, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 49 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.05 (reserved $0.0056)
+[enrich] primary: 0 distinct texts saved this invocation (of 49 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.05 (reserved $0.0056)
+[enrich] primary: 0 distinct texts saved this invocation (of 49 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.05 (reserved $0.0056)
+[enrich] fallback decisions: 4 staged | routing 1 to fallback1 (cap 1, already routed 0) | 3 keep their primary label
+[run] completed in 58.4s | completed 50 | quarantined 0 | unfinished 0 | spend $0.000866
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/insight/__main__.py", line 5, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/insight/cli.py", line 681, in main
+    return handler(args)
+           ^^^^^^^^^^^^^
+  File "/Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/insight/cli.py", line 562, in cmd_golden
+    res = score_golden(Path(args.labels), store, cfg)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/insight/golden.py", line 30, in score_golden
+    with open(labels_csv, encoding="utf-8-sig", newline="") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'evals/golden/golden_50_labeled.csv'
+exit 1

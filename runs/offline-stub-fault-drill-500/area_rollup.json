@@ -2,59 +2,59 @@
   "areas": [
     {
       "area": "playback/performance",
-      "cancellation_count": 39,
-      "complaint_count": 67,
+      "cancellation_count": 26,
+      "complaint_count": 59,
       "decision_option": true,
       "issues": 6,
-      "severity_sum": 202,
-      "share_of_complaints": "0.304545"
+      "severity_sum": 177,
+      "share_of_complaints": "0.248945"
     },
     {
       "area": "catalog/content",
-      "cancellation_count": 26,
-      "complaint_count": 48,
+      "cancellation_count": 21,
+      "complaint_count": 56,
       "decision_option": false,
       "issues": 5,
-      "severity_sum": 151,
-      "share_of_complaints": "0.218182"
+      "severity_sum": 171,
+      "share_of_complaints": "0.236287"
     },
     {
       "area": "billing/support",
-      "cancellation_count": 20,
-      "complaint_count": 43,
+      "cancellation_count": 25,
+      "complaint_count": 45,
       "decision_option": true,
       "issues": 4,
-      "severity_sum": 124,
-      "share_of_complaints": "0.195455"
+      "severity_sum": 141,
+      "share_of_complaints": "0.189873"
     },
     {
       "area": "usability",
-      "cancellation_count": 18,
-      "complaint_count": 35,
+      "cancellation_count": 20,
+      "complaint_count": 44,
       "decision_option": true,
       "issues": 4,
-      "severity_sum": 116,
-      "share_of_complaints": "0.159091"
+      "severity_sum": 137,
+      "share_of_complaints": "0.185654"
     },
     {
       "area": "access/onboarding",
-      "cancellation_count": 10,
-      "complaint_count": 19,
+      "cancellation_count": 11,
+      "complaint_count": 20,
       "decision_option": true,
       "issues": 2,
-      "severity_sum": 55,
-      "share_of_complaints": "0.086364"
+      "severity_sum": 62,
+      "share_of_complaints": "0.084388"
     },
     {
       "area": "general/unspecified",
-      "cancellation_count": 4,
-      "complaint_count": 8,
+      "cancellation_count": 8,
+      "complaint_count": 13,
       "decision_option": false,
       "issues": 1,
-      "severity_sum": 30,
-      "share_of_complaints": "0.036364"
+      "severity_sum": 41,
+      "share_of_complaints": "0.054852"
     }
   ],
-  "denominator_complaints": 220,
+  "denominator_complaints": 237,
   "note": "Derived view: sums of baseline issue metrics by decision area. Not a contract metric."
 }

@@ -198,15 +198,15 @@
   "examples": [],
   "hash_convention": "Reference/benchmark: canonical UTF-8 JSON via canonical(); input files and audit script: exact bytes.",
   "input_files_sha256": {
-    "calls.jsonl.gz": "3386da39c129f8dc0c3c89a29792f2601f03eed0949e6bdbacfdd96581d4c524",
-    "checkpoint_after.json": "e9c0228812c8f0f3fc40dbeeb8946f9146a856800603fd1f157ddd097f344a76",
+    "calls.jsonl.gz": "91308cc9b5d54f9171f0be041b4069f41e797950abf5f250fd001b5f85de456f",
+    "checkpoint_after.json": "a958c3359855157c18cb85d04e0aeb7f9a5d6f474cb0575051334eb3117db05a",
     "checkpoint_before.json": "8692e510d641a4a14d6b8c44b89523b7e81e9e021840e8a6347fed4d60e97576",
     "claims.csv": "59fde122215b31b0ab31c0845fcfbed41e7f29b43a641c2e8b77e10551c88e01",
     "ingestion.json": "5512dd793b0bde3bd51f28b20b440108f3c9bab31233819bea5f32ce19482153",
     "membership.csv": "e387efe49f34714a8fea7d3f966a39879f3a8ada6c729441624dcb3ff50ad0e1",
     "ranking.csv": "06d2369272421dd174eb727368e33676801755df91de5b380426707e3c82aaca",
-    "records.jsonl.gz": "fcec12c6e76c700da4f3ff05057874bc6c6a5d0a5558700e1679ee9856c5026c",
-    "run.json": "f79f97e9571dd625b1b682aa7ddbc8e545d82f8fadd457a9077810220b8664db"
+    "records.jsonl.gz": "24a8b99d6107ef94131eb625fc4ffdf904f7ceaee068b488830364f950b5e843",
+    "run.json": "baa81e477190c42146028c76643afdcb41f1c81a2ea4c6d60576f75e1c32f045"
   },
   "issue_counts": {},
   "limits": [
@@ -220,9 +220,9 @@
     "status": "not_supplied"
   },
   "reference_sha256": "363b06cebcfca258f2739bb060ff396264bee897b61cb8bfc4c5892975e9f7a5",
-  "reported_calls": 16944,
-  "reported_input_tokens": 43787543,
-  "reported_output_tokens": 6058305,
+  "reported_calls": 16947,
+  "reported_input_tokens": 43863863,
+  "reported_output_tokens": 6071326,
   "status": "pass",
   "working_coverage_point_candidate": 1.0
 }

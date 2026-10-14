@@ -11,5 +11,33 @@
   "invocations": 1,
   "wall_clock_s": 931.56,
   "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
-  "saved_at": "2026-10-12T23:25:23+00:00"
+  "saved_at": "2026-10-12T23:25:23+00:00",
+  "workers_source": "max over the invocations that made enrichment calls",
+  "latest_invocation_workers": 8,
+  "enrichment_invocations": 1,
+  "enrichment_wall_clock_s": 931.56,
+  "enrichment_stage_seconds": 728.406,
+  "invocations_detail": [
+    {
+      "run_id": "run-20261012T230951.360Z-4fe8",
+      "phase": "initial",
+      "status": "completed",
+      "workers": 8,
+      "wall_clock_s": 931.56,
+      "stage_seconds": {
+        "enrich": 728.406,
+        "export": 0.34,
+        "group": 34.518,
+        "ingest": 0.278,
+        "memo": 31.9,
+        "rank": 0.101,
+        "verify": 135.946
+      },
+      "enrichment_calls": 299,
+      "budget_cap_usd": 0.5,
+      "budget_denials": 0
+    }
+  ],
+  "metadata_updated_at": "2026-10-13T23:47:35+00:00",
+  "metadata_update_note": "workers = max over the invocations that made enrichment calls (previously the latest invocation's setting); per-invocation detail copied from the run's invocations/*.json finished by saved_at (the invocations this refresh covers); usage and call files unchanged"
 }

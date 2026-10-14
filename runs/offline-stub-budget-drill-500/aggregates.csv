@@ -1,23 +1,23 @@
 rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,name,area,cancellation_count,needs_review_count,share_of_complaints,representative_review_ids
-1,downloads.offline,17,53,3.117647,53,Stub issue name,playback/performance,11,10,0.077273,9f46904c-4ed3-4799-8949-379b949c7344;62b53e0a-0397-4200-826f-122d18fdde32;f5cc511f-ae71-4985-a737-1c0075156e2b
-2,playback.devices,13,44,3.384615,44,Stub issue name,playback/performance,7,5,0.059091,6455e7cb-ad90-47ad-883f-5b0f0e205af1;00a77161-cb3f-4fae-a7b6-eca2cfc124ec;0d9c62d1-2b53-4887-8156-a28eeac86e82
-3,billing.premium_only,14,41,2.928571,41,Stub issue name,billing/support,7,7,0.063636,ba274609-2cbc-4d6a-9624-276d1c8246e8;ed15bb17-865a-492b-ba1b-268f4cab78f6;94fd7069-c8e1-4f09-9651-dd9f5cfefff4
-4,catalog.lyrics,13,40,3.076923,40,Stub issue name,catalog/content,7,6,0.059091,1db044db-d184-4335-877c-d8fc364b282e;b25beb44-9cc8-4d1e-b375-a4f319419424;aa86aa43-19d5-40b4-8b03-535a96346e18
-5,playback.stops,13,38,2.923077,38,Stub issue name,playback/performance,11,4,0.059091,28a441b5-1d54-4a5d-9df3-cbc84d21527c;5fb51bd0-dbe9-4a19-a466-a77f0c14393e;7c0a838b-2af2-4893-b8a2-315c41932dc3
-6,catalog.missing,12,35,2.916667,35,Stub issue name,catalog/content,6,6,0.054545,6eb64519-37d4-4591-a47a-bbb96357de36;02311997-e9a2-41f9-acd2-303988b849a4;1d3f978e-b31f-4a4b-ab17-ec46ab4966b3
-7,catalog.search,11,35,3.181818,35,Stub issue name,catalog/content,8,4,0.050000,065c418e-7f18-42a3-b241-fe693b7a2b0c;ed8efdfe-43e3-4baa-bbed-317807663531;83e0e3fb-c641-483d-8b6a-16dff7c2ab24
-8,access.account,12,34,2.833333,34,Stub issue name,access/onboarding,7,4,0.054545,f44b3617-a645-4375-ae2d-44b742a1a306;f9cf3b4a-c40e-4578-9f6f-358807450b0f;32fb340f-4f9f-4551-8dae-755221e58d6a
-9,usability.ads,10,34,3.400000,34,Stub issue name,usability,4,3,0.045455,084077ee-f9be-446a-9935-9e58550d5153;3e82cf28-6b0a-4980-902c-b6aa154d353a;35008b46-daf1-497c-ac9b-fe98f120f912
-10,usability.navigation,9,31,3.444444,31,Stub issue name,usability,3,2,0.040909,66a29b3c-c14d-440e-b722-b23e0c99ae82;f1532a7d-a47c-40eb-b41f-da17a379f9fb;0cc5a3be-e40c-4e9f-918d-53d284e2e5b3
-11,billing.payment,10,30,3.000000,30,Stub issue name,billing/support,6,3,0.045455,2aae0ce4-ae4a-46ce-b2fe-0d901eb23c06;0a5ff524-27b1-4f3b-a761-17ca48ee731d;59f31721-b2c8-40c5-ba3c-b9fe64a58d68
-12,other.general,8,30,3.750000,30,Stub issue name,general/unspecified,4,4,0.036364,a3605554-5c3a-441d-836e-e9fdea83eb2e;8cb9d355-e14c-4f55-b026-c6abd7bbce0d;3252de76-f17f-47e2-9517-fe47f66a1fdb
-13,playback.crash,10,30,3.000000,30,Crashes and freezes,playback/performance,3,6,0.045455,e23c12dd-e6f1-469c-a6e0-506f56b7b786;0b626430-7bf8-4ae4-9a44-f6ffc4324424;b1beb540-0a06-4396-9677-161fbd8029b6
-14,support.contact,11,29,2.636364,29,Customer support,billing/support,5,5,0.050000,2b57a12b-bbbe-457c-83a8-1bec297a5f63;9a436d71-1493-4700-a5cc-91472f708dcd;394b1e3e-205a-48a7-a9ca-64170fa5f6a0
-15,usability.other,7,27,3.857143,27,Other control annoyances,usability,6,5,0.031818,8b47c5d7-d31c-4aae-b00d-d62217ae55fc;237e6174-4921-44df-828c-28f7b9d6196e;e69dc5e0-1317-424e-a778-6081914a7b85
-16,billing.price,8,24,3.000000,24,Price and value,billing/support,2,3,0.036364,9c9757da-6b99-4c95-a0e7-0661ee858027;088e9ac3-8b93-4bff-8c75-032362d37b64;1ec1edb0-8827-4ee5-ba31-47c5a9c0a169
-17,usability.library,9,24,2.666667,24,"Library, queue and playlists",usability,5,1,0.040909,a862b037-7542-4a3e-94ef-836b7092f4ef;99a2f218-f1e7-4341-b8cf-bfef974095f1;453b621f-6bdd-428a-a610-2b55918c9adb
-18,catalog.podcasts,7,23,3.285714,23,Podcasts and audiobooks,catalog/content,1,3,0.031818,530b7128-1b64-46a7-81ad-d69c4bf821cf;6abbfa21-bc7b-400f-96b2-b07fe77b5e37;47bd8a1f-b7a6-4b3c-996a-9802d8ba119a
-19,access.login,7,21,3.000000,21,Login failures,access/onboarding,3,4,0.031818,01124066-b5dd-4c79-8618-d1bea99d197a;c76dcf3a-f9fa-4173-8129-1d0cb9fcfe6a;db98b02f-8a79-4b0c-af77-439171a20781
-20,playback.connection,6,21,3.500000,21,Connection errors,playback/performance,3,3,0.027273,5d50e8f0-18d7-4510-8b1d-eb6b2323f3c9;bb1a158b-e781-4a16-855b-d4f04a61002c;46b77196-0d17-4a48-b376-03a50b3d7440
-21,catalog.recommendations,5,18,3.600000,18,Recommendations,catalog/content,4,1,0.022727,2c3b2ca3-32b0-435f-aef5-84efafce6606;d0150464-7f34-43b2-b729-bbbc5354db7e;b47c203f-366e-4409-922d-cd52aa8bbef6
-22,playback.performance,8,16,2.000000,16,Performance and audio quality,playback/performance,4,4,0.036364,3feb5ba7-4a0d-47e0-a803-eb2dce85dd5e;e667ab56-1b04-4596-bfd9-69f5919dcc10;d635d6c8-460e-452f-8d53-6cd1ea804e98
+1,catalog.missing,19,63,3.315789,63,Stub issue name,catalog/content,8,7,0.080169,de0a9cdf-8974-48bc-802f-331228df4619;27aeb125-266a-47c9-85f5-bd8a56b4d6c3;130820bc-da31-46d3-9088-b09cb62cf241
+2,billing.premium_only,17,56,3.294118,56,Stub issue name,billing/support,5,8,0.071730,8b8e60dc-c64c-4c65-9e5c-5bb2df16d384;6eb64519-37d4-4591-a47a-bbb96357de36;5d4d3f47-4b3c-4be4-8f11-6cca41d27068
+3,playback.crash,14,48,3.428571,48,Stub issue name,playback/performance,9,4,0.059072,1db044db-d184-4335-877c-d8fc364b282e;6a4f84b4-18e2-47d9-adb8-2461a9319c11;fb794fdc-50f7-47d1-abc7-22c6b0cf6542
+4,usability.library,15,44,2.933333,44,Stub issue name,usability,5,8,0.063291,ec96a982-68d0-44c4-b2be-13a999be4094;02777996-211f-447b-94c4-99b61f049f78;0b716a9d-85bf-4f4e-8e2e-be71e4a379a6
+5,other.general,13,41,3.153846,41,General or unrelated,general/unspecified,8,5,0.054852,2aae0ce4-ae4a-46ce-b2fe-0d901eb23c06;d218ffde-42f9-48f8-a793-832507454b35;5650dbb7-7525-46e7-87b7-a75197c48ec7
+6,billing.payment,11,39,3.545455,39,Stub issue name,billing/support,10,0,0.046414,3bfefa06-133c-419b-a435-1fea919d6a44;0fa19eb8-c470-4217-8709-05f850aa9b88;f91ca58c-f265-47d0-aa63-2da3dd8dd87e
+7,catalog.search,13,38,2.923077,38,Stub issue name,catalog/content,6,6,0.054852,7c431748-3a85-4080-8cf9-c41f48f92ea5;89be32ab-664a-4647-a5e3-e4006a67e4e1;7c5d9a4d-1bb1-4da3-bc3b-2500ae0246f1
+8,usability.ads,9,37,4.111111,37,Stub issue name,usability,3,5,0.037975,8c81b973-f8c0-4d32-b0e0-844601f266fa;2be2ae92-6ad1-4c93-8589-65a0ce68fe46;91755919-64e7-4613-94f9-4cfb44976c44
+9,access.account,12,33,2.750000,33,Stub issue name,access/onboarding,7,3,0.050633,3feb5ba7-4a0d-47e0-a803-eb2dce85dd5e;e25cf0b6-0285-4cc9-9a4a-5a8a05be929e;68107809-52c1-469d-a78a-569280e49ed6
+10,usability.navigation,12,33,2.750000,33,Stub issue name,usability,6,6,0.050633,61d5fc66-9bd1-4a18-8185-ae9a451e05a3;94c9f2f9-36fa-4c11-936e-660514fe7a35;0d9c62d1-2b53-4887-8156-a28eeac86e82
+11,catalog.podcasts,8,30,3.750000,30,Stub issue name,catalog/content,1,3,0.033755,4d5b9506-3ae8-41e0-b5fd-381eda6ca773;0e5a2a0d-7f67-48a5-9edd-27064f670656;884e8712-da13-4890-a39e-731b69f42d6c
+12,support.contact,11,30,2.727273,30,Stub issue name,billing/support,7,5,0.046414,1a7af7d7-f3db-4a08-a041-b2fa84f08379;7084ced1-0428-4093-9328-442f74719b4f;59da9b92-c3f1-4441-9dbd-dde441468cf3
+13,access.login,8,29,3.625000,29,Login failures,access/onboarding,4,2,0.033755,df239418-e786-4b6f-9545-6946e1960b89;2d5cdd20-3094-40a5-bc6e-653302b59b56;66c56c76-ca94-46ef-b0a1-931654ead16d
+14,playback.connection,9,28,3.111111,28,Connection errors,playback/performance,3,2,0.037975,08d3a5a9-1ec1-4b10-a5c8-393da33843e1;0070e713-4cb7-4d78-954f-1764d5593c91;9a436d71-1493-4700-a5cc-91472f708dcd
+15,playback.performance,9,28,3.111111,28,Performance and audio quality,playback/performance,3,2,0.037975,505989d7-4f1f-4ca7-b815-657f30a84a1c;10775595-01b9-4623-9163-51619e2a0fa9;7d6aaa11-75f0-41c4-8f65-d2fd8bf2745f
+16,playback.stops,10,28,2.800000,28,Playback stops or skips,playback/performance,3,7,0.042194,06d4c78d-73b4-4b54-9ef3-3d5a0d18cb96;178c3b49-b689-4fe4-92a2-2257a58e6d95;83e0e3fb-c641-483d-8b6a-16dff7c2ab24
+17,catalog.recommendations,10,24,2.400000,24,Recommendations,catalog/content,4,5,0.042194,4c34f240-76d4-451a-ac74-5bc6bd484825;28711041-0c42-432c-a1ad-63be8278ebec;aeee488a-2077-489d-8914-1e01d5f7672f
+18,playback.devices,9,23,2.555556,23,Devices and casting,playback/performance,6,5,0.037975,9ce5f16c-aef0-48eb-ace1-91905796bc3d;15502657-31ee-440e-8df3-2c405b5da275;05fa5b8a-a49b-43be-bab5-38af789a65a7
+19,usability.other,8,23,2.875000,23,Other control annoyances,usability,6,3,0.033755,8decb2ac-5860-49e3-8dce-9ca198ad061e;5fb2a0b0-bb06-4d73-b6ff-1a2d332fae37;80e2b39e-11a5-485a-aace-8a8d8c564dc1
+20,downloads.offline,8,22,2.750000,22,Downloads and offline listening,playback/performance,2,2,0.033755,46ff0c74-5e86-4e5b-b4cd-36201aab0f9e;f1abd13b-2391-4b04-8109-efa7f3cfed0b;21915fcd-9a35-48ba-b277-6296c4154603
+21,billing.price,6,16,2.666667,16,Price and value,billing/support,3,4,0.025316,b92a7381-b5cd-4c77-9176-e5c4b4818c8a;088e9ac3-8b93-4bff-8c75-032362d37b64;42f0c9d1-088c-437b-bfc8-c1c36114a8f0
+22,catalog.lyrics,6,16,2.666667,16,Lyrics availability,catalog/content,2,1,0.025316,00a77161-cb3f-4fae-a7b6-eca2cfc124ec;253a336b-ef38-49b3-beda-3758b0d6b2c2;db93c5bf-998e-4ff2-aa22-a105ce21a40e

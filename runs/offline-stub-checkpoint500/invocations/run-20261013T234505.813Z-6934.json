@@ -1,0 +1,196 @@
+{
+  "calls_all_invocations": {
+    "enrich:primary": {
+      "attempts": 4,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 16963,
+      "invalid_output_retries": 0,
+      "output_tokens": 5729,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 4
+    }
+  },
+  "calls_this_invocation": {
+    "enrich:primary": {
+      "attempts": 4,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 16963,
+      "invalid_output_retries": 0,
+      "output_tokens": 5729,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 4
+    }
+  },
+  "completed_ids_saved": 75,
+  "config_summary": {
+    "crosscheck": {
+      "batch": "1 review/request",
+      "fields": "off",
+      "service_tier": "standard"
+    },
+    "enrich_primary": {
+      "batch": "50 reviews/request",
+      "service_tier": "flex"
+    },
+    "fallback1": {
+      "batch": "1 review/request",
+      "service_tier": "flex"
+    },
+    "fallback2": {
+      "batch": "1 review/request",
+      "service_tier": "subscription"
+    },
+    "group": {
+      "batch": "<= 12 quotes/request",
+      "service_tier": "subscription"
+    },
+    "memo": {
+      "batch": "aggregates + evidence pack",
+      "service_tier": "subscription"
+    },
+    "verify": {
+      "batch": "50 reviews/request",
+      "service_tier": "subscription"
+    }
+  },
+  "finished_at": "2026-10-13T23:45:10.399Z",
+  "input": {
+    "bytes": 76170,
+    "ingested_at": "2026-10-13T23:45:05.852Z",
+    "path": "Final Assignment - Spotify Reviews Dataset/checkpoint_500.csv",
+    "rows": 500,
+    "sha256": "a94e31663ee7b7eaa77e23b7a8425b530cc0c866ed5e714953172a0afef6a12f"
+  },
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154",
+  "ledger": {
+    "cap_usd": 1.0,
+    "denials": 0,
+    "reserved_usd": 0.0,
+    "spent_usd": 0.0,
+    "unknown_usd": 0.0
+  },
+  "models": {
+    "crosscheck": {
+      "effort": "n/a",
+      "enabled": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "model": "stub-gpt-6-luna",
+      "provider": "openai_decisions"
+    },
+    "enrich_primary": {
+      "effort": "none",
+      "model": "stub-gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback1": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.1,
+      "model": "stub-gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback2": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.0025,
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "group": {
+      "effort": "low",
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "memo": {
+      "effort": "low",
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "verify": {
+      "effort": "n/a",
+      "model": "stub-haiku",
+      "provider": "claude_code"
+    }
+  },
+  "offline_stub": true,
+  "phase": "initial",
+  "project_spend": null,
+  "reconciled_unknown_calls": 0,
+  "results": {
+    "by_status_and_tier": {
+      "completed:cache": 8,
+      "completed:primary": 67
+    },
+    "completed": 75,
+    "exact_text_cache_reuses": 8,
+    "needs_review": 0,
+    "quarantined": 0,
+    "quarantined_empty_text": 0,
+    "scope": {
+      "distinct_nonempty_texts": 479,
+      "duplicate_id_rows": 0,
+      "empty_texts": 0,
+      "nonempty": 500,
+      "representatives": 479,
+      "rows": 500,
+      "unique_ids": 500
+    },
+    "unfinished": 425
+  },
+  "run_id": "run-20261013T234505.813Z-6934",
+  "stage_configs": {
+    "group": "stub-sonnet@low|group-v1|cfg-517cba9731",
+    "memo": "stub-sonnet@low|memo-v1|cfg-61589c84fe",
+    "verify": "stub-haiku@n/a|verify-v1|cfg-5ade33d2cf"
+  },
+  "stage_seconds": {
+    "enrich": 4.511,
+    "export": 0.014,
+    "ingest": 0.018
+  },
+  "stages": {
+    "enrich": {
+      "aliases_written": 8,
+      "caps": {
+        "fallback1": 47,
+        "fallback2": 1
+      },
+      "difficult": 133,
+      "fallback_not_selected_cap": 0,
+      "invalid_output_retries": 0,
+      "invalid_outputs": 0,
+      "left_pending_stopping": 0,
+      "left_pending_transient": 0,
+      "quarantined": 0,
+      "routed": {
+        "fallback1": 0,
+        "fallback2": 0
+      },
+      "saved_fallback1": 0,
+      "saved_fallback2": 0,
+      "saved_primary": 67,
+      "staged": 133,
+      "still_pending": 412,
+      "stop_reason": "interrupted (SIGINT)",
+      "transient_requeued": 0
+    },
+    "export": {
+      "calls": 4,
+      "checkpoint_after": 75,
+      "checkpoint_before": 75,
+      "grading_dir": "runs/offline-stub-checkpoint500/grading",
+      "records": 500
+    }
+  },
+  "status": "interrupted",
+  "stop_reason": "interrupted (SIGINT)",
+  "wall_clock_s": 4.556,
+  "workers": 1
+}

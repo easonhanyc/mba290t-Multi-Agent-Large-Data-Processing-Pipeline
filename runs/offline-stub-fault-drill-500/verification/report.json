@@ -6,9 +6,9 @@
       "rate": 0.25
     },
     "sentiment_within_tolerance": {
-      "agree": 24,
+      "agree": 28,
       "of": 48,
-      "rate": 0.5
+      "rate": 0.5833
     },
     "severity": {
       "agree": 9,
@@ -16,178 +16,275 @@
       "rate": 0.1875
     },
     "topic": {
-      "agree": 6,
+      "agree": 9,
       "of": 48,
-      "rate": 0.125
+      "rate": 0.1875
     }
   },
   "by_enricher_tier": {
     "fallback1": {
       "all_three_agree": 0,
-      "n": 3
+      "n": 6
     },
     "primary": {
       "all_three_agree": 0,
-      "n": 45
+      "n": 42
     }
   },
   "compared": 48,
   "disagreements": [
     {
       "enricher": {
-        "intent": "cancellation",
-        "sentiment": -0.34,
-        "severity": 2,
-        "topic": "catalog"
+        "intent": "praise",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "access"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
         "topic",
         "intent",
-        "severity",
-        "sentiment_within_tolerance"
+        "severity"
       ],
       "review_id": "00363dc8-2117-4565-9af9-efadf8fa90cf",
       "severity_abs_diff": 2,
       "text": "Worst",
       "verifier": {
         "confidence": "low",
-        "intent": "complaint",
-        "sentiment": 0.5,
-        "severity": 4,
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 3,
         "topic": "support"
       }
     },
     {
       "enricher": {
         "intent": "request",
-        "sentiment": -0.5,
+        "sentiment": 0.5,
         "severity": 1,
         "topic": "billing"
       },
       "enricher_labeled_by": "fallback1",
       "enricher_needs_review": true,
       "fields": [
-        "intent"
+        "topic",
+        "severity"
       ],
       "review_id": "035213ba-b1b9-411c-b028-70296e5f0e73",
-      "severity_abs_diff": 0,
+      "severity_abs_diff": 2,
       "text": "I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .",
       "verifier": {
-        "confidence": "high",
-        "intent": "cancellation",
-        "sentiment": -0.5,
-        "severity": 1,
-        "topic": "billing"
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": 0.0,
+        "severity": 3,
+        "topic": "playback"
       }
     },
     {
       "enricher": {
-        "intent": "unclear",
-        "sentiment": 0.55,
-        "severity": 1,
-        "topic": "support"
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 4,
+        "topic": "playback"
       },
-      "enricher_labeled_by": "primary",
+      "enricher_labeled_by": "fallback1",
       "enricher_needs_review": false,
       "fields": [
         "topic",
-        "intent"
+        "severity"
       ],
       "review_id": "05fa5b8a-a49b-43be-bab5-38af789a65a7",
-      "severity_abs_diff": 0,
+      "severity_abs_diff": 2,
       "text": "Very bad doesn't work properly even if you network connection is best",
       "verifier": {
         "confidence": "low",
-        "intent": "complaint",
-        "sentiment": 1.0,
-        "severity": 1,
-        "topic": "downloads"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "request",
-        "sentiment": -0.46,
-        "severity": 1,
-        "topic": "other"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "topic",
-        "intent",
-        "severity"
-      ],
-      "review_id": "08c07310-e802-4a88-bd97-2a5f240c0b44",
-      "severity_abs_diff": 1,
-      "text": "Kitna paisa chahiye bhai...gareebo ko lootega to paap lagega...sudhar jao bhagwaan sab dekh raha hai..mera jigri dost lattu depression me chala gaya hai tum kameeno ke karan..lattu ki aah lagegi saalo tumhe",
-      "verifier": {
-        "confidence": "high",
-        "intent": "unclear",
-        "sentiment": 0.0,
-        "severity": 2,
-        "topic": "support"
-      }
-    },
-    {
-      "enricher": {
         "intent": "cancellation",
-        "sentiment": -0.38,
+        "sentiment": -0.5,
         "severity": 2,
+        "topic": "other"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 3,
         "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
+        "topic",
+        "severity"
+      ],
+      "review_id": "08c07310-e802-4a88-bd97-2a5f240c0b44",
+      "severity_abs_diff": 2,
+      "text": "Kitna paisa chahiye bhai...gareebo ko lootega to paap lagega...sudhar jao bhagwaan sab dekh raha hai..mera jigri dost lattu depression me chala gaya hai tum kameeno ke karan..lattu ki aah lagegi saalo tumhe",
+      "verifier": {
+        "confidence": "low",
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 5,
+        "topic": "playback"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.5,
+        "severity": 2,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "fallback1",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
         "intent",
         "severity",
         "sentiment_within_tolerance"
       ],
       "review_id": "0d361ea6-3089-41c2-9e0f-4cd6a04f0dd8",
-      "severity_abs_diff": 3,
+      "severity_abs_diff": 2,
       "text": "aA😩qa1qw1awqqqqaqqa😊qqqw11qqqaq1qW1QAQ1QQQ12qww2aqqqwaqaqaA1aqq2Qqww1qq1qqaaqa☝️qQawww1qaqaqqaq😊q1qq12qq2aq🤩q☝️a1qqQ1qq1aaAawwa1qq1qqwQwqqWaw1aaqqQ",
       "verifier": {
-        "confidence": "low",
-        "intent": "complaint",
-        "sentiment": -1.0,
-        "severity": 5,
+        "confidence": "high",
+        "intent": "request",
+        "sentiment": -0.5,
+        "severity": 4,
         "topic": "catalog"
       }
     },
     {
       "enricher": {
         "intent": "complaint",
-        "sentiment": 0.48,
-        "severity": 5,
-        "topic": "playback"
+        "sentiment": 0.5,
+        "severity": 4,
+        "topic": "usability"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
         "topic",
         "intent",
-        "severity",
-        "sentiment_within_tolerance"
+        "severity"
       ],
       "review_id": "0d9c62d1-2b53-4887-8156-a28eeac86e82",
       "severity_abs_diff": 1,
       "text": "Recent update bad and needs rework",
       "verifier": {
         "confidence": "low",
-        "intent": "praise",
+        "intent": "unclear",
+        "sentiment": 0.5,
+        "severity": 5,
+        "topic": "catalog"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
         "sentiment": 1.0,
+        "severity": 5,
+        "topic": "playback"
+      },
+      "enricher_labeled_by": "fallback1",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "10775595-01b9-4623-9163-51619e2a0fa9",
+      "severity_abs_diff": 0,
+      "text": "One star for the songs availability, I like underrated songs which sometimes not available on other app but this app have, otherwise this app is worst it have adds every sec",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 5,
+        "topic": "access"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "praise",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "fallback1",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "intent"
+      ],
+      "review_id": "145ea602-b8fb-41c1-bfdd-79293a18681f",
+      "severity_abs_diff": 0,
+      "text": "I doesn't have the song feature were you play the song on computer it starts that same song but on mobile I tried playing a song and it play the most inappropriate song",
+      "verifier": {
+        "confidence": "low",
+        "intent": "unclear",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "playback"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 1.0,
+        "severity": 2,
+        "topic": "other"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "review_id": "19cefc8d-4813-4fcd-8ebe-41958a622517",
+      "severity_abs_diff": 2,
+      "text": "Awesome app that has amazing features",
+      "verifier": {
+        "confidence": "low",
+        "intent": "request",
+        "sentiment": 0.5,
         "severity": 4,
+        "topic": "other"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "playback"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "intent",
+        "severity"
+      ],
+      "review_id": "1ee942bb-a3de-4380-8c08-a15949687c6c",
+      "severity_abs_diff": 2,
+      "text": "Uninstall this all",
+      "verifier": {
+        "confidence": "high",
+        "intent": "unclear",
+        "sentiment": -1.0,
+        "severity": 1,
         "topic": "access"
       }
     },
     {
       "enricher": {
         "intent": "cancellation",
-        "sentiment": 0.85,
-        "severity": 2,
-        "topic": "catalog"
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "usability"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
@@ -197,23 +294,222 @@
         "severity",
         "sentiment_within_tolerance"
       ],
-      "review_id": "10775595-01b9-4623-9163-51619e2a0fa9",
+      "review_id": "1f13c3a2-e57b-460c-b569-964e6b2b1f31",
       "severity_abs_diff": 1,
-      "text": "One star for the songs availability, I like underrated songs which sometimes not available on other app but this app have, otherwise this app is worst it have adds every sec",
+      "text": "Can no longer listen to music off line or even log in. The app is broken. Stop telling people to reinstall the app. Just fix it. Maybe if all of your dissatisfied customers were to canal their subscriptions, you might listen. Without them, you have nothing.",
       "verifier": {
-        "confidence": "high",
-        "intent": "complaint",
-        "sentiment": -0.5,
-        "severity": 1,
+        "confidence": "low",
+        "intent": "praise",
+        "sentiment": 1.0,
+        "severity": 5,
         "topic": "support"
       }
     },
     {
       "enricher": {
-        "intent": "request",
-        "sentiment": -0.84,
-        "severity": 1,
+        "intent": "complaint",
+        "sentiment": 1.0,
+        "severity": 3,
         "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "2be2ae92-6ad1-4c93-8589-65a0ce68fe46",
+      "severity_abs_diff": 2,
+      "text": "Very nice app",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "billing"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "praise",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "playback"
+      },
+      "enricher_labeled_by": "fallback1",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "intent",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "2c3b2ca3-32b0-435f-aef5-84efafce6606",
+      "severity_abs_diff": 4,
+      "text": "This aap is good",
+      "verifier": {
+        "confidence": "low",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 5,
+        "topic": "billing"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 5,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "intent",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
+      "severity_abs_diff": 3,
+      "text": "RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮",
+      "verifier": {
+        "confidence": "high",
+        "intent": "request",
+        "sentiment": 1.0,
+        "severity": 2,
+        "topic": "other"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "intent"
+      ],
+      "review_id": "347e23c3-b84f-49f3-8d7a-da9f797d3790",
+      "severity_abs_diff": 0,
+      "text": "🕳️",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "access"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "request",
+        "sentiment": -1.0,
+        "severity": 1,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "intent"
+      ],
+      "review_id": "41f67b68-df85-4685-a28c-2558abcb71c9",
+      "severity_abs_diff": 0,
+      "text": "Great always using",
+      "verifier": {
+        "confidence": "high",
+        "intent": "unclear",
+        "sentiment": -1.0,
+        "severity": 1,
+        "topic": "catalog"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.5,
+        "severity": 3,
+        "topic": "billing"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "intent",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "46b77196-0d17-4a48-b376-03a50b3d7440",
+      "severity_abs_diff": 1,
+      "text": "Simply awesome",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "cancellation",
+        "sentiment": -1.0,
+        "severity": 4,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "downloads"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
+      "severity_abs_diff": 2,
+      "text": "I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs",
+      "verifier": {
+        "confidence": "low",
+        "intent": "cancellation",
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 5,
+        "topic": "catalog"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "intent",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "4d5b9506-3ae8-41e0-b5fd-381eda6ca773",
+      "severity_abs_diff": 1,
+      "text": "Deendyal",
+      "verifier": {
+        "confidence": "high",
+        "intent": "request",
+        "sentiment": 0.5,
+        "severity": 4,
+        "topic": "catalog"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "praise",
+        "sentiment": -1.0,
+        "severity": 1,
+        "topic": "billing"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
@@ -222,23 +518,47 @@
         "intent",
         "severity"
       ],
-      "review_id": "145ea602-b8fb-41c1-bfdd-79293a18681f",
-      "severity_abs_diff": 3,
-      "text": "I doesn't have the song feature were you play the song on computer it starts that same song but on mobile I tried playing a song and it play the most inappropriate song",
+      "review_id": "4e4c0ec8-e42b-4428-b192-d527c3384aab",
+      "severity_abs_diff": 2,
+      "text": "Nice but i am not install",
       "verifier": {
         "confidence": "high",
-        "intent": "praise",
+        "intent": "cancellation",
         "sentiment": -1.0,
-        "severity": 4,
+        "severity": 3,
         "topic": "downloads"
       }
     },
     {
       "enricher": {
         "intent": "praise",
-        "sentiment": -0.85,
+        "sentiment": -0.5,
         "severity": 1,
-        "topic": "usability"
+        "topic": "access"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "severity"
+      ],
+      "review_id": "57aca404-d58b-4bb4-97b1-c64db92f054a",
+      "severity_abs_diff": 1,
+      "text": "I cant't buy premium correctly. it show that my internet is poor.",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "praise",
+        "sentiment": -1.0,
+        "severity": 2,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "cancellation",
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "support"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
@@ -246,519 +566,148 @@
         "topic",
         "intent"
       ],
-      "review_id": "19cefc8d-4813-4fcd-8ebe-41958a622517",
-      "severity_abs_diff": 0,
-      "text": "Awesome app that has amazing features",
-      "verifier": {
-        "confidence": "high",
-        "intent": "unclear",
-        "sentiment": -1.0,
-        "severity": 1,
-        "topic": "support"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "cancellation",
-        "sentiment": 0.0,
-        "severity": 3,
-        "topic": "usability"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "1ee942bb-a3de-4380-8c08-a15949687c6c",
-      "severity_abs_diff": 2,
-      "text": "Uninstall this all",
-      "verifier": {
-        "confidence": "medium",
-        "intent": "cancellation",
-        "sentiment": 0.0,
-        "severity": 1,
-        "topic": "support"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "request",
-        "sentiment": 0.9,
-        "severity": 1,
-        "topic": "playback"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "intent",
-        "severity"
-      ],
-      "review_id": "1f13c3a2-e57b-460c-b569-964e6b2b1f31",
-      "severity_abs_diff": 3,
-      "text": "Can no longer listen to music off line or even log in. The app is broken. Stop telling people to reinstall the app. Just fix it. Maybe if all of your dissatisfied customers were to canal their subscriptions, you might listen. Without them, you have nothing.",
-      "verifier": {
-        "confidence": "low",
-        "intent": "praise",
-        "sentiment": 1.0,
-        "severity": 4,
-        "topic": "downloads"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "unclear",
-        "sentiment": 0.49,
-        "severity": 1,
-        "topic": "billing"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "2be2ae92-6ad1-4c93-8589-65a0ce68fe46",
-      "severity_abs_diff": 1,
-      "text": "Very nice app",
-      "verifier": {
-        "confidence": "high",
-        "intent": "unclear",
-        "sentiment": 0.0,
-        "severity": 2,
-        "topic": "other"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "complaint",
-        "sentiment": 0.49,
-        "severity": 5,
-        "topic": "catalog"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "2c3b2ca3-32b0-435f-aef5-84efafce6606",
-      "severity_abs_diff": 3,
-      "text": "This aap is good",
-      "verifier": {
-        "confidence": "low",
-        "intent": "complaint",
-        "sentiment": 0.5,
-        "severity": 2,
-        "topic": "access"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "praise",
-        "sentiment": -0.24,
-        "severity": 1,
-        "topic": "playback"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "33526c6f-7a49-4b3d-bd20-d1bc191c494c",
-      "severity_abs_diff": 4,
-      "text": "RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮",
-      "verifier": {
-        "confidence": "medium",
-        "intent": "praise",
-        "sentiment": 0.0,
-        "severity": 5,
-        "topic": "support"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "complaint",
-        "sentiment": 0.32,
-        "severity": 2,
-        "topic": "playback"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "topic",
-        "intent",
-        "severity",
-        "sentiment_within_tolerance"
-      ],
-      "review_id": "347e23c3-b84f-49f3-8d7a-da9f797d3790",
-      "severity_abs_diff": 2,
-      "text": "🕳️",
-      "verifier": {
-        "confidence": "low",
-        "intent": "praise",
-        "sentiment": -1.0,
-        "severity": 4,
-        "topic": "billing"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "complaint",
-        "sentiment": 0.0,
-        "severity": 4,
-        "topic": "usability"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "41f67b68-df85-4685-a28c-2558abcb71c9",
-      "severity_abs_diff": 3,
-      "text": "Great always using",
-      "verifier": {
-        "confidence": "high",
-        "intent": "complaint",
-        "sentiment": -0.5,
-        "severity": 1,
-        "topic": "playback"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "cancellation",
-        "sentiment": -0.62,
-        "severity": 4,
-        "topic": "playback"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "intent",
-        "severity"
-      ],
-      "review_id": "46b77196-0d17-4a48-b376-03a50b3d7440",
-      "severity_abs_diff": 1,
-      "text": "Simply awesome",
-      "verifier": {
-        "confidence": "medium",
-        "intent": "praise",
-        "sentiment": -0.5,
-        "severity": 5,
-        "topic": "catalog"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "complaint",
-        "sentiment": -0.75,
-        "severity": 3,
-        "topic": "access"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "topic",
-        "severity",
-        "sentiment_within_tolerance"
-      ],
-      "review_id": "46ff0c74-5e86-4e5b-b4cd-36201aab0f9e",
-      "severity_abs_diff": 2,
-      "text": "I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs",
-      "verifier": {
-        "confidence": "low",
-        "intent": "complaint",
-        "sentiment": 0.5,
-        "severity": 5,
-        "topic": "downloads"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "cancellation",
-        "sentiment": 0.0,
-        "severity": 1,
-        "topic": "usability"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "4d5b9506-3ae8-41e0-b5fd-381eda6ca773",
-      "severity_abs_diff": 3,
-      "text": "Deendyal",
-      "verifier": {
-        "confidence": "low",
-        "intent": "cancellation",
-        "sentiment": -0.5,
-        "severity": 4,
-        "topic": "access"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "cancellation",
-        "sentiment": 0.98,
-        "severity": 2,
-        "topic": "billing"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "intent",
-        "severity",
-        "sentiment_within_tolerance"
-      ],
-      "review_id": "4e4c0ec8-e42b-4428-b192-d527c3384aab",
-      "severity_abs_diff": 3,
-      "text": "Nice but i am not install",
-      "verifier": {
-        "confidence": "medium",
-        "intent": "complaint",
-        "sentiment": -0.5,
-        "severity": 5,
-        "topic": "billing"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "request",
-        "sentiment": 0.46,
-        "severity": 1,
-        "topic": "catalog"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "severity"
-      ],
-      "review_id": "57aca404-d58b-4bb4-97b1-c64db92f054a",
-      "severity_abs_diff": 4,
-      "text": "I cant't buy premium correctly. it show that my internet is poor.",
-      "verifier": {
-        "confidence": "high",
-        "intent": "request",
-        "sentiment": 0.5,
-        "severity": 5,
-        "topic": "access"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "praise",
-        "sentiment": 0.47,
-        "severity": 1,
-        "topic": "billing"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "intent",
-        "severity",
-        "sentiment_within_tolerance"
-      ],
       "review_id": "59da9b92-c3f1-4441-9dbd-dde441468cf3",
-      "severity_abs_diff": 4,
+      "severity_abs_diff": 0,
       "text": "Tbh it's the best",
       "verifier": {
-        "confidence": "high",
+        "confidence": "low",
         "intent": "request",
-        "sentiment": -1.0,
-        "severity": 5,
-        "topic": "access"
+        "sentiment": 0.0,
+        "severity": 1,
+        "topic": "billing"
       }
     },
     {
       "enricher": {
-        "intent": "unclear",
-        "sentiment": 0.86,
+        "intent": "praise",
+        "sentiment": 1.0,
         "severity": 1,
-        "topic": "playback"
+        "topic": "support"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
         "topic",
-        "intent",
-        "severity",
-        "sentiment_within_tolerance"
+        "intent"
       ],
       "review_id": "5c581e49-727a-4221-be0a-a59344c78d60",
-      "severity_abs_diff": 4,
+      "severity_abs_diff": 0,
       "text": "Good but everything is premium",
       "verifier": {
-        "confidence": "low",
-        "intent": "cancellation",
-        "sentiment": -1.0,
-        "severity": 5,
-        "topic": "catalog"
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": 1.0,
+        "severity": 1,
+        "topic": "billing"
       }
     },
     {
       "enricher": {
         "intent": "cancellation",
-        "sentiment": -0.96,
+        "sentiment": -1.0,
         "severity": 4,
-        "topic": "playback"
+        "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
-        "topic",
         "intent",
         "severity",
         "sentiment_within_tolerance"
       ],
       "review_id": "5d5e08d1-1686-4c86-b9bd-cb0f3a719e0b",
-      "severity_abs_diff": 1,
+      "severity_abs_diff": 2,
       "text": "Time to switch to another platform. Spotify team has made a bad decision with the new updates.",
       "verifier": {
-        "confidence": "high",
-        "intent": "request",
-        "sentiment": 0.0,
-        "severity": 5,
-        "topic": "other"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "complaint",
-        "sentiment": -0.44,
-        "severity": 5,
-        "topic": "playback"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": true,
-      "fields": [
-        "intent",
-        "severity",
-        "sentiment_within_tolerance"
-      ],
-      "review_id": "6455e7cb-ad90-47ad-883f-5b0f0e205af1",
-      "severity_abs_diff": 4,
-      "text": "i have used spotify for 5 years and would say its the best streaming service",
-      "verifier": {
         "confidence": "low",
-        "intent": "request",
+        "intent": "unclear",
         "sentiment": 1.0,
-        "severity": 1,
-        "topic": "playback"
+        "severity": 2,
+        "topic": "catalog"
       }
     },
     {
       "enricher": {
         "intent": "request",
-        "sentiment": -0.19,
+        "sentiment": -1.0,
         "severity": 1,
-        "topic": "support"
+        "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
       "fields": [
         "topic",
         "intent",
-        "severity",
         "sentiment_within_tolerance"
       ],
-      "review_id": "6ea569fb-4d91-4fea-bbcc-c61cda5791be",
-      "severity_abs_diff": 3,
-      "text": "I love to listen songs and i don't have particular song type. Its depends on my mood. Spotify makes this very easy. Its understand my mood and play ▶️ by according. I loved it so far.",
+      "review_id": "6455e7cb-ad90-47ad-883f-5b0f0e205af1",
+      "severity_abs_diff": 0,
+      "text": "i have used spotify for 5 years and would say its the best streaming service",
       "verifier": {
         "confidence": "high",
         "intent": "complaint",
-        "sentiment": -1.0,
-        "severity": 4,
-        "topic": "other"
+        "sentiment": 1.0,
+        "severity": 1,
+        "topic": "access"
       }
     },
     {
       "enricher": {
         "intent": "complaint",
-        "sentiment": 0.0,
+        "sentiment": 1.0,
         "severity": 2,
         "topic": "playback"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
       "fields": [
+        "topic",
         "intent",
-        "sentiment_within_tolerance"
+        "severity"
       ],
-      "review_id": "710e1aee-ed80-4753-9c4e-c63bee84fd56",
-      "severity_abs_diff": 0,
-      "text": "Excellent",
+      "review_id": "6ea569fb-4d91-4fea-bbcc-c61cda5791be",
+      "severity_abs_diff": 2,
+      "text": "I love to listen songs and i don't have particular song type. Its depends on my mood. Spotify makes this very easy. Its understand my mood and play ▶️ by according. I loved it so far.",
       "verifier": {
         "confidence": "medium",
         "intent": "request",
-        "sentiment": 1.0,
-        "severity": 2,
-        "topic": "playback"
+        "sentiment": 0.5,
+        "severity": 4,
+        "topic": "access"
       }
     },
     {
       "enricher": {
-        "intent": "praise",
-        "sentiment": 0.0,
-        "severity": 1,
-        "topic": "catalog"
+        "intent": "complaint",
+        "sentiment": 1.0,
+        "severity": 5,
+        "topic": "other"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
         "topic",
-        "severity"
-      ],
-      "review_id": "8b9d84a8-f650-4272-b332-4d60cb42377d",
-      "severity_abs_diff": 1,
-      "text": "Sometimes it's a pain to connect to other devices live a gaming console or the PC",
-      "verifier": {
-        "confidence": "high",
-        "intent": "praise",
-        "sentiment": 0.5,
-        "severity": 2,
-        "topic": "access"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "cancellation",
-        "sentiment": 0.5,
-        "severity": 2,
-        "topic": "downloads"
-      },
-      "enricher_labeled_by": "fallback1",
-      "enricher_needs_review": true,
-      "fields": [
         "intent",
         "severity",
         "sentiment_within_tolerance"
       ],
-      "review_id": "92c43612-30bb-4514-bd51-cb7419c7e4d2",
-      "severity_abs_diff": 1,
-      "text": "Very bad app only ad",
+      "review_id": "710e1aee-ed80-4753-9c4e-c63bee84fd56",
+      "severity_abs_diff": 2,
+      "text": "Excellent",
       "verifier": {
-        "confidence": "medium",
-        "intent": "complaint",
+        "confidence": "high",
+        "intent": "request",
         "sentiment": -0.5,
-        "severity": 1,
-        "topic": "downloads"
+        "severity": 3,
+        "topic": "catalog"
       }
     },
     {
       "enricher": {
-        "intent": "cancellation",
-        "sentiment": 0.42,
+        "intent": "request",
+        "sentiment": 0.5,
         "severity": 1,
-        "topic": "playback"
+        "topic": "access"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
@@ -767,48 +716,99 @@
         "intent",
         "severity"
       ],
-      "review_id": "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+      "review_id": "8b9d84a8-f650-4272-b332-4d60cb42377d",
       "severity_abs_diff": 4,
-      "text": "Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time.",
+      "text": "Sometimes it's a pain to connect to other devices live a gaming console or the PC",
       "verifier": {
-        "confidence": "low",
-        "intent": "complaint",
-        "sentiment": 0.0,
+        "confidence": "high",
+        "intent": "cancellation",
+        "sentiment": 1.0,
         "severity": 5,
-        "topic": "usability"
+        "topic": "playback"
       }
     },
     {
       "enricher": {
-        "intent": "complaint",
-        "sentiment": -0.61,
-        "severity": 5,
-        "topic": "billing"
+        "intent": "praise",
+        "sentiment": -1.0,
+        "severity": 1,
+        "topic": "usability"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
       "fields": [
         "topic",
+        "intent",
+        "severity"
+      ],
+      "review_id": "92c43612-30bb-4514-bd51-cb7419c7e4d2",
+      "severity_abs_diff": 2,
+      "text": "Very bad app only ad",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "catalog"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 4,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic",
+        "severity",
+        "sentiment_within_tolerance"
+      ],
+      "review_id": "94c9f2f9-36fa-4c11-936e-660514fe7a35",
+      "severity_abs_diff": 3,
+      "text": "Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time.",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": 0.5,
+        "severity": 1,
+        "topic": "downloads"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "unclear",
+        "sentiment": -0.5,
+        "severity": 1,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "intent",
         "severity",
         "sentiment_within_tolerance"
       ],
       "review_id": "94fd7069-c8e1-4f09-9651-dd9f5cfefff4",
-      "severity_abs_diff": 2,
+      "severity_abs_diff": 4,
       "text": "\"EA sports its in the game\"",
       "verifier": {
         "confidence": "low",
-        "intent": "complaint",
-        "sentiment": 1.0,
-        "severity": 3,
-        "topic": "access"
+        "intent": "cancellation",
+        "sentiment": 0.5,
+        "severity": 5,
+        "topic": "other"
       }
     },
     {
       "enricher": {
-        "intent": "praise",
-        "sentiment": -0.81,
-        "severity": 1,
-        "topic": "support"
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 2,
+        "topic": "billing"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
@@ -823,70 +823,69 @@
         "confidence": "medium",
         "intent": "cancellation",
         "sentiment": -0.5,
+        "severity": 2,
+        "topic": "playback"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "request",
+        "sentiment": -0.5,
         "severity": 1,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "severity"
+      ],
+      "review_id": "a31fe34e-04ce-4375-8985-9a14db7fb11e",
+      "severity_abs_diff": 3,
+      "text": "This a good app and I really enjoyed it since I downloaded this app that why 4 stars",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": -1.0,
+        "severity": 4,
         "topic": "billing"
       }
     },
     {
       "enricher": {
         "intent": "request",
-        "sentiment": 0.52,
+        "sentiment": -0.5,
         "severity": 1,
         "topic": "usability"
       },
       "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
+      "enricher_needs_review": true,
       "fields": [
-        "topic",
-        "intent"
+        "intent",
+        "severity"
       ],
-      "review_id": "a31fe34e-04ce-4375-8985-9a14db7fb11e",
-      "severity_abs_diff": 0,
-      "text": "This a good app and I really enjoyed it since I downloaded this app that why 4 stars",
+      "review_id": "a3c6d913-4b67-4025-b34e-3760e5f7795f",
+      "severity_abs_diff": 2,
+      "text": "Too many ads",
       "verifier": {
         "confidence": "low",
-        "intent": "unclear",
-        "sentiment": 0.5,
-        "severity": 1,
-        "topic": "support"
+        "intent": "praise",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "usability"
       }
     },
     {
       "enricher": {
         "intent": "complaint",
-        "sentiment": -0.65,
-        "severity": 2,
-        "topic": "other"
+        "sentiment": 0.5,
+        "severity": 3,
+        "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
       "fields": [
         "topic",
-        "intent"
-      ],
-      "review_id": "a3c6d913-4b67-4025-b34e-3760e5f7795f",
-      "severity_abs_diff": 0,
-      "text": "Too many ads",
-      "verifier": {
-        "confidence": "high",
-        "intent": "unclear",
-        "sentiment": -0.5,
-        "severity": 2,
-        "topic": "downloads"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "unclear",
-        "sentiment": -0.94,
-        "severity": 1,
-        "topic": "billing"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "intent",
         "severity",
         "sentiment_within_tolerance"
       ],
@@ -894,92 +893,91 @@
       "severity_abs_diff": 1,
       "text": "Amazing!!!",
       "verifier": {
-        "confidence": "high",
-        "intent": "cancellation",
-        "sentiment": 0.5,
+        "confidence": "medium",
+        "intent": "complaint",
+        "sentiment": -1.0,
         "severity": 2,
         "topic": "support"
       }
     },
     {
       "enricher": {
-        "intent": "cancellation",
-        "sentiment": -0.9,
-        "severity": 5,
-        "topic": "catalog"
+        "intent": "request",
+        "sentiment": 0.5,
+        "severity": 1,
+        "topic": "access"
       },
       "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
+      "enricher_needs_review": true,
       "fields": [
-        "topic",
-        "intent",
-        "severity"
+        "severity",
+        "sentiment_within_tolerance"
       ],
       "review_id": "b25beb44-9cc8-4d1e-b375-a4f319419424",
-      "severity_abs_diff": 1,
+      "severity_abs_diff": 4,
       "text": "Nice as always,keep up the good job.",
       "verifier": {
-        "confidence": "high",
-        "intent": "unclear",
-        "sentiment": -0.5,
-        "severity": 4,
-        "topic": "usability"
+        "confidence": "medium",
+        "intent": "request",
+        "sentiment": -1.0,
+        "severity": 5,
+        "topic": "access"
       }
     },
     {
       "enricher": {
-        "intent": "cancellation",
-        "sentiment": -0.76,
-        "severity": 4,
-        "topic": "downloads"
+        "intent": "unclear",
+        "sentiment": 0.5,
+        "severity": 1,
+        "topic": "playback"
       },
       "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
+      "enricher_needs_review": true,
       "fields": [
-        "topic",
         "intent",
-        "sentiment_within_tolerance"
+        "severity"
       ],
       "review_id": "b543d31c-665d-483e-976a-fb1d1bfc75b3",
-      "severity_abs_diff": 0,
+      "severity_abs_diff": 1,
       "text": "I can enjoy the music I choose.",
       "verifier": {
-        "confidence": "medium",
-        "intent": "unclear",
-        "sentiment": 1.0,
-        "severity": 4,
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 2,
         "topic": "playback"
       }
     },
     {
       "enricher": {
         "intent": "praise",
-        "sentiment": 0.5,
+        "sentiment": -1.0,
         "severity": 1,
         "topic": "usability"
       },
-      "enricher_labeled_by": "fallback1",
+      "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
       "fields": [
         "topic",
         "intent",
-        "severity"
+        "severity",
+        "sentiment_within_tolerance"
       ],
       "review_id": "bc554ce2-8461-46eb-954d-c81e5b388cf4",
-      "severity_abs_diff": 2,
+      "severity_abs_diff": 4,
       "text": "Splendid thanks for the app Love it",
       "verifier": {
-        "confidence": "medium",
-        "intent": "request",
-        "sentiment": 1.0,
-        "severity": 3,
-        "topic": "billing"
+        "confidence": "low",
+        "intent": "unclear",
+        "sentiment": 0.5,
+        "severity": 5,
+        "topic": "downloads"
       }
     },
     {
       "enricher": {
-        "intent": "request",
-        "sentiment": 0.49,
+        "intent": "unclear",
+        "sentiment": 0.0,
         "severity": 1,
         "topic": "usability"
       },
@@ -992,73 +990,70 @@
         "sentiment_within_tolerance"
       ],
       "review_id": "bfda45a9-d2a3-4aa6-8530-9abe87a63df8",
-      "severity_abs_diff": 1,
+      "severity_abs_diff": 2,
       "text": "It's good it's just ads and I'm having troubles getting my Playlist",
       "verifier": {
-        "confidence": "medium",
-        "intent": "unclear",
-        "sentiment": -1.0,
-        "severity": 2,
-        "topic": "downloads"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "unclear",
-        "sentiment": -0.39,
-        "severity": 1,
-        "topic": "billing"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
-      "fields": [
-        "topic",
-        "severity",
-        "sentiment_within_tolerance"
-      ],
-      "review_id": "d26566f7-a898-4298-a06a-50bd3f7319c1",
-      "severity_abs_diff": 4,
-      "text": "Could be doing with hi-res audio don't like getting bombarded with playlist recommendations when the option is turned off",
-      "verifier": {
-        "confidence": "high",
-        "intent": "unclear",
-        "sentiment": 0.5,
-        "severity": 5,
-        "topic": "usability"
+        "confidence": "low",
+        "intent": "praise",
+        "sentiment": 1.0,
+        "severity": 3,
+        "topic": "other"
       }
     },
     {
       "enricher": {
         "intent": "praise",
-        "sentiment": 0.24,
+        "sentiment": -1.0,
         "severity": 1,
-        "topic": "billing"
+        "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
       "fields": [
         "topic",
-        "intent",
-        "severity",
-        "sentiment_within_tolerance"
+        "intent"
       ],
-      "review_id": "d3ddb3ad-e576-4638-a100-926ba56caabe",
-      "severity_abs_diff": 2,
-      "text": "Worst update",
+      "review_id": "d26566f7-a898-4298-a06a-50bd3f7319c1",
+      "severity_abs_diff": 0,
+      "text": "Could be doing with hi-res audio don't like getting bombarded with playlist recommendations when the option is turned off",
       "verifier": {
         "confidence": "medium",
-        "intent": "cancellation",
-        "sentiment": 1.0,
-        "severity": 3,
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 1,
+        "topic": "playback"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "praise",
+        "sentiment": 0.5,
+        "severity": 1,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "topic",
+        "severity"
+      ],
+      "review_id": "d3ddb3ad-e576-4638-a100-926ba56caabe",
+      "severity_abs_diff": 1,
+      "text": "Worst update",
+      "verifier": {
+        "confidence": "high",
+        "intent": "praise",
+        "sentiment": 0.5,
+        "severity": 2,
         "topic": "catalog"
       }
     },
     {
       "enricher": {
-        "intent": "request",
-        "sentiment": 0.93,
-        "severity": 1,
-        "topic": "downloads"
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
@@ -1068,22 +1063,22 @@
         "severity"
       ],
       "review_id": "dc73ecd9-3293-4ede-90d5-dd6cd1e8d087",
-      "severity_abs_diff": 3,
+      "severity_abs_diff": 1,
       "text": "Great",
       "verifier": {
         "confidence": "low",
         "intent": "praise",
-        "sentiment": 1.0,
-        "severity": 4,
-        "topic": "playback"
+        "sentiment": 0.5,
+        "severity": 5,
+        "topic": "access"
       }
     },
     {
       "enricher": {
-        "intent": "complaint",
-        "sentiment": -0.41,
-        "severity": 3,
-        "topic": "usability"
+        "intent": "cancellation",
+        "sentiment": 0.5,
+        "severity": 2,
+        "topic": "access"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
@@ -1095,22 +1090,22 @@
       "severity_abs_diff": 1,
       "text": "Awesome music app can def see y everyone loves it so much best part to me personally is the categories suggested for you personally",
       "verifier": {
-        "confidence": "high",
-        "intent": "complaint",
-        "sentiment": 0.0,
-        "severity": 2,
-        "topic": "billing"
+        "confidence": "medium",
+        "intent": "cancellation",
+        "sentiment": 0.5,
+        "severity": 1,
+        "topic": "downloads"
       }
     },
     {
       "enricher": {
-        "intent": "cancellation",
-        "sentiment": 0.82,
-        "severity": 3,
+        "intent": "unclear",
+        "sentiment": -1.0,
+        "severity": 1,
         "topic": "catalog"
       },
       "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
+      "enricher_needs_review": true,
       "fields": [
         "topic",
         "intent",
@@ -1118,22 +1113,46 @@
         "sentiment_within_tolerance"
       ],
       "review_id": "e3238297-f942-4c8e-96f7-b951b461e707",
-      "severity_abs_diff": 2,
+      "severity_abs_diff": 3,
       "text": "This music app is the only one I'll ever use,it's great and always the best experience listening to music on the net.I love it😎💯❤❤❤❤",
       "verifier": {
         "confidence": "medium",
-        "intent": "request",
-        "sentiment": -1.0,
-        "severity": 1,
-        "topic": "playback"
+        "intent": "complaint",
+        "sentiment": 0.5,
+        "severity": 4,
+        "topic": "support"
       }
     },
     {
       "enricher": {
-        "intent": "request",
-        "sentiment": 0.0,
+        "intent": "cancellation",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "review_id": "e8f2fb9b-ad3b-4fec-8194-ab67956ee50a",
+      "severity_abs_diff": 2,
+      "text": "Not user friendly for older people",
+      "verifier": {
+        "confidence": "low",
+        "intent": "complaint",
+        "sentiment": -0.5,
         "severity": 1,
-        "topic": "billing"
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": 0.0,
+        "severity": 4,
+        "topic": "usability"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": false,
@@ -1142,51 +1161,26 @@
         "intent",
         "severity"
       ],
-      "review_id": "e8f2fb9b-ad3b-4fec-8194-ab67956ee50a",
-      "severity_abs_diff": 4,
-      "text": "Not user friendly for older people",
+      "review_id": "ec96a982-68d0-44c4-b2be-13a999be4094",
+      "severity_abs_diff": 1,
+      "text": "This is not well so many ad here",
       "verifier": {
-        "confidence": "low",
-        "intent": "praise",
-        "sentiment": 0.0,
-        "severity": 5,
-        "topic": "usability"
+        "confidence": "medium",
+        "intent": "unclear",
+        "sentiment": 0.5,
+        "severity": 3,
+        "topic": "other"
       }
     },
     {
       "enricher": {
-        "intent": "request",
-        "sentiment": -0.72,
+        "intent": "unclear",
+        "sentiment": 0.0,
         "severity": 1,
-        "topic": "support"
+        "topic": "playback"
       },
       "enricher_labeled_by": "primary",
       "enricher_needs_review": true,
-      "fields": [
-        "topic",
-        "intent",
-        "sentiment_within_tolerance"
-      ],
-      "review_id": "ec96a982-68d0-44c4-b2be-13a999be4094",
-      "severity_abs_diff": 0,
-      "text": "This is not well so many ad here",
-      "verifier": {
-        "confidence": "low",
-        "intent": "unclear",
-        "sentiment": 1.0,
-        "severity": 1,
-        "topic": "billing"
-      }
-    },
-    {
-      "enricher": {
-        "intent": "complaint",
-        "sentiment": 0.31,
-        "severity": 5,
-        "topic": "billing"
-      },
-      "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
       "fields": [
         "topic",
         "intent",
@@ -1199,39 +1193,38 @@
       "verifier": {
         "confidence": "high",
         "intent": "praise",
-        "sentiment": -0.5,
-        "severity": 2,
-        "topic": "other"
+        "sentiment": -1.0,
+        "severity": 4,
+        "topic": "billing"
       }
     },
     {
       "enricher": {
         "intent": "unclear",
-        "sentiment": 0.0,
+        "sentiment": 1.0,
         "severity": 1,
-        "topic": "usability"
+        "topic": "billing"
       },
       "enricher_labeled_by": "primary",
-      "enricher_needs_review": false,
+      "enricher_needs_review": true,
       "fields": [
         "topic",
-        "intent",
         "severity",
         "sentiment_within_tolerance"
       ],
       "review_id": "ee17dcd6-07c0-4441-8e64-e7ea57877c78",
-      "severity_abs_diff": 1,
+      "severity_abs_diff": 3,
       "text": "Too much adds🙄🥲",
       "verifier": {
-        "confidence": "low",
-        "intent": "complaint",
-        "sentiment": -1.0,
-        "severity": 2,
+        "confidence": "medium",
+        "intent": "unclear",
+        "sentiment": -0.5,
+        "severity": 4,
         "topic": "other"
       }
     }
   ],
-  "label_config": "stub-jev-1.13.0>stub-gpt-6-luna@low(10%)>stub-claude-sonnet-5@low(1%)|enrich-v1|schema-v1|cfg-b1bc6d3ab1",
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154",
   "note": "Agreement between two models is a consistency check, not accuracy. Disagreements are reported for inspection; enriched labels are never overwritten by the verifier.",
   "owner": "independent model + code",
   "sample": {
@@ -1243,42 +1236,42 @@
     "sample_size": 48,
     "seed": "berkeley-fa-2026-insight-v1"
   },
-  "sentiment_mean_abs_diff": 0.7338,
+  "sentiment_mean_abs_diff": 0.7083,
   "sentiment_tolerance": 0.5,
   "severity_abs_diff_counts": {
     "0": 9,
-    "1": 13,
-    "2": 8,
-    "3": 10,
-    "4": 8
+    "1": 11,
+    "2": 17,
+    "3": 6,
+    "4": 5
   },
   "stage": "verify",
   "top_confusions": {
     "intent": {
-      "cancellation -> complaint": 6,
+      "cancellation -> complaint": 2,
       "cancellation -> request": 2,
-      "complaint -> praise": 3,
-      "complaint -> request": 2,
+      "complaint -> cancellation": 3,
+      "complaint -> request": 6,
+      "complaint -> unclear": 3,
       "praise -> cancellation": 2,
+      "praise -> complaint": 2,
       "praise -> request": 2,
-      "request -> praise": 4,
-      "request -> unclear": 4,
-      "unclear -> cancellation": 2,
+      "praise -> unclear": 2,
       "unclear -> complaint": 2
     },
     "topic": {
-      "billing -> access": 2,
-      "billing -> other": 2,
+      "access -> downloads": 2,
+      "billing -> downloads": 2,
+      "billing -> playback": 2,
       "catalog -> access": 3,
-      "catalog -> support": 2,
-      "downloads -> playback": 2,
-      "playback -> catalog": 2,
-      "support -> billing": 2,
+      "catalog -> playback": 3,
+      "playback -> access": 3,
+      "playback -> billing": 2,
       "usability -> billing": 2,
-      "usability -> downloads": 2,
-      "usability -> support": 3
+      "usability -> catalog": 4,
+      "usability -> other": 4
     }
   },
-  "verifier_config": "stub-gpt-6-luna@low|verify-v1|cfg-520f0f4346",
+  "verifier_config": "stub-haiku@n/a|verify-v1|cfg-5ade33d2cf",
   "verifier_failures": 0
 }

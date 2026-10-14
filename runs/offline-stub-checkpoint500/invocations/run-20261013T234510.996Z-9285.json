@@ -1,0 +1,462 @@
+{
+  "calls_all_invocations": {
+    "enrich:fallback1": {
+      "attempts": 47,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 122096,
+      "invalid_output_retries": 0,
+      "output_tokens": 1153,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 47
+    },
+    "enrich:primary": {
+      "attempts": 10,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 42098,
+      "invalid_output_retries": 0,
+      "output_tokens": 13685,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 10
+    },
+    "group": {
+      "attempts": 11,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 4007,
+      "invalid_output_retries": 0,
+      "output_tokens": 330,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 11
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 5557,
+      "invalid_output_retries": 0,
+      "output_tokens": 265,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 1978,
+      "invalid_output_retries": 0,
+      "output_tokens": 1336,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    }
+  },
+  "calls_this_invocation": {
+    "enrich:fallback1": {
+      "attempts": 47,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 122096,
+      "invalid_output_retries": 0,
+      "output_tokens": 1153,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 47
+    },
+    "enrich:primary": {
+      "attempts": 6,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 25135,
+      "invalid_output_retries": 0,
+      "output_tokens": 7956,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 6
+    },
+    "group": {
+      "attempts": 11,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 4007,
+      "invalid_output_retries": 0,
+      "output_tokens": 330,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 11
+    },
+    "memo": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 5557,
+      "invalid_output_retries": 0,
+      "output_tokens": 265,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    },
+    "verify": {
+      "attempts": 1,
+      "cached_input_tokens": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 1978,
+      "invalid_output_retries": 0,
+      "output_tokens": 1336,
+      "reasoning_tokens": 0,
+      "retries": 0,
+      "succeeded": 1
+    }
+  },
+  "completed_ids_saved": 500,
+  "config_summary": {
+    "crosscheck": {
+      "batch": "1 review/request",
+      "fields": "off",
+      "service_tier": "standard"
+    },
+    "enrich_primary": {
+      "batch": "50 reviews/request",
+      "service_tier": "flex"
+    },
+    "fallback1": {
+      "batch": "1 review/request",
+      "service_tier": "flex"
+    },
+    "fallback2": {
+      "batch": "1 review/request",
+      "service_tier": "subscription"
+    },
+    "group": {
+      "batch": "<= 12 quotes/request",
+      "service_tier": "subscription"
+    },
+    "memo": {
+      "batch": "aggregates + evidence pack",
+      "service_tier": "subscription"
+    },
+    "verify": {
+      "batch": "50 reviews/request",
+      "service_tier": "subscription"
+    }
+  },
+  "finished_at": "2026-10-13T23:45:49.172Z",
+  "input": {
+    "bytes": 76170,
+    "ingested_at": "2026-10-13T23:45:05.852Z",
+    "path": "Final Assignment - Spotify Reviews Dataset/checkpoint_500.csv",
+    "rows": 500,
+    "sha256": "a94e31663ee7b7eaa77e23b7a8425b530cc0c866ed5e714953172a0afef6a12f"
+  },
+  "label_config": "stub-gpt-6-luna@none>stub-gpt-6-luna@low(10%)>stub-sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-d87dd74154",
+  "ledger": {
+    "cap_usd": 1.0,
+    "denials": 0,
+    "reserved_usd": 0.0,
+    "spent_usd": 0.0,
+    "unknown_usd": 0.0
+  },
+  "models": {
+    "crosscheck": {
+      "effort": "n/a",
+      "enabled": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "model": "stub-gpt-6-luna",
+      "provider": "openai_decisions"
+    },
+    "enrich_primary": {
+      "effort": "none",
+      "model": "stub-gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback1": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.1,
+      "model": "stub-gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback2": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.0025,
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "group": {
+      "effort": "low",
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "memo": {
+      "effort": "low",
+      "model": "stub-sonnet",
+      "provider": "claude_code"
+    },
+    "verify": {
+      "effort": "n/a",
+      "model": "stub-haiku",
+      "provider": "claude_code"
+    }
+  },
+  "offline_stub": true,
+  "phase": "resume",
+  "project_spend": null,
+  "reconciled_unknown_calls": 0,
+  "results": {
+    "by_status_and_tier": {
+      "completed:cache": 21,
+      "completed:fallback1": 47,
+      "completed:primary": 432
+    },
+    "completed": 500,
+    "exact_text_cache_reuses": 21,
+    "needs_review": 318,
+    "quarantined": 0,
+    "quarantined_empty_text": 0,
+    "scope": {
+      "distinct_nonempty_texts": 479,
+      "duplicate_id_rows": 0,
+      "empty_texts": 0,
+      "nonempty": 500,
+      "representatives": 479,
+      "rows": 500,
+      "unique_ids": 500
+    },
+    "unfinished": 0
+  },
+  "run_id": "run-20261013T234510.996Z-9285",
+  "stage_configs": {
+    "group": "stub-sonnet@low|group-v1|cfg-517cba9731",
+    "memo": "stub-sonnet@low|memo-v1|cfg-61589c84fe",
+    "verify": "stub-haiku@n/a|verify-v1|cfg-5ade33d2cf"
+  },
+  "stage_seconds": {
+    "enrich": 0.524,
+    "export": 0.02,
+    "group": 30.031,
+    "ingest": 0.0,
+    "memo": 7.49,
+    "rank": 0.013,
+    "verify": 0.061
+  },
+  "stages": {
+    "analysis": {
+      "robustness": {
+        "by_complaint_count": {
+          "top_enricher": "usability",
+          "top_verifier": "playback/performance"
+        },
+        "decision_area_order_enricher": [
+          "usability",
+          "playback/performance",
+          "billing/support",
+          "access/onboarding"
+        ],
+        "decision_area_order_verifier": [
+          "playback/performance",
+          "billing/support",
+          "access/onboarding",
+          "usability"
+        ],
+        "enricher_labels": {
+          "areas": {
+            "access/onboarding": {
+              "complaints": 1,
+              "severity_sum": 2,
+              "share_of_complaints": 0.033333
+            },
+            "billing/support": {
+              "complaints": 3,
+              "severity_sum": 6,
+              "share_of_complaints": 0.1
+            },
+            "catalog/content": {
+              "complaints": 9,
+              "severity_sum": 33,
+              "share_of_complaints": 0.3
+            },
+            "general/unspecified": {
+              "complaints": 4,
+              "severity_sum": 17,
+              "share_of_complaints": 0.133333
+            },
+            "playback/performance": {
+              "complaints": 5,
+              "severity_sum": 16,
+              "share_of_complaints": 0.166667
+            },
+            "usability": {
+              "complaints": 8,
+              "severity_sum": 29,
+              "share_of_complaints": 0.266667
+            }
+          },
+          "complaints": 30
+        },
+        "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+        "note": "Same reviews (the declared verification sample, distinct texts weighted by the rows sharing each text), labelled independently by two model roles. Sampling error is not included.",
+        "row_weighted_reviews": 53,
+        "same_top_decision_area": false,
+        "sample": 48,
+        "top_decision_area_enricher": "usability",
+        "top_decision_area_verifier": "playback/performance",
+        "verifier_labels": {
+          "areas": {
+            "access/onboarding": {
+              "complaints": 3,
+              "severity_sum": 8,
+              "share_of_complaints": 0.15
+            },
+            "billing/support": {
+              "complaints": 4,
+              "severity_sum": 14,
+              "share_of_complaints": 0.2
+            },
+            "general/unspecified": {
+              "complaints": 2,
+              "severity_sum": 7,
+              "share_of_complaints": 0.1
+            },
+            "playback/performance": {
+              "complaints": 10,
+              "severity_sum": 28,
+              "share_of_complaints": 0.5
+            },
+            "usability": {
+              "complaints": 1,
+              "severity_sum": 1,
+              "share_of_complaints": 0.05
+            }
+          },
+          "complaints": 20
+        }
+      }
+    },
+    "enrich": {
+      "aliases_written": 13,
+      "caps": {
+        "fallback1": 47,
+        "fallback2": 1
+      },
+      "difficult": 187,
+      "fallback_not_selected_cap": 273,
+      "invalid_output_retries": 0,
+      "invalid_outputs": 0,
+      "left_pending_stopping": 0,
+      "left_pending_transient": 0,
+      "quarantined": 0,
+      "routed": {
+        "fallback1": 47,
+        "fallback2": 0
+      },
+      "saved_fallback1": 47,
+      "saved_fallback2": 0,
+      "saved_primary": 365,
+      "staged": 187,
+      "still_pending": 0,
+      "stop_reason": null,
+      "transient_requeued": 0
+    },
+    "export": {
+      "calls": 70,
+      "checkpoint_after": 500,
+      "checkpoint_before": 75,
+      "grading_dir": "runs/offline-stub-checkpoint500/grading",
+      "records": 500
+    },
+    "group": {
+      "issues": 22,
+      "memberships": 237,
+      "named_calls": 11
+    },
+    "memo": {
+      "claims": 40,
+      "source": "model"
+    },
+    "rank": {
+      "complaints": 237,
+      "issues": 22,
+      "top": [
+        {
+          "complaint_count": 19,
+          "issue_id": "catalog.missing",
+          "mean_severity": "3.315789",
+          "priority_score": 63,
+          "rank": 1,
+          "severity_sum": 63
+        },
+        {
+          "complaint_count": 17,
+          "issue_id": "billing.premium_only",
+          "mean_severity": "3.294118",
+          "priority_score": 56,
+          "rank": 2,
+          "severity_sum": 56
+        },
+        {
+          "complaint_count": 14,
+          "issue_id": "playback.crash",
+          "mean_severity": "3.428571",
+          "priority_score": 48,
+          "rank": 3,
+          "severity_sum": 48
+        },
+        {
+          "complaint_count": 15,
+          "issue_id": "usability.library",
+          "mean_severity": "2.933333",
+          "priority_score": 44,
+          "rank": 4,
+          "severity_sum": 44
+        },
+        {
+          "complaint_count": 13,
+          "issue_id": "other.general",
+          "mean_severity": "3.153846",
+          "priority_score": 41,
+          "rank": 5,
+          "severity_sum": 41
+        }
+      ]
+    },
+    "verify": {
+      "agreement": {
+        "intent": {
+          "agree": 12,
+          "of": 48,
+          "rate": 0.25
+        },
+        "sentiment_within_tolerance": {
+          "agree": 28,
+          "of": 48,
+          "rate": 0.5833
+        },
+        "severity": {
+          "agree": 9,
+          "of": 48,
+          "rate": 0.1875
+        },
+        "topic": {
+          "agree": 9,
+          "of": 48,
+          "rate": 0.1875
+        }
+      },
+      "completed": 48,
+      "sample": 48
+    }
+  },
+  "status": "completed",
+  "stop_reason": null,
+  "wall_clock_s": 38.155,
+  "workers": 1
+}

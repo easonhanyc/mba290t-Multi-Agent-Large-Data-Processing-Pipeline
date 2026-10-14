@@ -249,7 +249,8 @@ def evals():
           "JOIN reviews r ON r.review_id = v.review_id WHERE v.status = 'completed' AND r.status = 'completed'", one=True)
     return cached({"verification_sql": v, "verification_report": doc("verification_report"), "golden": doc("golden_results"),
                    "golden_error_analysis": doc("golden_error_analysis"), "planted_error": doc("planted_error"),
-                   "injection": doc("injection_check"), "rank_check": doc("rank_check"), "self_check": doc("self_check")})
+                   "injection": doc("injection_check"), "rank_check": doc("rank_check"), "self_check": doc("self_check"),
+                   "self_check_full": doc("self_check_full")})
 
 
 @app.get("/api/run")

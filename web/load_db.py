@@ -160,6 +160,7 @@ def documents(run_dir: Path):
     add("planted_error", "eval", "evals/planted_error.json")
     add("rank_check", "eval", "rank_check.json")
     add("self_check", "eval", "self-check.json")
+    add("self_check_full", "eval", "self-check-vs-full-reference.json")
     add("golden_results", "eval", ROOT / "evals" / "golden" / "results.json")
     add("golden_error_analysis", "eval_md", ROOT / "evals" / "golden" / "error_analysis.md")
     add("injection_check", "eval", ROOT / "evals" / "injection" / "synthetic_check.json")

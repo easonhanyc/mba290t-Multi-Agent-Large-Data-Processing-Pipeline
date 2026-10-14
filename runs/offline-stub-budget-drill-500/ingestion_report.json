@@ -16,7 +16,7 @@
     "unique_review_ids": 500
   },
   "exact_text_reuse": true,
-  "finished_at": "2026-10-02T01:12:03.536Z",
+  "finished_at": "2026-10-13T23:46:34.528Z",
   "first_review": "2022-05-19 14:22:29",
   "handling": {
     "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
@@ -25,7 +25,7 @@
     "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
     "missing_app_version": "kept; app_version is metadata and never used for classification"
   },
-  "helper_profile": "ingestion.json (produced by the provided check_submission.py profile helper)",
+  "helper_profile": "ingestion.json: full-file profile of Final Assignment - Spotify Reviews Dataset/checkpoint_500.csv produced by the provided check_submission.py profile helper",
   "input": {
     "bytes": 76170,
     "ignored_columns": [],
@@ -63,9 +63,13 @@
     "4": 45,
     "5": 216
   },
-  "run_id": "run-20261002T011203.510Z-da42",
+  "run_id": "run-20261013T234634.501Z-6d13",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
   "stage": "ingest",
-  "started_at": "2026-10-02T01:12:03.527Z",
+  "started_at": "2026-10-13T23:46:34.519Z",
   "text_length_chars": {
     "max": 499,
     "mean": 78.5,

@@ -1,0 +1,28 @@
+[pilot] cold run: insight run --input /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/runs/pilot100-20261012T224901Z/input/cost_100.csv --run-dir /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/runs/pilot100-20261012T224901Z --workers 1 --allow-paid --budget-usd 0.1
+[run] run-20261012T224901.597Z-55e5 | phase initial | run dir runs/pilot100-20261012T224901Z | budget $0.10 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 100 rows | 100 nonempty | 0 empty | 100 distinct texts (0 exact-text reuses) | 18 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 100 | staged for a fallback decision: 0 | fallback caps {'fallback1': 1, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 100 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.10 (reserved $0.0022)
+[enrich] primary: 0 distinct texts saved this invocation (of 100 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.10 (reserved $0.0022)
+[enrich] primary: 49 distinct texts saved this invocation (of 100 pending at start) | 1.1/s | staged 1 | spent $0.0007 of $0.10 (reserved $0.0022)
+[enrich] fallback decisions: 4 staged | routing 1 to fallback1 (cap 1, already routed 0) | 3 keep their primary label
+[verify] declared sample 10 of 100 distinct texts; 10 to call
+[group] 52 complaint/cancellation memberships in 15 issues; naming top 12 (12 new model calls, 0 cached or empty)
+[rank] 15 issues ranked from 52 complaint/cancellation records (no model calls)
+[analysis] 100 completed records: 18 months, 2 spike months, 4 app-version families; verifier robustness: True (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv
+[run] completed in 159.5s | completed 100 | quarantined 0 | unfinished 0 | spend $0.001339
+[pilot] warm run: insight run --input /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/runs/pilot100-20261012T224901Z/input/cost_100.csv --run-dir /Users/easonhan/Desktop/研一上/MBA 290T Fundamentals of Agentic AI/final-assignment/runs/pilot100-20261012T224901Z --workers 1 --allow-paid --budget-usd 0.1
+[run] run-20261012T225141.618Z-d2d1 | phase resume | run dir runs/pilot100-20261012T224901Z | budget $0.10 (already spent $0.001339, unknown $0.000000) | LIVE
+[ingest] 100 rows | 100 nonempty | 0 empty | 100 distinct texts (0 exact-text reuses) | 18 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 0 | staged for a fallback decision: 0 | fallback caps {'fallback1': 1, 'fallback2': 1} | already routed {'fallback1': 1, 'fallback2': 0} | backend llm | workers 1
+[verify] declared sample 10 of 100 distinct texts; 0 to call
+[group] 52 complaint/cancellation memberships in 15 issues; naming top 12 (0 new model calls, 12 cached or empty)
+[rank] 15 issues ranked from 52 complaint/cancellation records (no model calls)
+[analysis] 100 completed records: 18 months, 2 spike months, 4 app-version families; verifier robustness: True (no model calls)
+[memo] memo.md written (source: cache); 40 issue-level claims in claims.csv
+[run] completed in 0.0s | completed 100 | quarantined 0 | unfinished 0 | spend $0.001339
+[pilot] wrote cost/report.md
+exit 0

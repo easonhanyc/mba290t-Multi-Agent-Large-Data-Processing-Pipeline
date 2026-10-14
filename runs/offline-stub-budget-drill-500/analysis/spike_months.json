@@ -1,0 +1,91 @@
+{
+  "rule": "full months with more than 1.8x the median full-month review count",
+  "spikes": [
+    {
+      "complaint_share": 0.482143,
+      "largest_increases": [
+        {
+          "complaints_in_month": 6,
+          "issue_id": "playback.crash",
+          "pp_difference": 8.973,
+          "share_in_month": 0.107143,
+          "share_other_months": 0.017413
+        },
+        {
+          "complaints_in_month": 2,
+          "issue_id": "usability.other",
+          "pp_difference": 2.328,
+          "share_in_month": 0.035714,
+          "share_other_months": 0.012438
+        },
+        {
+          "complaints_in_month": 2,
+          "issue_id": "access.login",
+          "pp_difference": 2.079,
+          "share_in_month": 0.035714,
+          "share_other_months": 0.014925
+        },
+        {
+          "complaints_in_month": 2,
+          "issue_id": "other.general",
+          "pp_difference": 1.333,
+          "share_in_month": 0.035714,
+          "share_other_months": 0.022388
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "billing.price",
+          "pp_difference": 0.791,
+          "share_in_month": 0.017857,
+          "share_other_months": 0.00995
+        }
+      ],
+      "median_full_month_reviews": 21,
+      "month": "2023-07",
+      "reviews": 56
+    },
+    {
+      "complaint_share": 0.405063,
+      "largest_increases": [
+        {
+          "complaints_in_month": 3,
+          "issue_id": "downloads.offline",
+          "pp_difference": 2.742,
+          "share_in_month": 0.037975,
+          "share_other_months": 0.010554
+        },
+        {
+          "complaints_in_month": 3,
+          "issue_id": "usability.navigation",
+          "pp_difference": 2.214,
+          "share_in_month": 0.037975,
+          "share_other_months": 0.015831
+        },
+        {
+          "complaints_in_month": 3,
+          "issue_id": "catalog.search",
+          "pp_difference": 1.423,
+          "share_in_month": 0.037975,
+          "share_other_months": 0.023747
+        },
+        {
+          "complaints_in_month": 2,
+          "issue_id": "usability.other",
+          "pp_difference": 1.212,
+          "share_in_month": 0.025316,
+          "share_other_months": 0.013193
+        },
+        {
+          "complaints_in_month": 3,
+          "issue_id": "usability.library",
+          "pp_difference": 0.895,
+          "share_in_month": 0.037975,
+          "share_other_months": 0.029024
+        }
+      ],
+      "median_full_month_reviews": 21,
+      "month": "2023-10",
+      "reviews": 79
+    }
+  ]
+}

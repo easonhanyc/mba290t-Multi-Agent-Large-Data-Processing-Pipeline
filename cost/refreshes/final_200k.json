@@ -7,9 +7,135 @@
   "completed": 200000,
   "quarantined": 13,
   "unfinished": 0,
-  "workers": 4,
-  "invocations": 5,
-  "wall_clock_s": 9156.131,
+  "workers": 16,
+  "invocations": 7,
+  "wall_clock_s": 9334.36,
   "label_config": "gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790",
-  "saved_at": "2026-10-13T02:10:46+00:00"
+  "saved_at": "2026-10-14T03:12:22+00:00",
+  "workers_source": "max over the invocations that made enrichment calls",
+  "latest_invocation_workers": 4,
+  "enrichment_invocations": 2,
+  "enrichment_wall_clock_s": 8974.424,
+  "enrichment_stage_seconds": 8567.764,
+  "invocations_detail": [
+    {
+      "run_id": "run-20261012T232925.093Z-9d9d",
+      "phase": "initial",
+      "status": "interrupted",
+      "workers": 16,
+      "wall_clock_s": 208.431,
+      "stage_seconds": {
+        "enrich": 193.123,
+        "export": 2.925,
+        "ingest": 12.289
+      },
+      "enrichment_calls": 112,
+      "budget_cap_usd": 4.0,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261012T233254.463Z-c2b5",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 16,
+      "wall_clock_s": 8765.993,
+      "stage_seconds": {
+        "enrich": 8374.641,
+        "export": 8.961,
+        "group": 45.986,
+        "ingest": 0.016,
+        "memo": 44.697,
+        "rank": 1.93,
+        "verify": 288.562
+      },
+      "enrichment_calls": 16766,
+      "budget_cap_usd": 4.0,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261013T020340.008Z-bf6f",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 66.589,
+      "stage_seconds": {
+        "export": 9.038,
+        "group": 27.774,
+        "ingest": 0.015,
+        "memo": 26.501,
+        "rank": 1.959
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 2.1,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261013T020708.758Z-2e20",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 58.97,
+      "stage_seconds": {
+        "export": 9.07,
+        "group": 9.014,
+        "ingest": 0.015,
+        "memo": 37.963,
+        "rank": 2.024
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 2.1,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261013T020919.171Z-a0b9",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 56.148,
+      "stage_seconds": {
+        "export": 9.094,
+        "group": 9.201,
+        "ingest": 0.014,
+        "memo": 34.915,
+        "rank": 2.033
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 2.1,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261013T233601.448Z-8794",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 115.389,
+      "stage_seconds": {
+        "export": 11.258,
+        "group": 9.578,
+        "ingest": 0.016,
+        "memo": 91.468,
+        "rank": 2.107
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 2.1,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261013T233959.792Z-f394",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 62.84,
+      "stage_seconds": {
+        "export": 9.594,
+        "group": 9.597,
+        "ingest": 0.016,
+        "memo": 40.502,
+        "rank": 2.135
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 2.1,
+      "budget_denials": 0
+    }
+  ]
 }

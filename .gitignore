@@ -11,6 +11,8 @@ node_modules/
 # Large raw data: link it and record its checksum instead of committing it
 Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv
 data/*.csv
+# 5-row CC0 course extract used by the two provider probes (runs/probe-*), cited in docs/model_choice.md
+!data/probe_dev_5.csv
 # The large final-run state database is published as a release asset, not committed
 runs/final-*/state.sqlite*
 runs/_*/
@@ -20,7 +22,6 @@ web/local.db
 # Course-provided dataset folder (download the course ZIP and unzip it here; see README)
 Final Assignment - Spotify Reviews Dataset/
 runs/.live.lock
-runs/*_console.log
 runs/**/full-reference.json
 runs/**/self-check-vs-full-reference.json.tmp
 runs/**/state.sqlite-shm

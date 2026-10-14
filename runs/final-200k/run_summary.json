@@ -39,6 +39,22 @@
       "status": "completed",
       "stop_reason": null,
       "wall_clock_s": 56.148
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261013T233601.448Z-8794",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 115.389
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261013T233959.792Z-f394",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 62.84
     }
   ],
   "latest": {
@@ -79,15 +95,16 @@
         "succeeded": 22
       },
       "memo": {
-        "attempts": 4,
-        "cached_input_tokens": 27292,
+        "attempts": 7,
+        "cached_input_tokens": 65115,
         "cost_usd": 0.0,
-        "input_tokens": 65309,
-        "invalid_output_retries": 0,
-        "output_tokens": 11746,
-        "reasoning_tokens": 2165,
+        "failed": 2,
+        "input_tokens": 141629,
+        "invalid_output_retries": 1,
+        "output_tokens": 24767,
+        "reasoning_tokens": 3667,
         "retries": 0,
-        "succeeded": 4
+        "succeeded": 5
       },
       "verify": {
         "attempts": 40,
@@ -104,12 +121,12 @@
     "calls_this_invocation": {
       "memo": {
         "attempts": 1,
-        "cached_input_tokens": 10878,
+        "cached_input_tokens": 12599,
         "cost_usd": 0.0,
-        "input_tokens": 20214,
+        "input_tokens": 25832,
         "invalid_output_retries": 0,
-        "output_tokens": 3085,
-        "reasoning_tokens": 308,
+        "output_tokens": 4506,
+        "reasoning_tokens": 594,
         "retries": 0,
         "succeeded": 1
       }
@@ -146,7 +163,7 @@
         "service_tier": "subscription"
       }
     },
-    "finished_at": "2026-10-13T02:10:16.220Z",
+    "finished_at": "2026-10-13T23:41:04.074Z",
     "input": {
       "bytes": 29411284,
       "ingested_at": "2026-10-12T23:29:31.437Z",
@@ -253,18 +270,18 @@
       },
       "unfinished": 0
     },
-    "run_id": "run-20261013T020919.171Z-a0b9",
+    "run_id": "run-20261013T233959.792Z-f394",
     "stage_configs": {
       "group": "sonnet@low|group-v1|cfg-28f1c4b99f",
-      "memo": "sonnet@low|memo-v1|cfg-5b215798be",
+      "memo": "sonnet@low|memo-v1|cfg-820daf045e",
       "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
     },
     "stage_seconds": {
-      "export": 9.094,
-      "group": 9.201,
-      "ingest": 0.014,
-      "memo": 34.915,
-      "rank": 2.033
+      "export": 9.594,
+      "group": 9.597,
+      "ingest": 0.016,
+      "memo": 40.502,
+      "rank": 2.135
     },
     "stages": {
       "analysis": {
@@ -365,7 +382,7 @@
         }
       },
       "export": {
-        "calls": 16944,
+        "calls": 16947,
         "checkpoint_after": 200000,
         "checkpoint_before": 34638,
         "grading_dir": "runs/final-200k/grading",
@@ -429,7 +446,7 @@
     },
     "status": "completed",
     "stop_reason": null,
-    "wall_clock_s": 56.148,
+    "wall_clock_s": 62.84,
     "workers": 4
   }
 }

@@ -217,3 +217,147 @@ class TestDecisionsAdapter(unittest.TestCase):
         with self.assertRaises(ProviderError) as cm:
             raise_mapped(openai, err(None))
         self.assertEqual(cm.exception.kind, "transient")
+
+
+class TestMemoTraceability(unittest.TestCase):
+    """Memo prose numbers carry token IDs, spike bullets list only real increases, golden status is never 'pending'."""
+
+    def _payload(self, lifts):
+        from insight import memo
+        ranking = [{"issue_id": "billing.premium_only", "complaint_count": 18016, "severity_sum": 52577,
+                    "mean_severity": "2.918350", "priority_score": 52577}]
+        issues = {"issues": [{"issue_id": "billing.premium_only", "name": "Premium-only restrictions", "evidence": [],
+                              "definition": "Features locked to Premium."}]}
+        areas = {"areas": [{"area": "billing/support", "decision_option": True, "complaint_count": 20290,
+                            "severity_sum": 59146, "share_of_complaints": "0.226042"}]}
+        analysis = {"spikes": {"spikes": [{"month": "2023-07", "reviews": 25850, "median_full_month_reviews": 8549,
+                                           "largest_increases": lifts}]}}
+        return memo.build_payload(ranking, issues, areas, [("Reviews in scope", 200013, "ingestion_report.json")],
+                                  1, 1, 10, analysis)
+
+    def _render(self, payload, tokens, data):
+        from insight import memo
+        meta = {"scope": "test", "run_id": "r", "input": "in.csv", "input_sha256": "0" * 64, "offline_stub": False,
+                "mandatory_limitations": []}
+        return memo.MemoStage.render(None, data, payload, tokens, meta, "model")
+
+    def test_spike_bullet_lists_only_positive_increases(self):
+        payload, tokens, _ = self._payload([
+            {"issue_id": "other.general", "pp_difference": 35.976}, {"issue_id": "usability.ads", "pp_difference": 0.04},
+            {"issue_id": "billing.price", "pp_difference": -0.011}, {"issue_id": "support.contact", "pp_difference": -0.065}])
+        spike = payload["trends_and_robustness"]["spike_months"][0]
+        self.assertEqual([l["issue_id"] for l in spike["largest_increases"]], ["other.general"])  # +0.0 pp is not a rise
+        data = {"recommended_area": "billing/support", "recommendation": "Premium-only {C02}.", "rationale": ["x"],
+                "alternatives": [], "limitations": ["y"], "cited_reviews": []}
+        md = self._render(payload, tokens, data)
+        self.assertIn("`other.general` +36.0 pp (", md)
+        self.assertNotIn("-0.0 pp", md)
+        self.assertNotIn("billing.price", md)
+        payload, tokens, _ = self._payload([{"issue_id": "billing.price", "pp_difference": -0.011}])
+        md = self._render(payload, tokens, data)
+        self.assertIn("no issue's share of complaints rose", md)
+        self.assertNotIn("largest increases", md)
+
+    def test_prose_numbers_carry_token_ids_and_every_token_is_indexed(self):
+        from insight import memo
+        payload, tokens, claims = self._payload([{"issue_id": "other.general", "pp_difference": 3.0}])
+        data = {"recommended_area": "billing/support",
+                "recommendation": "Premium-only restrictions lead with severity sum {C02} across {C01} reviews.",
+                "rationale": ["The area totals {A02}."], "alternatives": [],
+                "next_quarter_actions": ["Test free-tier controls and watch {C01}."],
+                "what_would_change_the_call": ["The spike in {T01} fading."],
+                "limitations": ["Only {S01} reviews in scope."], "cited_reviews": []}
+        self.assertEqual(memo.validate(data, tokens, []), [])
+        md = self._render(payload, tokens, data)
+        for text in ("severity sum 52577 (C02) across 18016 (C01) reviews", "totals 59146 (A02)",
+                     "watch 18016 (C01)", "spike in 2023-07 (T01)", "Only 200013 (S01) reviews", "## Next-quarter actions",
+                     "## What would change this call", "memo_tokens.csv"):
+            self.assertIn(text, md)
+        index = {r["token_id"]: r for r in memo.token_index(payload, tokens)}
+        self.assertEqual(set(index), set(tokens))
+        self.assertEqual(index["C02"]["source"], "claims.csv (from ranking.csv)")
+        self.assertEqual(index["A02"]["source"], "area_rollup.json")
+        self.assertEqual(index["S01"]["source"], "ingestion_report.json")
+        self.assertEqual(index["T01"]["source"], "analysis/spike_months.json")
+        self.assertEqual({c["claim_id"] for c in claims}, {k for k in tokens if k.startswith("C")})
+        bad = dict(data, next_quarter_actions=["Ship it in Q1."])
+        self.assertTrue(any("next_quarter_actions[0]" in p and "digit" in p for p in memo.validate(bad, tokens, [])))
+        req = memo.memo_request(payload, [], 100)
+        self.assertTrue({"next_quarter_actions", "what_would_change_the_call"} <= set(req["schema"]["required"]))
+
+    def test_golden_limitation_is_read_from_results_never_pending(self):
+        from insight import memo
+        lines = ["5 completed records are flagged needs_review, 0 are quarantined and 0 are unfinished; the golden-set "
+                 "comparison (human labels) is still pending."]
+        self.assertEqual(memo.mandatory_limitations(lines, None),
+                         ["5 completed records are flagged needs_review, 0 are quarantined and 0 are unfinished."])
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "results.json"
+            path.write_text(json.dumps({"status": "ready", "cases": 50, "label_config": "lc-1",
+                                        "agreement": {"topic": 0.76, "intent": 0.74, "severity": 0.76}}))
+            self.assertIsNone(memo.golden_status("another-config", path))
+            golden = memo.golden_status("lc-1", path)
+            out = memo.mandatory_limitations(lines, golden)
+        self.assertFalse(any("pending" in x for x in out))
+        self.assertIn("on 50 human-labelled reviews", out[-1])
+        self.assertIn("topic 76%, intent 74% and severity 76%", out[-1])
+
+
+class TestMemoTokensAndVerifiedTrace(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        cls.rd = Path(cls.tmp.name) / "run"
+        code, out = _run("run", "--input", FIXTURE, "--run-dir", cls.rd, "--offline-stub")
+        assert code == 0, out
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def test_every_token_id_in_memo_is_in_memo_tokens_csv(self):
+        import re
+        md = (self.rd / "memo.md").read_text(encoding="utf-8")
+        with open(self.rd / "memo_tokens.csv", encoding="utf-8") as f:
+            index = {r["token_id"]: r["value"] for r in csv.DictReader(f)}
+        cited = re.findall(r"(\S+) \(([CAST]\d{2,3})\)", md)
+        self.assertTrue(cited)
+        for value, tid in cited:
+            self.assertIn(tid, index)
+            self.assertTrue(value.endswith(index[tid].split()[-1]), (value, tid, index[tid]))
+        self.assertNotIn("pending", md.split("## Limitations")[1])
+
+    def test_trace_of_a_verified_review_shows_the_verifier_step(self):
+        from insight.store import Store
+        store = Store(self.rd)
+        verified = [r[0] for r in store.conn.execute("SELECT review_id FROM verifications WHERE status='completed'")]
+        self.assertTrue(verified)
+        code, out = _run("trace", "--run-dir", self.rd, "--review-id", verified[0], "--auto", "--offline-stub")
+        self.assertEqual(code, 0, out)
+        self.assertIn("A. Traced review (", out)
+        self.assertIn("| Field | Enricher (record) | Verifier (independent) | Code comparison |", out)
+        self.assertIn("B. An ambiguous or failed case", out)
+
+
+class TestMakeAnalysisSubset(unittest.TestCase):
+    def test_out_outside_the_repo_does_not_crash(self):
+        import contextlib
+        import importlib.util
+        import io
+        spec = importlib.util.spec_from_file_location("make_analysis_subset", ROOT / "scripts" / "make_analysis_subset.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        with tempfile.TemporaryDirectory() as d:
+            full = Path(d) / "full.csv"
+            with open(full, "w", encoding="utf-8", newline="") as f:
+                w = csv.writer(f, lineterminator="\n")
+                w.writerow(mod.FIELDS)
+                for i in range(6):
+                    w.writerow([f"id-{i}", "" if i == 5 else f"text {i}", "3", "0", "1.0", "2023-01-01 00:00:00"])
+            out = Path(d) / "elsewhere" / "subset.csv"
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                mod.main(["--full", str(full), "--n", "3", "--out", str(out)])
+            manifest = json.loads(out.with_suffix(".manifest.json").read_text())
+        self.assertEqual(manifest["file"], str(out.resolve()))
+        self.assertEqual(manifest["rows"], 4)  # 3 sampled + 1 empty-text row
+        self.assertIn("--out", manifest["command"])

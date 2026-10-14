@@ -1,49 +1,49 @@
 review_id,fields,enricher_topic,verifier_topic,enricher_intent,verifier_intent,enricher_severity,verifier_severity,enricher_labeled_by,text
-00363dc8-2117-4565-9af9-efadf8fa90cf,topic|intent|severity|sentiment_within_tolerance,catalog,support,cancellation,complaint,2,4,primary,Worst
-035213ba-b1b9-411c-b028-70296e5f0e73,intent,billing,billing,request,cancellation,1,1,fallback1,I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .
-05fa5b8a-a49b-43be-bab5-38af789a65a7,topic|intent,support,downloads,unclear,complaint,1,1,primary,Very bad doesn't work properly even if you network connection is best
-08c07310-e802-4a88-bd97-2a5f240c0b44,topic|intent|severity,other,support,request,unclear,1,2,primary,Kitna paisa chahiye bhai...gareebo ko lootega to paap lagega...sudhar jao bhagwaan sab dekh raha hai..mera jigri dost lattu depression me chala gaya hai tum kameeno ke karan..lattu ki aah lagegi saalo tumhe
-0d361ea6-3089-41c2-9e0f-4cd6a04f0dd8,intent|severity|sentiment_within_tolerance,catalog,catalog,cancellation,complaint,2,5,primary,aA😩qa1qw1awqqqqaqqa😊qqqw11qqqaq1qW1QAQ1QQQ12qww2aqqqwaqaqaA1aqq2Qqww1qq1qqaaqa☝️qQawww1qaqaqqaq😊q1qq12qq2aq🤩q☝️a1qqQ1qq1aaAawwa1qq1qqwQwqqWaw1aaqqQ
-0d9c62d1-2b53-4887-8156-a28eeac86e82,topic|intent|severity|sentiment_within_tolerance,playback,access,complaint,praise,5,4,primary,Recent update bad and needs rework
-10775595-01b9-4623-9163-51619e2a0fa9,topic|intent|severity|sentiment_within_tolerance,catalog,support,cancellation,complaint,2,1,primary,"One star for the songs availability, I like underrated songs which sometimes not available on other app but this app have, otherwise this app is worst it have adds every sec"
-145ea602-b8fb-41c1-bfdd-79293a18681f,topic|intent|severity,usability,downloads,request,praise,1,4,primary,I doesn't have the song feature were you play the song on computer it starts that same song but on mobile I tried playing a song and it play the most inappropriate song
-19cefc8d-4813-4fcd-8ebe-41958a622517,topic|intent,usability,support,praise,unclear,1,1,primary,Awesome app that has amazing features
-1ee942bb-a3de-4380-8c08-a15949687c6c,topic|severity,usability,support,cancellation,cancellation,3,1,primary,Uninstall this all
-1f13c3a2-e57b-460c-b569-964e6b2b1f31,topic|intent|severity,playback,downloads,request,praise,1,4,primary,"Can no longer listen to music off line or even log in. The app is broken. Stop telling people to reinstall the app. Just fix it. Maybe if all of your dissatisfied customers were to canal their subscriptions, you might listen. Without them, you have nothing."
-2be2ae92-6ad1-4c93-8589-65a0ce68fe46,topic|severity,billing,other,unclear,unclear,1,2,primary,Very nice app
-2c3b2ca3-32b0-435f-aef5-84efafce6606,topic|severity,catalog,access,complaint,complaint,5,2,primary,This aap is good
-33526c6f-7a49-4b3d-bd20-d1bc191c494c,topic|severity,playback,support,praise,praise,1,5,primary,"RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮"
-347e23c3-b84f-49f3-8d7a-da9f797d3790,topic|intent|severity|sentiment_within_tolerance,playback,billing,complaint,praise,2,4,primary,🕳️
-41f67b68-df85-4685-a28c-2558abcb71c9,topic|severity,usability,playback,complaint,complaint,4,1,primary,Great always using
-46b77196-0d17-4a48-b376-03a50b3d7440,topic|intent|severity,playback,catalog,cancellation,praise,4,5,primary,Simply awesome
-46ff0c74-5e86-4e5b-b4cd-36201aab0f9e,topic|severity|sentiment_within_tolerance,access,downloads,complaint,complaint,3,5,primary,I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs
-4d5b9506-3ae8-41e0-b5fd-381eda6ca773,topic|severity,usability,access,cancellation,cancellation,1,4,primary,Deendyal
-4e4c0ec8-e42b-4428-b192-d527c3384aab,intent|severity|sentiment_within_tolerance,billing,billing,cancellation,complaint,2,5,primary,Nice but i am not install
-57aca404-d58b-4bb4-97b1-c64db92f054a,topic|severity,catalog,access,request,request,1,5,primary,I cant't buy premium correctly. it show that my internet is poor.
-59da9b92-c3f1-4441-9dbd-dde441468cf3,topic|intent|severity|sentiment_within_tolerance,billing,access,praise,request,1,5,primary,Tbh it's the best
-5c581e49-727a-4221-be0a-a59344c78d60,topic|intent|severity|sentiment_within_tolerance,playback,catalog,unclear,cancellation,1,5,primary,Good but everything is premium
-5d5e08d1-1686-4c86-b9bd-cb0f3a719e0b,topic|intent|severity|sentiment_within_tolerance,playback,other,cancellation,request,4,5,primary,Time to switch to another platform. Spotify team has made a bad decision with the new updates.
-6455e7cb-ad90-47ad-883f-5b0f0e205af1,intent|severity|sentiment_within_tolerance,playback,playback,complaint,request,5,1,primary,i have used spotify for 5 years and would say its the best streaming service
-6ea569fb-4d91-4fea-bbcc-c61cda5791be,topic|intent|severity|sentiment_within_tolerance,support,other,request,complaint,1,4,primary,I love to listen songs and i don't have particular song type. Its depends on my mood. Spotify makes this very easy. Its understand my mood and play ▶️ by according. I loved it so far.
-710e1aee-ed80-4753-9c4e-c63bee84fd56,intent|sentiment_within_tolerance,playback,playback,complaint,request,2,2,primary,Excellent
-8b9d84a8-f650-4272-b332-4d60cb42377d,topic|severity,catalog,access,praise,praise,1,2,primary,Sometimes it's a pain to connect to other devices live a gaming console or the PC
-92c43612-30bb-4514-bd51-cb7419c7e4d2,intent|severity|sentiment_within_tolerance,downloads,downloads,cancellation,complaint,2,1,fallback1,Very bad app only ad
-94c9f2f9-36fa-4c11-936e-660514fe7a35,topic|intent|severity,playback,usability,cancellation,complaint,1,5,primary,"Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time."
-94fd7069-c8e1-4f09-9651-dd9f5cfefff4,topic|severity|sentiment_within_tolerance,billing,access,complaint,complaint,5,3,primary,"""EA sports its in the game"""
-9f7a013a-082e-4ec1-8a65-a1e0a0395d20,topic|intent,support,billing,praise,cancellation,1,1,primary,Nice app but why can't the lyrics of song on my playlist load?
-a31fe34e-04ce-4375-8985-9a14db7fb11e,topic|intent,usability,support,request,unclear,1,1,primary,This a good app and I really enjoyed it since I downloaded this app that why 4 stars
-a3c6d913-4b67-4025-b34e-3760e5f7795f,topic|intent,other,downloads,complaint,unclear,2,2,primary,Too many ads
-aeee488a-2077-489d-8914-1e01d5f7672f,topic|intent|severity|sentiment_within_tolerance,billing,support,unclear,cancellation,1,2,primary,Amazing!!!
-b25beb44-9cc8-4d1e-b375-a4f319419424,topic|intent|severity,catalog,usability,cancellation,unclear,5,4,primary,"Nice as always,keep up the good job."
-b543d31c-665d-483e-976a-fb1d1bfc75b3,topic|intent|sentiment_within_tolerance,downloads,playback,cancellation,unclear,4,4,primary,I can enjoy the music I choose.
-bc554ce2-8461-46eb-954d-c81e5b388cf4,topic|intent|severity,usability,billing,praise,request,1,3,fallback1,Splendid thanks for the app Love it
-bfda45a9-d2a3-4aa6-8530-9abe87a63df8,topic|intent|severity|sentiment_within_tolerance,usability,downloads,request,unclear,1,2,primary,It's good it's just ads and I'm having troubles getting my Playlist
-d26566f7-a898-4298-a06a-50bd3f7319c1,topic|severity|sentiment_within_tolerance,billing,usability,unclear,unclear,1,5,primary,Could be doing with hi-res audio don't like getting bombarded with playlist recommendations when the option is turned off
-d3ddb3ad-e576-4638-a100-926ba56caabe,topic|intent|severity|sentiment_within_tolerance,billing,catalog,praise,cancellation,1,3,primary,Worst update
-dc73ecd9-3293-4ede-90d5-dd6cd1e8d087,topic|intent|severity,downloads,playback,request,praise,1,4,primary,Great
-e25cf0b6-0285-4cc9-9a4a-5a8a05be929e,topic|severity,usability,billing,complaint,complaint,3,2,primary,Awesome music app can def see y everyone loves it so much best part to me personally is the categories suggested for you personally
-e3238297-f942-4c8e-96f7-b951b461e707,topic|intent|severity|sentiment_within_tolerance,catalog,playback,cancellation,request,3,1,primary,"This music app is the only one I'll ever use,it's great and always the best experience listening to music on the net.I love it😎💯❤❤❤❤"
-e8f2fb9b-ad3b-4fec-8194-ab67956ee50a,topic|intent|severity,billing,usability,request,praise,1,5,primary,Not user friendly for older people
-ec96a982-68d0-44c4-b2be-13a999be4094,topic|intent|sentiment_within_tolerance,support,billing,request,unclear,1,1,primary,This is not well so many ad here
-ed15bb17-865a-492b-ba1b-268f4cab78f6,topic|intent|severity|sentiment_within_tolerance,billing,other,complaint,praise,5,2,primary,Very good app enna advertisement verudu premium best
-ee17dcd6-07c0-4441-8e64-e7ea57877c78,topic|intent|severity|sentiment_within_tolerance,usability,other,unclear,complaint,1,2,primary,Too much adds🙄🥲
+00363dc8-2117-4565-9af9-efadf8fa90cf,topic|intent|severity,access,support,praise,cancellation,1,3,primary,Worst
+035213ba-b1b9-411c-b028-70296e5f0e73,topic|severity,billing,playback,request,request,1,3,fallback1,I m using this app from 5 to 6 year but now m uninstald this app cz his premium adds are everywhere now .
+05fa5b8a-a49b-43be-bab5-38af789a65a7,topic|severity,playback,other,cancellation,cancellation,4,2,fallback1,Very bad doesn't work properly even if you network connection is best
+08c07310-e802-4a88-bd97-2a5f240c0b44,topic|severity,catalog,playback,complaint,complaint,3,5,primary,Kitna paisa chahiye bhai...gareebo ko lootega to paap lagega...sudhar jao bhagwaan sab dekh raha hai..mera jigri dost lattu depression me chala gaya hai tum kameeno ke karan..lattu ki aah lagegi saalo tumhe
+0d361ea6-3089-41c2-9e0f-4cd6a04f0dd8,topic|intent|severity|sentiment_within_tolerance,usability,catalog,complaint,request,2,4,fallback1,aA😩qa1qw1awqqqqaqqa😊qqqw11qqqaq1qW1QAQ1QQQ12qww2aqqqwaqaqaA1aqq2Qqww1qq1qqaaqa☝️qQawww1qaqaqqaq😊q1qq12qq2aq🤩q☝️a1qqQ1qq1aaAawwa1qq1qqwQwqqWaw1aaqqQ
+0d9c62d1-2b53-4887-8156-a28eeac86e82,topic|intent|severity,usability,catalog,complaint,unclear,4,5,primary,Recent update bad and needs rework
+10775595-01b9-4623-9163-51619e2a0fa9,topic|intent|sentiment_within_tolerance,playback,access,cancellation,complaint,5,5,fallback1,"One star for the songs availability, I like underrated songs which sometimes not available on other app but this app have, otherwise this app is worst it have adds every sec"
+145ea602-b8fb-41c1-bfdd-79293a18681f,topic|intent,catalog,playback,praise,unclear,1,1,fallback1,I doesn't have the song feature were you play the song on computer it starts that same song but on mobile I tried playing a song and it play the most inappropriate song
+19cefc8d-4813-4fcd-8ebe-41958a622517,intent|severity,other,other,complaint,request,2,4,primary,Awesome app that has amazing features
+1ee942bb-a3de-4380-8c08-a15949687c6c,topic|intent|severity,playback,access,complaint,unclear,3,1,primary,Uninstall this all
+1f13c3a2-e57b-460c-b569-964e6b2b1f31,topic|intent|severity|sentiment_within_tolerance,usability,support,cancellation,praise,4,5,primary,"Can no longer listen to music off line or even log in. The app is broken. Stop telling people to reinstall the app. Just fix it. Maybe if all of your dissatisfied customers were to canal their subscriptions, you might listen. Without them, you have nothing."
+2be2ae92-6ad1-4c93-8589-65a0ce68fe46,topic|intent|severity|sentiment_within_tolerance,usability,billing,complaint,request,3,1,primary,Very nice app
+2c3b2ca3-32b0-435f-aef5-84efafce6606,topic|intent|severity|sentiment_within_tolerance,playback,billing,praise,complaint,1,5,fallback1,This aap is good
+33526c6f-7a49-4b3d-bd20-d1bc191c494c,topic|intent|severity|sentiment_within_tolerance,usability,other,cancellation,request,5,2,primary,"RUDE APP , THIS APP SUPPORT GUYS 🤮🤮🤮🤮🤮🤮🤮🤮🤮🤮. تطبيق سيء ، بدعم المثليين 🤮🤮🤮"
+347e23c3-b84f-49f3-8d7a-da9f797d3790,topic|intent,catalog,access,complaint,cancellation,2,2,primary,🕳️
+41f67b68-df85-4685-a28c-2558abcb71c9,intent,catalog,catalog,request,unclear,1,1,primary,Great always using
+46b77196-0d17-4a48-b376-03a50b3d7440,topic|intent|severity|sentiment_within_tolerance,billing,downloads,complaint,cancellation,3,4,primary,Simply awesome
+46ff0c74-5e86-4e5b-b4cd-36201aab0f9e,severity,downloads,downloads,cancellation,cancellation,2,4,primary,I am unable to use my Google assistant on the app.it says playing your Spotify playlist but do not play the songs
+4d5b9506-3ae8-41e0-b5fd-381eda6ca773,intent|severity|sentiment_within_tolerance,catalog,catalog,complaint,request,5,4,primary,Deendyal
+4e4c0ec8-e42b-4428-b192-d527c3384aab,topic|intent|severity,billing,downloads,praise,cancellation,1,3,primary,Nice but i am not install
+57aca404-d58b-4bb4-97b1-c64db92f054a,topic|severity,access,downloads,praise,praise,1,2,primary,I cant't buy premium correctly. it show that my internet is poor.
+59da9b92-c3f1-4441-9dbd-dde441468cf3,topic|intent,support,billing,cancellation,request,1,1,primary,Tbh it's the best
+5c581e49-727a-4221-be0a-a59344c78d60,topic|intent,support,billing,praise,request,1,1,primary,Good but everything is premium
+5d5e08d1-1686-4c86-b9bd-cb0f3a719e0b,intent|severity|sentiment_within_tolerance,catalog,catalog,cancellation,unclear,4,2,primary,Time to switch to another platform. Spotify team has made a bad decision with the new updates.
+6455e7cb-ad90-47ad-883f-5b0f0e205af1,topic|intent|sentiment_within_tolerance,catalog,access,request,complaint,1,1,primary,i have used spotify for 5 years and would say its the best streaming service
+6ea569fb-4d91-4fea-bbcc-c61cda5791be,topic|intent|severity,playback,access,complaint,request,2,4,primary,I love to listen songs and i don't have particular song type. Its depends on my mood. Spotify makes this very easy. Its understand my mood and play ▶️ by according. I loved it so far.
+710e1aee-ed80-4753-9c4e-c63bee84fd56,topic|intent|severity|sentiment_within_tolerance,other,catalog,complaint,request,5,3,primary,Excellent
+8b9d84a8-f650-4272-b332-4d60cb42377d,topic|intent|severity,access,playback,request,cancellation,1,5,primary,Sometimes it's a pain to connect to other devices live a gaming console or the PC
+92c43612-30bb-4514-bd51-cb7419c7e4d2,topic|intent|severity,usability,catalog,praise,request,1,3,primary,Very bad app only ad
+94c9f2f9-36fa-4c11-936e-660514fe7a35,topic|severity|sentiment_within_tolerance,usability,downloads,complaint,complaint,4,1,primary,"Spotify is great, but the new homescreen update is horrible. You're not tiktok or Instagram. I don't want to scroll through 1 playlist or album or artist at a time."
+94fd7069-c8e1-4f09-9651-dd9f5cfefff4,topic|intent|severity|sentiment_within_tolerance,usability,other,unclear,cancellation,1,5,primary,"""EA sports its in the game"""
+9f7a013a-082e-4ec1-8a65-a1e0a0395d20,topic|intent,billing,playback,complaint,cancellation,2,2,primary,Nice app but why can't the lyrics of song on my playlist load?
+a31fe34e-04ce-4375-8985-9a14db7fb11e,topic|severity,usability,billing,request,request,1,4,primary,This a good app and I really enjoyed it since I downloaded this app that why 4 stars
+a3c6d913-4b67-4025-b34e-3760e5f7795f,intent|severity,usability,usability,request,praise,1,3,primary,Too many ads
+aeee488a-2077-489d-8914-1e01d5f7672f,topic|severity|sentiment_within_tolerance,catalog,support,complaint,complaint,3,2,primary,Amazing!!!
+b25beb44-9cc8-4d1e-b375-a4f319419424,severity|sentiment_within_tolerance,access,access,request,request,1,5,primary,"Nice as always,keep up the good job."
+b543d31c-665d-483e-976a-fb1d1bfc75b3,intent|severity,playback,playback,unclear,complaint,1,2,primary,I can enjoy the music I choose.
+bc554ce2-8461-46eb-954d-c81e5b388cf4,topic|intent|severity|sentiment_within_tolerance,usability,downloads,praise,unclear,1,5,primary,Splendid thanks for the app Love it
+bfda45a9-d2a3-4aa6-8530-9abe87a63df8,topic|intent|severity|sentiment_within_tolerance,usability,other,unclear,praise,1,3,primary,It's good it's just ads and I'm having troubles getting my Playlist
+d26566f7-a898-4298-a06a-50bd3f7319c1,topic|intent,catalog,playback,praise,complaint,1,1,primary,Could be doing with hi-res audio don't like getting bombarded with playlist recommendations when the option is turned off
+d3ddb3ad-e576-4638-a100-926ba56caabe,topic|severity,usability,catalog,praise,praise,1,2,primary,Worst update
+dc73ecd9-3293-4ede-90d5-dd6cd1e8d087,topic|intent|severity,catalog,access,complaint,praise,4,5,primary,Great
+e25cf0b6-0285-4cc9-9a4a-5a8a05be929e,topic|severity,access,downloads,cancellation,cancellation,2,1,primary,Awesome music app can def see y everyone loves it so much best part to me personally is the categories suggested for you personally
+e3238297-f942-4c8e-96f7-b951b461e707,topic|intent|severity|sentiment_within_tolerance,catalog,support,unclear,complaint,1,4,primary,"This music app is the only one I'll ever use,it's great and always the best experience listening to music on the net.I love it😎💯❤❤❤❤"
+e8f2fb9b-ad3b-4fec-8194-ab67956ee50a,intent|severity,usability,usability,cancellation,complaint,3,1,primary,Not user friendly for older people
+ec96a982-68d0-44c4-b2be-13a999be4094,topic|intent|severity,usability,other,complaint,unclear,4,3,primary,This is not well so many ad here
+ed15bb17-865a-492b-ba1b-268f4cab78f6,topic|intent|severity|sentiment_within_tolerance,playback,billing,unclear,praise,1,4,primary,Very good app enna advertisement verudu premium best
+ee17dcd6-07c0-4441-8e64-e7ea57877c78,topic|severity|sentiment_within_tolerance,billing,other,unclear,unclear,1,4,primary,Too much adds🙄🥲

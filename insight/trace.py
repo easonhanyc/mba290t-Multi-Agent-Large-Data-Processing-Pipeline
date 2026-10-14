@@ -2,17 +2,23 @@
 
     python -m insight trace --run-dir runs/<run> --auto --out docs/trace_example.md
     python -m insight trace --run-dir runs/<run> --review-id <ID>
+    python -m insight trace --run-dir runs/<run> --review-id <ID> --auto   # <ID> as case A, plus the auto case B
 
-source row -> enrichment (calls, tier, label_config, quote) -> verification -> issue membership ->
-ranking row -> memo claims. --auto picks (1) a review that was verified, belongs to the top-ranked issue
-and is quoted in the memo evidence, and (2) an ambiguous or failed case with its recorded handling.
+source row -> enrichment (calls, tier, label_config, quote) -> verification (the verifier's independent
+labels, its call and the field-by-field comparison) -> issue membership -> ranking row -> memo claims
+(claim IDs and where the memo prose cites them). --auto picks (1) a review that was verified, belongs to
+the top-ranked issue and is quoted in the memo evidence, and (2) an ambiguous or failed case with its
+recorded handling.
 """
 
 import csv
 import json
+import re
 from pathlib import Path
 
 from . import labels
+
+_TOKEN = re.compile(r"\{(C\d{2,3})\}")
 
 
 def _read_csv(path):
@@ -89,7 +95,7 @@ def trace_markdown(store, cfg, run_dir, rid, title):
                   f"| evidence_quote | \"{rec['evidence_quote']}\" (exact substring: {rec['evidence_quote'] in src['review_text']}) |",
                   f"| entities (code-matched) | {', '.join(json.loads(rec['entities'] or '[]')) or '-'} |",
                   f"| needs_review | {bool(rec['needs_review'])} |", f"| cache_source_id | {rec['cache_source_id'] or '-'} |",
-                  f"| label_config | `{rec['label_config']}` |"]
+                  f"| label_config | `{rec['label_config'].replace('|', chr(92) + '|')}` |"]
             if detail.get("difficulty"):
                 L.append(f"| difficulty signals | {'; '.join(detail['difficulty'])} |")
             if detail.get("fallback"):
@@ -119,11 +125,31 @@ def trace_markdown(store, cfg, run_dir, rid, title):
     elif v["status"] != "completed":
         L.append(f"In the sample; verifier failed: {v['reason']}")
     else:
+        v = dict(v)
+        sample = _verification_sample(run_dir)
+        if sample:
+            L += [f"In the declared verification sample ({sample.get('method')}; seed `{sample.get('seed')}`, "
+                  f"{sample.get('sample_size')} of {sample.get('population')} distinct completed texts). The verifier saw "
+                  "only the review text, in its own batch request, never the enricher's labels.", ""]
         from .verify import compare
-        cmp = compare(dict(rec), dict(v)) if rec and rec["status"] == "completed" else None
-        L += [f"Verifier (`{vconf}`): topic {v['topic']}, intent {v['intent']}, severity {v['severity']}, "
-              f"sentiment {v['sentiment']}, confidence {v['confidence']}.",
-              f"Code comparison: {'agrees on every field' if cmp and not cmp['disagreement_fields'] else 'disagrees on ' + ', '.join(cmp['disagreement_fields']) if cmp else 'n/a'}."]
+        cmp = compare(dict(rec), v) if rec and rec["status"] == "completed" else None
+        L += [f"Verifier `{vconf}`, request `{v.get('request_id') or '-'}` (run `{v.get('run_id') or '-'}`), "
+              f"confidence {v['confidence']}:", "",
+              "| Field | Enricher (record) | Verifier (independent) | Code comparison |", "|---|---|---|---|"]
+        if cmp:
+            ag = cmp["agree"]
+            L += [f"| topic | {rec['topic']} | {v['topic']} | {'agree' if ag['topic'] else 'disagree'} |",
+                  f"| intent | {rec['intent']} | {v['intent']} | {'agree' if ag['intent'] else 'disagree'} |",
+                  f"| severity | {rec['severity']} | {v['severity']} | "
+                  f"{'agree' if ag['severity'] else 'disagree (abs. difference ' + str(cmp['severity_abs_diff']) + ')'} |",
+                  f"| sentiment | {rec['sentiment']} | {v['sentiment']} | abs. difference {cmp['sentiment_abs_diff']} "
+                  f"({'within' if ag['sentiment_within_tolerance'] else 'outside'} tolerance {labels.SENTIMENT_TOLERANCE}) |",
+                  "", f"Result: {'agrees on every field' if not cmp['disagreement_fields'] else 'disagrees on ' + ', '.join(cmp['disagreement_fields'])}"
+                  " (saved in `verification/report.json`; disagreements are listed in `verification/disagreements.csv`, "
+                  "and the enricher's labels are never overwritten)."]
+        else:
+            L.append(f"| topic / intent / severity / sentiment | - | {v['topic']} / {v['intent']} / {v['severity']} / "
+                     f"{v['sentiment']} | n/a |")
     members = [m for m in _read_csv(run_dir / "membership.csv") if m["review_id"] == rid]
     L += ["", "**4. Issue membership** (`group`, code; the model only names issues).", ""]
     if not members:
@@ -144,13 +170,48 @@ def trace_markdown(store, cfg, run_dir, rid, title):
     memo = json.loads((run_dir / "memo.json").read_text()) if (run_dir / "memo.json").exists() else {}
     cited = rid in ((memo.get("output") or {}).get("cited_reviews") or [])
     quoted = any(e["review_id"] == rid for e in (memo.get("payload") or {}).get("evidence", []))
-    L += ["", "**6. Memo** (`memo`, model + code; numbers are tokens filled by code).", ""]
+    L += ["", "**6. Memo** (`memo`, model + code; the model writes tokens, code fills each as `value (claim ID)`).", ""]
     if claims:
         L.append("Claims in `claims.csv` for this issue: " + ", ".join(f"`{c['claim_id']}` {c['metric']} = {c['value']}"
                                                                     for c in claims) + ".")
+        where = _claim_citations(memo.get("output") or {})
+        cited_here = [(c, where[c["claim_id"]]) for c in claims if c["claim_id"] in where]
+        if cited_here:
+            L += ["", f"Where `memo.md` cites them (memo source: {memo.get('source', '-')}):", ""]
+            L += [f"- `{c['claim_id']}` ({c['metric']}) is printed as `{c['value']} ({c['claim_id']})` in: "
+                  f"{', '.join(places)}" for c, places in cited_here]
+            L.append(f"- The memo's issue table prints all four values with their claim IDs (rank {rank['rank'] if rank else '-'} "
+                     "row), and `memo_tokens.csv` lists every token ID the memo uses.")
+        else:
+            L.append("The memo prose cites none of these claim IDs; they appear in the memo's issue table only.")
+    L.append("")
     L.append(f"This review is {'quoted in the memo evidence pack' if quoted else 'not quoted in the memo evidence pack'}"
-             f"{' and cited by the memo model' if cited else ''}.")
+             f"{' and cited by the memo model' if cited else ''}; it contributes to the issue's numbers above.")
     return "\n".join(L) + "\n"
+
+
+def _verification_sample(run_dir):
+    path = Path(run_dir) / "verification" / "report.json"
+    try:
+        return json.loads(path.read_text()).get("sample") if path.exists() else None
+    except (OSError, ValueError):
+        return None
+
+
+def _claim_citations(output):
+    """claim ID -> memo.md sections whose prose cites it (from the saved model output in memo.json)."""
+    places = {}
+    fields = [("Recommendation", output.get("recommendation"))]
+    for name, heading in (("next_quarter_actions", "Next-quarter actions"), ("rationale", "Why"),
+                          ("what_would_change_the_call", "What would change this call"), ("limitations", "Limitations")):
+        fields += [(f"{heading} #{i + 1}", t) for i, t in enumerate(output.get(name) or [])]
+    fields += [(f"Alternatives ({a.get('area')})", a.get("why_not_first")) for a in output.get("alternatives") or []
+               if isinstance(a, dict)]
+    for where, text in fields:
+        for cid in _TOKEN.findall(text or ""):
+            if where not in places.setdefault(cid, []):
+                places[cid].append(where)
+    return places
 
 
 def run_trace(store, cfg, run_dir, review_id=None, auto=False):
@@ -159,10 +220,28 @@ def run_trace(store, cfg, run_dir, review_id=None, auto=False):
              "Generated from saved artifacts by `python -m insight trace` (no model calls).", ""]
     if auto:
         main, hard = pick_reviews(store, cfg, run_dir)
+        if review_id:  # an explicitly chosen case A; case B is still picked automatically
+            main = review_id
         if main:
-            parts.append(trace_markdown(store, cfg, run_dir, main, "A. Traced review (top issue, verified, quoted in the memo)"))
+            parts.append(trace_markdown(store, cfg, run_dir, main, "A. Traced review (" + _describe(store, cfg, run_dir, main) + ")"))
         if hard:
             parts.append(trace_markdown(store, cfg, run_dir, hard, "B. An ambiguous or failed case and its recorded handling"))
     else:
-        parts.append(trace_markdown(store, cfg, run_dir, review_id, "Traced review"))
+        parts.append(trace_markdown(store, cfg, run_dir, review_id, "Traced review (" + _describe(store, cfg, run_dir, review_id) + ")"))
     return "\n".join(parts)
+
+
+def _describe(store, cfg, run_dir, rid):
+    """Which pipeline evidence this review carries, for the section title."""
+    ranking = _read_csv(Path(run_dir) / "ranking.csv")
+    member = next((m["issue_id"] for m in _read_csv(Path(run_dir) / "membership.csv") if m["review_id"] == rid), None)
+    v = store.verification(rid, cfg.stage_config("verify"))
+    memo = json.loads((Path(run_dir) / "memo.json").read_text()) if (Path(run_dir) / "memo.json").exists() else {}
+    quoted = any(e["review_id"] == rid for e in (memo.get("payload") or {}).get("evidence", []))
+    bits = []
+    if member:
+        rank = next((r["rank"] for r in ranking if r["issue_id"] == member), None)
+        bits.append("top issue" if rank == "1" else f"issue rank {rank}")
+    bits.append("verified" if v is not None and v["status"] == "completed" else "not in the verification sample")
+    bits.append("quoted in the memo" if quoted else "not quoted in the memo")
+    return ", ".join(bits)

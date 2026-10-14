@@ -1,6 +1,6 @@
 {
   "_doc": "Editable inputs for projections. Every value carries its source. Values marked 'estimate' or 'assumption' are NOT measurements: once a real pilot (cost/pilot_runs.json) or a refresh (cost/refreshes/*.json) exists, measured per-unit costs, latencies and fallback rates replace them automatically and the report says which was used. Prices live in cost/rates.csv.",
-  "as_of": "2026-10-10",
+  "as_of": "2026-10-13",
   "budget_usd": 9.0,
   "full_run": {
     "rows": 660622,
@@ -14,10 +14,12 @@
     "nonempty_to_classify": 200000,
     "empty_text_quarantines": 13,
     "distinct_nonempty_texts": 152363,
-    "source": "data/analysis_200k.manifest.json (scripts/make_analysis_subset.py)"
+    "source": "data/analysis_200k.manifest.json (scripts/make_analysis_subset.py)",
+    "decided_by": "project owner (declared subset; the full corpus is projected for reference only, not run)"
   },
   "controls": {
-    "max_workers": 4,
+    "max_workers": 16,
+    "_max_workers_doc": "enrichment workers of the final run: both invocations that made enrichment calls in runs/final-200k ran 16 workers (runs/final-200k/invocations/*.json, recorded in cost/refreshes/final_200k.json); the later group/memo regenerations used 4 but made no enrichment calls. Chosen after 1 -> 2 -> 8 worker steps; at 16 the Flex tier returned 172 HTTP 429 responses (about 1% of attempts), all retried, far below the configured 1,000 RPM limit (see report.md, 'Scaling decision')",
     "output_token_cap_per_review": 70,
     "max_fallback1_fraction": 0.1,
     "max_fallback2_fraction": 0.0025,
@@ -307,6 +309,15 @@
         "output_tokens_per_request": 1500,
         "seconds_per_request": 12,
         "source": "preflight estimate on checkpoint_500 (runs/_preflight500/preflight.json): characters / 4; no cache price listed"
+      }
+    ]
+  },
+  "scaling_decision": {
+    "_doc": "Runs read only for the report's worker comparison (not refreshes, not used for projections). Each is read from its committed state.sqlite and invocations/*.json; a missing run is reported as unavailable.",
+    "worker_comparison_runs": [
+      {
+        "run_dir": "runs/live-checkpoint500-w2",
+        "note": "same 500 reviews as checkpoint_500, cold, 2 workers"
       }
     ]
   }

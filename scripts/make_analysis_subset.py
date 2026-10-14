@@ -33,6 +33,15 @@ def sha256_file(path):
     return h.hexdigest()
 
 
+def shown(path):
+    """Path as recorded in the manifest: relative to the repo when inside it, else absolute (never raises)."""
+    path = Path(path).resolve()
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def ids_of(path):
     with open(path, encoding="utf-8-sig", newline="") as f:
         return [r["review_id"] for r in csv.DictReader(f)]
@@ -44,6 +53,7 @@ def main(argv=None):
     ap.add_argument("--n", type=int, default=200_000, help="sampled nonempty reviews (default 200,000)")
     ap.add_argument("--out", type=Path, default=ROOT / "data" / "analysis_200k.csv")
     args = ap.parse_args(argv)
+    args.full, args.out = args.full.resolve(), args.out.resolve()  # relative paths are taken from the current directory
 
     full_sha = sha256_file(args.full)
     if full_sha != FULL_SHA:
@@ -84,10 +94,10 @@ def main(argv=None):
             ids = ids_of(p)
             contains[name] = {"rows": len(ids), "all_in_scope": set(ids) <= keep}
     manifest = {
-        "file": str(args.out.relative_to(ROOT)), "sha256": sha256_file(args.out), "bytes": args.out.stat().st_size,
+        "file": shown(args.out), "sha256": sha256_file(args.out), "bytes": args.out.stat().st_size,
         "rows": written, "sampled_nonempty": len(chosen), "empty_text_rows_added": len(empty_ids),
         "distinct_sampled_texts": len(set(texts)),
-        "full_source": {"file": str(args.full.relative_to(ROOT)) if args.full.is_relative_to(ROOT) else str(args.full),
+        "full_source": {"file": shown(args.full),
                         "sha256": full_sha, "rows": len(rows), "matches_course_manifest": full_sha == FULL_SHA},
         "method": (f"Lowest SHA-256('{SEED}:' + review_id) among unique-ID, nonempty, valid-rating records "
                    f"(the course's sampling rule), first {args.n}; plus every empty-text row so it is explicitly "
@@ -97,7 +107,9 @@ def main(argv=None):
         "out_of_scope_reason": ("Not classified: outside the declared 200,000-review analysis scope chosen to keep "
                                 "total API spend under the $10 project budget. Ingested and profiled only."),
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "command": "python3 scripts/make_analysis_subset.py" + (f" --n {args.n}" if args.n != 200_000 else ""),
+        "command": "python3 scripts/make_analysis_subset.py" + (f" --n {args.n}" if args.n != 200_000 else "")
+                   + (f" --full '{shown(args.full)}'" if args.full != (DATASET / "spotify_reviews_18months.csv").resolve() else "")
+                   + (f" --out '{shown(args.out)}'" if args.out != (ROOT / "data" / "analysis_200k.csv").resolve() else ""),
     }
     mpath = args.out.with_suffix(".manifest.json")
     mpath.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

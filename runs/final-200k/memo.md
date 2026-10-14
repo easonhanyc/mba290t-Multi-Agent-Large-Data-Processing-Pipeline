@@ -1,25 +1,40 @@
 # Decision memo: where to focus next quarter
 
 Scope: the declared analysis scope: 200,013 reviews (analysis_200k.csv, a deterministic uniform sample of the 660,622-review corpus plus every empty-text row)  
-Run: `run-20261013T020919.171Z-a0b9` | input `data/analysis_200k.csv` (sha256 `3c023c9dd47a5775...`) | memo source: model
+Run: `run-20261013T233959.792Z-f394` | input `data/analysis_200k.csv` (sha256 `3c023c9dd47a5775...`) | memo source: model
+
+Numbers are written as value (token ID): C## IDs are the issue-level claims in `claims.csv`; every ID (C##, A## area roll-up, S## scope figure, T## trend/robustness) is listed with its value, what it measures and its source file in `memo_tokens.csv`.
 
 ## Recommendation
 
-**billing/support.** Prioritize billing/support, driven overwhelmingly by Premium-only restrictions (18016 complaints, severity sum 52577, mean severity 2.918350), which also shows a sharp spike in October (+25.1 pp). This area carries the highest baseline priority of all four areas (59146) and the largest year-over-year growth in review share (+10.9 pp).
+**billing/support.** Billing/support carries the highest baseline priority (59146 (A02)), driven almost entirely by the Premium-only restrictions issue (52577 (C02), mean severity 2.918350 (C03) across 18016 (C01) complaint and cancellation reviews). This issue is a free-tier packaging and entitlement policy question - what the free tier includes (skip limits, forced shuffle, inability to pick, repeat or rewind songs) and how changes to it are rolled out and explained - not a payment, checkout or support-backlog defect.
+
+## Next-quarter actions
+
+1. Pilot clearer in-app messaging and staged rollout of free-tier limits tied to the Premium-only restrictions issue (52577 (C02)), testing whether complaint count (18016 (C01)) or severity sum (52577 (C02)) for that issue declines.
+2. Review whether specific free-tier controls (skip limits, forced shuffle, repeat/rewind) can be partially restored or better explained, aiming to reduce the area's share of complaints (0.226042 (A03)) in the next period comparison.
+3. As a hedge, prioritize a scoped investigation into playback stability (stops/skips 16288 (C14), crashes 11618 (C22)) given the verifier's alternate ranking (758 (T46)), tracking whether its severity sum narrows the gap with billing/support in a future verified sample.
+4. Monitor the trend share for billing/support (+10.9 pp (T12)) into the next comparable period to confirm it continues rising rather than reversing.
 
 ## Why
 
-- Billing/support has the highest baseline priority score (59146), ahead of usability (54124), playback/performance (46058), and access/onboarding (11172).
-- Premium-only restrictions alone (18016 reviews, severity sum 52577, mean severity 2.918350) is the single largest issue in the entire table.
-- Year-over-year, billing/support's share of reviews grew the most of any decision area, from 4.5% to 15.4% (+10.9 pp), while playback/performance shrank (-5.0 pp) and usability/access grew only modestly (+0.7 pp, +0.9 pp).
-- A spike month in October shows billing.premium_only jumping +25.1 pp, consistent with an intensifying recent pattern rather than a one-off.
-- Robustness caveat: the independent verifier's severity-based ranking instead puts playback/performance on top (2000 sample), so the lead for billing/support is not fully robust across labeling methods; complaint-count ranking, however, favors usability in both labelings, underscoring this is a severity-driven call.
+- Billing/support's baseline severity sum (59146 (A02)) exceeds usability (54124 (A05)), playback/performance (46058 (A08)) and access/onboarding (11172 (A17)), and is dominated by the single premium_only issue (52577 (C02)) with a high mean severity (2.918350 (C03)).
+- The area's share of reviews grew from 4.5% (T10) in 2022 Jun-Oct (T01) to 15.4% (T11) in 2023 Jun-Oct (T02), a change of +10.9 pp (T12), the largest increase of any area in that comparison, while playback/performance's share fell (-5.0 pp (T15)).
+- A spike month (2023-10 (T35)) shows the premium_only issue rising sharply (+25.1 pp (T38)) relative to other months, consistent with the area's growth pattern.
+- Within sampling intervals, billing/support's complaint share (22.6% (T22), range 22.3% (T23) to 22.9% (T24)) is close to usability's (25.6% (T19), range 25.3% (T20) to 25.9% (T21)), so the lead over usability is not wide, though it still exceeds playback/performance's complaint share (15.5% (T25)).
+- The independent verifier's labels do not fully agree: on the same severity-sum metric the verifier ranks playback/performance first in its sample (758 (T46)) and billing/support third (661 (T48)), whereas the enricher labels rank billing/support first (787 (T42)) and playback/performance third (599 (T44)); both label sets agree usability leads on complaint count alone.
+
+## What would change this call
+
+- If a larger verified sample confirms the verifier's ordering with playback/performance ahead of billing/support on severity sum (758 (T46) versus 661 (T48)), that would weaken the recommendation.
+- If billing/support's share of reviews reverses and falls back toward its earlier-period level (4.5% (T10)) in the same months of the following year, that would weaken the case for prioritizing it.
+- If the spike-month lift in premium_only complaints (+25.1 pp (T38) in 2023-10 (T35)) fades back to the level seen in other months, that would suggest the issue is less persistent than the baseline priority implies.
 
 ## Alternatives considered
 
-- **usability**: Usability has the second-highest baseline priority (54124), led by Excessive ad interruptions (11429, severity sum 24431) and Playlist/queue misbehavior (4087, severity sum 12202), and its complaint share held the top spot by count in both enricher and verifier views (25.6%, interval 25.3%-25.9%). But its year-over-year growth (+0.7 pp) was far smaller than billing/support's (+10.9 pp).
-- **playback/performance**: Playback/performance shows severity concentration, e.g. App crashes (3098, mean severity 3.750161) and Playback stops (4973, mean severity 3.275287), and the verifier's severity-based ranking places it first (2000 sample). However, its baseline priority under the primary labeling (46058) trails billing/support, and its year-over-year review share declined (-5.0 pp).
-- **access/onboarding**: Access/onboarding has the highest mean severity per single issue (Login failures, mean severity 3.960270) but by far the smallest baseline priority (11172) and smallest share of complaints (3.2%, interval 3.1%-3.3%), so its total impact remains limited even though its share grew (+0.9 pp).
+- **usability**: Usability has the second-highest baseline severity sum (54124 (A05)), led by excessive ad interruptions (24431 (C10)) and playlist/queue misbehavior (12202 (C18)), and its complaint share held roughly flat between periods (+0.7 pp (T18)); it also leads on raw complaint count in both label sets, but the baseline metric still places it behind billing/support (59146 (A02) versus 54124 (A05)).
+- **playback/performance**: Playback/performance has a lower baseline severity sum (46058 (A08)) than billing/support, led by unexpected stops/skips (16288 (C14)) and crashes (11618 (C22)), and its share of reviews declined between the compared periods (-5.0 pp (T15)); the verifier's sample does rank it first on severity (758 (T46)), which is a reason to watch it but not yet to override the larger-sample baseline order.
+- **access/onboarding**: Access/onboarding has by far the smallest baseline severity sum (11172 (A17)), driven by login failures (9370 (C30)), and even though its share of reviews grew (+0.9 pp (T09)), it remains the smallest area by complaint share (3.2% (T28), range 3.1% (T29) to 3.3% (T30)).
 
 ## Supporting numbers (baseline ranking, computed by code)
 
@@ -42,35 +57,35 @@ Priority = severity_sum = complaint_count x mean_severity over complaint and can
 
 | Area | Complaints | Severity sum | Share of complaints |
 |---|---:|---:|---:|
-| billing/support | 20290 | 59146 | 0.226042 |
-| usability | 23004 | 54124 | 0.256278 |
-| playback/performance | 13907 | 46058 | 0.154932 |
-| general/unspecified (not one of the four options) | 23108 | 45898 | 0.257436 |
-| catalog/content (not one of the four options) | 6593 | 19143 | 0.073450 |
-| access/onboarding | 2860 | 11172 | 0.031862 |
+| billing/support | 20290 (A01) | 59146 (A02) | 0.226042 (A03) |
+| usability | 23004 (A04) | 54124 (A05) | 0.256278 (A06) |
+| playback/performance | 13907 (A07) | 46058 (A08) | 0.154932 (A09) |
+| general/unspecified (not one of the four options) | 23108 (A10) | 45898 (A11) | 0.257436 (A12) |
+| catalog/content (not one of the four options) | 6593 (A13) | 19143 (A14) | 0.073450 (A15) |
+| access/onboarding | 2860 (A16) | 11172 (A17) | 0.031862 (A18) |
 
 ## Trends and robustness (descriptive, computed by code)
 
 Same calendar months one year apart (full months only). Share = the area's complaint and cancellation reviews / all classified reviews in the period.
 
-| Area | Jun-Oct 2022 | Jun-Oct 2023 | Change |
+| Area | 2022 Jun-Oct (T01) | 2023 Jun-Oct (T02) | Change |
 |---|---:|---:|---:|
-| access/onboarding | 0.9% | 1.8% | +0.9 pp |
-| billing/support | 4.5% | 15.4% | +10.9 pp |
-| playback/performance | 9.6% | 4.7% | -5.0 pp |
-| usability | 10.5% | 11.3% | +0.7 pp |
-| Denominator (classified reviews) | 45073 | 82997 | |
+| access/onboarding | 0.9% (T07) | 1.8% (T08) | +0.9 pp (T09) |
+| billing/support | 4.5% (T10) | 15.4% (T11) | +10.9 pp (T12) |
+| playback/performance | 9.6% (T13) | 4.7% (T14) | -5.0 pp (T15) |
+| usability | 10.5% (T16) | 11.3% (T17) | +0.7 pp (T18) |
+| Denominator (classified reviews) | 45073 (T03) | 82997 (T05) | |
 
 | Decision area | Share of complaints | 95% interval (sampling only) |
 |---|---:|---:|
-| usability | 25.6% | 25.3% to 25.9% |
-| billing/support | 22.6% | 22.3% to 22.9% |
-| playback/performance | 15.5% | 15.3% to 15.7% |
-| access/onboarding | 3.2% | 3.1% to 3.3% |
+| usability | 25.6% (T19) | 25.3% (T20) to 25.9% (T21) |
+| billing/support | 22.6% (T22) | 22.3% (T23) to 22.9% (T24) |
+| playback/performance | 15.5% (T25) | 15.3% (T26) to 15.7% (T27) |
+| access/onboarding | 3.2% (T28) | 3.1% (T29) to 3.3% (T30) |
 
-- Volume spike 2023-07: 25850 reviews (median full month 8549); largest increases in share: `other.general` +36.0 pp, `billing.price` -0.0 pp, `support.contact` -0.1 pp.
-- Volume spike 2023-10: 26790 reviews (median full month 8549); largest increases in share: `billing.premium_only` +25.1 pp, `other.general` +9.2 pp, `usability.other` +3.7 pp.
-- Verifier robustness on 2000 sampled reviews (severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted): decision areas in order under enricher labels **billing/support, usability, playback/performance, access/onboarding**; under independent verifier labels **playback/performance, usability, billing/support, access/onboarding** (top area different).
+- Volume spike 2023-07 (T31): 25850 (T32) reviews (median full month 8549 (T33)); largest increases in share of complaints vs other months: `other.general` +36.0 pp (T34).
+- Volume spike 2023-10 (T35): 26790 (T36) reviews (median full month 8549 (T37)); largest increases in share of complaints vs other months: `billing.premium_only` +25.1 pp (T38), `other.general` +9.2 pp (T39), `usability.other` +3.7 pp (T40).
+- Verifier robustness on 2000 (T41) sampled reviews (severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted): decision areas in order under enricher labels **billing/support 787 (T42), usability 637 (T43), playback/performance 599 (T44), access/onboarding 159 (T45)**; under independent verifier labels **playback/performance 758 (T46), usability 709 (T47), billing/support 661 (T48), access/onboarding 192 (T49)** (top area different).
 
 ## Representative evidence (exact quotes from the reviews)
 
@@ -87,34 +102,39 @@ Same calendar months one year apart (full months only). Share = the area's compl
 
 ## Scope figures
 
-| Figure | Value | Source |
-|---|---:|---|
-| Reviews in scope (unique IDs ingested) | 200013 | ingestion_report.json |
-| Completed classifications | 200000 | grading/records.jsonl |
-| Quarantined: empty text | 13 | quarantine.jsonl |
-| Quarantined: other reasons | 0 | quarantine.jsonl |
-| Unfinished | 0 | run_summary.json |
-| Completed records flagged needs_review | 16964 | enriched.jsonl |
-| Complaint and cancellation records ranked | 89762 | membership.csv |
-| Verification sample compared | 2000 | verification/report.json |
-| Verifier topic agreement (rate) | 0.809 | verification/report.json |
-| Verifier intent agreement (rate) | 0.9205 | verification/report.json |
-| Verifier exact severity agreement (rate) | 0.7915 | verification/report.json |
+| Figure | Value | Token | Source |
+|---|---:|---|---|
+| Reviews in scope (unique IDs ingested) | 200013 | S01 | ingestion_report.json |
+| Completed classifications | 200000 | S02 | grading/records.jsonl |
+| Quarantined: empty text | 13 | S03 | quarantine.jsonl |
+| Quarantined: other reasons | 0 | S04 | quarantine.jsonl |
+| Unfinished | 0 | S05 | run_summary.json |
+| Completed records flagged needs_review | 16964 | S06 | enriched.jsonl |
+| Complaint and cancellation records ranked | 89762 | S07 | membership.csv |
+| Verification sample compared | 2000 | S08 | verification/report.json |
+| Verifier topic agreement (rate) | 0.809 | S09 | verification/report.json |
+| Verifier intent agreement (rate) | 0.9205 | S10 | verification/report.json |
+| Verifier exact severity agreement (rate) | 0.7915 | S11 | verification/report.json |
+| Golden set: human-labelled reviews scored | 50 | S12 | evals/golden/results.json |
+| Golden topic agreement (rate) | 0.76 | S13 | evals/golden/results.json |
+| Golden intent agreement (rate) | 0.74 | S14 | evals/golden/results.json |
+| Golden severity agreement (rate) | 0.76 | S15 | evals/golden/results.json |
 
 ## Limitations
 
-- These are self-selected public app reviews, not a census of all customers, so counts and shares describe labeled reviews in scope (89762 of 200013), not overall user experience.
-- Cancellation language reflects expressed intent, not observed or confirmed churn.
-- The verifier agreement rates (0.809, 0.9205, 0.7915) and the disagreement in top-area ranking by severity (2000 sample) show meaningful labeling uncertainty, especially between billing/support and playback/performance.
-- Trend figures are descriptive patterns in sampled reviews across two windows (45073 vs 82997 reviews) and cannot establish causes of the shifts.
+- The verifier's labels disagree with the enricher's labels on which area ranks first by severity sum (787 (T42) versus 758 (T46)), so the billing/support lead should be treated as provisional pending a larger verified sample.
+- The premium_only issue (52577 (C02)) reflects packaging and policy objections rather than technical billing defects, so standard 'billing/support' remediation playbooks (refunds, payment fixes) will not address it.
+- Period and spike-month comparisons (2022 Jun-Oct (T01), 2023 Jun-Oct (T02), 2023-07 (T31), 2023-10 (T35)) describe shifting review volume and mix, not a controlled measurement of underlying issue frequency.
 - Counts describe the labeled reviews in the declared analysis scope: 200,013 reviews (analysis_200k.csv, a deterministic uniform sample of the 660,622-review corpus plus every empty-text row): self-selected public app reviews, not a customer population. They carry no revenue, plan tier or confirmed cancellations, so revenue at risk cannot be computed.
 - Cancellation language is expressed intent, not observed churn; nothing here estimates a causal effect on retention.
 - Star ratings and helpful votes were not used to classify; severity is judged from the text under the shared rubric.
-- 16964 completed records are flagged needs_review, 13 are quarantined and 0 are unfinished; the golden-set comparison (human labels) is still pending.
+- 16964 completed records are flagged needs_review, 13 are quarantined and 0 are unfinished.
 - The analysis covers a uniform random sample of the corpus, not every review; shares carry sampling error (intervals shown) and the 460,609 out-of-scope reviews were ingested but not classified.
+- Golden set (evals/golden/results.json): on 50 human-labelled reviews the pipeline's labels match the human labels on topic 76%, intent 74% and severity 76% (exact); 50 cases are a diagnostic of label quality, not a precise accuracy estimate.
 
 ## Traceability
 
-- `claims.csv`: every issue-level number above (claim_id, issue_id, metric, value).
+- `claims.csv`: every issue-level number above (claim_id, issue_id, metric, value); the C## IDs in the prose and the ranking table.
+- `memo_tokens.csv` (also `memo.json` -> `token_index`): every token ID used above (C##, A##, S##, T##) with its value, what it measures and the saved file it comes from (`area_rollup.json`, the scope sources, `analysis/*.json`).
 - `ranking.csv` / `membership.csv`: rerun with `python -m insight rank --run-dir <run> --check` (no model calls).
 - `issues.json`: issue names and the evidence each name was based on.

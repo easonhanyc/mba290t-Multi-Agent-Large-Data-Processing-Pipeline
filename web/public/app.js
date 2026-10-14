@@ -57,7 +57,7 @@ function md(text) {
 
 // ---- tabs ----------------------------------------------------------------------------------------------
 const loaders = {overview: loadOverview, recommendation: loadRecommendation, issues: loadIssues, trends: loadTrends,
-                 evaluation: loadEvaluation, run: loadRun, lookup: () => {}};
+                 evaluation: loadEvaluation, run: loadRun, lookup: async () => {}};  // async: show() chains .catch()
 function show(tab) {
   document.querySelectorAll(".tabs button").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
   document.querySelectorAll(".tab").forEach((s) => s.classList.toggle("active", s.id === `tab-${tab}`));
@@ -129,6 +129,9 @@ async function loadRecommendation() {
   $("rec-why").innerHTML = out.rationale.map((x) => `<li>${fillTokens(x, tk)}</li>`).join("");
   $("rec-alts").innerHTML = out.alternatives.map((a) => `<li><strong>${esc(a.area)}</strong>: ${fillTokens(a.why_not_first, tk)}</li>`).join("");
   $("rec-limits").innerHTML = out.limitations.map((x) => `<li>${fillTokens(x, tk)}</li>`).join("");
+  const list = (xs) => (xs || []).map((x) => `<li>${fillTokens(typeof x === "string" ? x : (x.action || x.text || JSON.stringify(x)), tk)}</li>`).join("");
+  $("rec-actions").innerHTML = list(out.next_quarter_actions) || "<li class='muted'>not in this memo version</li>";
+  $("rec-change").innerHTML = list(out.what_would_change_the_call) || "<li class='muted'>not in this memo version</li>";
   $("rec-cited").innerHTML = (r.cited_reviews || []).map((c) => `<blockquote>“${esc(c.evidence_quote)}”<br><span class="small muted">review <a href="#" data-review="${esc(c.review_id)}">${esc(c.review_id)}</a> · issue <code>${esc(c.issue_id)}</code> · severity ${c.severity} · ${esc(c.intent)}</span></blockquote>`).join("") || "<p class='muted'>The memo cited no specific reviews; see the evidence pack in the full memo.</p>";
   $("rec-consistency").innerHTML = `${cons.ranking_matches ? "<span class='ok'>✔</span>" : "<span class='bad'>✖</span>"} Ranking recomputed in SQL from the reviews and membership tables ${cons.ranking_matches ? "matches" : "does NOT match"} the saved ranking (${cons.issues_recomputed} issues; ${cons.ungrouped_complaints} ungrouped complaints). ` +
     `${r.all_claims_match_database ? "<span class='ok'>✔</span> All" : "<span class='bad'>✖</span> Not all"} ${r.claims.length} claims in claims.csv equal the database values.`;
@@ -210,9 +213,11 @@ async function loadEvaluation() {
   $("planted").innerHTML = p ? `<p>Status: <span class="${p.status === "detected" ? "ok" : "bad"}">${esc(p.status)}</span></p>` + agreeTable([["Review", `<code>${esc(p.review_id)}</code>`], ["Original", esc(JSON.stringify(p.original))], ["Planted (test copy)", esc(JSON.stringify(p.planted))], ["Flagged fields", esc((p.comparison_after || []).join(", "))]]) : "<p class='muted'>not loaded</p>";
   const inj = e.injection;
   $("injection").innerHTML = inj ? `<p>${esc(inj.summary || "")}</p><div class="table-wrap"><table><tr><th>Case</th><th>Expectation</th><th>Result</th></tr>${(inj.cases || []).map((c) => `<tr><td class="mono">${esc(c.case_id)}</td><td>${esc(c.expectation)}</td><td class="${c.passed ? "ok" : "bad"}">${c.passed ? "pass" : "fail"} ${esc(c.detail || "")}</td></tr>`).join("")}</table></div>` : "<p class='muted'>not loaded</p>";
-  const sc = e.self_check, rc = e.rank_check;
+  const sc = e.self_check, sf = e.self_check_full, rc = e.rank_check;
+  const checkCell = (c) => c ? `<span class="${c.status === "pass" ? "ok" : "warn"}">${esc(c.status)}</span> · coverage candidate ${c.working_coverage_point_candidate} · ${n(c.coverage?.valid_completed)} valid completed, ${n(c.coverage?.quarantined)} quarantined, ${n(c.coverage?.valid_cache_reuses)} valid cache reuses · issues ${esc(JSON.stringify(c.issue_counts))}` : "–";
   $("checks").innerHTML = agreeTable([
-    ["Course checker (check_submission.py)", sc ? `<span class="${sc.status === "pass" ? "ok" : "warn"}">${esc(sc.status)}</span> · coverage candidate ${sc.working_coverage_point_candidate} · ${n(sc.coverage?.valid_completed)} valid completed, ${n(sc.coverage?.quarantined)} quarantined, ${n(sc.coverage?.valid_cache_reuses)} valid cache reuses · issues ${esc(JSON.stringify(sc.issue_counts))}` : "–"],
+    ["Course checker, reference = declared 200,013-row scope", checkCell(sc)],
+    ["Course checker, reference = full 660,622-row file (disclosed: 460,609 rows outside the declared scope)", checkCell(sf)],
     ["Ranking rebuilt from grading/ files", rc ? (rc.identical ? "<span class='ok'>identical</span>" : "<span class='bad'>different</span>") + ` (${rc.issues} issues)` : "–"]]);
 }
 

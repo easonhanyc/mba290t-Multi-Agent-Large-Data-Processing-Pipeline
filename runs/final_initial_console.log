@@ -1,0 +1,49 @@
+{
+  "file": "data/analysis_200k.csv",
+  "sha256": "3c023c9dd47a577523dc2a74eb00ec69a79ae1300b80de13f2423256b7222fad",
+  "rows": 200013,
+  "sampled_nonempty": 200000,
+  "empty_text_rows_added": 13,
+  "distinct_sampled_texts": 152363,
+  "contains_course_files": {
+    "golden_50_to_label.csv": {
+      "rows": 50,
+      "all_in_scope": true
+    },
+    "analysis_10000.csv": {
+      "rows": 10000,
+      "all_in_scope": true
+    },
+    "checkpoint_500.csv": {
+      "rows": 500,
+      "all_in_scope": true
+    },
+    "cost_100.csv": {
+      "rows": 100,
+      "all_in_scope": true
+    }
+  }
+}
+[run] run-20261012T232925.093Z-9d9d | phase initial | run dir runs/final-200k | budget $4.00 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 200013 rows | 200000 nonempty | 13 empty | 152363 distinct texts (47637 exact-text reuses) | 48432 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790
+[enrich] pending distinct texts: 152363 | staged for a fallback decision: 0 | fallback caps {'fallback1': 15236, 'fallback2': 380} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 16
+[enrich] primary: 0 distinct texts saved this invocation (of 152363 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $4.00 (reserved $0.0393)
+[enrich] primary: 0 distinct texts saved this invocation (of 152363 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $4.00 (reserved $0.0393)
+[enrich] primary: 773 distinct texts saved this invocation (of 152363 pending at start) | 17.0/s | staged 77 | spent $0.0088 of $4.00 (reserved $0.0394)
+[enrich] primary: 865 distinct texts saved this invocation (of 152363 pending at start) | 14.2/s | staged 85 | spent $0.0098 of $4.00 (reserved $0.0394)
+[enrich] primary: 1447 distinct texts saved this invocation (of 152363 pending at start) | 19.0/s | staged 153 | spent $0.0166 of $4.00 (reserved $0.0394)
+[enrich] primary: 1816 distinct texts saved this invocation (of 152363 pending at start) | 19.9/s | staged 184 | spent $0.0208 of $4.00 (reserved $0.0394)
+[enrich] primary: 2445 distinct texts saved this invocation (of 152363 pending at start) | 22.9/s | staged 255 | spent $0.0281 of $4.00 (reserved $0.0396)
+[enrich] primary: 2861 distinct texts saved this invocation (of 152363 pending at start) | 23.4/s | staged 289 | spent $0.0328 of $4.00 (reserved $0.0395)
+[enrich] primary: 3413 distinct texts saved this invocation (of 152363 pending at start) | 24.8/s | staged 337 | spent $0.0391 of $4.00 (reserved $0.0395)
+[enrich] primary: 4009 distinct texts saved this invocation (of 152363 pending at start) | 26.3/s | staged 391 | spent $0.0459 of $4.00 (reserved $0.0397)
+
+[SIGINT] stopping: no new requests; finishing in-flight work and saving. Press Ctrl-C again to exit immediately (in-flight calls are reconciled on the next run).
+[enrich] primary: 4374 distinct texts saved this invocation (of 152363 pending at start) | 26.1/s | staged 426 | spent $0.0501 of $4.00 (reserved $0.0396)
+[enrich] primary: 4827 distinct texts saved this invocation (of 152363 pending at start) | 26.4/s | staged 473 | spent $0.0554 of $4.00 (reserved $0.0149)
+[run] enrichment incomplete (interrupted (SIGINT)); skipping verify/group/rank/memo until a resumed run finishes it
+[run] interrupted (interrupted (SIGINT)) in 208.4s | completed 34638 | quarantined 13 | unfinished 165362 | spend $0.058568
+
+[recorder] wrote runs/final-200k/recording/1-initial-interrupted.cast and runs/final-200k/recording/1-initial-interrupted.txt
+initial exit 0

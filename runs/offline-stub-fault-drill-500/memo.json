@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-02T01:12:02.834Z",
-  "memo_config": "stub-gpt-6-luna@low|memo-v1|cfg-0d09621bbe",
+  "generated_at": "2026-10-13T23:46:33.849Z",
+  "memo_config": "stub-sonnet@low|memo-v1|cfg-61589c84fe",
   "output": {
     "alternatives": [
       {
-        "area": "usability",
+        "area": "access/onboarding",
         "why_not_first": "Stub text (offline plumbing test)."
       },
       {
@@ -17,9 +17,13 @@
       }
     ],
     "cited_reviews": [
-      "9f46904c-4ed3-4799-8949-379b949c7344"
+      "de0a9cdf-8974-48bc-802f-331228df4619"
     ],
     "limitations": [
+      "Stub text from the offline test server; not a model output.",
+      "Stub text from the offline test server; not a model output."
+    ],
+    "next_quarter_actions": [
       "Stub text from the offline test server; not a model output.",
       "Stub text from the offline test server; not a model output."
     ],
@@ -28,7 +32,11 @@
       "Stub text from the offline test server; not a model output."
     ],
     "recommendation": "Stub memo text (offline plumbing test, not a finding), citing {C01} and {C02}.",
-    "recommended_area": "access/onboarding"
+    "recommended_area": "usability",
+    "what_would_change_the_call": [
+      "Stub text from the offline test server; not a model output.",
+      "Stub text from the offline test server; not a model output."
+    ]
   },
   "payload": {
     "areas": [
@@ -36,150 +44,150 @@
         "area": "playback/performance",
         "complaint_count": {
           "token": "{A01}",
-          "value": 67
+          "value": 59
         },
         "decision_option": true,
         "severity_sum": {
           "token": "{A02}",
-          "value": 202
+          "value": 177
         },
         "share_of_complaints": {
           "token": "{A03}",
-          "value": "0.304545"
+          "value": "0.248945"
         }
       },
       {
         "area": "catalog/content",
         "complaint_count": {
           "token": "{A04}",
-          "value": 48
+          "value": 56
         },
         "decision_option": false,
         "severity_sum": {
           "token": "{A05}",
-          "value": 151
+          "value": 171
         },
         "share_of_complaints": {
           "token": "{A06}",
-          "value": "0.218182"
+          "value": "0.236287"
         }
       },
       {
         "area": "billing/support",
         "complaint_count": {
           "token": "{A07}",
-          "value": 43
+          "value": 45
         },
         "decision_option": true,
         "severity_sum": {
           "token": "{A08}",
-          "value": 124
+          "value": 141
         },
         "share_of_complaints": {
           "token": "{A09}",
-          "value": "0.195455"
+          "value": "0.189873"
         }
       },
       {
         "area": "usability",
         "complaint_count": {
           "token": "{A10}",
-          "value": 35
+          "value": 44
         },
         "decision_option": true,
         "severity_sum": {
           "token": "{A11}",
-          "value": 116
+          "value": 137
         },
         "share_of_complaints": {
           "token": "{A12}",
-          "value": "0.159091"
+          "value": "0.185654"
         }
       },
       {
         "area": "access/onboarding",
         "complaint_count": {
           "token": "{A13}",
-          "value": 19
+          "value": 20
         },
         "decision_option": true,
         "severity_sum": {
           "token": "{A14}",
-          "value": 55
+          "value": 62
         },
         "share_of_complaints": {
           "token": "{A15}",
-          "value": "0.086364"
+          "value": "0.084388"
         }
       },
       {
         "area": "general/unspecified",
         "complaint_count": {
           "token": "{A16}",
-          "value": 8
+          "value": 13
         },
         "decision_option": false,
         "severity_sum": {
           "token": "{A17}",
-          "value": 30
+          "value": 41
         },
         "share_of_complaints": {
           "token": "{A18}",
-          "value": "0.036364"
+          "value": "0.054852"
         }
       }
     ],
     "decision_rule": "baseline priority = severity_sum over complaint and cancellation reviews; areas sum their issues",
     "evidence": [
       {
-        "issue_id": "downloads.offline",
-        "quote": "Best indeeeeeeeed",
-        "review_id": "9f46904c-4ed3-4799-8949-379b949c7344"
+        "issue_id": "catalog.missing",
+        "quote": "Will not except my password",
+        "review_id": "de0a9cdf-8974-48bc-802f-331228df4619"
       },
       {
-        "issue_id": "downloads.offline",
-        "quote": "I haven't experted about this from Spotify...🙄 I'm uninstalling successful....meet me when have got the old Spotify update !!!",
-        "review_id": "62b53e0a-0397-4200-826f-122d18fdde32"
-      },
-      {
-        "issue_id": "playback.devices",
-        "quote": "i have used spotify for 5 years and would say its the best streaming service",
-        "review_id": "6455e7cb-ad90-47ad-883f-5b0f0e205af1"
-      },
-      {
-        "issue_id": "playback.devices",
-        "quote": "Excellent quality and great choice",
-        "review_id": "00a77161-cb3f-4fae-a7b6-eca2cfc124ec"
+        "issue_id": "catalog.missing",
+        "quote": "I have worked remotely without cell or internet and I like that I can still play all my collections.",
+        "review_id": "27aeb125-266a-47c9-85f5-bd8a56b4d6c3"
       },
       {
         "issue_id": "billing.premium_only",
-        "quote": "I can't use anything else but Spotify 💯👍🏼",
-        "review_id": "ba274609-2cbc-4d6a-9624-276d1c8246e8"
+        "quote": "Electrifying, AWESOME 👌 👏 👍",
+        "review_id": "8b8e60dc-c64c-4c65-9e5c-5bb2df16d384"
       },
       {
         "issue_id": "billing.premium_only",
-        "quote": "Very good app enna advertisement verudu premium best",
-        "review_id": "ed15bb17-865a-492b-ba1b-268f4cab78f6"
+        "quote": "useless music app music k naam pe khaali ad dikhata hai.",
+        "review_id": "6eb64519-37d4-4591-a47a-bbb96357de36"
       },
       {
-        "issue_id": "catalog.lyrics",
+        "issue_id": "playback.crash",
         "quote": "I hate application",
         "review_id": "1db044db-d184-4335-877c-d8fc364b282e"
       },
       {
-        "issue_id": "catalog.lyrics",
-        "quote": "Nice as always,keep up the good job.",
-        "review_id": "b25beb44-9cc8-4d1e-b375-a4f319419424"
+        "issue_id": "playback.crash",
+        "quote": "This app is now not for free users.....",
+        "review_id": "6a4f84b4-18e2-47d9-adb8-2461a9319c11"
       },
       {
-        "issue_id": "playback.stops",
-        "quote": "App is very easy to use and no more ads",
-        "review_id": "28a441b5-1d54-4a5d-9df3-cbc84d21527c"
+        "issue_id": "usability.library",
+        "quote": "This is not well so many ad here",
+        "review_id": "ec96a982-68d0-44c4-b2be-13a999be4094"
       },
       {
-        "issue_id": "playback.stops",
-        "quote": "No good",
-        "review_id": "5fb51bd0-dbe9-4a19-a466-a77f0c14393e"
+        "issue_id": "usability.library",
+        "quote": "To everyone, do not update Spotify app, some features are missing in updated version,",
+        "review_id": "02777996-211f-447b-94c4-99b61f049f78"
+      },
+      {
+        "issue_id": "other.general",
+        "quote": "The new layout is awful.",
+        "review_id": "2aae0ce4-ae4a-46ce-b2fe-0d901eb23c06"
+      },
+      {
+        "issue_id": "other.general",
+        "quote": "Some of the song lyrics couldn't load, even if I updated it and refresh the app.",
+        "review_id": "d218ffde-42f9-48f8-a793-832507454b35"
       }
     ],
     "question": "Where should the next quarter of product-improvement effort go: access/onboarding, usability, playback/performance, or billing/support?",
@@ -218,13 +226,13 @@
         "label": "Completed records flagged needs_review",
         "source": "enriched.jsonl",
         "token": "{S06}",
-        "value": 210
+        "value": 318
       },
       "S07": {
         "label": "Complaint and cancellation records ranked",
         "source": "membership.csv",
         "token": "{S07}",
-        "value": 220
+        "value": 237
       },
       "S08": {
         "label": "Verification sample compared",
@@ -236,7 +244,7 @@
         "label": "Verifier topic agreement (rate)",
         "source": "verification/report.json",
         "token": "{S09}",
-        "value": 0.125
+        "value": 0.1875
       },
       "S10": {
         "label": "Verifier intent agreement (rate)",
@@ -253,288 +261,1522 @@
     },
     "top_issues": [
       {
-        "area": "playback/performance",
+        "area": "catalog/content",
         "complaint_count": {
           "token": "{C01}",
-          "value": 17
+          "value": 19
         },
-        "issue_id": "downloads.offline",
+        "definition": "Songs, artists, albums or podcasts missing, removed, greyed out or unavailable.",
+        "issue_id": "catalog.missing",
         "mean_severity": {
           "token": "{C03}",
-          "value": "3.117647"
+          "value": "3.315789"
         },
         "name": "Stub issue name",
         "priority_score": {
           "token": "{C04}",
-          "value": 53
+          "value": 63
         },
         "severity_sum": {
           "token": "{C02}",
-          "value": 53
-        }
+          "value": 63
+        },
+        "summary": "Stub text from the offline test server; not a model output."
       },
       {
-        "area": "playback/performance",
+        "area": "billing/support",
         "complaint_count": {
           "token": "{C05}",
-          "value": 13
+          "value": 17
         },
-        "issue_id": "playback.devices",
+        "definition": "Features locked to Premium: skip limits, forced shuffle, cannot pick songs, cannot repeat or rewind, lyrics or offline behind a paywall, 'everything needs Premium now'.",
+        "issue_id": "billing.premium_only",
         "mean_severity": {
           "token": "{C07}",
-          "value": "3.384615"
+          "value": "3.294118"
         },
         "name": "Stub issue name",
         "priority_score": {
           "token": "{C08}",
-          "value": 44
+          "value": 56
         },
         "severity_sum": {
           "token": "{C06}",
+          "value": 56
+        },
+        "summary": "Stub text from the offline test server; not a model output."
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C09}",
+          "value": 14
+        },
+        "definition": "App crashes, freezes, will not open or load, blank screens.",
+        "issue_id": "playback.crash",
+        "mean_severity": {
+          "token": "{C11}",
+          "value": "3.428571"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C12}",
+          "value": 48
+        },
+        "severity_sum": {
+          "token": "{C10}",
+          "value": 48
+        },
+        "summary": "Stub text from the offline test server; not a model output."
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C13}",
+          "value": 15
+        },
+        "definition": "Managing the queue, playlists, liked songs or library; shuffle or repeat controls that misbehave.",
+        "issue_id": "usability.library",
+        "mean_severity": {
+          "token": "{C15}",
+          "value": "2.933333"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C16}",
           "value": 44
+        },
+        "severity_sum": {
+          "token": "{C14}",
+          "value": 44
+        },
+        "summary": "Stub text from the offline test server; not a model output."
+      },
+      {
+        "area": "general/unspecified",
+        "complaint_count": {
+          "token": "{C17}",
+          "value": 13
+        },
+        "definition": "General praise or criticism with no specific feature, unrelated content (politics, artists, boycotts), or meaningless text.",
+        "issue_id": "other.general",
+        "mean_severity": {
+          "token": "{C19}",
+          "value": "3.153846"
+        },
+        "name": "General or unrelated",
+        "priority_score": {
+          "token": "{C20}",
+          "value": 41
+        },
+        "severity_sum": {
+          "token": "{C18}",
+          "value": 41
         }
       },
       {
         "area": "billing/support",
         "complaint_count": {
-          "token": "{C09}",
-          "value": 14
-        },
-        "issue_id": "billing.premium_only",
-        "mean_severity": {
-          "token": "{C11}",
-          "value": "2.928571"
-        },
-        "name": "Stub issue name",
-        "priority_score": {
-          "token": "{C12}",
-          "value": 41
-        },
-        "severity_sum": {
-          "token": "{C10}",
-          "value": 41
-        }
-      },
-      {
-        "area": "catalog/content",
-        "complaint_count": {
-          "token": "{C13}",
-          "value": 13
-        },
-        "issue_id": "catalog.lyrics",
-        "mean_severity": {
-          "token": "{C15}",
-          "value": "3.076923"
-        },
-        "name": "Stub issue name",
-        "priority_score": {
-          "token": "{C16}",
-          "value": 40
-        },
-        "severity_sum": {
-          "token": "{C14}",
-          "value": 40
-        }
-      },
-      {
-        "area": "playback/performance",
-        "complaint_count": {
-          "token": "{C17}",
-          "value": 13
-        },
-        "issue_id": "playback.stops",
-        "mean_severity": {
-          "token": "{C19}",
-          "value": "2.923077"
-        },
-        "name": "Stub issue name",
-        "priority_score": {
-          "token": "{C20}",
-          "value": 38
-        },
-        "severity_sum": {
-          "token": "{C18}",
-          "value": 38
-        }
-      },
-      {
-        "area": "catalog/content",
-        "complaint_count": {
           "token": "{C21}",
-          "value": 12
+          "value": 11
         },
-        "issue_id": "catalog.missing",
+        "definition": "Unexpected or repeated charges, refunds, payment failures, a subscription or trial not activating, cancellation or plan problems.",
+        "issue_id": "billing.payment",
         "mean_severity": {
           "token": "{C23}",
-          "value": "2.916667"
+          "value": "3.545455"
         },
         "name": "Stub issue name",
         "priority_score": {
           "token": "{C24}",
-          "value": 35
+          "value": 39
         },
         "severity_sum": {
           "token": "{C22}",
-          "value": 35
-        }
+          "value": 39
+        },
+        "summary": "Stub text from the offline test server; not a model output."
       },
       {
         "area": "catalog/content",
         "complaint_count": {
           "token": "{C25}",
-          "value": 11
+          "value": 13
         },
+        "definition": "Search results, finding songs or artists, browsing and discovery.",
         "issue_id": "catalog.search",
         "mean_severity": {
           "token": "{C27}",
-          "value": "3.181818"
+          "value": "2.923077"
         },
         "name": "Stub issue name",
         "priority_score": {
           "token": "{C28}",
-          "value": 35
+          "value": 38
         },
         "severity_sum": {
           "token": "{C26}",
-          "value": 35
-        }
-      },
-      {
-        "area": "access/onboarding",
-        "complaint_count": {
-          "token": "{C29}",
-          "value": 12
+          "value": 38
         },
-        "issue_id": "access.account",
-        "mean_severity": {
-          "token": "{C31}",
-          "value": "2.833333"
-        },
-        "name": "Stub issue name",
-        "priority_score": {
-          "token": "{C32}",
-          "value": 34
-        },
-        "severity_sum": {
-          "token": "{C30}",
-          "value": 34
-        }
+        "summary": "Stub text from the offline test server; not a model output."
       },
       {
         "area": "usability",
         "complaint_count": {
-          "token": "{C33}",
-          "value": 10
+          "token": "{C29}",
+          "value": 9
         },
+        "definition": "Too many, too long, too loud or repeated ads; ads interrupting listening.",
         "issue_id": "usability.ads",
         "mean_severity": {
+          "token": "{C31}",
+          "value": "4.111111"
+        },
+        "name": "Stub issue name",
+        "priority_score": {
+          "token": "{C32}",
+          "value": 37
+        },
+        "severity_sum": {
+          "token": "{C30}",
+          "value": 37
+        },
+        "summary": "Stub text from the offline test server; not a model output."
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{C33}",
+          "value": 12
+        },
+        "definition": "Sign-up or account creation, password reset, hacked, locked or deleted accounts, account settings.",
+        "issue_id": "access.account",
+        "mean_severity": {
           "token": "{C35}",
-          "value": "3.400000"
+          "value": "2.750000"
         },
         "name": "Stub issue name",
         "priority_score": {
           "token": "{C36}",
-          "value": 34
+          "value": 33
         },
         "severity_sum": {
           "token": "{C34}",
-          "value": 34
-        }
+          "value": 33
+        },
+        "summary": "Stub text from the offline test server; not a model output."
       },
       {
         "area": "usability",
         "complaint_count": {
           "token": "{C37}",
-          "value": 9
+          "value": 12
         },
+        "definition": "Hard to find things, confusing layout, redesigns or home-screen changes, buttons moved or removed.",
         "issue_id": "usability.navigation",
         "mean_severity": {
           "token": "{C39}",
-          "value": "3.444444"
+          "value": "2.750000"
         },
         "name": "Stub issue name",
         "priority_score": {
           "token": "{C40}",
-          "value": 31
+          "value": 33
         },
         "severity_sum": {
           "token": "{C38}",
-          "value": 31
-        }
+          "value": 33
+        },
+        "summary": "Stub text from the offline test server; not a model output."
       }
-    ]
+    ],
+    "trends_and_robustness": {
+      "area_shares_with_sampling_intervals": [
+        {
+          "area": "playback/performance",
+          "ci_high": {
+            "token": "{T21}",
+            "value": "30.8%"
+          },
+          "ci_low": {
+            "token": "{T20}",
+            "value": "19.8%"
+          },
+          "share_of_complaints": {
+            "token": "{T19}",
+            "value": "24.9%"
+          }
+        },
+        {
+          "area": "billing/support",
+          "ci_high": {
+            "token": "{T24}",
+            "value": "24.5%"
+          },
+          "ci_low": {
+            "token": "{T23}",
+            "value": "14.5%"
+          },
+          "share_of_complaints": {
+            "token": "{T22}",
+            "value": "19.0%"
+          }
+        },
+        {
+          "area": "usability",
+          "ci_high": {
+            "token": "{T27}",
+            "value": "24.0%"
+          },
+          "ci_low": {
+            "token": "{T26}",
+            "value": "14.1%"
+          },
+          "share_of_complaints": {
+            "token": "{T25}",
+            "value": "18.6%"
+          }
+        },
+        {
+          "area": "access/onboarding",
+          "ci_high": {
+            "token": "{T30}",
+            "value": "12.7%"
+          },
+          "ci_low": {
+            "token": "{T29}",
+            "value": "5.5%"
+          },
+          "share_of_complaints": {
+            "token": "{T28}",
+            "value": "8.4%"
+          }
+        }
+      ],
+      "period_comparison": {
+        "areas": [
+          {
+            "area": "access/onboarding",
+            "change_pp": {
+              "token": "{T09}",
+              "value": "+2.6 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T07}",
+              "value": "1.8%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T08}",
+              "value": "4.4%"
+            }
+          },
+          {
+            "area": "billing/support",
+            "change_pp": {
+              "token": "{T12}",
+              "value": "+1.2 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T10}",
+              "value": "8.1%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T11}",
+              "value": "9.3%"
+            }
+          },
+          {
+            "area": "playback/performance",
+            "change_pp": {
+              "token": "{T15}",
+              "value": "+2.2 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T13}",
+              "value": "9.0%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T14}",
+              "value": "11.2%"
+            }
+          },
+          {
+            "area": "usability",
+            "change_pp": {
+              "token": "{T18}",
+              "value": "-2.1 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T16}",
+              "value": "9.9%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T17}",
+              "value": "7.8%"
+            }
+          }
+        ],
+        "denominators": {
+          "earlier_period": {
+            "complaint_share": {
+              "token": "{T04}",
+              "value": "49.5%"
+            },
+            "reviews": {
+              "token": "{T03}",
+              "value": "111"
+            }
+          },
+          "later_period": {
+            "complaint_share": {
+              "token": "{T06}",
+              "value": "42.9%"
+            },
+            "reviews": {
+              "token": "{T05}",
+              "value": "205"
+            }
+          }
+        },
+        "earlier_period": {
+          "token": "{T01}",
+          "value": "2022 Jun-Oct"
+        },
+        "later_period": {
+          "token": "{T02}",
+          "value": "2023 Jun-Oct"
+        },
+        "method": "share = complaint/cancellation reviews in the area / all classified reviews in the period; Wilson 95% intervals; identical calendar months one year apart avoid the partial first/last months and seasonal mix. Descriptive only: reviews are self-selected, not a customer census."
+      },
+      "spike_months": [
+        {
+          "largest_increases": [
+            {
+              "issue_id": "playback.crash",
+              "pp_difference": {
+                "token": "{T34}",
+                "value": "+9.0 pp"
+              }
+            },
+            {
+              "issue_id": "usability.other",
+              "pp_difference": {
+                "token": "{T35}",
+                "value": "+2.3 pp"
+              }
+            },
+            {
+              "issue_id": "access.login",
+              "pp_difference": {
+                "token": "{T36}",
+                "value": "+2.1 pp"
+              }
+            }
+          ],
+          "median_full_month_reviews": {
+            "token": "{T33}",
+            "value": "21"
+          },
+          "month": {
+            "token": "{T31}",
+            "value": "2023-07"
+          },
+          "reviews": {
+            "token": "{T32}",
+            "value": "56"
+          }
+        },
+        {
+          "largest_increases": [
+            {
+              "issue_id": "downloads.offline",
+              "pp_difference": {
+                "token": "{T40}",
+                "value": "+2.7 pp"
+              }
+            },
+            {
+              "issue_id": "usability.navigation",
+              "pp_difference": {
+                "token": "{T41}",
+                "value": "+2.2 pp"
+              }
+            },
+            {
+              "issue_id": "catalog.search",
+              "pp_difference": {
+                "token": "{T42}",
+                "value": "+1.4 pp"
+              }
+            }
+          ],
+          "median_full_month_reviews": {
+            "token": "{T39}",
+            "value": "21"
+          },
+          "month": {
+            "token": "{T37}",
+            "value": "2023-10"
+          },
+          "reviews": {
+            "token": "{T38}",
+            "value": "79"
+          }
+        }
+      ],
+      "verifier_robustness": {
+        "decision_area_order_enricher_labels": [
+          "usability",
+          "playback/performance",
+          "billing/support",
+          "access/onboarding"
+        ],
+        "decision_area_order_verifier_labels": [
+          "playback/performance",
+          "billing/support",
+          "access/onboarding",
+          "usability"
+        ],
+        "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+        "same_top_area": false,
+        "sample_reviews": {
+          "token": "{T43}",
+          "value": "48"
+        },
+        "sample_severity_sum_by_area_enricher_labels": [
+          {
+            "area": "usability",
+            "severity_sum": {
+              "token": "{T44}",
+              "value": "29"
+            }
+          },
+          {
+            "area": "playback/performance",
+            "severity_sum": {
+              "token": "{T45}",
+              "value": "16"
+            }
+          },
+          {
+            "area": "billing/support",
+            "severity_sum": {
+              "token": "{T46}",
+              "value": "6"
+            }
+          },
+          {
+            "area": "access/onboarding",
+            "severity_sum": {
+              "token": "{T47}",
+              "value": "2"
+            }
+          }
+        ],
+        "sample_severity_sum_by_area_verifier_labels": [
+          {
+            "area": "playback/performance",
+            "severity_sum": {
+              "token": "{T48}",
+              "value": "28"
+            }
+          },
+          {
+            "area": "billing/support",
+            "severity_sum": {
+              "token": "{T49}",
+              "value": "14"
+            }
+          },
+          {
+            "area": "access/onboarding",
+            "severity_sum": {
+              "token": "{T50}",
+              "value": "8"
+            }
+          },
+          {
+            "area": "usability",
+            "severity_sum": {
+              "token": "{T51}",
+              "value": "1"
+            }
+          }
+        ],
+        "top_by_complaint_count": {
+          "top_enricher": "usability",
+          "top_verifier": "playback/performance"
+        },
+        "top_decision_area_enricher_labels": "usability",
+        "top_decision_area_verifier_labels": "playback/performance"
+      }
+    }
   },
+  "rejected_outputs": [],
   "source": "model",
+  "token_index": [
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C01",
+      "value": "19"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C02",
+      "value": "63"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C03",
+      "value": "3.315789"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C04",
+      "value": "63"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C05",
+      "value": "17"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C06",
+      "value": "56"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C07",
+      "value": "3.294118"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C08",
+      "value": "56"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C09",
+      "value": "14"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C10",
+      "value": "48"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C11",
+      "value": "3.428571"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C12",
+      "value": "48"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C13",
+      "value": "15"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C14",
+      "value": "44"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C15",
+      "value": "2.933333"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C16",
+      "value": "44"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C17",
+      "value": "13"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C18",
+      "value": "41"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C19",
+      "value": "3.153846"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C20",
+      "value": "41"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.payment].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C21",
+      "value": "11"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.payment].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C22",
+      "value": "39"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.payment].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C23",
+      "value": "3.545455"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.payment].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C24",
+      "value": "39"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.search].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C25",
+      "value": "13"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.search].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C26",
+      "value": "38"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.search].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C27",
+      "value": "2.923077"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.search].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C28",
+      "value": "38"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C29",
+      "value": "9"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C30",
+      "value": "37"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C31",
+      "value": "4.111111"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C32",
+      "value": "37"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.account].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C33",
+      "value": "12"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.account].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C34",
+      "value": "33"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.account].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C35",
+      "value": "2.750000"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.account].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C36",
+      "value": "33"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C37",
+      "value": "12"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C38",
+      "value": "33"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C39",
+      "value": "2.750000"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C40",
+      "value": "33"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[playback/performance].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A01",
+      "value": "59"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[playback/performance].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A02",
+      "value": "177"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[playback/performance].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A03",
+      "value": "0.248945"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[catalog/content].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A04",
+      "value": "56"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[catalog/content].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A05",
+      "value": "171"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[catalog/content].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A06",
+      "value": "0.236287"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[billing/support].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A07",
+      "value": "45"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[billing/support].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A08",
+      "value": "141"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[billing/support].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A09",
+      "value": "0.189873"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[usability].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A10",
+      "value": "44"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[usability].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A11",
+      "value": "137"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[usability].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A12",
+      "value": "0.185654"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[access/onboarding].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A13",
+      "value": "20"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[access/onboarding].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A14",
+      "value": "62"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[access/onboarding].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A15",
+      "value": "0.084388"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[general/unspecified].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A16",
+      "value": "13"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[general/unspecified].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A17",
+      "value": "41"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[general/unspecified].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A18",
+      "value": "0.054852"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Reviews in scope (unique IDs ingested)",
+      "source": "ingestion_report.json",
+      "token_id": "S01",
+      "value": "500"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Completed classifications",
+      "source": "grading/records.jsonl",
+      "token_id": "S02",
+      "value": "500"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Quarantined: empty text",
+      "source": "quarantine.jsonl",
+      "token_id": "S03",
+      "value": "0"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Quarantined: other reasons",
+      "source": "quarantine.jsonl",
+      "token_id": "S04",
+      "value": "0"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Unfinished",
+      "source": "run_summary.json",
+      "token_id": "S05",
+      "value": "0"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Completed records flagged needs_review",
+      "source": "enriched.jsonl",
+      "token_id": "S06",
+      "value": "318"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Complaint and cancellation records ranked",
+      "source": "membership.csv",
+      "token_id": "S07",
+      "value": "237"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verification sample compared",
+      "source": "verification/report.json",
+      "token_id": "S08",
+      "value": "48"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verifier topic agreement (rate)",
+      "source": "verification/report.json",
+      "token_id": "S09",
+      "value": "0.1875"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verifier intent agreement (rate)",
+      "source": "verification/report.json",
+      "token_id": "S10",
+      "value": "0.25"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verifier exact severity agreement (rate)",
+      "source": "verification/report.json",
+      "token_id": "S11",
+      "value": "0.1875"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T01",
+      "value": "2022 Jun-Oct"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T02",
+      "value": "2023 Jun-Oct"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.earlier_period.reviews",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T03",
+      "value": "111"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.earlier_period.complaint_share",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T04",
+      "value": "49.5%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.later_period.reviews",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T05",
+      "value": "205"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.later_period.complaint_share",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T06",
+      "value": "42.9%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_earlier_period",
+      "source": "area_rollup.json",
+      "token_id": "T07",
+      "value": "1.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_later_period",
+      "source": "area_rollup.json",
+      "token_id": "T08",
+      "value": "4.4%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[access/onboarding].change_pp",
+      "source": "area_rollup.json",
+      "token_id": "T09",
+      "value": "+2.6 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_earlier_period",
+      "source": "area_rollup.json",
+      "token_id": "T10",
+      "value": "8.1%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_later_period",
+      "source": "area_rollup.json",
+      "token_id": "T11",
+      "value": "9.3%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[billing/support].change_pp",
+      "source": "area_rollup.json",
+      "token_id": "T12",
+      "value": "+1.2 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_earlier_period",
+      "source": "area_rollup.json",
+      "token_id": "T13",
+      "value": "9.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_later_period",
+      "source": "area_rollup.json",
+      "token_id": "T14",
+      "value": "11.2%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[playback/performance].change_pp",
+      "source": "area_rollup.json",
+      "token_id": "T15",
+      "value": "+2.2 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[usability].share_of_reviews_earlier_period",
+      "source": "area_rollup.json",
+      "token_id": "T16",
+      "value": "9.9%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[usability].share_of_reviews_later_period",
+      "source": "area_rollup.json",
+      "token_id": "T17",
+      "value": "7.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[usability].change_pp",
+      "source": "area_rollup.json",
+      "token_id": "T18",
+      "value": "-2.1 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T19",
+      "value": "24.9%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T20",
+      "value": "19.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T21",
+      "value": "30.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[billing/support].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T22",
+      "value": "19.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[billing/support].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T23",
+      "value": "14.5%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[billing/support].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T24",
+      "value": "24.5%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[usability].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T25",
+      "value": "18.6%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T26",
+      "value": "14.1%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T27",
+      "value": "24.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T28",
+      "value": "8.4%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T29",
+      "value": "5.5%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T30",
+      "value": "12.7%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].month",
+      "source": "analysis/spike_months.json",
+      "token_id": "T31",
+      "value": "2023-07"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T32",
+      "value": "56"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].median_full_month_reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T33",
+      "value": "21"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].largest_increases[playback.crash].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T34",
+      "value": "+9.0 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].largest_increases[usability.other].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T35",
+      "value": "+2.3 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].largest_increases[access.login].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T36",
+      "value": "+2.1 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].month",
+      "source": "analysis/spike_months.json",
+      "token_id": "T37",
+      "value": "2023-10"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T38",
+      "value": "79"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].median_full_month_reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T39",
+      "value": "21"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].largest_increases[downloads.offline].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T40",
+      "value": "+2.7 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].largest_increases[usability.navigation].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T41",
+      "value": "+2.2 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].largest_increases[catalog.search].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T42",
+      "value": "+1.4 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_reviews",
+      "source": "analysis/robustness.json",
+      "token_id": "T43",
+      "value": "48"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[usability].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T44",
+      "value": "29"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[playback/performance].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T45",
+      "value": "16"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[billing/support].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T46",
+      "value": "6"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[access/onboarding].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T47",
+      "value": "2"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[playback/performance].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T48",
+      "value": "28"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[billing/support].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T49",
+      "value": "14"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[access/onboarding].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T50",
+      "value": "8"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[usability].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T51",
+      "value": "1"
+    }
+  ],
   "tokens": {
-    "A01": "67",
-    "A02": "202",
-    "A03": "0.304545",
-    "A04": "48",
-    "A05": "151",
-    "A06": "0.218182",
-    "A07": "43",
-    "A08": "124",
-    "A09": "0.195455",
-    "A10": "35",
-    "A11": "116",
-    "A12": "0.159091",
-    "A13": "19",
-    "A14": "55",
-    "A15": "0.086364",
-    "A16": "8",
-    "A17": "30",
-    "A18": "0.036364",
-    "C01": "17",
-    "C02": "53",
-    "C03": "3.117647",
-    "C04": "53",
-    "C05": "13",
-    "C06": "44",
-    "C07": "3.384615",
-    "C08": "44",
+    "A01": "59",
+    "A02": "177",
+    "A03": "0.248945",
+    "A04": "56",
+    "A05": "171",
+    "A06": "0.236287",
+    "A07": "45",
+    "A08": "141",
+    "A09": "0.189873",
+    "A10": "44",
+    "A11": "137",
+    "A12": "0.185654",
+    "A13": "20",
+    "A14": "62",
+    "A15": "0.084388",
+    "A16": "13",
+    "A17": "41",
+    "A18": "0.054852",
+    "C01": "19",
+    "C02": "63",
+    "C03": "3.315789",
+    "C04": "63",
+    "C05": "17",
+    "C06": "56",
+    "C07": "3.294118",
+    "C08": "56",
     "C09": "14",
-    "C10": "41",
-    "C11": "2.928571",
-    "C12": "41",
-    "C13": "13",
-    "C14": "40",
-    "C15": "3.076923",
-    "C16": "40",
+    "C10": "48",
+    "C11": "3.428571",
+    "C12": "48",
+    "C13": "15",
+    "C14": "44",
+    "C15": "2.933333",
+    "C16": "44",
     "C17": "13",
-    "C18": "38",
-    "C19": "2.923077",
-    "C20": "38",
-    "C21": "12",
-    "C22": "35",
-    "C23": "2.916667",
-    "C24": "35",
-    "C25": "11",
-    "C26": "35",
-    "C27": "3.181818",
-    "C28": "35",
-    "C29": "12",
-    "C30": "34",
-    "C31": "2.833333",
-    "C32": "34",
-    "C33": "10",
-    "C34": "34",
-    "C35": "3.400000",
-    "C36": "34",
-    "C37": "9",
-    "C38": "31",
-    "C39": "3.444444",
-    "C40": "31",
+    "C18": "41",
+    "C19": "3.153846",
+    "C20": "41",
+    "C21": "11",
+    "C22": "39",
+    "C23": "3.545455",
+    "C24": "39",
+    "C25": "13",
+    "C26": "38",
+    "C27": "2.923077",
+    "C28": "38",
+    "C29": "9",
+    "C30": "37",
+    "C31": "4.111111",
+    "C32": "37",
+    "C33": "12",
+    "C34": "33",
+    "C35": "2.750000",
+    "C36": "33",
+    "C37": "12",
+    "C38": "33",
+    "C39": "2.750000",
+    "C40": "33",
     "S01": "500",
     "S02": "500",
     "S03": "0",
     "S04": "0",
     "S05": "0",
-    "S06": "210",
-    "S07": "220",
+    "S06": "318",
+    "S07": "237",
     "S08": "48",
-    "S09": "0.125",
+    "S09": "0.1875",
     "S10": "0.25",
-    "S11": "0.1875"
+    "S11": "0.1875",
+    "T01": "2022 Jun-Oct",
+    "T02": "2023 Jun-Oct",
+    "T03": "111",
+    "T04": "49.5%",
+    "T05": "205",
+    "T06": "42.9%",
+    "T07": "1.8%",
+    "T08": "4.4%",
+    "T09": "+2.6 pp",
+    "T10": "8.1%",
+    "T11": "9.3%",
+    "T12": "+1.2 pp",
+    "T13": "9.0%",
+    "T14": "11.2%",
+    "T15": "+2.2 pp",
+    "T16": "9.9%",
+    "T17": "7.8%",
+    "T18": "-2.1 pp",
+    "T19": "24.9%",
+    "T20": "19.8%",
+    "T21": "30.8%",
+    "T22": "19.0%",
+    "T23": "14.5%",
+    "T24": "24.5%",
+    "T25": "18.6%",
+    "T26": "14.1%",
+    "T27": "24.0%",
+    "T28": "8.4%",
+    "T29": "5.5%",
+    "T30": "12.7%",
+    "T31": "2023-07",
+    "T32": "56",
+    "T33": "21",
+    "T34": "+9.0 pp",
+    "T35": "+2.3 pp",
+    "T36": "+2.1 pp",
+    "T37": "2023-10",
+    "T38": "79",
+    "T39": "21",
+    "T40": "+2.7 pp",
+    "T41": "+2.2 pp",
+    "T42": "+1.4 pp",
+    "T43": "48",
+    "T44": "29",
+    "T45": "16",
+    "T46": "6",
+    "T47": "2",
+    "T48": "28",
+    "T49": "14",
+    "T50": "8",
+    "T51": "1"
   },
   "validation_problems": []
 }

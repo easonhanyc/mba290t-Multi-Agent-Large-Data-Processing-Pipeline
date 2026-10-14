@@ -1,0 +1,57 @@
+[run] run-20261012T230951.360Z-4fe8 | phase initial | run dir runs/live-analysis10000 | budget $0.50 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 10000 rows | 10000 nonempty | 0 empty | 8448 distinct texts (1552 exact-text reuses) | 2447 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 8448 | staged for a fallback decision: 0 | fallback caps {'fallback1': 126, 'fallback2': 21} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 8
+[enrich] primary: 0 distinct texts saved this invocation (of 8448 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.50 (reserved $0.0177)
+[enrich] primary: 382 distinct texts saved this invocation (of 8448 pending at start) | 12.5/s | staged 18 | spent $0.0034 of $0.50 (reserved $0.0178)
+[enrich] primary: 382 distinct texts saved this invocation (of 8448 pending at start) | 8.4/s | staged 18 | spent $0.0034 of $0.50 (reserved $0.0178)
+[enrich] primary: 751 distinct texts saved this invocation (of 8448 pending at start) | 12.3/s | staged 49 | spent $0.0075 of $0.50 (reserved $0.0177)
+[enrich] primary: 751 distinct texts saved this invocation (of 8448 pending at start) | 9.9/s | staged 49 | spent $0.0075 of $0.50 (reserved $0.0177)
+[enrich] primary: 1117 distinct texts saved this invocation (of 8448 pending at start) | 12.3/s | staged 83 | spent $0.0117 of $0.50 (reserved $0.0179)
+[enrich] primary: 1251 distinct texts saved this invocation (of 8448 pending at start) | 11.8/s | staged 99 | spent $0.0133 of $0.50 (reserved $0.0177)
+[enrich] primary: 1432 distinct texts saved this invocation (of 8448 pending at start) | 11.8/s | staged 118 | spent $0.0154 of $0.50 (reserved $0.0178)
+[enrich] primary: 1712 distinct texts saved this invocation (of 8448 pending at start) | 12.5/s | staged 138 | spent $0.0195 of $0.50 (reserved $0.0178)
+[enrich] primary: 1755 distinct texts saved this invocation (of 8448 pending at start) | 11.5/s | staged 145 | spent $0.0200 of $0.50 (reserved $0.0178)
+[enrich] primary: 2120 distinct texts saved this invocation (of 8448 pending at start) | 12.6/s | staged 180 | spent $0.0242 of $0.50 (reserved $0.0194)
+[enrich] primary: 2203 distinct texts saved this invocation (of 8448 pending at start) | 12.0/s | staged 197 | spent $0.0257 of $0.50 (reserved $0.0156)
+[enrich] primary: 2474 distinct texts saved this invocation (of 8448 pending at start) | 12.5/s | staged 225 | spent $0.0283 of $0.50 (reserved $0.0180)
+[enrich] primary: 2838 distinct texts saved this invocation (of 8448 pending at start) | 13.3/s | staged 262 | spent $0.0328 of $0.50 (reserved $0.0178)
+[enrich] primary: 2884 distinct texts saved this invocation (of 8448 pending at start) | 12.6/s | staged 266 | spent $0.0333 of $0.50 (reserved $0.0178)
+[enrich] primary: 3201 distinct texts saved this invocation (of 8448 pending at start) | 13.1/s | staged 299 | spent $0.0370 of $0.50 (reserved $0.0179)
+[enrich] primary: 3330 distinct texts saved this invocation (of 8448 pending at start) | 12.8/s | staged 320 | spent $0.0386 of $0.50 (reserved $0.0178)
+[enrich] primary: 3562 distinct texts saved this invocation (of 8448 pending at start) | 12.9/s | staged 338 | spent $0.0413 of $0.50 (reserved $0.0178)
+[enrich] primary: 3786 distinct texts saved this invocation (of 8448 pending at start) | 13.0/s | staged 364 | spent $0.0439 of $0.50 (reserved $0.0179)
+[enrich] primary: 3921 distinct texts saved this invocation (of 8448 pending at start) | 12.8/s | staged 379 | spent $0.0455 of $0.50 (reserved $0.0179)
+[enrich] primary: 4183 distinct texts saved this invocation (of 8448 pending at start) | 13.0/s | staged 417 | spent $0.0487 of $0.50 (reserved $0.0180)
+[enrich] primary: 4267 distinct texts saved this invocation (of 8448 pending at start) | 12.7/s | staged 432 | spent $0.0497 of $0.50 (reserved $0.0180)
+[enrich] primary: 4537 distinct texts saved this invocation (of 8448 pending at start) | 12.9/s | staged 462 | spent $0.0530 of $0.50 (reserved $0.0179)
+[enrich] primary: 4632 distinct texts saved this invocation (of 8448 pending at start) | 12.6/s | staged 468 | spent $0.0540 of $0.50 (reserved $0.0180)
+[enrich] primary: 4940 distinct texts saved this invocation (of 8448 pending at start) | 12.9/s | staged 510 | spent $0.0578 of $0.50 (reserved $0.0179)
+[enrich] primary: 4990 distinct texts saved this invocation (of 8448 pending at start) | 12.5/s | staged 510 | spent $0.0583 of $0.50 (reserved $0.0180)
+[enrich] primary: 5305 distinct texts saved this invocation (of 8448 pending at start) | 12.8/s | staged 545 | spent $0.0620 of $0.50 (reserved $0.0179)
+[enrich] primary: 5351 distinct texts saved this invocation (of 8448 pending at start) | 12.5/s | staged 549 | spent $0.0626 of $0.50 (reserved $0.0177)
+[enrich] primary: 5617 distinct texts saved this invocation (of 8448 pending at start) | 12.7/s | staged 583 | spent $0.0658 of $0.50 (reserved $0.0178)
+[enrich] primary: 5703 distinct texts saved this invocation (of 8448 pending at start) | 12.4/s | staged 597 | spent $0.0668 of $0.50 (reserved $0.0179)
+[enrich] primary: 5974 distinct texts saved this invocation (of 8448 pending at start) | 12.6/s | staged 626 | spent $0.0700 of $0.50 (reserved $0.0179)
+[enrich] primary: 6058 distinct texts saved this invocation (of 8448 pending at start) | 12.4/s | staged 642 | spent $0.0711 of $0.50 (reserved $0.0179)
+[enrich] primary: 6333 distinct texts saved this invocation (of 8448 pending at start) | 12.6/s | staged 667 | spent $0.0743 of $0.50 (reserved $0.0177)
+[enrich] primary: 6430 distinct texts saved this invocation (of 8448 pending at start) | 12.4/s | staged 670 | spent $0.0753 of $0.50 (reserved $0.0177)
+[enrich] primary: 6656 distinct texts saved this invocation (of 8448 pending at start) | 12.4/s | staged 694 | spent $0.0779 of $0.50 (reserved $0.0179)
+[enrich] primary: 6748 distinct texts saved this invocation (of 8448 pending at start) | 12.3/s | staged 702 | spent $0.0790 of $0.50 (reserved $0.0179)
+[enrich] primary: 6958 distinct texts saved this invocation (of 8448 pending at start) | 12.3/s | staged 742 | spent $0.0825 of $0.50 (reserved $0.0178)
+[enrich] primary: 7041 distinct texts saved this invocation (of 8448 pending at start) | 12.1/s | staged 759 | spent $0.0838 of $0.50 (reserved $0.0178)
+[enrich] primary: 7316 distinct texts saved this invocation (of 8448 pending at start) | 12.3/s | staged 784 | spent $0.0869 of $0.50 (reserved $0.0170)
+[enrich] primary: 7401 distinct texts saved this invocation (of 8448 pending at start) | 12.1/s | staged 799 | spent $0.0880 of $0.50 (reserved $0.0125)
+[enrich] primary: 7577 distinct texts saved this invocation (of 8448 pending at start) | 12.1/s | staged 821 | spent $0.0902 of $0.50 (reserved $0.0037)
+[enrich] primary: 7577 distinct texts saved this invocation (of 8448 pending at start) | 11.8/s | staged 821 | spent $0.0902 of $0.50 (reserved $0.0037)
+[enrich] primary: 7577 distinct texts saved this invocation (of 8448 pending at start) | 11.5/s | staged 821 | spent $0.0902 of $0.50 (reserved $0.0037)
+[enrich] fallback decisions: 871 staged | routing 126 to fallback1 (cap 126, already routed 0) | 745 keep their primary label
+[verify] declared sample 845 of 8448 distinct texts; 845 to call
+[group] 4567 complaint/cancellation memberships in 22 issues; naming top 12 (12 new model calls, 0 cached or empty)
+[rank] 22 issues ranked from 4567 complaint/cancellation records (no model calls)
+[analysis] 10000 completed records: 19 months, 2 spike months, 7 app-version families; verifier robustness: True (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv
+[run] completed in 931.6s | completed 10000 | quarantined 0 | unfinished 0 | spend $0.096326
+[refresh] saved cost/refreshes/analysis_10000.json and rewrote cost/report.md
+./scripts/live.sh: line 60: syntax error near unexpected token `;;'
+exit 2

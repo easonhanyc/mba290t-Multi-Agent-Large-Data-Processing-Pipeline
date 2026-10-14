@@ -2,59 +2,81 @@
 
 Generated from saved artifacts by `python -m insight trace` (no model calls).
 
-## A. Traced review (top issue, verified, quoted in the memo)
+## A. Traced review (top issue, verified, not quoted in the memo)
 
-Review `674b2fb0-f4a5-430d-9241-ee3ea348a30e` (run `final-200k`).
+Review `02ccf42f-6ef1-44e2-ad96-5c8972e856d5` (run `final-200k`).
 
 **1. Source row** (`ingest`, code). Six original fields, unchanged; row hash = SHA-256 of their compact JSON.
 
 | Field | Value |
 |---|---|
-| review_text | I really don't want to give Spotify 1 star for real but this made me very upset. For like 3 to 4 days before I was listening songs and today I really shocked to see that ..now I have to buy premium to put the song again and I can't even play the song now . Today morning it was my last time I listen to music in Spotify. What are you doing Spotify this will decrease your download and also you are ge... |
-| review_rating | 1 |
+| review_text | I wanna give a 5 star rating but the new update made me do so !! even if u wanna listen the main part of the song u have to get premium 💀✨ idk why they r doin this,......tbh I want a new update that would be able to do what we used to do!!!! |
+| review_rating | 2 |
 | review_likes | 0 |
 | app_version | 8.8.76.667 |
-| review_timestamp | 2023-10-10 14:28:01 |
-| source_sha256 | `5621660d8d5bc44eb912c39a357f35755750f7a3fe5537cc3cef8e81929abf59` |
+| review_timestamp | 2023-10-18 05:05:08 |
+| source_sha256 | `e19884f0a7a6708575643dc8b46bed3a2aed3db821d612d917c3a26fc44585fe` |
 
 **2. Enrichment** (`enrich`, model + code). Only `review_text` was sent.
 
 | Field | Value |
 |---|---|
-| status | completed (labeled by **primary**) |
+| status | completed (labeled by **fallback1**) |
 | topic / subtopic | billing / premium_only |
 | intent | complaint |
-| severity | 4 (A clearly blocked core task, such as inability to log in or play music) |
-| sentiment | -1.0 |
-| evidence_quote | "For like 3 to 4 days before I was listening songs and today I really shocked to see that ..now I have to buy premium to put the song again and I can't even play the song now ." (exact substring: True) |
-| entities (code-matched) | premium, downloads |
+| severity | 3 (A degraded or restricted function; some use or workaround remains) |
+| sentiment | -0.5 |
+| evidence_quote | "even if u wanna listen the main part of the song u have to get premium 💀✨ idk why they r doin this,......tbh I want a new update that would be able to do what we used to do!!!!" (exact substring: True) |
+| entities (code-matched) | update, premium |
 | needs_review | False |
 | cache_source_id | - |
-| label_config | `gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790` |
+| label_config | `gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)\|enrich-v2\|schema-v2\|cfg-f6337dc790` |
+| difficulty signals | request with severity 3 (definition implies 1) |
+| primary answer before fallback | issue billing_premium_only, intent request, severity 3 |
 
 Model calls that carried this review (every attempt is logged before it is sent):
 
 | request_id | role / tier | phase | model (reported) | tier / billing | outcome | in / cached / out tokens | billed |
 |---|---|---|---|---|---|---|---:|
-| `req-20261013T005112354170-0e20c394` | enrich / primary | resume | `gpt-6-luna` (gpt-6-luna) | flex / api | succeeded | 5348 / 2368 / 1667 | $0.000615 |
-| `req-20261013T020350269465-6822f75e` | group / group | resume | `sonnet` (claude-sonnet-5) | subscription / subscription | succeeded | 2036 / 0 / 149 | $0.000000 |
+| `req-20261013T005534241902-572f587b` | enrich / primary | resume | `gpt-6-luna` (gpt-6-luna) | flex / api | succeeded | 4178 / 2368 / 1647 | $0.000537 |
+| `req-20261013T010759019782-0f7b5897` | enrich / fallback1 | resume | `gpt-6-luna` (gpt-6-luna) | flex / api | succeeded | 2291 / 2199 / 38 | $0.000026 |
+| `req-20261013T015230781792-0eeb575b` | verify / verify | resume | `haiku` (claude-haiku-4-5-20251001) | subscription / subscription | succeeded | 4417 / 0 / 6331 | $0.000000 |
 
 **3. Verification** (`verify`, independent model + code; blind to the enricher's labels).
 
-Not in the declared random verification sample.
+In the declared verification sample (lowest SHA-256(seed + ':' + review_id) among distinct completed texts; seed `berkeley-fa-2026-insight-v1`, 2000 of 152363 distinct completed texts). The verifier saw only the review text, in its own batch request, never the enricher's labels.
+
+Verifier `haiku@n/a|verify-v1|cfg-26c97bdddf`, request `req-20261013T015230781792-0eeb575b` (run `run-20261012T233254.463Z-c2b5`), confidence high:
+
+| Field | Enricher (record) | Verifier (independent) | Code comparison |
+|---|---|---|---|
+| topic | billing | billing | agree |
+| intent | complaint | complaint | agree |
+| severity | 3 | 4 | disagree (abs. difference 1) |
+| sentiment | -0.5 | -0.5 | abs. difference 0.0 (within tolerance 0.5) |
+
+Result: disagrees on severity (saved in `verification/report.json`; disagreements are listed in `verification/disagreements.csv`, and the enricher's labels are never overwritten).
 
 **4. Issue membership** (`group`, code; the model only names issues).
 
-`membership.csv`: `billing.premium_only,674b2fb0-f4a5-430d-9241-ee3ea348a30e` -> issue **Premium-only restrictions** (named by `cache`).
+`membership.csv`: `billing.premium_only,02ccf42f-6ef1-44e2-ad96-5c8972e856d5` -> issue **Premium-only restrictions** (named by `cache`).
 
 **5. Ranking** (`rank`, code; reproducible with `python -m insight rank --run-dir <run> --check`).
 
-Rank **1**: complaint_count 18016, severity_sum 52577, mean_severity 2.918350, priority_score 52577 (this review contributes severity 4).
+Rank **1**: complaint_count 18016, severity_sum 52577, mean_severity 2.918350, priority_score 52577 (this review contributes severity 3).
 
-**6. Memo** (`memo`, model + code; numbers are tokens filled by code).
+**6. Memo** (`memo`, model + code; the model writes tokens, code fills each as `value (claim ID)`).
 
 Claims in `claims.csv` for this issue: `C01` complaint_count = 18016, `C02` severity_sum = 52577, `C03` mean_severity = 2.918350, `C04` priority_score = 52577.
-This review is quoted in the memo evidence pack and cited by the memo model.
+
+Where `memo.md` cites them (memo source: model):
+
+- `C01` (complaint_count) is printed as `18016 (C01)` in: Recommendation, Next-quarter actions #1
+- `C02` (severity_sum) is printed as `52577 (C02)` in: Recommendation, Next-quarter actions #1, Why #1, Limitations #2
+- `C03` (mean_severity) is printed as `2.918350 (C03)` in: Recommendation, Why #1
+- The memo's issue table prints all four values with their claim IDs (rank 1 row), and `memo_tokens.csv` lists every token ID the memo uses.
+
+This review is not quoted in the memo evidence pack; it contributes to the issue's numbers above.
 
 ## B. An ambiguous or failed case and its recorded handling
 
@@ -84,7 +106,7 @@ Review `00046c11-dc53-495f-a874-6a9f1a0445dc` (run `final-200k`).
 | entities (code-matched) | - |
 | needs_review | True |
 | cache_source_id | - |
-| label_config | `gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790` |
+| label_config | `gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)\|enrich-v2\|schema-v2\|cfg-f6337dc790` |
 | difficulty signals | model flagged the review as ambiguous |
 | primary answer before fallback | issue other_general, intent unclear, severity 1 |
 

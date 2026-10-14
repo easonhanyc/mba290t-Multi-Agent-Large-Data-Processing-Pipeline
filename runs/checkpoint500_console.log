@@ -1,0 +1,44 @@
+[run] run-20261012T225242.945Z-c7a3 | phase initial | run dir runs/live-checkpoint500 | budget $0.15 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 7, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 479 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.15 (reserved $0.0022)
+[enrich] primary: 49 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 1 | spent $0.0004 of $0.15 (reserved $0.0022)
+[enrich] primary: 49 distinct texts saved this invocation (of 479 pending at start) | 1.1/s | staged 1 | spent $0.0004 of $0.15 (reserved $0.0022)
+[enrich] primary: 95 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 5 | spent $0.0008 of $0.15 (reserved $0.0022)
+[enrich] primary: 95 distinct texts saved this invocation (of 479 pending at start) | 1.2/s | staged 5 | spent $0.0008 of $0.15 (reserved $0.0022)
+[enrich] primary: 144 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 6 | spent $0.0014 of $0.15 (reserved $0.0022)
+[enrich] primary: 144 distinct texts saved this invocation (of 479 pending at start) | 1.3/s | staged 6 | spent $0.0014 of $0.15 (reserved $0.0022)
+[enrich] primary: 192 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 8 | spent $0.0019 of $0.15 (reserved $0.0022)
+[enrich] primary: 192 distinct texts saved this invocation (of 479 pending at start) | 1.4/s | staged 8 | spent $0.0019 of $0.15 (reserved $0.0022)
+[enrich] primary: 238 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 12 | spent $0.0024 of $0.15 (reserved $0.0022)
+[enrich] primary: 238 distinct texts saved this invocation (of 479 pending at start) | 1.4/s | staged 12 | spent $0.0024 of $0.15 (reserved $0.0022)
+[enrich] primary: 288 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 12 | spent $0.0029 of $0.15 (reserved $0.0022)
+[enrich] primary: 336 distinct texts saved this invocation (of 479 pending at start) | 1.7/s | staged 14 | spent $0.0035 of $0.15 (reserved $0.0022)
+[enrich] primary: 336 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 14 | spent $0.0035 of $0.15 (reserved $0.0022)
+[enrich] primary: 383 distinct texts saved this invocation (of 479 pending at start) | 1.7/s | staged 17 | spent $0.0040 of $0.15 (reserved $0.0022)
+[enrich] primary: 383 distinct texts saved this invocation (of 479 pending at start) | 1.6/s | staged 17 | spent $0.0040 of $0.15 (reserved $0.0022)
+[enrich] fallback decisions: 21 staged | routing 7 to fallback1 (cap 7, already routed 0) | 14 keep their primary label
+[verify] declared sample 48 of 479 distinct texts; 48 to call
+[group] 247 complaint/cancellation memberships in 20 issues; naming top 12 (12 new model calls, 0 cached or empty)
+[rank] 20 issues ranked from 247 complaint/cancellation records (no model calls)
+[analysis] 500 completed records: 19 months, 2 spike months, 6 app-version families; verifier robustness: True (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv
+[run] completed in 396.6s | completed 500 | quarantined 0 | unfinished 0 | spend $0.005175
+[run] run-20261012T225920.142Z-63e8 | phase initial | run dir runs/live-checkpoint500-w2 | budget $0.15 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 500 rows | 500 nonempty | 0 empty | 479 distinct texts (21 exact-text reuses) | 108 missing app_version
+[enrich] label_config = gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb
+[enrich] pending distinct texts: 479 | staged for a fallback decision: 0 | fallback caps {'fallback1': 7, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 2
+[enrich] primary: 0 distinct texts saved this invocation (of 479 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.15 (reserved $0.0044)
+[enrich] primary: 0 distinct texts saved this invocation (of 479 pending at start) | 0.0/s | staged 0 | spent $0.0004 of $0.15 (reserved $0.0022)
+[enrich] primary: 95 distinct texts saved this invocation (of 479 pending at start) | 2.1/s | staged 5 | spent $0.0008 of $0.15 (reserved $0.0044)
+[enrich] primary: 190 distinct texts saved this invocation (of 479 pending at start) | 3.1/s | staged 10 | spent $0.0017 of $0.15 (reserved $0.0044)
+[enrich] primary: 190 distinct texts saved this invocation (of 479 pending at start) | 2.5/s | staged 10 | spent $0.0017 of $0.15 (reserved $0.0044)
+[enrich] primary: 285 distinct texts saved this invocation (of 479 pending at start) | 3.1/s | staged 15 | spent $0.0025 of $0.15 (reserved $0.0044)
+[enrich] primary: 285 distinct texts saved this invocation (of 479 pending at start) | 2.7/s | staged 15 | spent $0.0025 of $0.15 (reserved $0.0044)
+[enrich] primary: 381 distinct texts saved this invocation (of 479 pending at start) | 3.1/s | staged 19 | spent $0.0034 of $0.15 (reserved $0.0037)
+[enrich] primary: 410 distinct texts saved this invocation (of 479 pending at start) | 3.0/s | staged 19 | spent $0.0037 of $0.15 (reserved $0.0022)
+[enrich] fallback decisions: 23 staged | routing 7 to fallback1 (cap 7, already routed 0) | 16 keep their primary label
+[run] completed in 154.3s | completed 500 | quarantined 0 | unfinished 0 | spend $0.004250
+[refresh] saved cost/refreshes/checkpoint_500.json and rewrote cost/report.md
+exit 0

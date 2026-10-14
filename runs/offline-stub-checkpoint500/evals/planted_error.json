@@ -10,14 +10,14 @@
   "note": "Test copy only; the stored record was not changed. Detection uses the saved verifier output.",
   "offline_stub_labels": true,
   "original": {
-    "intent": "complaint",
-    "sentiment": 0.5,
-    "severity": 4,
+    "intent": "cancellation",
+    "sentiment": -0.5,
+    "severity": 3,
     "topic": "support"
   },
   "planted": {
     "intent": "praise",
-    "sentiment": -0.5,
+    "sentiment": 0.5,
     "severity": 1,
     "topic": "billing"
   },
@@ -25,9 +25,9 @@
   "status": "detected",
   "verifier": {
     "confidence": "low",
-    "intent": "complaint",
-    "sentiment": 0.5,
-    "severity": 4,
+    "intent": "cancellation",
+    "sentiment": -0.5,
+    "severity": 3,
     "topic": "support"
   }
 }

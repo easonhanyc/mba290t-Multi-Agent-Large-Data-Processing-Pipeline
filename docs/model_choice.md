@@ -1,11 +1,13 @@
 # Model choice
 
-Updated 2026-10-12. This replaces the 2026-10-01 plan (Jev as primary enricher, GPT-6 Luna for verify,
+Updated 2026-10-14 (UTC). This replaces the 2026-10-01 plan (Jev as primary enricher, GPT-6 Luna for verify,
 group and memo), which was written before any model had been called. The current choice rests on two
 provider probes, the real 100-review pilot and the live 500-review checkpoint. It then ran at the
 10,000-review checkpoint and, with a larger fallback1 cap and output-token cap, on the declared
-200,013-row scope (below). The golden-50 comparison is still pending, so quality evidence comes only from
-the verifier sample and from repeating a run.
+200,013-row scope (below). Quality evidence comes from the verifier sample, from repeating a run, and from the
+golden-50 comparison against Eason's hand labels ("Candidate comparison on the golden 50" below). The golden
+labels were finished after the final run, so they informed the disclosure there, not the choice made before
+the run.
 
 ## Decision rule
 
@@ -13,15 +15,17 @@ the verifier sample and from repeating a run.
    - **Money**: the conservative projection for the chosen scope fits the $9.00 project cap
      (`run.project_cap_usd`, Eason's $10 total budget less a $1 margin, `config/pipeline.toml`), and it needs
      no purchase beyond the funded OpenAI credit.
-   - **Time**: the measured rate limit and latency let the run finish before the deadline
-     (Tue 2026-10-13, 11:59 pm PT).
+   - **Time**: the measured rate limit and latency let the run finish well before the course deadline (the
+     final run took 9,334.36 s over seven invocations, 8,974.4 s of it in the two enrichment invocations,
+     `cost/refreshes/final_200k.json`).
    - **Contract**: structured output, at most 50 reviews per request, and every call logged with its model
      ID, tokens and cost.
 2. **Quality.** Among setups that pass, use the cheapest one whose golden-50 results are not clearly
    worse than the others. The brief sets no minimum accuracy, and 50 cases cannot separate differences of
    one or two reviews.
 3. **Stronger models only where bounded.** They are used for capped fallbacks, the declared verifier
-   sample, 12 issue-naming calls and one memo call, never as an automatic upgrade for every review.
+   sample, at most 12 issue-naming calls and one memo call per pass (a second memo attempt only after an
+   invalid output), never as an automatic upgrade for every review.
 
 ## Roles in production (`config/pipeline.toml`)
 
@@ -31,8 +35,8 @@ the verifier sample and from repeating a run.
 | Enrich, fallback1 | `gpt-6-luna` | effort low, 1 review/request, at most 10% of distinct texts (1.5% up to the 10k checkpoint) | billed API | A second, slower read of the reviews the primary pass flagged or contradicted itself on |
 | Enrich, fallback2 | Claude Sonnet via `claude -p` (alias `sonnet`) | effort low, at most 0.25% | Claude Pro subscription | Only when fallback1 output is invalid twice. Never routed in the measured runs |
 | Verify | `claude-haiku-4-5-20251001` via `claude -p` | blind, declared 10% random sample of distinct texts, at most 2,000 | Claude Pro subscription | A different model family from the enricher, so agreement is a real consistency check |
-| Group (names only) | `claude-sonnet-5` via `claude -p` | top 12 issues, 12 sampled member quotes each; catch-all issues keep their taxonomy names; membership is code | Claude Pro subscription | Readable names; at most 12 calls per run |
-| Memo | `claude-sonnet-5` via `claude -p` | aggregates + evidence pack; writes claim tokens, code fills numbers | Claude Pro subscription | One call per run |
+| Group (names only) | `claude-sonnet-5` via `claude -p` | top 12 issues, 12 sampled member quotes each; catch-all issues keep their taxonomy names; membership is code | Claude Pro subscription | Readable names; at most 12 calls per pass (names are cached by their exact inputs) |
+| Memo | `claude-sonnet-5` via `claude -p` | aggregates + evidence pack; writes claim tokens, code fills numbers | Claude Pro subscription | One call per pass, retried once if invalid; a template memo if invalid twice |
 
 Logged model IDs come from `model_reported` in the `calls` table of `runs/live-checkpoint500/state.sqlite`
 (the same IDs appear in `runs/final-200k/state.sqlite`).
@@ -44,9 +48,9 @@ that apart from billed spend.
 The measured runs used verifier prompt `verify-v1` at 25 reviews per request and memo prompt `memo-v1`
 (`stage_configs` and `config_summary` in `runs/live-checkpoint500/run_summary.json`). The config now
 points to `prompts/verify_v2.md` at 50 reviews per request and `prompts/memo_v2.md`.
-The final run's `stage_configs` (`runs/final-200k/run_summary.json`) are verify
+The final run's `stage_configs` (`runs/final-200k/run_summary.json`, latest invocation) are verify
 `haiku@n/a|verify-v1|cfg-26c97bdddf`, group `sonnet@low|group-v1|cfg-28f1c4b99f` and memo
-`sonnet@low|memo-v1|cfg-5b215798be`. The `-v1` in these strings is a fixed label (`insight/config.py`,
+`sonnet@low|memo-v1|cfg-820daf045e`. The `-v1` in these strings is a fixed label (`insight/config.py`,
 `stage_config`); the prompt file enters through its SHA-256 inside the `cfg-` hash. All three equal what the
 current `config/pipeline.toml` produces (recomputed with `insight.config.load().stage_config(...)`, no
 calls), so the final run used `prompts/verify_v2.md` at 50 reviews per request (40 verifier calls for
@@ -55,7 +59,7 @@ calls), so the final run used `prompts/verify_v2.md` at 50 reviews per request (
 
 ## Measured evidence
 
-### Provider probes (2026-10-12, 5 development reviews, `data/probe_dev_5.csv`)
+### Provider probes (2026-10-12, 5 development reviews, [`data/probe_dev_5.csv`](../data/probe_dev_5.csv))
 
 | Probe | Requests | Input tokens per request | Cached | Latency | Rate limit reported | Billed | Source |
 |---|---:|---|---:|---|---|---:|---|
@@ -108,7 +112,7 @@ measured $0.00001073 per distinct review, 49.833 reviews per request and 29.29 s
 | fallback1 cap / staged / routed | 1.5% (126) / 871 / 126 | 10% (15,236) / 13,639 / 13,639 |
 | Enrichment attempts | 173 primary, 126 fallback1 | 3,163 primary, 13,715 fallback1 (incl. 172 HTTP 429 retries) |
 | Billed API | $0.096326 | $2.019246 |
-| Wall clock | 931.6 s, all stages | 208.4 s (interrupted) + 8,766.0 s (resume, all stages) |
+| Wall clock | 931.6 s, all stages | 208.4 s (interrupted) + 8,766.0 s (resume, all stages); then five regenerations without enrichment, 359.9 s in total (`cost/refreshes/final_200k.json`) |
 | Verifier agreement: topic / intent / severity | 678 / 763 / 655 of 845 | 1,618 / 1,841 / 1,583 of 2,000 |
 
 Sources: `run_summary.json` and `verification/report.json` in each run directory,
@@ -129,7 +133,7 @@ so the final run started in a new run directory.
 | **Hybrid** (`backend = "hybrid"`): Luna labels plus a Decisions cross-check of intent and severity on high-stakes texts (cancellation, severity >= 4, or flagged ambiguous) and a 10% deterministic random sample; disagreements are staged for the capped fallback | Same probe; cross-check estimate 367 input tokens per compact request (`cost/assumptions.json`, estimate) | Time: fails at scale (50 requests per day) | Built and tested offline (`tests/test_pipeline.py::test_hybrid_crosscheck_routes_disagreements_and_resumes`); off in production (`crosscheck_fraction` 0 in `cost/assumptions.json`). `evals/ensemble_golden.py` scores, offline, what this combination would have done on the golden 50 |
 | **Jev 1.13** (TypeSafe), one review per request | Not run. Listed price $0.042 per million input tokens, output free (`cost/rates.csv`); its question set is about 1,666 tokens per request (6,665 characters / 4, `cost/report.md`), so the golden 50 would cost about $0.0035 | Money: fails. TypeSafe requires a $5 minimum purchase against a $10 total budget. Projection $10.66 at the declared scope (`cost/report.md`, estimate) | Not used. The Decisions backend reuses the Jev question set (`prompts/jev_enrich_v1.json`) as the typed-classifier comparison |
 | **Claude Haiku via `claude -p`** | 500 run: 2 verifier calls for 48 reviews, mean 23.7 s, API-equivalent $0.040849 (`runs/live-checkpoint500/state.sqlite`). Final run: 40 calls for 2,000 reviews, API-equivalent $1.464668 (`runs/final-200k/state.sqlite`) | Subscription usage limits; config allows 8 requests per minute to `claude -p` | Verifier |
-| **Claude Sonnet via `claude -p`** | 500 run: 12 group calls (API-equivalent $0.071323) and 1 memo call ($0.057585) (`runs/live-checkpoint500/state.sqlite`). Final run, including the post-run regenerations: 22 group and 4 memo calls (`runs/final-200k/state.sqlite`) | Bounded: 13 calls per pipeline pass | Group names, memo, fallback2 |
+| **Claude Sonnet via `claude -p`** | 500 run: 12 group calls (API-equivalent $0.071323) and 1 memo call ($0.057585) (`runs/live-checkpoint500/state.sqlite`). Final run, including the five post-run regenerations: 22 group calls (12 in the resume, 10 in the first regeneration) and 7 memo attempts, 5 valid and 2 invalid (both attempts of one regeneration, which then used the template memo); all $0 billed (`runs/final-200k/grading/calls.jsonl.gz`) | Bounded: at most 12 group calls and 2 memo attempts per pipeline pass | Group names, memo, fallback2 |
 
 Other priced alternatives that were not run (Gemini 2.5 Flash-Lite, whose adapter is not built; Claude Haiku
 5.5 by API; Luna at Standard tier) appear in `cost/report.md`, "Enrichment-stage alternatives", as token
