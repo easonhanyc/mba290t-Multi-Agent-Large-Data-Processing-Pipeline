@@ -235,6 +235,13 @@
             "models_reported": [
               "gpt-6-luna"
             ],
+            "invalid_outputs": 0,
+            "invalid_outputs_first_try": 0,
+            "invalid_outputs_on_retry": 0,
+            "invalid_outputs_by_finish": {},
+            "partially_valid_outputs": null,
+            "invalid_output_retry_tasks": 0,
+            "invalid_output_retry_tasks_resent": 0,
             "unique_reviews": 100,
             "mean_latency_s": 29.5833,
             "mean_attempt_latency_s": 29.5835,
@@ -275,6 +282,13 @@
             "models_reported": [
               "gpt-6-luna"
             ],
+            "invalid_outputs": 0,
+            "invalid_outputs_first_try": 0,
+            "invalid_outputs_on_retry": 0,
+            "invalid_outputs_by_finish": {},
+            "partially_valid_outputs": null,
+            "invalid_output_retry_tasks": 0,
+            "invalid_output_retry_tasks_resent": 0,
             "unique_reviews": 1,
             "mean_latency_s": 1.7815,
             "mean_attempt_latency_s": 1.782,
@@ -315,6 +329,13 @@
             "models_reported": [
               "claude-haiku-4-5-20251001"
             ],
+            "invalid_outputs": 0,
+            "invalid_outputs_first_try": 0,
+            "invalid_outputs_on_retry": 0,
+            "invalid_outputs_by_finish": {},
+            "partially_valid_outputs": null,
+            "invalid_output_retry_tasks": 0,
+            "invalid_output_retry_tasks_resent": 0,
             "unique_reviews": 10,
             "mean_latency_s": 18.821,
             "mean_attempt_latency_s": 18.821,
@@ -355,6 +376,13 @@
             "models_reported": [
               "claude-sonnet-5"
             ],
+            "invalid_outputs": 0,
+            "invalid_outputs_first_try": 0,
+            "invalid_outputs_on_retry": 0,
+            "invalid_outputs_by_finish": {},
+            "partially_valid_outputs": null,
+            "invalid_output_retry_tasks": 0,
+            "invalid_output_retry_tasks_resent": 0,
             "unique_reviews": 38,
             "mean_latency_s": 3.559,
             "mean_attempt_latency_s": 3.559,
@@ -395,6 +423,13 @@
             "models_reported": [
               "claude-sonnet-5"
             ],
+            "invalid_outputs": 0,
+            "invalid_outputs_first_try": 0,
+            "invalid_outputs_on_retry": 0,
+            "invalid_outputs_by_finish": {},
+            "partially_valid_outputs": null,
+            "invalid_output_retry_tasks": 0,
+            "invalid_output_retry_tasks_resent": 0,
             "unique_reviews": 0,
             "mean_latency_s": 36.5876,
             "mean_attempt_latency_s": 36.588,
@@ -520,6 +555,13 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 479,
           "mean_latency_s": 25.3286,
           "mean_attempt_latency_s": 25.3286,
@@ -560,6 +602,13 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 7,
           "mean_latency_s": 1.8785,
           "mean_attempt_latency_s": 1.8786,
@@ -600,6 +649,13 @@
           "models_reported": [
             "claude-haiku-4-5-20251001"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 48,
           "mean_latency_s": 23.7091,
           "mean_attempt_latency_s": 23.709,
@@ -640,6 +696,13 @@
           "models_reported": [
             "claude-sonnet-5"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 88,
           "mean_latency_s": 3.8239,
           "mean_attempt_latency_s": 3.8239,
@@ -680,6 +743,13 @@
           "models_reported": [
             "claude-sonnet-5"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 0,
           "mean_latency_s": 36.3452,
           "mean_attempt_latency_s": 36.345,
@@ -779,6 +849,15 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 3,
+          "invalid_outputs_first_try": 2,
+          "invalid_outputs_on_retry": 1,
+          "invalid_outputs_by_finish": {
+            "unrecorded": 3
+          },
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 4,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 8398,
           "mean_latency_s": 28.0869,
           "mean_attempt_latency_s": 28.6708,
@@ -819,6 +898,13 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 126,
           "mean_latency_s": 3.1493,
           "mean_attempt_latency_s": 3.1493,
@@ -859,6 +945,13 @@
           "models_reported": [
             "claude-haiku-4-5-20251001"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 845,
           "mean_latency_s": 50.7875,
           "mean_attempt_latency_s": 50.7875,
@@ -899,6 +992,13 @@
           "models_reported": [
             "claude-sonnet-5"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 96,
           "mean_latency_s": 4.3759,
           "mean_attempt_latency_s": 4.3759,
@@ -939,6 +1039,13 @@
           "models_reported": [
             "claude-sonnet-5"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": null,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 0,
           "mean_latency_s": 28.7795,
           "mean_attempt_latency_s": 28.779,
@@ -977,10 +1084,10 @@
       "quarantined": 13,
       "unfinished": 0,
       "workers": 16,
-      "invocations": 7,
-      "wall_clock_s": 9334.36,
+      "invocations": 12,
+      "wall_clock_s": 9682.057,
       "label_config": "gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790",
-      "saved_at": "2026-10-14T03:12:22+00:00",
+      "saved_at": "2026-10-14T18:50:39+00:00",
       "workers_source": "max over the invocations that made enrichment calls",
       "latest_invocation_workers": 4,
       "enrichment_invocations": 2,
@@ -1105,6 +1212,91 @@
           "enrichment_calls": 0,
           "budget_cap_usd": 2.1,
           "budget_denials": 0
+        },
+        {
+          "run_id": "run-20261014T183909.239Z-202d",
+          "phase": "resume",
+          "status": "completed",
+          "workers": 4,
+          "wall_clock_s": 77.84,
+          "stage_seconds": {
+            "export": 9.428,
+            "group": 15.868,
+            "ingest": 0.026,
+            "memo": 46.166,
+            "rank": 4.531
+          },
+          "enrichment_calls": 0,
+          "budget_cap_usd": 2.1,
+          "budget_denials": 0
+        },
+        {
+          "run_id": "run-20261014T184128.634Z-8a66",
+          "phase": "resume",
+          "status": "completed",
+          "workers": 4,
+          "wall_clock_s": 91.289,
+          "stage_seconds": {
+            "export": 9.854,
+            "group": 9.764,
+            "ingest": 0.016,
+            "memo": 67.523,
+            "rank": 2.786
+          },
+          "enrichment_calls": 0,
+          "budget_cap_usd": 2.1,
+          "budget_denials": 0
+        },
+        {
+          "run_id": "run-20261014T184351.433Z-0d14",
+          "phase": "resume",
+          "status": "completed",
+          "workers": 4,
+          "wall_clock_s": 83.378,
+          "stage_seconds": {
+            "export": 9.409,
+            "group": 9.309,
+            "ingest": 0.015,
+            "memo": 60.333,
+            "rank": 2.868
+          },
+          "enrichment_calls": 0,
+          "budget_cap_usd": 2.1,
+          "budget_denials": 0
+        },
+        {
+          "run_id": "run-20261014T184545.752Z-3a1e",
+          "phase": "resume",
+          "status": "completed",
+          "workers": 4,
+          "wall_clock_s": 71.048,
+          "stage_seconds": {
+            "export": 9.983,
+            "group": 9.468,
+            "ingest": 0.014,
+            "memo": 47.714,
+            "rank": 2.873
+          },
+          "enrichment_calls": 0,
+          "budget_cap_usd": 2.1,
+          "budget_denials": 0
+        },
+        {
+          "run_id": "run-20261014T184902.112Z-bd73",
+          "phase": "resume",
+          "status": "completed",
+          "workers": 4,
+          "wall_clock_s": 24.142,
+          "stage_seconds": {
+            "export": 9.417,
+            "group": 10.268,
+            "ingest": 0.016,
+            "memo": 0.578,
+            "rank": 2.834
+          },
+          "enrichment_calls": 0,
+          "budget_cap_usd": 2.1,
+          "budget_denials": 0
         }
       ],
       "stages": {
@@ -1137,6 +1329,16 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 10,
+          "invalid_outputs_first_try": 9,
+          "invalid_outputs_on_retry": 1,
+          "invalid_outputs_by_finish": {
+            "malformed_json": 4,
+            "truncated": 6
+          },
+          "partially_valid_outputs": 10,
+          "invalid_output_retry_tasks": 19,
+          "invalid_output_retry_tasks_resent": 1,
           "unique_reviews": 152313,
           "mean_latency_s": 29.2946,
           "mean_attempt_latency_s": 28.7277,
@@ -1178,6 +1380,13 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": 0,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 13639,
           "mean_latency_s": 2.8192,
           "mean_attempt_latency_s": 2.8381,
@@ -1218,6 +1427,13 @@
           "models_reported": [
             "claude-haiku-4-5-20251001"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": 0,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 2000,
           "mean_latency_s": 47.1121,
           "mean_attempt_latency_s": 47.1121,
@@ -1258,6 +1474,13 @@
           "models_reported": [
             "claude-sonnet-5"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": 0,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 216,
           "mean_latency_s": 4.0621,
           "mean_attempt_latency_s": 4.0621,
@@ -1271,22 +1494,22 @@
           "mean_output_tokens": 168.6
         },
         "memo": {
-          "attempts": 7,
-          "first_attempts": 6,
+          "attempts": 11,
+          "first_attempts": 10,
           "transient_retries": 0,
           "invalid_output_retries": 1,
           "failed": 2,
-          "succeeded": 5,
+          "succeeded": 9,
           "usage": {
-            "input_uncached": 26,
-            "input_cached": 65115,
-            "input_cache_write": 76488,
-            "output": 24767
+            "input_uncached": 42,
+            "input_cached": 124504,
+            "input_cache_write": 142700,
+            "output": 46354
           },
           "billed_usd": 0.0,
-          "api_equivalent_usd": 0.451965,
+          "api_equivalent_usd": 0.8452748,
           "api_equivalent_unpriced": 0,
-          "attempt_seconds": 270.372,
+          "attempt_seconds": 489.38,
           "rate_limited": 0,
           "reviews_sent": 0,
           "tiers": [
@@ -1298,17 +1521,26 @@
           "models_reported": [
             "claude-sonnet-5"
           ],
+          "invalid_outputs": 2,
+          "invalid_outputs_first_try": 1,
+          "invalid_outputs_on_retry": 1,
+          "invalid_outputs_by_finish": {
+            "complete": 2
+          },
+          "partially_valid_outputs": 0,
+          "invalid_output_retry_tasks": 1,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 0,
-          "mean_latency_s": 35.9004,
-          "mean_attempt_latency_s": 38.6246,
+          "mean_latency_s": 44.2789,
+          "mean_attempt_latency_s": 44.4891,
           "attempts_per_unique_review": null,
           "reviews_per_request": 0.0,
           "billed_usd_per_review": null,
           "api_equivalent_usd_per_review": null,
           "billed_usd_per_call": 0.0,
-          "api_equivalent_usd_per_call": 0.0645664286,
-          "mean_input_tokens": 28325.8,
-          "mean_output_tokens": 4953.4
+          "api_equivalent_usd_per_call": 0.0768431636,
+          "mean_input_tokens": 29694.0,
+          "mean_output_tokens": 5150.4
         }
       },
       "api_cost_usd": 2.0192462,
@@ -1324,7 +1556,7 @@
           "run-20261012T233254.463Z-c2b5"
         ]
       },
-      "api_equivalent_subscription_usd": 2.056856,
+      "api_equivalent_subscription_usd": 2.4501658,
       "cost_per_1000_input_rows_usd": 0.010096
     }
   ],
@@ -1351,6 +1583,9 @@
         "source": "measured: final_200k (152363 distinct texts)",
         "attempts_per_review": 0.020766,
         "latency_succeeded_s": 29.2946,
+        "models_reported": [
+          "gpt-6-luna"
+        ],
         "provider": "openai",
         "model": "gpt-6-luna",
         "fixed_calls": null,
@@ -1391,6 +1626,9 @@
         "source": "measured: final_200k (152363 distinct texts)",
         "attempts_per_review": 1.005572,
         "latency_succeeded_s": 2.8192,
+        "models_reported": [
+          "gpt-6-luna"
+        ],
         "provider": "openai",
         "model": "gpt-6-luna",
         "fixed_calls": null,
@@ -1431,6 +1669,9 @@
         "source": "measured: final_200k (152363 distinct texts)",
         "attempts_per_review": 0.02,
         "latency_succeeded_s": 47.1121,
+        "models_reported": [
+          "claude-haiku-4-5-20251001"
+        ],
         "provider": "claude_code",
         "model": "haiku",
         "fixed_calls": null,
@@ -1451,6 +1692,9 @@
         "source": "measured: final_200k (152363 distinct texts)",
         "attempts_per_review": 0.101852,
         "latency_succeeded_s": 4.0621,
+        "models_reported": [
+          "claude-sonnet-5"
+        ],
         "provider": "claude_code",
         "model": "sonnet",
         "fixed_calls": 12,
@@ -1462,15 +1706,18 @@
       "memo": {
         "billed_per_call": 0.0,
         "billed_per_review": null,
-        "equiv_per_call": 0.0645664286,
+        "equiv_per_call": 0.0768431636,
         "equiv_per_review": null,
         "reviews_per_request": 1.0,
-        "latency_s": 38.6246,
+        "latency_s": 44.4891,
         "tier": "subscription",
         "billing": "subscription",
         "source": "measured: final_200k (152363 distinct texts)",
         "attempts_per_review": null,
-        "latency_succeeded_s": 35.9004,
+        "latency_succeeded_s": 44.2789,
+        "models_reported": [
+          "claude-sonnet-5"
+        ],
         "provider": "claude_code",
         "model": "sonnet",
         "fixed_calls": 2,
@@ -1566,7 +1813,7 @@
             "reviews": 0,
             "requests": 2.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.1291,
+            "api_equivalent_usd": 0.1537,
             "seconds": 15.0,
             "adds_seconds": 15.0,
             "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -1574,7 +1821,7 @@
         },
         "code_stage_seconds": 66.1,
         "api_cost_usd": 6.42,
-        "api_equivalent_subscription_usd": 1.67,
+        "api_equivalent_subscription_usd": 1.69,
         "elapsed_seconds": 27706.6,
         "elapsed_hours": 7.7,
         "exceeds_budget": false,
@@ -1648,7 +1895,7 @@
             "reviews": 0,
             "requests": 2.0,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.1291,
+            "api_equivalent_usd": 0.1537,
             "seconds": 15.0,
             "adds_seconds": 15.0,
             "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -1656,7 +1903,7 @@
         },
         "code_stage_seconds": 66.1,
         "api_cost_usd": 8.76,
-        "api_equivalent_subscription_usd": 1.67,
+        "api_equivalent_subscription_usd": 1.69,
         "elapsed_seconds": 37630.1,
         "elapsed_hours": 10.45,
         "exceeds_budget": false,
@@ -1730,7 +1977,7 @@
             "reviews": 0,
             "requests": 2.3,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.1931,
+            "api_equivalent_usd": 0.2298,
             "seconds": 17.2,
             "adds_seconds": 17.2,
             "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -1738,7 +1985,7 @@
         },
         "code_stage_seconds": 66.1,
         "api_cost_usd": 9.6,
-        "api_equivalent_subscription_usd": 26.38,
+        "api_equivalent_subscription_usd": 26.42,
         "elapsed_seconds": 42293.0,
         "elapsed_hours": 11.75,
         "exceeds_budget": true,
@@ -1812,7 +2059,7 @@
             "reviews": 0,
             "requests": 2.3,
             "billed_usd": 0.0,
-            "api_equivalent_usd": 0.1931,
+            "api_equivalent_usd": 0.2298,
             "seconds": 17.2,
             "adds_seconds": 17.2,
             "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -1820,7 +2067,7 @@
         },
         "code_stage_seconds": 66.1,
         "api_cost_usd": 13.09,
-        "api_equivalent_subscription_usd": 35.09,
+        "api_equivalent_subscription_usd": 35.12,
         "elapsed_seconds": 57509.1,
         "elapsed_hours": 15.97,
         "exceeds_budget": true,
@@ -1905,7 +2152,7 @@
               "reviews": 0,
               "requests": 2.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.1291,
+              "api_equivalent_usd": 0.1537,
               "seconds": 15.0,
               "adds_seconds": 15.0,
               "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -1913,7 +2160,7 @@
           },
           "code_stage_seconds": 20.0,
           "api_cost_usd": 2.02,
-          "api_equivalent_subscription_usd": 1.67,
+          "api_equivalent_subscription_usd": 1.69,
           "elapsed_seconds": 8995.4,
           "elapsed_hours": 2.5,
           "exceeds_budget": false,
@@ -1987,7 +2234,7 @@
               "reviews": 0,
               "requests": 2.0,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.1291,
+              "api_equivalent_usd": 0.1537,
               "seconds": 15.0,
               "adds_seconds": 15.0,
               "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -1995,7 +2242,7 @@
           },
           "code_stage_seconds": 20.0,
           "api_cost_usd": 2.65,
-          "api_equivalent_subscription_usd": 1.67,
+          "api_equivalent_subscription_usd": 1.69,
           "elapsed_seconds": 11674.9,
           "elapsed_hours": 3.24,
           "exceeds_budget": false,
@@ -2069,7 +2316,7 @@
               "reviews": 0,
               "requests": 2.3,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.1931,
+              "api_equivalent_usd": 0.2298,
               "seconds": 17.2,
               "adds_seconds": 17.2,
               "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -2077,7 +2324,7 @@
           },
           "code_stage_seconds": 20.0,
           "api_cost_usd": 3.02,
-          "api_equivalent_subscription_usd": 10.01,
+          "api_equivalent_subscription_usd": 10.05,
           "elapsed_seconds": 13627.0,
           "elapsed_hours": 3.79,
           "exceeds_budget": false,
@@ -2151,7 +2398,7 @@
               "reviews": 0,
               "requests": 2.3,
               "billed_usd": 0.0,
-              "api_equivalent_usd": 0.1931,
+              "api_equivalent_usd": 0.2298,
               "seconds": 17.2,
               "adds_seconds": 17.2,
               "inputs_from": "measured: final_200k (152363 distinct texts)"
@@ -2159,7 +2406,7 @@
           },
           "code_stage_seconds": 20.0,
           "api_cost_usd": 3.96,
-          "api_equivalent_subscription_usd": 12.36,
+          "api_equivalent_subscription_usd": 12.4,
           "elapsed_seconds": 17735.7,
           "elapsed_hours": 4.93,
           "exceeds_budget": false,
@@ -2456,6 +2703,13 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": 0,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 479,
           "mean_latency_s": 26.9146,
           "mean_attempt_latency_s": 26.9146,
@@ -2496,6 +2750,13 @@
           "models_reported": [
             "gpt-6-luna"
           ],
+          "invalid_outputs": 0,
+          "invalid_outputs_first_try": 0,
+          "invalid_outputs_on_retry": 0,
+          "invalid_outputs_by_finish": {},
+          "partially_valid_outputs": 0,
+          "invalid_output_retry_tasks": 0,
+          "invalid_output_retry_tasks_resent": 0,
           "unique_reviews": 7,
           "mean_latency_s": 2.6594,
           "mean_attempt_latency_s": 2.6594,
@@ -2779,6 +3040,6 @@
       ]
     },
     "method": "usage x rates.csv per billed-provider call, deduplicated by request_id; usage from runs/**/state.sqlite when present, else committed per-call evidence (cost/refreshes/*_usage.csv + *_calls.jsonl, cost/usage.csv + pilot_calls.jsonl); unknown-outcome calls count their reservation; stub and Claude Pro (subscription) calls excluded",
-    "computed_at": "2026-10-14T03:12:24+00:00"
+    "computed_at": "2026-10-14T18:50:41+00:00"
   }
 }

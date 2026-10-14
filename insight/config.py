@@ -137,6 +137,13 @@ class Config:
         return f"{'>'.join(parts)}|{e['prompt_version']}|{e['schema_version']}|cfg-{short_hash(affecting)}"
 
     def stage_config(self, stage: str) -> str:
+        """Cache/provenance key of a model stage: '<model alias>@<effort>|<stage>-v1|cfg-<hash>'.
+
+        '<stage>-v1' is the version of this key format, not of the prompt file: the prompt is identified by the SHA-256
+        of its contents inside cfg-<hash> (so verify-v1 uses prompts/verify_v2.md and memo-v1 prompts/memo_v2.md), and
+        renaming the label would change every saved cache key. The exact model ID the provider reported is in each call's
+        model_reported field (calls.jsonl, state.sqlite), next to the configured alias.
+        """
         if f"stage:{stage}" in self.pinned:
             return self.pinned[f"stage:{stage}"]
         s = self.data[stage]

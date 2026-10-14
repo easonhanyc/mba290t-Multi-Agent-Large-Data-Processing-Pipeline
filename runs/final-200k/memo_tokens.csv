@@ -57,6 +57,7 @@ A15,area roll-up,0.073450,areas[catalog/content].share_of_complaints,area_rollup
 A16,area roll-up,2860,areas[access/onboarding].complaint_count,area_rollup.json
 A17,area roll-up,11172,areas[access/onboarding].severity_sum,area_rollup.json
 A18,area roll-up,0.031862,areas[access/onboarding].share_of_complaints,area_rollup.json
+A19,area roll-up,25.7%,unallocated_complaints.share_of_complaints_percent,area_rollup.json
 S01,scope figure,200013,Reviews in scope (unique IDs ingested),ingestion_report.json
 S02,scope figure,200000,Completed classifications,grading/records.jsonl
 S03,scope figure,13,Quarantined: empty text,quarantine.jsonl
@@ -78,18 +79,18 @@ T03,trend/robustness,45073,trends_and_robustness.period_comparison.denominators.
 T04,trend/robustness,30.8%,trends_and_robustness.period_comparison.denominators.earlier_period.complaint_share,analysis/period_comparison.json
 T05,trend/robustness,82997,trends_and_robustness.period_comparison.denominators.later_period.reviews,analysis/period_comparison.json
 T06,trend/robustness,58.1%,trends_and_robustness.period_comparison.denominators.later_period.complaint_share,analysis/period_comparison.json
-T07,trend/robustness,0.9%,trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_earlier_period,area_rollup.json
-T08,trend/robustness,1.8%,trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_later_period,area_rollup.json
-T09,trend/robustness,+0.9 pp,trends_and_robustness.period_comparison.areas[access/onboarding].change_pp,area_rollup.json
-T10,trend/robustness,4.5%,trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_earlier_period,area_rollup.json
-T11,trend/robustness,15.4%,trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_later_period,area_rollup.json
-T12,trend/robustness,+10.9 pp,trends_and_robustness.period_comparison.areas[billing/support].change_pp,area_rollup.json
-T13,trend/robustness,9.6%,trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_earlier_period,area_rollup.json
-T14,trend/robustness,4.7%,trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_later_period,area_rollup.json
-T15,trend/robustness,-5.0 pp,trends_and_robustness.period_comparison.areas[playback/performance].change_pp,area_rollup.json
-T16,trend/robustness,10.5%,trends_and_robustness.period_comparison.areas[usability].share_of_reviews_earlier_period,area_rollup.json
-T17,trend/robustness,11.3%,trends_and_robustness.period_comparison.areas[usability].share_of_reviews_later_period,area_rollup.json
-T18,trend/robustness,+0.7 pp,trends_and_robustness.period_comparison.areas[usability].change_pp,area_rollup.json
+T07,trend/robustness,0.9%,trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_earlier_period,analysis/period_comparison.json
+T08,trend/robustness,1.8%,trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_later_period,analysis/period_comparison.json
+T09,trend/robustness,+0.9 pp,trends_and_robustness.period_comparison.areas[access/onboarding].change_pp,analysis/period_comparison.json
+T10,trend/robustness,4.5%,trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_earlier_period,analysis/period_comparison.json
+T11,trend/robustness,15.4%,trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_later_period,analysis/period_comparison.json
+T12,trend/robustness,+10.9 pp,trends_and_robustness.period_comparison.areas[billing/support].change_pp,analysis/period_comparison.json
+T13,trend/robustness,9.6%,trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_earlier_period,analysis/period_comparison.json
+T14,trend/robustness,4.7%,trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_later_period,analysis/period_comparison.json
+T15,trend/robustness,-5.0 pp,trends_and_robustness.period_comparison.areas[playback/performance].change_pp,analysis/period_comparison.json
+T16,trend/robustness,10.5%,trends_and_robustness.period_comparison.areas[usability].share_of_reviews_earlier_period,analysis/period_comparison.json
+T17,trend/robustness,11.3%,trends_and_robustness.period_comparison.areas[usability].share_of_reviews_later_period,analysis/period_comparison.json
+T18,trend/robustness,+0.7 pp,trends_and_robustness.period_comparison.areas[usability].change_pp,analysis/period_comparison.json
 T19,trend/robustness,25.6%,trends_and_robustness.area_shares_with_sampling_intervals[usability].share_of_complaints,analysis/area_intervals.json
 T20,trend/robustness,25.3%,trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_low,analysis/area_intervals.json
 T21,trend/robustness,25.9%,trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_high,analysis/area_intervals.json
@@ -121,3 +122,12 @@ T46,trend/robustness,758,trends_and_robustness.verifier_robustness.sample_severi
 T47,trend/robustness,709,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[usability].severity_sum,analysis/robustness.json
 T48,trend/robustness,661,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[billing/support].severity_sum,analysis/robustness.json
 T49,trend/robustness,192,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[access/onboarding].severity_sum,analysis/robustness.json
+T50,trend/robustness,2.7%,trends_and_robustness.period_comparison.non_decision_areas[catalog/content].share_of_reviews_earlier_period,analysis/period_comparison.json
+T51,trend/robustness,3.3%,trends_and_robustness.period_comparison.non_decision_areas[catalog/content].share_of_reviews_later_period,analysis/period_comparison.json
+T52,trend/robustness,+0.6 pp,trends_and_robustness.period_comparison.non_decision_areas[catalog/content].change_pp,analysis/period_comparison.json
+T53,trend/robustness,2.5%,trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].share_of_reviews_earlier_period,analysis/period_comparison.json
+T54,trend/robustness,21.7%,trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].share_of_reviews_later_period,analysis/period_comparison.json
+T55,trend/robustness,+19.3 pp,trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].change_pp,analysis/period_comparison.json
+T56,trend/robustness,4785,trends_and_robustness.premium_only_sensitivity.records_without_payment_word,analysis/premium_only_sensitivity.json
+T57,trend/robustness,14239,trends_and_robustness.premium_only_sensitivity.their_severity_sum,analysis/premium_only_sensitivity.json
+T58,trend/robustness,44907,trends_and_robustness.premium_only_sensitivity.billing_support_severity_sum_without_them,analysis/premium_only_sensitivity.json

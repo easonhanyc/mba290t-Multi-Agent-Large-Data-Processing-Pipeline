@@ -17,10 +17,12 @@ import re
 from pathlib import Path
 
 from . import labels, prompts
+from .analysis import positive_increases, shown_pp as _shown_pp  # noqa: F401  (shared with spike_months.json)
 from .control import Dispatcher, Task
 from .util import PROJECT_ROOT, atomic_write_json, atomic_write_text, read_json, short_hash, utc_now
 
 TOKEN = re.compile(r"\{([CAST]\d{2,3})\}")
+UNALLOCATED_AREA = labels.AREA_OF_TOPIC["other"]  # general/unspecified: generic criticism with no specific area
 METRICS = ("complaint_count", "severity_sum", "mean_severity", "priority_score")
 # Fields the memo model returns in addition to the base schema in prompts.memo_request (prose, token rules apply).
 EXTRA_PROSE_FIELDS = {
@@ -29,10 +31,12 @@ EXTRA_PROSE_FIELDS = {
 }
 GOLDEN_RESULTS = PROJECT_ROOT / "evals" / "golden" / "results.json"
 _GOLDEN_CLAUSE = re.compile(r";\s*the golden-set comparison \(human labels\) is (?:still pending|reported separately)\.?")
-TOKEN_SOURCES = {  # payload section -> saved file that holds the value behind its tokens
+TOKEN_SOURCES = {  # payload section -> saved file that holds the value behind its tokens (nested keys inherit it)
     "top_issues": "claims.csv (from ranking.csv)", "areas": "area_rollup.json",
+    "unallocated_complaints": "area_rollup.json",
     "period_comparison": "analysis/period_comparison.json", "area_shares_with_sampling_intervals": "analysis/area_intervals.json",
     "spike_months": "analysis/spike_months.json", "verifier_robustness": "analysis/robustness.json",
+    "premium_only_sensitivity": "analysis/premium_only_sensitivity.json",
 }
 
 
@@ -40,15 +44,20 @@ def _pct(x):
     return "n/a" if x is None else f"{float(x) * 100:.1f}%"
 
 
-def _shown_pp(x):
-    """The pp change as the memo prints it (one decimal), so '+0.0 pp' never counts as an increase."""
-    return round(float(x), 1)
+def _overlaps(a, b):
+    return a[0] is not None and b[0] is not None and a[0] <= b[1] and b[0] <= a[1]
 
 
-def _trend_section(analysis, tokens):
-    """Descriptive trend/robustness facts for the memo, each number behind a T## token."""
+def _trend_section(analysis, tokens, refs=None):
+    """Descriptive trend/robustness facts for the memo, each number behind a T## token.
+
+    refs: {"issue": {issue_id: top_issues row}, "area": {area: areas row}} so a figure already in the payload is
+    cited by its existing C##/A## token instead of a duplicate. New tokens are numbered after the existing ones
+    (period comparison, intervals, spikes, robustness first), so earlier T## IDs keep their meaning.
+    """
     if not analysis:
         return {}
+    refs = refs or {"issue": {}, "area": {}}
     def tok(value):  # value shown to the model (so it can describe direction); the token is what it must write
         tid = f"T{len([t for t in tokens if t.startswith('T')]) + 1:02d}"
         tokens[tid] = str(value)
@@ -60,6 +69,10 @@ def _trend_section(analysis, tokens):
         # period labels contain years, so they are tokens too (the model never types a digit)
         earlier, later = sorted(periods)[:2]
         out["period_comparison"] = {"method": pc.get("method"), "earlier_period": tok(earlier), "later_period": tok(later),
+                                    "comparison_scope": "areas lists the four decision areas only; areas that are not "
+                                                        "decision options are under non_decision_areas",
+                                    "largest_increase_among_the_four_decision_areas":
+                                        (pc.get("largest_increase") or {}).get("among_the_four_decision_areas"),
                                     "denominators": {}, "areas": []}
         for key, label in (("earlier_period", earlier), ("later_period", later)):
             v = periods[label]
@@ -74,15 +87,21 @@ def _trend_section(analysis, tokens):
                 "share_of_reviews_later_period": tok(_pct(ch.get(y1))), "change_pp": tok(f"{ch['pp_change']:+.1f} pp")})
     ai = analysis.get("area_intervals") or {}
     if ai.get("areas"):
+        dec = [a for a in ai["areas"] if a["decision_option"]]
         out["area_shares_with_sampling_intervals"] = [
             {"area": a["area"], "share_of_complaints": tok(_pct(a["share_of_complaints"])),
-             "ci_low": tok(_pct(a["share_of_complaints_ci95"][0])), "ci_high": tok(_pct(a["share_of_complaints_ci95"][1]))}
-            for a in ai["areas"] if a["decision_option"]]
+             "ci_low": tok(_pct(a["share_of_complaints_ci95"][0])), "ci_high": tok(_pct(a["share_of_complaints_ci95"][1])),
+             # computed by code: areas whose 95% interval overlaps this one (empty = the difference is outside sampling error)
+             "interval_overlaps_with": [b["area"] for b in dec if b is not a and
+                                        _overlaps(a["share_of_complaints_ci95"], b["share_of_complaints_ci95"])]}
+            for a in dec]
     sp = analysis.get("spikes") or {}
     if sp.get("spikes"):
         # only issues whose share actually rose in the spike month (as printed, one decimal) count as increases
         out["spike_months"] = [{"month": tok(x["month"]), "reviews": tok(x["reviews"]),
                                 "median_full_month_reviews": tok(x["median_full_month_reviews"]),
+                                "measure": "the issue's complaint and cancellation reviews as a share of all reviews in "
+                                           "the month, minus the same share in the other full months (share of reviews)",
                                 "largest_increases": [{"issue_id": l["issue_id"], "pp_difference": tok(f"{l['pp_difference']:+.1f} pp")}
                                                       for l in positive_increases(x["largest_increases"])[:3]]}
                                for x in sp["spikes"]]
@@ -95,19 +114,46 @@ def _trend_section(analysis, tokens):
                                       "decision_area_order_enricher_labels": rb.get("decision_area_order_enricher"),
                                       "decision_area_order_verifier_labels": rb.get("decision_area_order_verifier"),
                                       "same_top_area": rb.get("same_top_decision_area"),
-                                      "top_by_complaint_count": rb.get("by_complaint_count")}
+                                      "top_by_complaint_count": dict(rb.get("by_complaint_count") or {},
+                                                                     note="area names only, no counts: state in words, "
+                                                                          "cite no token")}
         for who in ("enricher", "verifier"):  # the sample's per-area severity sums behind each ordering
             areas = (rb.get(f"{who}_labels") or {}).get("areas") or {}
             order = rb.get(f"decision_area_order_{who}") or []
             if areas and order:
                 out["verifier_robustness"][f"sample_severity_sum_by_area_{who}_labels"] = [
                     {"area": a, "severity_sum": tok(areas[a]["severity_sum"])} for a in order if a in areas]
+    # --- tokens added after the ones above (numbered after them) ---
+    if out.get("period_comparison"):  # areas that are not decision options, kept apart from the four-area comparison
+        earlier, later = sorted(periods)[:2]
+        y0, y1 = earlier.split()[0], later.split()[0]
+        out["period_comparison"]["non_decision_areas"] = [
+            {"area": area, "share_of_reviews_earlier_period": tok(_pct(ch.get(y0))),
+             "share_of_reviews_later_period": tok(_pct(ch.get(y1))), "change_pp": tok(f"{ch['pp_change']:+.1f} pp")}
+            for area, ch in sorted(pc.get("change_in_share_of_reviews", {}).items()) if area not in labels.DECISION_AREAS]
+    ps = analysis.get("premium_only_sensitivity") or {}
+    w = ps.get("without_payment_word") or {}
+    if ps.get("issue_records") and w.get("records") is not None:
+        issue = refs["issue"].get(ps["issue_id"]) or {}
+        area = lambda a, key: (refs["area"].get(a) or {}).get(key)
+        own = ps["area"]
+        out["premium_only_sensitivity"] = {
+            "what": "upper-bound sensitivity of the billing/support lead to the premium-only topic boundary, computed "
+                    "by code; not a relabelling",
+            "issue_id": ps["issue_id"], "payment_words_case_insensitive": w["words"],
+            "issue_complaint_records": issue.get("complaint_count") or tok(ps["issue_records"]),
+            "records_without_payment_word": tok(w["records"]),
+            "their_severity_sum": tok(w["severity_sum"]),
+            "billing_support_severity_sum": area(own, "severity_sum") or tok(ps["decision_area_severity_sums"][own]),
+            "billing_support_severity_sum_without_them": tok(w["billing_support_severity_sum_without_them"]),
+            "decision_area_order_without_them": w["decision_area_order_without_them"],
+            "decision_areas_above_billing_support_without_them": w["decision_areas_above_billing_support_without_them"],
+            "other_decision_area_severity_sums": [
+                {"area": a, "severity_sum": area(a, "severity_sum") or tok(ps["decision_area_severity_sums"][a])}
+                for a in ps["decision_area_order"] if a != own],
+            "interpretation": ps.get("interpretation"),
+        }
     return out
-
-
-def positive_increases(lifts):
-    """Spike-month lifts that are real increases in share (> 0 pp after rounding to one decimal), largest first."""
-    return [l for l in lifts if _shown_pp(l["pp_difference"]) > 0]
 
 
 def build_payload(ranking, issues_doc, areas_doc, scope, evidence_issues, quotes_per_issue, top_n, analysis=None):
@@ -135,6 +181,15 @@ def build_payload(ranking, issues_doc, areas_doc, scope, evidence_issues, quotes
             tokens[aid] = str(a[m])
             entry[m] = {"value": a[m], "token": "{" + aid + "}"}
         area_rows.append(entry)
+    unallocated = None
+    for entry, a in zip(area_rows, areas_doc["areas"]):  # numbered after A01..A18 so those IDs keep their meaning
+        if a["area"] == UNALLOCATED_AREA:
+            aid = f"A{len([t for t in tokens if t.startswith('A')]) + 1:02d}"
+            tokens[aid] = _pct(a["share_of_complaints"])
+            unallocated = {"area": a["area"], "what": "complaint and cancellation records labelled with no specific area "
+                                                      "(generic criticism); not allocated to any decision area",
+                           "complaint_count": entry["complaint_count"],
+                           "share_of_complaints_percent": {"value": tokens[aid], "token": "{" + aid + "}"}}
     scope_rows = {}
     for label, value, source in scope:
         sid = f"S{len(scope_rows) + 1:02d}"
@@ -150,7 +205,10 @@ def build_payload(ranking, issues_doc, areas_doc, scope, evidence_issues, quotes
         "decision_rule": "baseline priority = severity_sum over complaint and cancellation reviews; areas sum their issues",
         "top_issues": rank_rows, "areas": area_rows, "scope_figures": scope_rows, "evidence": evidence,
     }
-    trends = _trend_section(analysis, tokens)
+    if unallocated:
+        payload["unallocated_complaints"] = unallocated
+    trends = _trend_section(analysis, tokens, {"issue": {r["issue_id"]: r for r in rank_rows},
+                                               "area": {e["area"]: e for e in area_rows}})
     if trends:
         payload["trends_and_robustness"] = trends
     return payload, tokens, claims
@@ -183,6 +241,10 @@ def validate(data, tokens, evidence_ids):
         if hit:
             snippet = bare[max(0, hit.start() - 30):hit.end() + 30].replace("\n", " ")
             problems.append(f"{where} contains a typed digit (numbers must be tokens): ...{snippet}...")
+        stray = re.search(r"\{[^{}]*\}", TOKEN.sub("", text))  # code would leave it unfilled in memo.md
+        if stray:
+            problems.append(f"{where} contains {stray.group(0)}, which is not a token: write the token from the "
+                            "input's token field (a letter and digits in braces), never a key name in braces")
     seen = set()
     for a in alts:
         area = a.get("area") if isinstance(a, dict) else None
@@ -208,13 +270,26 @@ def memo_request(payload, review_ids, max_output_tokens, template=None):
     return req
 
 
+_SIGNED_TOKEN = re.compile(r"([+-]?)\{([CAST]\d{2,3})\}")
+
+
+def _sub_tokens(text, tokens, fmt):
+    """Replace tokens; a sign typed just before a token whose value already carries one ('+{T38}' with value
+    '+25.1 pp') is dropped, so the memo never prints '++25.1 pp'."""
+    def one(m):
+        value = tokens[m.group(2)]
+        sign = "" if value[:1] in "+-" else m.group(1)
+        return sign + fmt(value, m.group(2))
+    return _SIGNED_TOKEN.sub(one, text)
+
+
 def fill(text, tokens):
-    return TOKEN.sub(lambda m: tokens[m.group(1)], text)
+    return _sub_tokens(text, tokens, lambda value, tid: value)
 
 
 def fill_cited(text, tokens):
     """Fill tokens as 'value (ID)', e.g. '52577 (C02)', so every number in the memo traces to a saved token."""
-    return TOKEN.sub(lambda m: f"{tokens[m.group(1)]} ({m.group(1)})", text)
+    return _sub_tokens(text, tokens, lambda value, tid: f"{value} ({tid})")
 
 
 def token_index(payload, tokens):
@@ -232,7 +307,9 @@ def token_index(payload, tokens):
                                  "source": node.get("source") or source}
                 return
             for k, v in node.items():
-                walk(v, f"{path}.{k}" if path else k, TOKEN_SOURCES.get(k, source))
+                # A section's source file holds for everything nested inside it: a nested key that happens to share a
+                # section name (e.g. period_comparison -> "areas") must not re-map to that section's file.
+                walk(v, f"{path}.{k}" if path else k, source or TOKEN_SOURCES.get(k, ""))
         elif isinstance(node, list):
             for i, v in enumerate(node):
                 key = next((label for k in ("issue_id", "area", "month") if isinstance(v, dict)
@@ -270,6 +347,44 @@ def mandatory_limitations(lines, golden):
         out.append(f"Golden set ({golden['source']}): on {golden['cases']} human-labelled reviews the pipeline's labels "
                    f"match the human labels on topic {pct('topic')}, intent {pct('intent')} and severity {pct('severity')} "
                    f"(exact); {golden['cases']} cases are a diagnostic of label quality, not a precise accuracy estimate.")
+    return out
+
+
+def _and(items):
+    items = list(items)
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1] if items else ""
+
+
+def code_limitations(payload):
+    """Decision-specific limitations written by code from saved figures (token templates, filled with their IDs).
+
+    Unallocated complaints (from area_rollup.json) and the premium-only boundary sensitivity
+    (analysis/premium_only_sensitivity.json). The model is told not to repeat them as limitations.
+    """
+    out = []
+    u = payload.get("unallocated_complaints")
+    if u:
+        out.append(f"Unallocated complaints (computed by code from `area_rollup.json`): "
+                   f"{u['share_of_complaints_percent']['token']} of complaint and cancellation records "
+                   f"({u['complaint_count']['token']}) are {u['area']}: generic criticism (for example \"worst update\") "
+                   "that names no specific area, so they are not allocated to any of the four decision areas. If many of "
+                   "them refer to one area's problem, for example the same free-tier change, that area's total is "
+                   "understated; the labels cannot show which area that would be.")
+    s = (payload.get("trends_and_robustness") or {}).get("premium_only_sensitivity")
+    if s:
+        others = {x["area"]: x["severity_sum"]["token"] for x in s["other_decision_area_severity_sums"]}
+        above = s["decision_areas_above_billing_support_without_them"]
+        where = (f"below {_and(f'{a} {others[a]}' for a in above if a in others)}" if above
+                 else f"still above every other decision area ({_and(f'{a} {t}' for a, t in others.items())})")
+        out.append(f"Premium-only boundary, upper-bound sensitivity (computed by code; "
+                   f"`analysis/premium_only_sensitivity.json`): {s['records_without_payment_word']['token']} of the "
+                   f"{s['issue_complaint_records']['token']} `{s['issue_id']}` complaint and cancellation records contain "
+                   f"no Premium or payment word ({', '.join(s['payment_words_case_insensitive'])}; case-insensitive), "
+                   f"with a severity sum of {s['their_severity_sum']['token']}. If none of them belonged to billing/support, "
+                   f"its severity sum would fall from {s['billing_support_severity_sum']['token']} to "
+                   f"{s['billing_support_severity_sum_without_them']['token']}, {where}. This is an upper bound, not a "
+                   "relabelling: many of these reviews plainly describe free-tier limits without naming Premium (skip "
+                   "limits, forced shuffle), and they were not moved to any other area.")
     return out
 
 
@@ -318,6 +433,10 @@ class MemoStage:
         key = short_hash({"payload": payload, "config": self.mconf}, 20)
         cached = store.cache_get("memo", key)
         source, problems_log = "cache", []
+        if cached is not None:  # say which invocation's model call produced the reused output
+            row = store.conn.execute("SELECT run_id FROM stage_cache WHERE stage = 'memo' AND cache_key = ?",
+                                     (key,)).fetchone()
+            source = f"model, reused from the stage cache (generated in `{row[0]}`)" if row and row[0] else "cache"
         data = cached
         if data is None and ranking:
             data, source, problems_log = self._call(payload, tokens, evidence_ids)
@@ -341,6 +460,10 @@ class MemoStage:
         w.writerows(index)
         atomic_write_text(store.run_dir / "memo_tokens.csv", buf.getvalue())
         atomic_write_json(store.run_dir / "memo.json", {"memo_config": self.mconf, "source": source, "output": data,
+                                                        # limitations memo.md adds after the model's, as rendered there
+                                                        "code_written_limitations": [fill_cited(x, tokens) for x in
+                                                                                     code_limitations(payload)],
+                                                        "mandatory_limitations": meta["mandatory_limitations"],
                                                         "tokens": tokens, "token_index": index, "payload": payload,
                                                         "validation_problems": problems_log,
                                                         "rejected_outputs": getattr(self, "rejected", []),
@@ -359,6 +482,9 @@ class MemoStage:
             if ctx.stop_admitting.is_set():
                 break
             req = memo_request(payload, evidence_ids, int(self.m["max_output_tokens"]), template=self.m["prompt"])
+            if self.rejected:  # the single retry is told what the validator rejected
+                req["user"] += ("\n\nYour previous answer was rejected by the code validator for these reasons; return a "
+                                "corrected answer that follows every rule:\n- " + "\n- ".join(self.rejected[-1]["problems"]))
             chars = len(req["system"]) + len(req["user"]) + len(json.dumps(req["schema"]))
             task = Task(role="memo", tier="memo", provider=provider, request=req, review_ids=[],
                         max_output_tokens=int(self.m["max_output_tokens"]), prompt_chars=chars,
@@ -442,17 +568,31 @@ class MemoStage:
                 lines.append("| Denominator (classified reviews) | " + " | ".join(
                     f(d[k]["reviews"]) for k in ("earlier_period", "later_period")) + " | |")
                 lines.append("")
+                nd = pc.get("non_decision_areas") or []
+                lines.append("Note (code): this table, and any comparison of growth in this memo, covers the four decision "
+                             "areas only. Areas that are not decision options are listed in "
+                             "`analysis/period_comparison.json`"
+                             + (": " + "; ".join(f"{r['area']} {f(r['share_of_reviews_earlier_period'])} to "
+                                                 f"{f(r['share_of_reviews_later_period'])}, {f(r['change_pp'])}" for r in nd)
+                                if nd else "") + ".")
+                lines.append("")
             if tr.get("area_shares_with_sampling_intervals"):
                 lines += ["| Decision area | Share of complaints | 95% interval (sampling only) |", "|---|---:|---:|"]
                 for a in tr["area_shares_with_sampling_intervals"]:
                     lines.append(f"| {a['area']} | {f(a['share_of_complaints'])} | {f(a['ci_low'])} to {f(a['ci_high'])} |")
                 lines.append("")
+            if tr.get("spike_months"):
+                lines.append("Volume spikes (code): each line lists at most three issues, from any area (the catch-all "
+                             "`other.general` included), whose share of reviews (the issue's complaint and cancellation "
+                             "reviews / all reviews in the month) rose versus the other full months; zero and negative "
+                             "changes are left out.")
+                lines.append("")
             for x in tr.get("spike_months", []):
                 inc = ", ".join(f"`{l['issue_id']}` {f(l['pp_difference'])}" for l in x["largest_increases"])
                 lines.append(f"- Volume spike {f(x['month'])}: {f(x['reviews'])} reviews (median full month "
                              f"{f(x['median_full_month_reviews'])}); "
-                             + (f"largest increases in share of complaints vs other months: {inc}." if inc else
-                                "no issue's share of complaints rose versus other months (the extra volume kept the "
+                             + (f"largest increases in share of reviews vs other months: {inc}." if inc else
+                                "no issue's share of reviews rose versus other months (the extra volume kept the "
                                 "usual issue mix)."))
             rb = tr.get("verifier_robustness")
             if rb:
@@ -462,7 +602,8 @@ class MemoStage:
                 lines.append(f"- Verifier robustness on {f(rb['sample_reviews'])} sampled reviews ({rb.get('metric')}): decision "
                              f"areas in order under enricher labels **{order('enricher')}**; under independent verifier "
                              f"labels **{order('verifier')}** (top area {'same' if rb['same_top_area'] else 'different'}).")
-        lines += ["", "## Representative evidence (exact quotes from the reviews)", ""]
+        lines += ["", "## Representative evidence (exact quotes from the reviews)", "",
+                  "\"(cited)\" marks a review the memo cites in support of the recommendation.", ""]
         cited = set(data.get("cited_reviews") or [])
         for e in payload["evidence"]:
             mark = " (cited)" if e["review_id"] in cited else ""
@@ -471,6 +612,7 @@ class MemoStage:
         for sid, s in payload["scope_figures"].items():
             lines.append(f"| {s['label']} | {s['value']} | {sid} | {s['source']} |")
         lines += ["", "## Limitations", ""] + [f"- {f(x)}" for x in data["limitations"]]
+        lines += [f"- {f(x)}" for x in code_limitations(payload)]
         lines += [f"- {x}" for x in meta["mandatory_limitations"]]
         lines += ["", "## Traceability", "",
                   "- `claims.csv`: every issue-level number above (claim_id, issue_id, metric, value); the C## IDs in the "

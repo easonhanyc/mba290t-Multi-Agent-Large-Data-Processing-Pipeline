@@ -69,10 +69,10 @@ Rank **1**: complaint_count 18016, severity_sum 52577, mean_severity 2.918350, p
 
 Claims in `claims.csv` for this issue: `C01` complaint_count = 18016, `C02` severity_sum = 52577, `C03` mean_severity = 2.918350, `C04` priority_score = 52577.
 
-Where `memo.md` cites them (memo source: model):
+Where `memo.md` cites them (memo source: model, reused from the stage cache (generated in `run-20261014T184545.752Z-3a1e`)):
 
-- `C01` (complaint_count) is printed as `18016 (C01)` in: Recommendation, Next-quarter actions #1
-- `C02` (severity_sum) is printed as `52577 (C02)` in: Recommendation, Next-quarter actions #1, Why #1, Limitations #2
+- `C01` (complaint_count) is printed as `18016 (C01)` in: Recommendation, Next-quarter actions #1, Why #1
+- `C02` (severity_sum) is printed as `52577 (C02)` in: Recommendation, Next-quarter actions #1, Why #1
 - `C03` (mean_severity) is printed as `2.918350 (C03)` in: Recommendation, Why #1
 - The memo's issue table prints all four values with their claim IDs (rank 1 row), and `memo_tokens.csv` lists every token ID the memo uses.
 

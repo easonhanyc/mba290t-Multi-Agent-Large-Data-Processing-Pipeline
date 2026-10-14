@@ -4,8 +4,9 @@
     .venv/bin/python web/load_db.py --run-dir runs/<run> --database-url sqlite:///web/local.db
 
 Reads only exported artifacts: grading/records.jsonl(.gz) + the run's input CSV (source fields),
-membership/ranking/claims/aggregates CSVs, issues.json, area_rollup.json, memo.json/memo.md,
-analysis/*, verification/*, evals/*, run_summary.json, data_manifest.json and cost/report.json.
+membership/ranking/claims/aggregates CSVs, issues.json, area_rollup.json, memo.json/memo.md (including the
+token index), analysis/*, verification/*, evals/*, run_summary.json, data_manifest.json, recordings and
+cost/report.json.
 The load replaces the previous contents in one transaction, then checks row counts and that the
 ranking recomputed in SQL from reviews + membership equals the saved ranking.
 PostgreSQL (psycopg 3, COPY) in production; sqlite3 for local tests.
@@ -145,14 +146,19 @@ def gather(run_dir: Path, input_csv: Path | None):
     return run_json, manifest, reviews, membership
 
 
+def rel(p: Path) -> str:
+    return str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p)
+
+
 def documents(run_dir: Path):
     docs = []
     def add(name, kind, path):
         p = run_dir / path if not str(path).startswith("/") else Path(path)
         if p.exists():
             body = p.read_text(encoding="utf-8")
-            docs.append((name, kind, str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p), body))
-    for f in ("overview", "period_comparison", "spike_months", "rating_crosstab", "area_intervals", "robustness"):
+            docs.append((name, kind, rel(p), body))
+    for f in ("overview", "period_comparison", "spike_months", "rating_crosstab", "area_intervals", "robustness",
+              "premium_only_sensitivity"):
         add(f, "analysis", f"analysis/{f}.json")
     for f in ("app_versions", "reach_weighted_ranking", "trends_monthly"):
         add(f, "analysis_csv", f"analysis/{f}.csv")
@@ -174,15 +180,35 @@ def documents(run_dir: Path):
     if rec.exists():
         for cast in sorted(rec.glob("*.cast")):
             add(f"recording:{cast.stem}", "recording", cast)
+            if cast.with_suffix(".txt").exists():
+                add(f"recording_txt:{cast.stem}", "recording_txt", cast.with_suffix(".txt"))
+    vr = run_dir / "verification" / "report.json"
+    if vr.exists():  # the dashboard reads this small summary instead of parsing the full report on every request
+        report = read_json(vr)
+        docs.append(("verification_summary", "eval", rel(vr) + " (without the per-review disagreements list)",
+                     json.dumps({k: v for k, v in report.items() if k != "disagreements"}
+                                | {"disagreements_count": len(report.get("disagreements") or [])})))
+    memo_json = run_dir / "memo.json"
+    if memo_json.exists():  # every memo token (C/A/S/T) with its value, what it measures and its source file
+        memo = read_json(memo_json)
+        if memo.get("token_index"):
+            docs.append(("memo_tokens", "memo", rel(memo_json) + " -> token_index (also memo_tokens.csv)",
+                         json.dumps(memo["token_index"], ensure_ascii=False)))
     for name in ("checkpoint_before", "checkpoint_after"):
         p = run_dir / "grading" / f"{name}.json"
         if p.exists():
             d = read_json(p)
-            docs.append((name, "checkpoint", str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p),
+            docs.append((name, "checkpoint", rel(p),
                          json.dumps({"run_id": d.get("run_id"), "status": d.get("status"), "stop_reason": d.get("stop_reason"),
                                      "completed_ids_count": len(d.get("completed_ids") or []),
                                      "first_ids": (d.get("completed_ids") or [])[:5]})))
     return docs
+
+
+def evidence_json(issue):
+    """The quotes the issue name was based on; quotes the naming model flagged as not fitting carry misfit=true."""
+    misfit = set(issue.get("misfit_review_ids") or [])
+    return json.dumps([dict(e, misfit=e.get("review_id") in misfit) for e in issue.get("evidence", [])], ensure_ascii=False)
 
 
 def load(run_dir: Path, url: str, input_csv: Path | None = None, log=print):
@@ -212,7 +238,7 @@ def load(run_dir: Path, url: str, input_csv: Path | None = None, log=print):
     n_members = db.insert_many("membership", ("issue_id", "review_id"), [(m["issue_id"], m["review_id"]) for m in membership])
     db.insert_many("issues", ("issue_id", "name", "default_name", "summary", "area", "definition", "named_by", "evidence_json"),
                    [(i["issue_id"], i["name"], i.get("default_name"), i.get("summary"), i["area"], i.get("definition"),
-                     i.get("named_by"), json.dumps(i.get("evidence", []), ensure_ascii=False)) for i in issues_doc["issues"]])
+                     i.get("named_by"), evidence_json(i)) for i in issues_doc["issues"]])
     db.insert_many("ranking", ("issue_id", "rank", "complaint_count", "severity_sum", "mean_severity", "priority_score",
                                "cancellation_count", "needs_review_count", "share_of_complaints"),
                    [(r["issue_id"], int(r["rank"]), int(r["complaint_count"]), int(r["severity_sum"]), r["mean_severity"],

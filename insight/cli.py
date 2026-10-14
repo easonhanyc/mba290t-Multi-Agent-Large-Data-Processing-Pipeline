@@ -17,6 +17,7 @@ the same code against a local test server (model IDs become stub-*; nothing is r
 """
 
 import argparse
+import contextlib
 import csv
 import fcntl
 import json
@@ -183,6 +184,13 @@ def _config_summary(cfg):
 
 
 def cmd_run(args):
+    # The lock files stay open (so their flocks stay held) for the whole invocation and are closed, releasing the
+    # locks, when it returns or raises.
+    with contextlib.ExitStack() as held:
+        return _cmd_run(args, held)
+
+
+def _cmd_run(args, held):
     cfg = _load_cfg(args)
     stages = [s.strip() for s in args.stages.split(",")] if args.stages else list(STAGES)
     for s in stages:
@@ -190,7 +198,7 @@ def cmd_run(args):
             raise SystemExit(f"unknown stage {s!r}; choose from {', '.join(STAGES)}")
     run_dir = Path(args.run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)
-    lock = open(run_dir / ".lock", "w")
+    lock = held.enter_context(open(run_dir / ".lock", "w"))
     try:  # one invocation per run directory: a second one would pay for the same pending reviews
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
@@ -259,7 +267,7 @@ def cmd_run(args):
             _say(f"Refusing live calls: the run directory must be under {rel(runs_root)} so the project cap counts it.")
             return 2
         runs_root.mkdir(parents=True, exist_ok=True)
-        project_lock = open(runs_root / ".live.lock", "w")  # one live run at a time: the cap is read once at start
+        project_lock = held.enter_context(open(runs_root / ".live.lock", "w"))  # one live run at a time: cap read once
         try:
             fcntl.flock(project_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
@@ -339,7 +347,8 @@ def cmd_run(args):
             t = monotonic()
             out["rank"] = run_rank(store, lc, log=_say)
             from .analysis import run_analysis
-            out["analysis"] = {k: v for k, v in run_analysis(store, cfg, log=_say).items() if k in ("robustness",)}
+            out["analysis"] = {k: v for k, v in run_analysis(store, cfg, log=_say).items()
+                               if k in ("robustness", "premium_only_sensitivity")}
             stage_s["rank"] = round(monotonic() - t, 3)
         if downstream_ok and "memo" in stages and not ctx.stop_reason:
             t = monotonic()
@@ -416,7 +425,7 @@ def _memo(store, cfg, registry, ctx, args):
     if n == 660622:
         scope_name = f"the full corpus ({input_meta['path']})"
     elif full and n >= 100000:
-        scope_name = (f"the declared analysis scope: {n:,} reviews ({Path(input_meta['path']).name}, a deterministic uniform "
+        scope_name = (f"the declared analysis scope of {n:,} reviews ({Path(input_meta['path']).name}, a deterministic uniform "
                       f"sample of the 660,622-review corpus plus every empty-text row)")
     else:
         scope_name = f"a {n}-review development checkpoint ({Path(input_meta['path']).name}), not the full corpus"
@@ -449,7 +458,8 @@ def _memo(store, cfg, registry, ctx, args):
     analysis = {}
     adir = run_dir / "analysis"
     for key, name in (("period_comparison", "period_comparison.json"), ("area_intervals", "area_intervals.json"),
-                      ("spikes", "spike_months.json"), ("robustness", "robustness.json")):
+                      ("spikes", "spike_months.json"), ("robustness", "robustness.json"),
+                      ("premium_only_sensitivity", "premium_only_sensitivity.json")):
         if (adir / name).exists():
             analysis[key] = read_json(adir / name)
     return MemoStage(store, cfg, registry, ctx, log=_say).run(ranking, issues_doc, areas_doc, scope, meta, analysis)

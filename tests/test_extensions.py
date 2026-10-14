@@ -255,7 +255,7 @@ class TestMemoTraceability(unittest.TestCase):
         self.assertNotIn("billing.price", md)
         payload, tokens, _ = self._payload([{"issue_id": "billing.price", "pp_difference": -0.011}])
         md = self._render(payload, tokens, data)
-        self.assertIn("no issue's share of complaints rose", md)
+        self.assertIn("no issue's share of reviews rose", md)  # spike shares are shares of all reviews in the month
         self.assertNotIn("largest increases", md)
 
     def test_prose_numbers_carry_token_ids_and_every_token_is_indexed(self):

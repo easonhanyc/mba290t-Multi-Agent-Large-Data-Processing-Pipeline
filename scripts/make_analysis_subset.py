@@ -14,11 +14,13 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+LOGICAL_ROOT = Path(os.path.abspath(__file__)).parent.parent  # the repo as reached, before resolving symlinks
 DATASET = ROOT / "Final Assignment - Spotify Reviews Dataset"
 FIELDS = ("review_id", "review_text", "review_rating", "review_likes", "app_version", "review_timestamp")
 SEED = "berkeley-fall-2026-assignment-5-v1"
@@ -34,12 +36,18 @@ def sha256_file(path):
 
 
 def shown(path):
-    """Path as recorded in the manifest: relative to the repo when inside it, else absolute (never raises)."""
-    path = Path(path).resolve()
-    try:
-        return str(path.relative_to(ROOT))
-    except ValueError:
-        return str(path)
+    """Path as recorded in the manifest: relative to the repo when inside it, else absolute (never raises).
+
+    The logical path (symlinks not resolved) is tried first, so a dataset folder that is a symlink inside the repo
+    is still recorded relative to the repo; a path that is outside the repo either way is recorded resolved.
+    """
+    logical, resolved = Path(os.path.abspath(path)), Path(path).resolve()
+    for candidate, root in ((logical, LOGICAL_ROOT), (logical, ROOT), (resolved, ROOT)):
+        try:
+            return candidate.relative_to(root).as_posix()
+        except ValueError:
+            continue
+    return str(resolved)
 
 
 def ids_of(path):
@@ -53,6 +61,7 @@ def main(argv=None):
     ap.add_argument("--n", type=int, default=200_000, help="sampled nonempty reviews (default 200,000)")
     ap.add_argument("--out", type=Path, default=ROOT / "data" / "analysis_200k.csv")
     args = ap.parse_args(argv)
+    full_as_given, out_as_given = Path(os.path.abspath(args.full)), Path(os.path.abspath(args.out))  # for the manifest
     args.full, args.out = args.full.resolve(), args.out.resolve()  # relative paths are taken from the current directory
 
     full_sha = sha256_file(args.full)
@@ -94,10 +103,10 @@ def main(argv=None):
             ids = ids_of(p)
             contains[name] = {"rows": len(ids), "all_in_scope": set(ids) <= keep}
     manifest = {
-        "file": shown(args.out), "sha256": sha256_file(args.out), "bytes": args.out.stat().st_size,
+        "file": shown(out_as_given), "sha256": sha256_file(args.out), "bytes": args.out.stat().st_size,
         "rows": written, "sampled_nonempty": len(chosen), "empty_text_rows_added": len(empty_ids),
         "distinct_sampled_texts": len(set(texts)),
-        "full_source": {"file": shown(args.full),
+        "full_source": {"file": shown(full_as_given),
                         "sha256": full_sha, "rows": len(rows), "matches_course_manifest": full_sha == FULL_SHA},
         "method": (f"Lowest SHA-256('{SEED}:' + review_id) among unique-ID, nonempty, valid-rating records "
                    f"(the course's sampling rule), first {args.n}; plus every empty-text row so it is explicitly "
@@ -108,8 +117,8 @@ def main(argv=None):
                                 "total API spend under the $10 project budget. Ingested and profiled only."),
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "command": "python3 scripts/make_analysis_subset.py" + (f" --n {args.n}" if args.n != 200_000 else "")
-                   + (f" --full '{shown(args.full)}'" if args.full != (DATASET / "spotify_reviews_18months.csv").resolve() else "")
-                   + (f" --out '{shown(args.out)}'" if args.out != (ROOT / "data" / "analysis_200k.csv").resolve() else ""),
+                   + (f" --full '{shown(full_as_given)}'" if args.full != (DATASET / "spotify_reviews_18months.csv").resolve() else "")
+                   + (f" --out '{shown(out_as_given)}'" if args.out != (ROOT / "data" / "analysis_200k.csv").resolve() else ""),
     }
     mpath = args.out.with_suffix(".manifest.json")
     mpath.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

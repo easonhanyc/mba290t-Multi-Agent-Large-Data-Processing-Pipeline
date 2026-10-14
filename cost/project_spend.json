@@ -232,5 +232,5 @@
     ]
   },
   "method": "usage x rates.csv per billed-provider call, deduplicated by request_id; usage from runs/**/state.sqlite when present, else committed per-call evidence (cost/refreshes/*_usage.csv + *_calls.jsonl, cost/usage.csv + pilot_calls.jsonl); unknown-outcome calls count their reservation; stub and Claude Pro (subscription) calls excluded",
-  "computed_at": "2026-10-14T03:12:24+00:00"
+  "computed_at": "2026-10-14T18:50:41+00:00"
 }

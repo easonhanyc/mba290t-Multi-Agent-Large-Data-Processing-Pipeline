@@ -12,6 +12,8 @@ Everything here is arithmetic over saved records + source metadata, with denomin
   reach_weighted_ranking.csv ADDITIONAL business view: severity weighted by (1 + helpful votes)
   area_intervals.json        Wilson 95% intervals for each area's share of complaints and of all reviews
   robustness.json            area shares on the verifier sample under enricher vs verifier labels
+  premium_only_sensitivity.json  upper-bound sensitivity of the billing/support lead to the premium-only topic
+                             boundary: premium-only complaints whose text has no Premium/payment word
 The baseline ranking (ranking.csv) is unchanged by any of these.
 """
 
@@ -19,6 +21,7 @@ import csv
 import io
 import json
 import math
+import re
 from collections import Counter, defaultdict
 from decimal import ROUND_HALF_UP, Decimal
 
@@ -27,6 +30,49 @@ from .util import atomic_write_json, atomic_write_text
 
 COMPARE_MONTHS = ("06", "07", "08", "09", "10")
 PARTIAL_MONTHS = {"2022-05": "starts 2022-05-17", "2023-11": "ends 2023-11-15"}
+PREMIUM_ONLY_ISSUE = "billing.premium_only"
+# Premium/payment words for the premium-only boundary sensitivity: (what it matches, case-insensitive regex part).
+# The joined pattern matches exactly what evals/verification/disagreement_analysis.md section 4 used by hand, so the
+# code reproduces that analysis. English words only: a non-English payment word (e.g. "paisa") is not matched.
+PAYMENT_WORDS = (
+    ("premium", r"premium"),
+    ("subscri-", r"subscri"),
+    ("pay/paid/paying", r"\bpa(?:y|id|ying)\b"),
+    ("free", r"\bfree\b"),
+    ("buy", r"\bbuy\b"),
+    ("money", r"money"),
+    ("trial", r"trial"),
+    ("$", r"\$"),
+)
+# A broader list, reported alongside as a check on the word choice (not used by the memo).
+BROADER_PAYMENT_WORDS = PAYMENT_WORDS + (
+    ("paymen-", r"paymen"),
+    ("pric-", r"pric"),
+    ("upgrad-", r"upgrad"),
+    ("purchas-", r"purchas"),
+    ("cost/costs", r"\bcosts?\b"),
+    ("charg-", r"\bcharg"),
+    ("fee/fees", r"\bfees?\b"),
+    ("plan/plans", r"\bplans?\b"),
+)
+WORD_NOTES = ("Case-insensitive. 'subscri-' matches subscribe, subscription and subscriber; 'paymen-', 'pric-', "
+              "'upgrad-' and 'purchas-' match payment(s), price/pricing, upgrade and purchase; 'charg-' matches at a word "
+              "start (charge, charged); pay/paid/paying, free (free version, free tier, free user), buy, cost/costs, "
+              "fee/fees and plan/plans match whole words only; premium, money, trial and $ match anywhere in the text.")
+
+
+def shown_pp(x):
+    """A pp difference as the memo and dashboard print it (one decimal), so '+0.0 pp' never counts as an increase."""
+    return round(float(x), 1)
+
+
+def positive_increases(lifts):
+    """Spike-month lifts that are real increases in share (> 0 pp after rounding to one decimal), largest first.
+
+    Shared by spike_months.json (read by the dashboard) and the memo's spike bullets, so neither lists a zero or
+    negative change as an increase.
+    """
+    return [l for l in lifts if shown_pp(l["pp_difference"]) > 0]
 
 
 def wilson(k, n, z=1.96):
@@ -125,8 +171,12 @@ def period_comparison(rows):
     for area in sorted(set(a["areas"]) | set(b["areas"])):
         pa = (a["areas"].get(area) or {}).get("share_of_reviews") or 0
         pb = (b["areas"].get(area) or {}).get("share_of_reviews") or 0
-        change[area] = {"pp_change": round((pb - pa) * 100, 3), "2022": pa, "2023": pb}
+        change[area] = {"pp_change": round((pb - pa) * 100, 3), "2022": pa, "2023": pb,
+                        "decision_option": area in labels.DECISION_AREAS}
+    top = lambda areas: max(areas, key=lambda x: (change[x]["pp_change"], x)) if areas else None
     return {"periods": res, "change_in_share_of_reviews": change,
+            "largest_increase": {"among_the_four_decision_areas": top([x for x in change if x in labels.DECISION_AREAS]),
+                                 "among_all_areas": top(list(change))},
             "method": "share = complaint/cancellation reviews in the area / all classified reviews in the period; "
                       "Wilson 95% intervals; identical calendar months one year apart avoid the partial first/last "
                       "months and seasonal mix. Descriptive only: reviews are self-selected, not a customer census."}
@@ -151,8 +201,13 @@ def spike_months(rows, monthly_rows):
         lifts.sort(key=lambda x: (-x["pp_difference"], x["issue_id"]))
         out.append({"month": month, "reviews": len(inside), "median_full_month_reviews": median,
                     "complaint_share": r6(sum(r["complaint"] for r in inside) / len(inside)),
-                    "largest_increases": lifts[:5]})
-    return {"rule": "full months with more than 1.8x the median full-month review count", "spikes": out}
+                    "largest_increases": positive_increases(lifts)[:5]})
+    return {"rule": "full months with more than 1.8x the median full-month review count", "spikes": out,
+            "share_definition": "share = the issue's complaint and cancellation reviews / all classified reviews in the "
+                                "month (a share of reviews, not of complaints); pp_difference = share in the spike month "
+                                "minus the same share over the other full months",
+            "increase_rule": "largest_increases lists at most five issues whose share rose, i.e. pp_difference > 0 after "
+                             "rounding to one decimal; zero and negative changes are left out"}
 
 
 def app_versions(rows):
@@ -259,6 +314,64 @@ def robustness(store, cfg, rows_by_id):
                     "text), labelled independently by two model roles. Sampling error is not included."}
 
 
+def premium_only_sensitivity(store, label_config, rows, area_rollup=None):
+    """Upper-bound sensitivity of the billing/support lead to the premium-only topic boundary (code only).
+
+    Among the completed complaint/cancellation records of billing.premium_only (its membership, one per record, so
+    row-weighted like the ranking), count those whose review_text matches none of PAYMENT_WORDS, and their severity
+    sum; then the billing/support severity sum without them, compared with the other decision areas. The removed
+    records are not added to any other area, so this bounds the effect from above; it relabels nothing.
+    """
+    members = [r for r in rows if r["complaint"] and r["issue_id"] == PREMIUM_ONLY_ISSUE]
+    if not members:
+        return {"issue_id": PREMIUM_ONLY_ISSUE, "status": "no complaint or cancellation records in this issue"}
+    topic, subtopic = PREMIUM_ONLY_ISSUE.split(".")
+    own = labels.AREA_OF_TOPIC[topic]
+    text = dict(store.conn.execute(
+        "SELECT x.review_id, v.review_text FROM results x JOIN reviews v ON v.review_id = x.review_id AND "
+        "v.duplicate_id = 0 WHERE x.label_config = ? AND x.status = 'completed' AND x.topic = ? AND x.subtopic = ?",
+        (label_config, topic, subtopic)))
+    area_sev = Counter()
+    for r in rows:
+        if r["complaint"]:
+            area_sev[r["area"]] += r["severity"]
+    rollup = {a["area"]: int(a["severity_sum"]) for a in (area_rollup or {}).get("areas", [])}
+
+    def without(words):
+        rx = re.compile("|".join(p for _, p in words), re.IGNORECASE)
+        hit = [m for m in members if not rx.search(text.get(m["review_id"], ""))]
+        sev = sum(m["severity"] for m in hit)
+        adjusted = {a: area_sev[a] - (sev if a == own else 0) for a in labels.DECISION_AREAS}
+        order = sorted(adjusted, key=lambda a: (-adjusted[a], a))
+        return {"words": [w for w, _ in words], "pattern": rx.pattern, "case_insensitive": True,
+                "records": len(hit), "share_of_issue_records": r6(len(hit) / len(members)), "severity_sum": sev,
+                "billing_support_severity_sum_without_them": adjusted[own],
+                "decision_area_severity_sums_without_them": {a: adjusted[a] for a in order},
+                "decision_area_order_without_them": order, "billing_support_rank_without_them": order.index(own) + 1,
+                "decision_areas_above_billing_support_without_them": order[:order.index(own)]}
+
+    order_now = sorted(labels.DECISION_AREAS, key=lambda a: (-area_sev[a], a))
+    return {
+        "issue_id": PREMIUM_ONLY_ISSUE, "area": own,
+        "population": "completed complaint and cancellation records of billing.premium_only (its membership in "
+                      "membership.csv), one per record, so row-weighted like the baseline ranking",
+        "word_notes": WORD_NOTES,
+        "issue_records": len(members), "issue_severity_sum": sum(m["severity"] for m in members),
+        "decision_area_severity_sums": {a: area_sev[a] for a in order_now},
+        "decision_area_order": order_now,
+        "matches_area_rollup": (all(rollup.get(a) == area_sev[a] for a in labels.DECISION_AREAS) if rollup else None),
+        "without_payment_word": without(PAYMENT_WORDS),
+        "broader_word_list_check": without(BROADER_PAYMENT_WORDS),
+        "interpretation": "Upper-bound sensitivity, not a relabelling. It assumes that none of the records without a "
+                          "Premium or payment word belongs in billing/support and adds them to no other area. Many of "
+                          "them plainly describe free-tier limits without naming Premium (skip limits, forced shuffle, "
+                          "no repeat or rewind), and non-English payment words (for example 'paisa') are not matched, "
+                          "so the real effect is smaller than shown.",
+        "method": "case-insensitive regular expression over review_text (the words listed); severity from the saved "
+                  "labels; area sums over all complaint and cancellation records (equal to area_rollup.json).",
+    }
+
+
 def _csv(rows, columns=None):
     buf = io.StringIO()
     if not rows:
@@ -283,6 +396,9 @@ def run_analysis(store, cfg, log=print):
     rw = reach_weighted(rows)
     ai = area_intervals(rows)
     rb = robustness(store, cfg, {r["review_id"]: r for r in rows})
+    rollup_path = store.run_dir / "area_rollup.json"
+    ps = premium_only_sensitivity(store, lc, rows, json.loads(rollup_path.read_text(encoding="utf-8"))
+                                  if rollup_path.exists() else None)
     atomic_write_json(out_dir / "overview.json", ov)
     atomic_write_text(out_dir / "trends_monthly.csv", _csv(mon))
     atomic_write_json(out_dir / "period_comparison.json", pc)
@@ -293,7 +409,10 @@ def run_analysis(store, cfg, log=print):
                       _csv(rw, ["rank", "issue_id", "complaint_count", "severity_sum", "helpful_votes", "weighted_severity"]))
     atomic_write_json(out_dir / "area_intervals.json", ai)
     atomic_write_json(out_dir / "robustness.json", rb)
+    atomic_write_json(out_dir / "premium_only_sensitivity.json", ps)
+    w = ps.get("without_payment_word") or {}
     log(f"[analysis] {len(rows)} completed records: {len(mon)} months, {len(sp.get('spikes', []))} spike months, "
-        f"{len(av)} app-version families; verifier robustness: {rb.get('same_top_decision_area', 'n/a')} (no model calls)")
+        f"{len(av)} app-version families; verifier robustness: {rb.get('same_top_decision_area', 'n/a')}; premium-only "
+        f"records without a payment word: {w.get('records', 'n/a')} (severity {w.get('severity_sum', 'n/a')}) (no model calls)")
     return {"overview": ov, "period_comparison": pc, "spikes": sp, "area_intervals": ai, "robustness": rb,
-            "reach_weighted_top": rw[:5]}
+            "premium_only_sensitivity": ps, "reach_weighted_top": rw[:5]}

@@ -55,6 +55,46 @@
       "status": "completed",
       "stop_reason": null,
       "wall_clock_s": 62.84
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261014T183909.239Z-202d",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 77.84
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261014T184128.634Z-8a66",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 91.289
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261014T184351.433Z-0d14",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 83.378
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261014T184545.752Z-3a1e",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 71.048
+    },
+    {
+      "completed_ids_saved": 200000,
+      "phase": "resume",
+      "run_id": "run-20261014T184902.112Z-bd73",
+      "status": "completed",
+      "stop_reason": null,
+      "wall_clock_s": 24.142
     }
   ],
   "latest": {
@@ -95,16 +135,16 @@
         "succeeded": 22
       },
       "memo": {
-        "attempts": 7,
-        "cached_input_tokens": 65115,
+        "attempts": 11,
+        "cached_input_tokens": 124504,
         "cost_usd": 0.0,
         "failed": 2,
-        "input_tokens": 141629,
+        "input_tokens": 267246,
         "invalid_output_retries": 1,
-        "output_tokens": 24767,
-        "reasoning_tokens": 3667,
+        "output_tokens": 46354,
+        "reasoning_tokens": 8026,
         "retries": 0,
-        "succeeded": 5
+        "succeeded": 9
       },
       "verify": {
         "attempts": 40,
@@ -118,19 +158,7 @@
         "succeeded": 40
       }
     },
-    "calls_this_invocation": {
-      "memo": {
-        "attempts": 1,
-        "cached_input_tokens": 12599,
-        "cost_usd": 0.0,
-        "input_tokens": 25832,
-        "invalid_output_retries": 0,
-        "output_tokens": 4506,
-        "reasoning_tokens": 594,
-        "retries": 0,
-        "succeeded": 1
-      }
-    },
+    "calls_this_invocation": {},
     "completed_ids_saved": 200000,
     "config_summary": {
       "crosscheck": {
@@ -163,7 +191,7 @@
         "service_tier": "subscription"
       }
     },
-    "finished_at": "2026-10-13T23:41:04.074Z",
+    "finished_at": "2026-10-14T18:49:27.460Z",
     "input": {
       "bytes": 29411284,
       "ingested_at": "2026-10-12T23:29:31.437Z",
@@ -270,21 +298,122 @@
       },
       "unfinished": 0
     },
-    "run_id": "run-20261013T233959.792Z-f394",
+    "run_id": "run-20261014T184902.112Z-bd73",
     "stage_configs": {
       "group": "sonnet@low|group-v1|cfg-28f1c4b99f",
-      "memo": "sonnet@low|memo-v1|cfg-820daf045e",
+      "memo": "sonnet@low|memo-v1|cfg-b9e01714ea",
       "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
     },
     "stage_seconds": {
-      "export": 9.594,
-      "group": 9.597,
+      "export": 9.417,
+      "group": 10.268,
       "ingest": 0.016,
-      "memo": 40.502,
-      "rank": 2.135
+      "memo": 0.578,
+      "rank": 2.834
     },
     "stages": {
       "analysis": {
+        "premium_only_sensitivity": {
+          "area": "billing/support",
+          "broader_word_list_check": {
+            "billing_support_rank_without_them": 3,
+            "billing_support_severity_sum_without_them": 45281,
+            "case_insensitive": true,
+            "decision_area_order_without_them": [
+              "usability",
+              "playback/performance",
+              "billing/support",
+              "access/onboarding"
+            ],
+            "decision_area_severity_sums_without_them": {
+              "access/onboarding": 11172,
+              "billing/support": 45281,
+              "playback/performance": 46058,
+              "usability": 54124
+            },
+            "decision_areas_above_billing_support_without_them": [
+              "usability",
+              "playback/performance"
+            ],
+            "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$|paymen|pric|upgrad|purchas|\\bcosts?\\b|\\bcharg|\\bfees?\\b|\\bplans?\\b",
+            "records": 4655,
+            "severity_sum": 13865,
+            "share_of_issue_records": 0.258381,
+            "words": [
+              "premium",
+              "subscri-",
+              "pay/paid/paying",
+              "free",
+              "buy",
+              "money",
+              "trial",
+              "$",
+              "paymen-",
+              "pric-",
+              "upgrad-",
+              "purchas-",
+              "cost/costs",
+              "charg-",
+              "fee/fees",
+              "plan/plans"
+            ]
+          },
+          "decision_area_order": [
+            "billing/support",
+            "usability",
+            "playback/performance",
+            "access/onboarding"
+          ],
+          "decision_area_severity_sums": {
+            "access/onboarding": 11172,
+            "billing/support": 59146,
+            "playback/performance": 46058,
+            "usability": 54124
+          },
+          "interpretation": "Upper-bound sensitivity, not a relabelling. It assumes that none of the records without a Premium or payment word belongs in billing/support and adds them to no other area. Many of them plainly describe free-tier limits without naming Premium (skip limits, forced shuffle, no repeat or rewind), and non-English payment words (for example 'paisa') are not matched, so the real effect is smaller than shown.",
+          "issue_id": "billing.premium_only",
+          "issue_records": 18016,
+          "issue_severity_sum": 52577,
+          "matches_area_rollup": true,
+          "method": "case-insensitive regular expression over review_text (the words listed); severity from the saved labels; area sums over all complaint and cancellation records (equal to area_rollup.json).",
+          "population": "completed complaint and cancellation records of billing.premium_only (its membership in membership.csv), one per record, so row-weighted like the baseline ranking",
+          "without_payment_word": {
+            "billing_support_rank_without_them": 3,
+            "billing_support_severity_sum_without_them": 44907,
+            "case_insensitive": true,
+            "decision_area_order_without_them": [
+              "usability",
+              "playback/performance",
+              "billing/support",
+              "access/onboarding"
+            ],
+            "decision_area_severity_sums_without_them": {
+              "access/onboarding": 11172,
+              "billing/support": 44907,
+              "playback/performance": 46058,
+              "usability": 54124
+            },
+            "decision_areas_above_billing_support_without_them": [
+              "usability",
+              "playback/performance"
+            ],
+            "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$",
+            "records": 4785,
+            "severity_sum": 14239,
+            "share_of_issue_records": 0.265597,
+            "words": [
+              "premium",
+              "subscri-",
+              "pay/paid/paying",
+              "free",
+              "buy",
+              "money",
+              "trial",
+              "$"
+            ]
+          },
+          "word_notes": "Case-insensitive. 'subscri-' matches subscribe, subscription and subscriber; 'paymen-', 'pric-', 'upgrad-' and 'purchas-' match payment(s), price/pricing, upgrade and purchase; 'charg-' matches at a word start (charge, charged); pay/paid/paying, free (free version, free tier, free user), buy, cost/costs, fee/fees and plan/plans match whole words only; premium, money, trial and $ match anywhere in the text."
+        },
         "robustness": {
           "by_complaint_count": {
             "top_enricher": "usability",
@@ -382,7 +511,7 @@
         }
       },
       "export": {
-        "calls": 16947,
+        "calls": 16951,
         "checkpoint_after": 200000,
         "checkpoint_before": 34638,
         "grading_dir": "runs/final-200k/grading",
@@ -395,7 +524,7 @@
       },
       "memo": {
         "claims": 40,
-        "source": "model"
+        "source": "model, reused from the stage cache (generated in `run-20261014T184545.752Z-3a1e`)"
       },
       "rank": {
         "complaints": 89762,
@@ -446,7 +575,7 @@
     },
     "status": "completed",
     "stop_reason": null,
-    "wall_clock_s": 62.84,
+    "wall_clock_s": 24.142,
     "workers": 4
   }
 }

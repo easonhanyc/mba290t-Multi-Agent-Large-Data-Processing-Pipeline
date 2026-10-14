@@ -101,14 +101,16 @@ the allowlist is the set of provider/model pairs in `cost/rates.csv`. The `claud
 - **Claude Sonnet, group**: human-readable issue names from 12 member quotes per issue, a deterministic
   uniform sample (`insight/group.py`, `evidence_pack`); the catch-alls `other.general` and `usability.other`
   keep their taxonomy names. Membership is code. The first version used the 8 highest-severity quotes and
-  named `other.general` after its rare privacy complaints; see the README, "Error found and fixed".
+  named `other.general` after its rare privacy complaints; see [post_run_corrections.md](post_run_corrections.md).
 - **Claude Sonnet, memo**: prose from saved aggregates. Code checks every token, review ID and area, and
-  rejects any digit typed outside a token. The template fallback (output invalid twice) ran once: in one
-  post-run regeneration of the final run both memo attempts typed digits outside tokens, so the template memo
-  was used
-  (`runs/final-200k/invocations/run-20261013T233601.448Z-8794.json`); after spike months and comparison
-  periods were turned into tokens (`insight/memo.py`), the final model memo validated on its first attempt
-  (`runs/final-200k/memo.json`).
+  rejects any digit typed outside a token; code also appends fixed limitations the model cannot change
+  (`code_written_limitations` in `memo.json`: the share of complaints with no specific area and the premium-only
+  sensitivity). The template fallback (output invalid twice) ran once: in one post-run regeneration of the final
+  run both memo attempts typed digits outside tokens
+  (`runs/final-200k/invocations/run-20261013T233601.448Z-8794.json`); after spike months and comparison periods
+  were turned into tokens (`insight/memo.py`), every later memo validated on its first attempt. The final memo
+  was generated in `run-20261014T184545.752Z-3a1e` and reused from the stage cache by the last invocation
+  (`runs/final-200k/memo.json`). History: [post_run_corrections.md](post_run_corrections.md).
 
 What code does instead of a model: parsing, hashing, duplicate detection, the pending queue, quote
 extraction (exact slices), entity matching, schema and consistency validation, grouping, ranking
@@ -118,8 +120,15 @@ Claude roles run through `claude -p` (Claude Code headless) under the Claude Pro
 API bill. The CLI runs in an empty temporary directory with all tools, MCP servers and settings files
 disabled, our system prompt and a JSON schema; `ANTHROPIC_API_KEY` is stripped so it cannot switch to API
 billing. Token usage and exact model IDs are logged like any other call (`claude-haiku-4-5-20251001` and
-`claude-sonnet-5` in `runs/live-checkpoint500/state.sqlite`); the calculator shows their API-equivalent
-price separately from billed spend.
+`claude-sonnet-5` in `model_reported`, next to the configured alias in `model`, in `grading/calls.jsonl.gz` and the
+`calls` table); the calculator shows both and prices the calls at API rates as an API-equivalent, kept apart from
+billed spend. The flat Claude Pro fee is not included in per-call billed spend.
+
+**Stage-config labels.** Each Claude stage's cache and provenance key is `<alias>@<effort>|<stage>-v1|cfg-<hash>`
+(`stage_configs` in `run_summary.json`). `<stage>-v1` is the version of that key format, not of the prompt file: the
+prompt is identified by the SHA-256 of its contents inside `cfg-<hash>`, so `verify-v1` uses `prompts/verify_v2.md`
+and `memo-v1` uses `prompts/memo_v2.md`. Renaming the label would change every saved cache key
+(`insight/config.py`, `stage_config`).
 
 ## Alternative enrichment backends (built and tested, not used at scale)
 
@@ -176,9 +185,10 @@ misses, so the combined rule (74% / 74% / 70%) does not beat Luna alone (`evals/
   The 10,000-review checkpoint ran with 8 workers (931.6 s, `cost/refreshes/analysis_10000.json`). Both
   enrichment invocations of the final run used 16 workers (`invocations` table of
   `runs/final-200k/state.sqlite`): enrich took 193.1 s before the interruption and 8,374.6 s in the resume.
-  Flex returned 172 HTTP 429 responses, all retried with backoff, and 10 batch outputs were invalid and
-  retried (`calls` table). The five post-run regeneration invocations (group, rank, memo and export only, no
-  enrichment calls) used 4 workers (`runs/final-200k/invocations/*.json`).
+  Flex returned 172 HTTP 429 responses, all retried with backoff; 10 enrichment outputs were fully invalid and 10
+  partly valid, and their 19 retry tasks made 20 attempts (reconciled in a footnote under "Retries" in
+  `cost/report.md`). The ten post-run regeneration invocations (group, rank, memo and export only, no enrichment
+  calls) used 4 workers (`runs/final-200k/invocations/*.json`), so the run has 12 invocations in all.
 - One token-bucket limiter per provider (requests/min and tokens/min) shared by all workers.
 - One spend ledger per run directory, shared by all workers. Before each attempt: reserve the worst case at
   Standard prices; refuse when spent + unknown + reserved + next reservation would exceed the cap.
@@ -205,12 +215,15 @@ misses, so the combined rule (74% / 74% / 70%) does not beat Luna alone (`evals/
   SELECT-only database role. `/api/consistency` recomputes the baseline ranking and every claim from the
   `reviews` and `membership` tables at request time. No model is ever called.
 - **Dashboard** (`web/public/`): a static page on the same Vercel project that renders only what the API
-  returns. It shows overall metrics, the issue ranking with source evidence, the AI recommendation (with its
-  next-quarter actions and what would change the call) with each number traced to its token, trends,
-  evaluations (including the course checker result against both references: declared scope `pass`, coverage
-  candidate 1.0; full file `review_required`, 0.4422), run and cost evidence, and a per-review lookup and
-  trace. A signed-out check on 2026-10-14 UTC, after the final database reload, found `ranking_matches` and
-  `claims_match` true on `/api/consistency` and no console errors on the Review lookup tab.
+  returns. A headline shows the recommendation on first load. Tabs: overall metrics, the issue ranking with source
+  evidence, the AI recommendation (next-quarter actions, what would change the call) where every number shows what
+  it measures and its source file, trends, evaluations (the course checker result, golden set, verifier), run and
+  cost evidence with the two recordings, and a per-review lookup and trace.
+- **API documentation**: Swagger UI for the GET routes at `/api/docs` (also `/docs`); every route is GET and the
+  database role is SELECT-only. `/api/consistency` also recomputes the memo's area, scope and trend tokens whose
+  inputs are in the database (52 tokens for the final memo: A01-A19, S01-S11, T03-T18, T50-T55; `_token_checks`).
+  A check on 2026-10-14 UTC, after the final database reload, found the ranking, the 40 claims and these tokens
+  all matching. The first request after an idle period can take a few seconds (serverless cold start).
 - **Deployment**: Vercel project `spotify-review-insights` (`web/vercel.json` routes `/api/*` to the
   function), live at https://spotify-review-insights-iota.vercel.app (public, read-only, no login). The
   database is Neon Postgres loaded by `web/load_db.py`; the deployed function connects as `dashboard_ro`, a

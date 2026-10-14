@@ -13,7 +13,7 @@
 | `pilot_calls.jsonl`, `pilot_records.jsonl`, `pilot_runs.json` | The real pilot (`runs/pilot100-20261012T224901Z`, executed 2026-10-12): every attempt, the 100 review statuses, settings and timings |
 | `refreshes/checkpoint_500.json`, `checkpoint_500_calls.jsonl`, `checkpoint_500_usage.csv` | The live 500-review checkpoint (`runs/live-checkpoint500`, 1 worker) |
 | `refreshes/analysis_10000.json`, `analysis_10000_calls.jsonl`, `analysis_10000_usage.csv` | The live 10,000-review checkpoint (`runs/live-analysis10000`, 8 workers) |
-| `refreshes/final_200k.json`, `final_200k_calls.jsonl`, `final_200k_usage.csv` | The final run on the declared 200,013-row scope (`runs/final-200k`, all seven invocations, with per-invocation workers, seconds and budget in `invocations_detail`) |
+| `refreshes/final_200k.json`, `final_200k_calls.jsonl`, `final_200k_usage.csv` | The final run on the declared 200,013-row scope (`runs/final-200k`, all 12 invocations, with per-invocation workers, seconds and budget in `invocations_detail`) |
 | `project_spend.json` | Billed spend per run directory, summed over `runs/`; reproduced offline from each run's `state.sqlite` when present, otherwise from the committed per-call evidence above, so it does not need the git-ignored final-run database |
 | `report.md`, `report.json` | Written by the replay; not edited by hand |
 | `offline_stub_example/` | The same file set from a stub pilot. Models are `stub-*`, cost is $0 by definition; never a measurement |
@@ -76,25 +76,34 @@ python3 cost/calculator.py refresh --run-dir runs/<run> --label checkpoint_500
   $0.0963, API-equivalent $0.7680, 126 fallback1 reviews (cap 1.5%), 845 verified (`report.md`, "Measured
   refreshes"; `refreshes/analysis_10000.json`).
 - **final_200k refresh: done.** 200,013 rows, 152,363 distinct texts, 200,000 completed, 13 quarantined, 0
-  unfinished, 9,334.36 s over 7 invocations (8,974.424 s in the 2 enrichment invocations), billed $2.0192,
-  API-equivalent $2.0569, 13,639 fallback1 reviews, 2,000 verified (`report.md`, "Measured refreshes";
+  unfinished, 9,682.057 s over 12 invocations (8,974.424 s in the 2 enrichment invocations), billed $2.0192,
+  API-equivalent $2.4502, 13,639 fallback1 reviews, 2,000 verified (`report.md`, "Measured refreshes";
   `refreshes/final_200k.json`). The enrichment-workers column shows 16, taken from the invocations that made
-  enrichment calls; the five later group/rank/memo/export regenerations used 4 (`latest_invocation_workers`
-  in `refreshes/final_200k.json`). The projections in `report.md` use the final_200k per-unit inputs at 16
+  enrichment calls; the ten later group/rank/memo/export regenerations used 4 and made no billed call
+  (`latest_invocation_workers` in `refreshes/final_200k.json`; why they ran: `docs/post_run_corrections.md`). The projections in `report.md` use the final_200k per-unit inputs at 16
   workers (`assumptions.json` `controls.max_workers`) and the measured 94.7% enrichment-pool utilisation;
   the base projection for the declared scope gives 8,995.4 s against 8,974.4 s measured over the enrichment
   invocations (`report.md`, "Projection check against the measured run").
 - Billed spend: $2.142643 over twelve run directories and 17,292 billed-provider calls in
-  `project_spend.json` (computed 2026-10-14 03:12 UTC), of which $2.019246 is the final run, against the
+  `project_spend.json` (computed 2026-10-14 18:50 UTC), of which $2.019246 is the final run, against the
   $9.00 project cap. No run directory is "not reproducible offline", and the costs logged at call time sum
-  to the same total (`report.md`, "Spending controls and spend to date").
+  to the same total (`report.md`, "Spending controls and spend to date"). A clean-clone replay without the
+  git-ignored final-run database gives the same total; only the report's "usage taken from" column and its count
+  of state databases read differ, because the committed report was generated with that database present.
+- **Invalid outputs, reconciled** (final run; footnote under "Retries" in `report.md`): 10 enrichment outputs
+  failed validation as a whole (6 truncated, 4 malformed JSON; 9 on a first try, 1 on a retry) and 10 were partly
+  valid. The 19 first-try problems started 19 retry tasks (the enrich stage's `invalid_output_retries` in
+  `runs/final-200k/run_log.jsonl`), which made 20 attempts (one task was resent after a transient error): the
+  report's "Invalid-output retries" column. The memo stage had 2 outputs rejected by its validator.
+- **Reconciliation with the provider**: billed OpenAI spend is computed from the usage each call reported and can
+  be checked against the OpenAI account's usage page; no reconciliation figure is recorded in this folder.
 
 ## Billing kinds
 
 - **Billed API**: per-token charges on the OpenAI account (and TypeSafe, which was not used).
 - **API-equivalent**: what the `claude -p` calls (Claude Pro subscription) would cost at Anthropic API
-  rates for the model the CLI reported. They are $0 per call under a fixed monthly fee and are never added to
-  billed spend. The course says subscription access is not evidence that calls are free
+  rates for the model the CLI reported. They are $0 per call under a flat monthly fee, which is not included in
+  billed spend or apportioned to calls, and the API-equivalent is never added to billed spend. The course says subscription access is not evidence that calls are free
   (`COST_CALCULATOR.md`), so this column is always shown.
 - **Local compute**: the orchestrating laptop only, from stated assumptions in `assumptions.json`;
   hardware cost is unknown and not estimated.

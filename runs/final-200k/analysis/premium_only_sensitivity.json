@@ -1,0 +1,101 @@
+{
+  "area": "billing/support",
+  "broader_word_list_check": {
+    "billing_support_rank_without_them": 3,
+    "billing_support_severity_sum_without_them": 45281,
+    "case_insensitive": true,
+    "decision_area_order_without_them": [
+      "usability",
+      "playback/performance",
+      "billing/support",
+      "access/onboarding"
+    ],
+    "decision_area_severity_sums_without_them": {
+      "access/onboarding": 11172,
+      "billing/support": 45281,
+      "playback/performance": 46058,
+      "usability": 54124
+    },
+    "decision_areas_above_billing_support_without_them": [
+      "usability",
+      "playback/performance"
+    ],
+    "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$|paymen|pric|upgrad|purchas|\\bcosts?\\b|\\bcharg|\\bfees?\\b|\\bplans?\\b",
+    "records": 4655,
+    "severity_sum": 13865,
+    "share_of_issue_records": 0.258381,
+    "words": [
+      "premium",
+      "subscri-",
+      "pay/paid/paying",
+      "free",
+      "buy",
+      "money",
+      "trial",
+      "$",
+      "paymen-",
+      "pric-",
+      "upgrad-",
+      "purchas-",
+      "cost/costs",
+      "charg-",
+      "fee/fees",
+      "plan/plans"
+    ]
+  },
+  "decision_area_order": [
+    "billing/support",
+    "usability",
+    "playback/performance",
+    "access/onboarding"
+  ],
+  "decision_area_severity_sums": {
+    "access/onboarding": 11172,
+    "billing/support": 59146,
+    "playback/performance": 46058,
+    "usability": 54124
+  },
+  "interpretation": "Upper-bound sensitivity, not a relabelling. It assumes that none of the records without a Premium or payment word belongs in billing/support and adds them to no other area. Many of them plainly describe free-tier limits without naming Premium (skip limits, forced shuffle, no repeat or rewind), and non-English payment words (for example 'paisa') are not matched, so the real effect is smaller than shown.",
+  "issue_id": "billing.premium_only",
+  "issue_records": 18016,
+  "issue_severity_sum": 52577,
+  "matches_area_rollup": true,
+  "method": "case-insensitive regular expression over review_text (the words listed); severity from the saved labels; area sums over all complaint and cancellation records (equal to area_rollup.json).",
+  "population": "completed complaint and cancellation records of billing.premium_only (its membership in membership.csv), one per record, so row-weighted like the baseline ranking",
+  "without_payment_word": {
+    "billing_support_rank_without_them": 3,
+    "billing_support_severity_sum_without_them": 44907,
+    "case_insensitive": true,
+    "decision_area_order_without_them": [
+      "usability",
+      "playback/performance",
+      "billing/support",
+      "access/onboarding"
+    ],
+    "decision_area_severity_sums_without_them": {
+      "access/onboarding": 11172,
+      "billing/support": 44907,
+      "playback/performance": 46058,
+      "usability": 54124
+    },
+    "decision_areas_above_billing_support_without_them": [
+      "usability",
+      "playback/performance"
+    ],
+    "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$",
+    "records": 4785,
+    "severity_sum": 14239,
+    "share_of_issue_records": 0.265597,
+    "words": [
+      "premium",
+      "subscri-",
+      "pay/paid/paying",
+      "free",
+      "buy",
+      "money",
+      "trial",
+      "$"
+    ]
+  },
+  "word_notes": "Case-insensitive. 'subscri-' matches subscribe, subscription and subscriber; 'paymen-', 'pric-', 'upgrad-' and 'purchas-' match payment(s), price/pricing, upgrade and purchase; 'charg-' matches at a word start (charge, charged); pay/paid/paying, free (free version, free tier, free user), buy, cost/costs, fee/fees and plan/plans match whole words only; premium, money, trial and $ match anywhere in the text."
+}

@@ -1,4 +1,8 @@
 {
   "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index?__path=$1" }],
+  "redirects": [
+    { "source": "/docs", "destination": "/api/docs", "permanent": false },
+    { "source": "/openapi.json", "destination": "/api/openapi.json", "permanent": false }
+  ],
   "headers": [{ "source": "/(.*)", "headers": [{ "key": "X-Content-Type-Options", "value": "nosniff" }] }]
 }

@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Spotify Review Insights</title>
   <meta name="description" content="Processed Spotify app reviews, issue ranking and an AI recommendation grounded in saved metrics and review evidence.">
-  <link rel="stylesheet" href="styles.css?v=2026101302">
+  <link rel="icon" href="favicon.svg?v=2026101415" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=2026101415">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/asciinema-player@3.7.1/dist/bundle/asciinema-player.css">
 </head>
 <body>
@@ -17,7 +18,7 @@
       </div>
       <div id="health" class="health" title="Backend and database status">checking…</div>
     </div>
-    <nav class="tabs wrap" role="tablist">
+    <nav id="tabs" class="tabs wrap" role="tablist" aria-label="Dashboard sections">
       <button role="tab" data-tab="overview" class="active">Overview</button>
       <button role="tab" data-tab="recommendation">AI recommendation</button>
       <button role="tab" data-tab="issues">Issue ranking</button>
@@ -31,51 +32,56 @@
 
   <main class="wrap">
     <section id="tab-overview" class="tab active">
+      <div id="headline" class="card headline loading" aria-live="polite"><p class="muted">Loading the recommendation…</p></div>
       <div id="kpis" class="kpis"></div>
       <div class="grid2">
-        <div class="card"><h3>Baseline priority by decision area</h3><p class="muted small">Sum of severity over complaint and cancellation reviews (the course baseline), grouped by the four decision areas plus other topics.</p><div class="chart" style="height:270px"><canvas id="chart-areas"></canvas></div></div>
+        <div class="card"><h3>Baseline priority by decision area</h3><p class="muted small">Coloured bar: severity sum over complaint and cancellation reviews (the course baseline priority). Grey bar: number of those reviews. <span class="nowrap">* not one of the four decision areas.</span></p><div class="chart" style="height:270px"><canvas id="chart-areas"></canvas></div></div>
         <div class="card"><h3>What reviewers are doing (intent)</h3><div class="chart" style="height:270px"><canvas id="chart-intents"></canvas></div></div>
         <div class="card"><h3>Complaints by topic</h3><div class="chart" style="height:270px"><canvas id="chart-topics"></canvas></div></div>
         <div class="card"><h3>Severity of complaints</h3><p class="muted small">1 no problem, 2 annoyance, 3 degraded, 4 blocked core task, 5 serious financial/privacy/data harm.</p><div class="chart" style="height:270px"><canvas id="chart-severity"></canvas></div></div>
       </div>
-      <div class="card"><h3>Accounting</h3><div id="accounting"></div></div>
+      <div class="card"><h3>Accounting</h3><div id="accounting" class="table-wrap"></div></div>
     </section>
 
     <section id="tab-recommendation" class="tab">
-      <div class="card rec">
-        <div class="rec-head"><span class="pill" id="rec-area">…</span><span class="muted small" id="rec-source"></span></div>
-        <p id="rec-text" class="lead"></p>
+      <div id="rec-card" class="card rec loading">
+        <div class="rec-head"><span class="pill-label">Recommended focus for next quarter</span><span class="pill" id="rec-area">…</span></div>
+        <p class="muted small" id="rec-source"></p>
+        <p id="rec-text" class="lead"><span class="muted">Loading the recommendation…</span></p>
         <div class="grid2">
-          <div><h3>Why</h3><ul id="rec-why"></ul></div>
+          <div><h3>Why</h3><ul id="rec-why"></ul><div id="rec-notes"></div></div>
           <div><h3>Alternatives considered</h3><ul id="rec-alts"></ul></div>
         </div>
         <div class="grid2">
           <div><h3>Next-quarter actions</h3><ol id="rec-actions"></ol></div>
           <div><h3>What would change the call</h3><ul id="rec-change"></ul></div>
         </div>
-        <h3>Limitations</h3><ul id="rec-limits"></ul>
+        <h3>Limitations</h3><p class="muted small">The model's own limitations first, then the ones code adds to every memo (scope, coverage, golden-set result).</p><ul id="rec-limits"></ul>
         <h3>Cited review evidence</h3><div id="rec-cited"></div>
       </div>
       <div class="card"><h3>Every number in the recommendation, traced</h3>
-        <p class="muted small">The memo model never typed a digit: it wrote tokens such as <code>{C01}</code> and code filled them from saved calculations. Issue-level claims are checked against the ranking table in the database on every page load.</p>
-        <div id="rec-consistency" class="status"></div>
-        <div class="table-wrap"><table id="rec-claims"></table></div>
+        <p class="muted small">The memo model never typed a digit: it wrote tokens such as <code>{C01}</code> and code filled them from saved calculations. Hover a number or its token ID in the memo for what it measures and its source file; click the ID to jump to its row here. Issue-level claims (C) are checked against the ranking recomputed in SQL on every page load; area (A), scope (S) and period-comparison (T) figures are recomputed in SQL where the database holds their inputs.</p>
+        <div id="rec-consistency" class="status"><span class="muted">Running the SQL checks…</span></div>
+        <h3>Issue-level claims (C)</h3>
+        <div class="table-wrap"><table id="rec-claims" class="tokens"></table></div>
+        <h3 style="margin-top:16px">Area, scope and trend figures (A, S, T)</h3>
+        <div class="table-wrap"><table id="rec-tokens" class="tokens"></table></div>
       </div>
       <details class="card"><summary>Full memo (memo.md)</summary><div id="rec-memo" class="md"></div></details>
     </section>
 
     <section id="tab-issues" class="tab">
       <div class="card"><h3>Baseline issue ranking</h3>
-        <p class="muted small">priority = severity_sum = complaint_count × mean_severity over complaint and cancellation reviews; ties broken by issue ID. Click an issue for its trend and source evidence.</p>
+        <p class="muted small">Priority = severity sum = complaints × mean severity, over complaint and cancellation reviews; ties broken by issue ID. Click an issue for its trend and source evidence. On a phone, swipe the table sideways; the issue column stays in place.</p>
         <div class="table-wrap"><table id="ranking"></table></div></div>
       <div id="issue-detail" class="card hidden"></div>
     </section>
 
     <section id="tab-trends" class="tab">
       <div class="card"><h3>Complaint share by month</h3><p class="muted small">Complaint and cancellation reviews / all classified reviews in the month (denominators shown on hover). First and last months are partial.</p><div class="chart" style="height:300px"><canvas id="chart-monthly"></canvas></div></div>
-      <div class="card"><h3>Complaints by decision area per month (share of all reviews)</h3><div class="chart" style="height:300px"><canvas id="chart-area-months"></canvas></div></div>
+      <div class="card"><h3>Complaints by decision area per month (share of all reviews)</h3><p class="muted small">* in the legend: not one of the four decision areas. * after a month: partial month.</p><div class="chart" style="height:300px"><canvas id="chart-area-months"></canvas></div></div>
       <div class="grid2">
-        <div class="card"><h3>Same months, one year apart</h3><div id="period"></div></div>
+        <div class="card"><h3>Same months, one year apart</h3><div id="period" class="table-wrap"></div></div>
         <div class="card"><h3>Review-volume spikes</h3><div id="spikes"></div></div>
       </div>
     </section>
@@ -95,8 +101,8 @@
         <div class="card"><h3>Cost</h3><div id="cost"></div></div>
         <div class="card"><h3>Interruption and resume</h3><div id="checkpoints"></div></div>
       </div>
-      <div class="card"><h3>Recording: live interruption (Ctrl-C) then resume</h3><div id="recordings"></div></div>
-      <div class="card"><h3>Run history</h3><div class="table-wrap"><table id="history"></table></div></div>
+      <div class="card"><h3>Recording: live interruption (Ctrl-C) then resume</h3><p class="muted small">Played at 2× with pauses over 2 s cut. The dots on the progress bar mark the interrupt and the final status lines; the plain-text transcript is easier to read on a phone.</p><div id="recordings"></div></div>
+      <div class="card"><h3>Run history</h3><div class="table-wrap"><table id="history"></table></div><p id="history-note" class="muted small"></p></div>
       <details class="card"><summary>One review traced end to end (docs/trace_example.md)</summary><div id="trace-md" class="md"></div></details>
     </section>
 
@@ -109,15 +115,15 @@
           <input id="s-id" placeholder="or paste a review ID" aria-label="Review ID">
           <button type="submit">Search</button>
         </form>
-        <div id="s-results"></div>
+        <div id="s-results" aria-live="polite"></div>
       </div>
       <div id="trace" class="card hidden"></div>
     </section>
   </main>
-  <footer class="wrap muted small">Read-only dashboard. Data: BwandoWando, "3.4 Million Spotify Google Store Reviews" (CC0), course extract May 2022 to Nov 2023. Backend: FastAPI on Vercel; database: Postgres. No model is called by this site.</footer>
+  <footer class="wrap muted small">Read-only dashboard. Data: BwandoWando, "3.4 Million Spotify Google Store Reviews" (CC0), course extract May 2022 to Nov 2023. Backend: FastAPI on Vercel (<a href="/docs">API docs</a>, GET only); database: Postgres<span id="loaded-at"></span>. No model is called by this site. The first request after a quiet period can take a few seconds while the serverless function starts.</footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.7.1/dist/bundle/asciinema-player.min.js"></script>
-  <script src="app.js?v=2026101302"></script>
+  <script src="app.js?v=2026101415"></script>
 </body>
 </html>

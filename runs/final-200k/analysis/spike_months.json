@@ -1,5 +1,7 @@
 {
+  "increase_rule": "largest_increases lists at most five issues whose share rose, i.e. pp_difference > 0 after rounding to one decimal; zero and negative changes are left out",
   "rule": "full months with more than 1.8x the median full-month review count",
+  "share_definition": "share = the issue's complaint and cancellation reviews / all classified reviews in the month (a share of reviews, not of complaints); pp_difference = share in the spike month minus the same share over the other full months",
   "spikes": [
     {
       "complaint_share": 0.568743,
@@ -10,34 +12,6 @@
           "pp_difference": 35.976,
           "share_in_month": 0.422553,
           "share_other_months": 0.062788
-        },
-        {
-          "complaints_in_month": 117,
-          "issue_id": "billing.price",
-          "pp_difference": -0.011,
-          "share_in_month": 0.004526,
-          "share_other_months": 0.004632
-        },
-        {
-          "complaints_in_month": 6,
-          "issue_id": "support.contact",
-          "pp_difference": -0.065,
-          "share_in_month": 0.000232,
-          "share_other_months": 0.00088
-        },
-        {
-          "complaints_in_month": 280,
-          "issue_id": "access.login",
-          "pp_difference": -0.127,
-          "share_in_month": 0.010832,
-          "share_other_months": 0.012098
-        },
-        {
-          "complaints_in_month": 36,
-          "issue_id": "access.account",
-          "pp_difference": -0.13,
-          "share_in_month": 0.001393,
-          "share_other_months": 0.00269
         }
       ],
       "median_full_month_reviews": 8549,

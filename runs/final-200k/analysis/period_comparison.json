@@ -3,33 +3,43 @@
     "access/onboarding": {
       "2022": 0.009451,
       "2023": 0.017965,
+      "decision_option": true,
       "pp_change": 0.851
     },
     "billing/support": {
       "2022": 0.044861,
       "2023": 0.154006,
+      "decision_option": true,
       "pp_change": 10.915
     },
     "catalog/content": {
       "2022": 0.026868,
       "2023": 0.032531,
+      "decision_option": false,
       "pp_change": 0.566
     },
     "general/unspecified": {
       "2022": 0.024804,
       "2023": 0.217454,
+      "decision_option": false,
       "pp_change": 19.265
     },
     "playback/performance": {
       "2022": 0.096466,
       "2023": 0.046917,
+      "decision_option": true,
       "pp_change": -4.955
     },
     "usability": {
       "2022": 0.105251,
       "2023": 0.112619,
+      "decision_option": true,
       "pp_change": 0.737
     }
+  },
+  "largest_increase": {
+    "among_all_areas": "general/unspecified",
+    "among_the_four_decision_areas": "billing/support"
   },
   "method": "share = complaint/cancellation reviews in the area / all classified reviews in the period; Wilson 95% intervals; identical calendar months one year apart avoid the partial first/last months and seasonal mix. Descriptive only: reviews are self-selected, not a customer census.",
   "periods": {

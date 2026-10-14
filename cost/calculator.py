@@ -227,7 +227,11 @@ def _stage_stats(R, usage_rows, calls):
                                   "failed": 0, "succeeded": 0, "usage": Counter(), "billed_usd": 0.0,
                                   "api_equivalent_usd": 0.0, "api_equivalent_unpriced": 0, "latencies": [],
                                   "attempt_seconds": 0.0, "rate_limited": 0, "reviews_sent": 0, "unique_reviews": set(), "tiers": set(),
-                                  "billing": set(), "models_reported": set()})
+                                  "billing": set(), "models_reported": set(),
+                                  # validation outcomes (see invalid_output_reconciliation)
+                                  "invalid_outputs": 0, "invalid_outputs_first_try": 0, "invalid_outputs_on_retry": 0,
+                                  "invalid_outputs_by_finish": Counter(), "partially_valid_outputs": None,
+                                  "invalid_output_retry_tasks": 0, "invalid_output_retry_tasks_resent": 0})
     unpriced = []
     for u in usage_rows:
         st = stages[u["stage"]]
@@ -249,7 +253,16 @@ def _stage_stats(R, usage_rows, calls):
         st["attempts"] += 1
         st["first_attempts"] += c["attempt"] == 1 and c["task_attempt"] == 1
         st["transient_retries"] += c["attempt"] > 1
-        st["invalid_output_retries"] += c["task_attempt"] > 1
+        st["invalid_output_retries"] += c["task_attempt"] > 1  # attempts of retry tasks (transport resends included)
+        st["invalid_output_retry_tasks"] += c["task_attempt"] > 1 and c["attempt"] == 1
+        st["invalid_output_retry_tasks_resent"] += c["task_attempt"] > 1 and c["attempt"] > 1
+        if (c.get("error") or "").startswith("invalid_output"):  # the whole output failed validation
+            st["invalid_outputs"] += 1
+            st["invalid_outputs_first_try" if c["task_attempt"] == 1 else "invalid_outputs_on_retry"] += 1
+            st["invalid_outputs_by_finish"][c.get("finish") or "unrecorded"] += 1
+        if "valid_output" in c:  # recorded since the provenance pass; older evidence files lack it (None = unknown)
+            st["partially_valid_outputs"] = (st["partially_valid_outputs"] or 0) + (
+                c["outcome"] == "succeeded" and c["valid_output"] == 0)
         st["rate_limited"] += "429" in (c.get("error") or "") or "rate limit" in (c.get("error") or "").lower()
         st["failed"] += c["outcome"] != "succeeded"
         st["succeeded"] += c["outcome"] == "succeeded"
@@ -285,6 +298,7 @@ def _stage_stats(R, usage_rows, calls):
         s["api_equivalent_usd_per_call"] = round(s["api_equivalent_usd"] / s["attempts"], 10) if s["attempts"] else None
         for k in ("tiers", "billing", "models_reported"):
             s[k] = sorted(s[k])
+        s["invalid_outputs_by_finish"] = dict(sorted(s["invalid_outputs_by_finish"].items()))
         tok = s["usage"]
         s["mean_input_tokens"] = round(sum(tok.get(i, 0) for i in ITEMS[:3]) / s["succeeded"], 1) if s["succeeded"] else None
         s["mean_output_tokens"] = round(tok.get("output", 0) / s["succeeded"], 1) if s["succeeded"] else None
@@ -397,6 +411,7 @@ def per_stage_inputs(a, R, measured_sources):
                 "latency_s": m.get("mean_attempt_latency_s") or m["mean_latency_s"] or base["latency_s"],
                 "attempts_per_review": m.get("attempts_per_unique_review"), "latency_succeeded_s": m["mean_latency_s"],
                 "tier": ",".join(m["tiers"]), "billing": ",".join(m["billing"]),
+                "models_reported": m.get("models_reported") or [],
                 "source": f"measured: {best.get('label') or best.get('pilot_id')} ({best.get('distinct_texts')} distinct texts)"})
         eff = pool.get("efficiency") if name in ENRICH_POOL and m and m.get("succeeded") else None
         base.update({"provider": st["provider"], "model": st["model"], "fixed_calls": st.get("fixed_calls"),
@@ -884,6 +899,59 @@ def _step(label, src, workers, enrich_s, wall_s, label_config, billed):
             "api_equivalent": round(sum(s["api_equivalent_usd"] for s in st.values()), 6)}
 
 
+def _enrich_retry_counter(run_dir):
+    """Sum of the enrich stage's invalid_output_retries counter over its 'end' events in the run's run_log.jsonl."""
+    path = ROOT / run_dir / "run_log.jsonl" if run_dir else None
+    if not path or not path.exists():
+        return None
+    total = 0
+    for e in read_jsonl(path):
+        if e.get("stage") == "enrich" and e.get("event") == "end":
+            total += int((e.get("detail") or {}).get("invalid_output_retries") or 0)
+    return total
+
+
+def invalid_output_reconciliation(ref):
+    """Reconcile the invalid-output counts of one measured run (enrichment pool plus memo) from its per-call evidence.
+
+    Three numbers describe the same events: whole outputs that failed validation, retry tasks (one per first-try output
+    that was invalid or only partly valid; the enrich stage's run_log counter), and attempts made by those retry tasks
+    (the 'Invalid-output retries' column, which also counts a transport resend of a retry task). Needs the validation
+    fields saved by `refresh` (valid_output); returns None for older evidence files.
+    """
+    st = ref.get("stages") or {}
+    pool = [st[s] for s in ENRICH_POOL if s in st]
+    if not pool or any(s.get("partially_valid_outputs") is None for s in pool):
+        return None
+    tot = lambda k: sum(s.get(k) or 0 for s in pool)
+    finish = Counter()
+    for s in pool:
+        finish.update(s.get("invalid_outputs_by_finish") or {})
+    memo = st.get("memo") or {}
+    counter = _enrich_retry_counter(ref.get("run_dir"))
+    out = {"run": ref.get("label"), "whole_output_invalid": tot("invalid_outputs"),
+           "whole_output_invalid_first_try": tot("invalid_outputs_first_try"),
+           "whole_output_invalid_on_retry": tot("invalid_outputs_on_retry"), "whole_output_invalid_by_finish": dict(finish),
+           "partially_valid": tot("partially_valid_outputs"), "retry_tasks": tot("invalid_output_retry_tasks"),
+           "retry_task_resends": tot("invalid_output_retry_tasks_resent"), "retry_attempts": tot("invalid_output_retries"),
+           "run_log_invalid_output_retries": counter, "memo_invalid_outputs": memo.get("invalid_outputs", 0),
+           "memo_invalid_outputs_on_retry": memo.get("invalid_outputs_on_retry", 0)}
+    why = ", ".join(f"{n} {k.replace('_json', ' JSON').replace('_', ' ')}" for k, n in sorted(finish.items()))
+    first_try = out["whole_output_invalid_first_try"] + out["partially_valid"]
+    out["footnote"] = (
+        f"Invalid outputs, reconciled ({ref.get('label')}, from the per-call evidence `refreshes/{ref.get('label')}_calls.jsonl`): "
+        f"the enrichment model returned **{out['whole_output_invalid']}** outputs that failed validation as a whole "
+        f"({why}; {out['whole_output_invalid_first_try']} on a first try, {out['whole_output_invalid_on_retry']} on a retry) "
+        f"and {out['partially_valid']} that were only partly valid (some reviews' labels rejected, the rest saved). "
+        f"Those {first_try} first-try problems started **{out['retry_tasks']}** retry tasks"
+        + (f" (the enrich stage's `invalid_output_retries` counter in `run_log.jsonl`: {counter})" if counter is not None else "")
+        + f"; {out['retry_task_resends']} retry task(s) were resent after a transient error, so the retry tasks made "
+        f"**{out['retry_attempts']}** attempts (the table's 'Invalid-output retries' column). Reviews whose output was still "
+        f"invalid on the retry were routed to the fallback tier. The memo stage, outside these enrichment counts, had {out['memo_invalid_outputs']} "
+        f"output(s) rejected by its validator ({out['memo_invalid_outputs_on_retry']} of them on its single retry).")
+    return out
+
+
 def _ref_step(r):
     return _step(r["label"], r, r.get("workers"), r.get("enrichment_stage_seconds"),
                  r.get("enrichment_wall_clock_s") or r.get("wall_clock_s"), r.get("label_config"), r.get("api_cost_usd"))
@@ -943,6 +1011,9 @@ def _scaling_decision(L, meas, refreshes, comparisons, proj, a, spend):
                           for s in steps)
     L.append(f"- **Retries:** {retry_txt}. Every step ended with 0 unfinished reviews." if all(s["unfinished"] == 0 for s in steps)
              else f"- **Retries:** {retry_txt}.")
+    rec = invalid_output_reconciliation(final_ref) if final_ref else None
+    if rec:
+        L.append(f"- <sub>{rec['footnote']}</sub>")
 
     # worker comparison: refreshes plus declared comparison runs, by worker count
     cmp_rows = sorted([_ref_step(r) for r in real_refs] + [_ref_step(c) for c in comparisons if c.get("available")],
@@ -1105,11 +1176,20 @@ def render(meas, proj, a, R, refreshes, spend, sources_note, comparisons=()):
               f"(manifest match: {meas['input']['matches_manifest']}) | {len(meas['input']['review_ids'])} review IDs; "
               "statuses in `pilot_records.jsonl`, every attempt in `pilot_calls.jsonl`.", ""]
         s = meas["settings"]
-        L += ["### Per-stage settings", "", "| Stage | Provider | Model | Effort | Tier | Version / config | Batch | Workers |",
-              "|---|---|---|---|---|---|---|---|"]
+        L += ["### Per-stage settings", "",
+              "Model = the configured alias (what `config/pipeline.toml`, `label_config` and the stage configs name); exact "
+              "model ID = what the provider reported on this pilot's calls (`model_reported` in `pilot_calls.jsonl` and in "
+              "the grading `calls.jsonl`). Stage configs read `<alias>@<effort>|<stage>-v1|cfg-<hash>`: `<stage>-v1` is the "
+              "version of that key format, not of the prompt file; the prompt is identified by its SHA-256 inside "
+              "`cfg-<hash>` (verify-v1 uses `prompts/verify_v2.md`, memo-v1 `prompts/memo_v2.md`).", "",
+              "| Stage | Provider | Model (configured alias) | Exact model ID (reported) | Effort | Tier | Version / config | Batch | Workers |",
+              "|---|---|---|---|---|---|---|---|---|"]
+        cold_stages = (meas["runs"].get("cold") or {}).get("stages") or {}
         for stage, st in s["stages"].items():
-            L.append(f"| {stage} | {st['provider']} | `{st['model']}` | {st['effort']} | {st.get('tier', 'standard')} | "
-                     f"`{st['config']}` | {st['batch']} | {s['workers']} |")
+            reported = (cold_stages.get(stage) or {}).get("models_reported") or []
+            L.append(f"| {stage} | {st['provider']} | `{st['model']}` | "
+                     f"{', '.join(f'`{m}`' for m in reported) or '- (no call in the pilot)'} | {st['effort']} | "
+                     f"{st.get('tier', 'standard')} | `{st['config']}` | {st['batch']} | {s['workers']} |")
         c, w = meas["runs"].get("cold", {}), meas["runs"].get("warm", {})
         L += ["", "### Cold vs warm", "", "| | Cold | Warm |", "|---|---:|---:|"]
         def row(label, key, f=lambda v: v):
@@ -1193,12 +1273,15 @@ def render(meas, proj, a, R, refreshes, spend, sources_note, comparisons=()):
           "full-file ingestion). Not run: the project executed the declared scope above.", ""]
     _scenario_table(L, p["scenarios"], p["budget_usd"])
     L += ["", "### Per-unit inputs used", "",
-          "| Stage | Provider / model | Tier | Billing | Reviews per request | Attempts per unique review | Billed per review | "
+          "| Stage | Provider / model (configured alias) | Exact model ID (reported) | Tier | Billing | Reviews per request | "
+          "Attempts per unique review | Billed per review | "
           "Billed per call | API-equivalent per call | Mean latency s, succeeded calls | Latency s used (mean per attempt) | "
           "Pool utilisation | Source |",
-          "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
+          "|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|"]
     for stage, ps in p["per_stage_inputs"].items():
-        L.append(f"| {stage} | {ps['provider']} / `{ps['model']}` | {ps['tier']} | {ps['billing']} | {ps['reviews_per_request']} | "
+        reported = ", ".join(f"`{m}`" for m in ps.get("models_reported") or []) or "- (not measured)"
+        L.append(f"| {stage} | {ps['provider']} / `{ps['model']}` | {reported} | {ps['tier']} | {ps['billing']} | "
+                 f"{ps['reviews_per_request']} | "
                  f"{_num(ps.get('attempts_per_review'), 4)} | {fmt_usd(ps['billed_per_review'], 8)} | {fmt_usd(ps['billed_per_call'], 6)} | "
                  f"{fmt_usd(ps['equiv_per_call'], 6)} | {ps['latency_succeeded_s'] if ps['latency_succeeded_s'] else '-'} | "
                  f"{ps['latency_s']} | "
@@ -1419,7 +1502,8 @@ def _call_rows(con, labels):
                "model_reported": c["model_reported"], "provider_request_id": c["provider_request_id"],
                "started_at": c["started_at"], "duration_s": c["duration_s"], "worker": c["worker"],
                "max_output_tokens": c["max_output_tokens"], "cost_usd_logged": c["cost_usd"],
-               "api_equivalent_usd_logged": get("api_equiv_usd"), "reserved_usd": get("reserved_usd")}
+               "api_equivalent_usd_logged": get("api_equiv_usd"), "reserved_usd": get("reserved_usd"),
+               "finish": get("finish"), "valid_output": get("valid_output"), "notes": get("notes")}
         calls.append(rec)
         inp, cached, write, out = rec["input_tokens"], rec["cached_input_tokens"], rec["cache_write_tokens"], rec["output_tokens"]
         for item, units in (("input_uncached", max(inp - cached - write, 0)), ("input_cached", cached),
