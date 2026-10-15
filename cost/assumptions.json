@@ -19,9 +19,9 @@
   },
   "controls": {
     "max_workers": 16,
-    "_max_workers_doc": "enrichment workers of the final run: both invocations that made enrichment calls in runs/final-200k ran 16 workers (runs/final-200k/invocations/*.json, recorded in cost/refreshes/final_200k.json); the later group/memo regenerations used 4 but made no enrichment calls. Chosen after 1 -> 2 -> 8 worker steps; at 16 the Flex tier returned 172 HTTP 429 responses (about 1% of attempts), all retried, far below the configured 1,000 RPM limit (see report.md, 'Scaling decision')",
-    "output_token_cap_per_review": 70,
-    "max_fallback1_fraction": 0.1,
+    "_max_workers_doc": "enrichment workers of the final run: both invocations that made enrichment calls in runs/final-200k-v2 ran 16 workers (runs/final-200k-v2/invocations/*.json, recorded in cost/refreshes/final_200k_v2.json); the later memo regenerations used 4 and made no enrichment calls. Chosen after 1 -> 2 -> 8 worker steps; at 16 the Flex tier returned 1 HTTP 429 and 16 timeouts in the final run (172 HTTP 429 in the superseded run), all retried, far below the configured 1,000 RPM limit (see report.md, 'Scaling decision')",
+    "output_token_cap_per_review": 200,
+    "max_fallback1_fraction": 0.015,
     "max_fallback2_fraction": 0.0025,
     "verify_sample_fraction": 0.1,
     "verify_min_sample": 10,
@@ -29,7 +29,9 @@
     "project_cap_usd": 9.0,
     "source": "config/pipeline.toml (run, enrich.fallback*, verify)",
     "crosscheck_fraction": 0.0,
-    "_crosscheck_fraction_doc": "share of distinct texts cross-checked by the OpenAI Decisions API (hybrid backend). 0: production uses backend=llm because the Decisions beta allows this account 50 requests/day (measured: x-ratelimit-limit-requests 50, refill 28m48s per request, runs/probe-decisions); measured Decisions input 1,812-2,018 tokens/request, no cached tokens"
+    "_crosscheck_fraction_doc": "share of distinct texts cross-checked by the OpenAI Decisions API (hybrid backend). 0: production uses backend=llm because the Decisions beta allows this account 50 requests/day (measured: x-ratelimit-limit-requests 50, refill 28m48s per request, runs/probe-decisions); measured Decisions input 1,812-2,018 tokens/request, no cached tokens",
+    "_output_token_cap_per_review_doc": "enrich.llm.max_output_tokens_per_review: 200 at effort low (reasoning tokens count as output); 70 in the superseded effort-none run",
+    "_max_fallback1_fraction_doc": "enrich.fallback1.max_fraction of the final setup (label_config cfg-52c5333247); the superseded effort-none run used 0.10"
   },
   "scenarios": {
     "base": {
@@ -242,7 +244,7 @@
     "_doc": "Enrichment-stage alternatives priced from token estimates (same request shape). Quality is compared on the golden set separately.",
     "options": [
       {
-        "name": "GPT-6 Luna, 50 reviews/request, effort none, Flex (configured)",
+        "name": "GPT-6 Luna, 50 reviews/request, effort none, Flex (superseded setting; preflight estimate)",
         "provider": "openai",
         "model": "gpt-6-luna",
         "tier": "flex",

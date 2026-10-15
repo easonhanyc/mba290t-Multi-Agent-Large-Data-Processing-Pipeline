@@ -1,0 +1,1 @@
+[load_db] postgres: 200013 reviews, 91268 memberships, 22 ranked issues, 40 claims; checks: {"review_rows_ok": true, "membership_rows_ok": true, "sql_ranking_equals_saved_ok": true, "claims_equal_sql_ok": true, "reviews": 200013, "memberships": 91268}

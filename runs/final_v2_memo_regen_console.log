@@ -1,0 +1,20 @@
+[run] run-20261015T032949.255Z-ff9e | phase resume | run dir runs/final-200k-v2 | budget $4.00 (already spent $2.323945, unknown $0.097098) | LIVE
+[ingest] 200013 rows | 200000 nonempty | 13 empty | 152363 distinct texts (47637 exact-text reuses) | 48432 missing app_version
+[enrich] label_config = gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247
+[enrich] pending distinct texts: 0 | staged for a fallback decision: 0 | fallback caps {'fallback1': 2285, 'fallback2': 380} | already routed {'fallback1': 2285, 'fallback2': 0} | backend llm | workers 4
+[verify] declared sample 2000 of 152363 distinct texts; 0 to call
+[group] 91268 complaint/cancellation memberships in 22 issues; naming top 12 (0 new model calls, 12 cached or empty)
+[rank] 22 issues ranked from 91268 complaint/cancellation records (no model calls)
+[analysis] 200000 completed records: 19 months, 2 spike months, 32 app-version families; verifier robustness: False; premium-only records without a payment word: 2456 (severity 7283) (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv; 128 tokens in memo_tokens.csv
+[run] completed in 86.1s | completed 200000 | quarantined 13 | unfinished 0 | spend $2.323945
+[run] run-20261015T033337.582Z-bf5d | phase resume | run dir runs/final-200k-v2 | budget $4.00 (already spent $2.323945, unknown $0.097098) | LIVE
+[ingest] 200013 rows | 200000 nonempty | 13 empty | 152363 distinct texts (47637 exact-text reuses) | 48432 missing app_version
+[enrich] label_config = gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247
+[enrich] pending distinct texts: 0 | staged for a fallback decision: 0 | fallback caps {'fallback1': 2285, 'fallback2': 380} | already routed {'fallback1': 2285, 'fallback2': 0} | backend llm | workers 4
+[verify] declared sample 2000 of 152363 distinct texts; 0 to call
+[group] 91268 complaint/cancellation memberships in 22 issues; naming top 12 (0 new model calls, 12 cached or empty)
+[rank] 22 issues ranked from 91268 complaint/cancellation records (no model calls)
+[analysis] 200000 completed records: 19 months, 2 spike months, 32 app-version families; verifier robustness: False; premium-only records without a payment word: 2456 (severity 7283) (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv; 128 tokens in memo_tokens.csv
+[run] completed in 91.3s | completed 200000 | quarantined 13 | unfinished 0 | spend $2.323945

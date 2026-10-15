@@ -1,0 +1,13 @@
+rank,issue_id,complaint_count,severity_sum,mean_severity,priority_score,name,area,cancellation_count,needs_review_count,share_of_complaints,representative_review_ids
+1,billing.premium_only,8,24,3.000000,24,Free tier playback restrictions,billing/support,1,0,0.266667,d8ed500e-f4cf-4e66-bb54-fa50e36d0839;a7e69c17-14b2-4289-9f56-76a90acdb5f1;e1a57cd5-78a1-4716-a762-17209c2f5207
+2,other.general,6,12,2.000000,12,General or unrelated,general/unspecified,1,0,0.200000,ac2965d2-3753-4186-9f07-de49efd7ac21;7dcdae21-bf0a-4cd1-aa68-d9b244b11bed;c3a997d2-fc66-44f0-b7fc-29d76679745b
+3,usability.ads,4,8,2.000000,8,Excessive ad frequency,usability,0,0,0.133333,54271e33-caf9-4b79-a9fa-8050d0dd21c1;2c105ee7-a641-4053-a676-cc5d4ca41457;84080b17-b4d9-4f21-b290-d6e123787e89
+4,catalog.recommendations,2,6,3.000000,6,DJ and Shuffle Feature Availability Issues,catalog/content,0,0,0.066667,502610e9-9667-41e8-93fa-e1cac819fc33;402ab8b0-3653-4709-8266-b97ea2c054af
+5,playback.stops,2,6,3.000000,6,Music playback stops unexpectedly,playback/performance,0,0,0.066667,865dbe36-a04f-4e2c-aecc-61fd7d5afa3a;cf9ab0bf-f46f-40fe-b2ff-42c62387f310
+6,billing.payment,1,5,5.000000,5,Charged without linked account access,billing/support,0,0,0.033333,8501cdf1-d33e-4e39-acb1-95e386a4ce97
+7,playback.crash,1,4,4.000000,4,App freezing and failing to play music,playback/performance,0,0,0.033333,855babc7-b0d6-4481-89f3-aa214d3250b3
+8,usability.other,2,4,2.000000,4,Other control annoyances,usability,0,0,0.066667,d50d4e0e-7030-40a5-83c1-839d37d1ccec;6df535df-a358-4346-a329-1416f58bca1d
+9,catalog.lyrics,1,3,3.000000,3,Lyrics feature unavailable,catalog/content,0,0,0.033333,26eae562-ef53-401a-be7a-1aa81c2161a4
+10,playback.performance,1,3,3.000000,3,Low Audio Quality on Premium,playback/performance,0,0,0.033333,36ee85a9-0c2b-4816-af4d-bdb75813dc5c
+11,usability.library,1,3,3.000000,3,Unclear queue/playlist complaint,usability,0,1,0.033333,2895858c-0a3b-40dd-a6af-ab31663593e6
+12,usability.navigation,1,2,2.000000,2,Redesign removed familiar features,usability,0,0,0.033333,73f023b0-f11e-44c3-a7cd-f1efe8e048ac

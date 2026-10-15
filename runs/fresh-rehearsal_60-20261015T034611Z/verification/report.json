@@ -1,0 +1,175 @@
+{
+  "agreement": {
+    "intent": {
+      "agree": 10,
+      "of": 10,
+      "rate": 1.0
+    },
+    "sentiment_within_tolerance": {
+      "agree": 10,
+      "of": 10,
+      "rate": 1.0
+    },
+    "severity": {
+      "agree": 6,
+      "of": 10,
+      "rate": 0.6
+    },
+    "topic": {
+      "agree": 9,
+      "of": 10,
+      "rate": 0.9
+    }
+  },
+  "by_enricher_tier": {
+    "primary": {
+      "all_three_agree": 5,
+      "n": 10
+    }
+  },
+  "compared": 10,
+  "disagreements": [
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 3,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": true,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "2895858c-0a3b-40dd-a6af-ab31663593e6",
+      "severity_abs_diff": 1,
+      "text": "Ok na sana... Kya lang ung mga liked songs q. Naha2luan nman ng nka2 inis na mha tug2. Wla din",
+      "verifier": {
+        "confidence": "medium",
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 2,
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 3,
+        "topic": "playback"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "865dbe36-a04f-4e2c-aecc-61fd7d5afa3a",
+      "severity_abs_diff": 1,
+      "text": "Now stops after every song making play Iists useless",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": -0.5,
+        "severity": 4,
+        "topic": "playback"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 2,
+        "topic": "usability"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "98616bf9-b8e7-42cb-9e0a-cf2ab59faa1d",
+      "severity_abs_diff": 1,
+      "text": "It shows so many ads 😡😡😡😡😡😡😡😡 and it's says pay charges .",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "billing"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "topic"
+      ],
+      "review_id": "a7e69c17-14b2-4289-9f56-76a90acdb5f1",
+      "severity_abs_diff": 0,
+      "text": "Bruhhh i hate that i cant turn off shuffle option and i cant drag the timelinee suuch basic features are gonee",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "usability"
+      }
+    },
+    {
+      "enricher": {
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 3,
+        "topic": "billing"
+      },
+      "enricher_labeled_by": "primary",
+      "enricher_needs_review": false,
+      "fields": [
+        "severity"
+      ],
+      "review_id": "c8f69e30-7d5e-4fcf-abb5-b9607c80c3fa",
+      "severity_abs_diff": 1,
+      "text": "The worst app ever! The new update made it the worst we can't even play our own favorite song without permission and can't shift the song to our favorite part and can only skip 6 songs a day without premium this the worst update and app I've ever seen!!",
+      "verifier": {
+        "confidence": "high",
+        "intent": "complaint",
+        "sentiment": -1.0,
+        "severity": 4,
+        "topic": "billing"
+      }
+    }
+  ],
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
+  "note": "Agreement between two models is a consistency check, not accuracy. Disagreements are reported for inspection; enriched labels are never overwritten by the verifier.",
+  "owner": "independent model + code",
+  "sample": {
+    "fraction": 0.1,
+    "max": 2000,
+    "method": "lowest SHA-256(seed + ':' + review_id) among distinct completed texts",
+    "min": 10,
+    "population": 60,
+    "sample_size": 10,
+    "seed": "berkeley-fa-2026-insight-v1"
+  },
+  "sentiment_mean_abs_diff": 0.1,
+  "sentiment_tolerance": 0.5,
+  "severity_abs_diff_counts": {
+    "0": 6,
+    "1": 4
+  },
+  "stage": "verify",
+  "top_confusions": {
+    "intent": {},
+    "topic": {
+      "billing -> usability": 1
+    }
+  },
+  "verifier_config": "haiku@n/a|verify-v1|cfg-26c97bdddf",
+  "verifier_failures": 0
+}

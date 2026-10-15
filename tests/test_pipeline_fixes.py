@@ -365,3 +365,38 @@ class TestRunLockFile(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestPlanLimitStopsInsteadOfDegrading(unittest.TestCase):
+    """A Claude Pro plan limit ("You've hit your session limit · resets ...", HTTP 429) must stop the run with progress
+    saved, never finish 'completed' with an empty verification, taxonomy names or a template memo; a resume completes it."""
+
+    def test_session_limit_stops_then_resume_completes(self):
+        with tempfile.TemporaryDirectory() as d:
+            rd = Path(d) / "run"
+            os.environ["STUB_CLAUDE_FAULT"] = "session"
+            try:
+                with contextlib.redirect_stdout(io.StringIO()) as out:
+                    code = cli.main(["run", "--input", str(FIXTURE), "--run-dir", str(rd), "--offline-stub"])
+            finally:
+                os.environ.pop("STUB_CLAUDE_FAULT", None)
+            self.assertNotEqual(code, 0)
+            self.assertIn("systemic_provider_error", out.getvalue())
+            self.assertIn("session limit", out.getvalue())
+            self.assertNotIn("template (model memo failed validation)", out.getvalue())
+            with contextlib.redirect_stdout(io.StringIO()) as out2:
+                self.assertEqual(cli.main(["run", "--input", str(FIXTURE), "--run-dir", str(rd), "--offline-stub"]), 0)
+            memo_doc = json.loads((rd / "memo.json").read_text())
+            self.assertNotIn("template", memo_doc["source"])
+            self.assertGreater(json.loads((rd / "verification" / "report.json").read_text())["compared"], 0)
+
+    def test_validator_rejects_within_sampling_error_without_overlap(self):
+        payload = {"trends_and_robustness": {"area_shares_with_sampling_intervals": [
+            {"area": "usability", "interval_overlaps_with": []}, {"area": "billing/support", "interval_overlaps_with": []}]}}
+        data = {"recommended_area": "usability", "recommendation": "Usability leads.",
+                "rationale": ["Usability's share is higher within sampling error."], "limitations": ["Self-selected."],
+                "alternatives": [], "cited_reviews": []}
+        problems = memo.validate(data, {}, [], payload)
+        self.assertTrue(any("within sampling error" in p for p in problems))
+        payload["trends_and_robustness"]["area_shares_with_sampling_intervals"][0]["interval_overlaps_with"] = ["billing/support"]
+        self.assertFalse(any("within sampling error" in p for p in memo.validate(data, {}, [], payload)))

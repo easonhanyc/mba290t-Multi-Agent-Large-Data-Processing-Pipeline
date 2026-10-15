@@ -383,9 +383,10 @@ def evals():
           "SUM(CASE WHEN v.intent = r.intent THEN 1 ELSE 0 END) AS intent, "
           "SUM(CASE WHEN v.severity = r.severity THEN 1 ELSE 0 END) AS severity FROM verification v "
           "JOIN reviews r ON r.review_id = v.review_id WHERE v.status = 'completed' AND r.status = 'completed'", one=True)
-    golden = doc("golden_results")
-    if isinstance(golden, dict):
-        golden = {k: x for k, x in golden.items() if k != "cases_detail"}
+    def summary(d):  # agreement figures only; per-case detail stays in the saved files
+        return {k: x for k, x in d.items() if k != "cases_detail"} if isinstance(d, dict) else d
+    golden = summary(doc("golden_results"))
+    candidates = {c: summary(doc(f"golden_candidate:{c}")) for c in ("golden-luna-none", "golden-luna-low", "golden-decisions")}
 
     def checker(d):
         if not isinstance(d, dict):
@@ -393,6 +394,8 @@ def evals():
         return {k: x for k, x in d.items() if k not in ("calculated_ranking", "input_files_sha256")} | \
             {"calculated_ranking_issues": len(d.get("calculated_ranking") or [])}
     return cached({"verification_sql": v, "verification_report": verification_summary(), "golden": golden,
+                   "golden_candidates": {c: d for c, d in candidates.items() if d},
+                   "quote_support": doc("quote_support"),
                    "golden_error_analysis": doc("golden_error_analysis"), "planted_error": doc("planted_error"),
                    "injection": doc("injection_check"), "rank_check": doc("rank_check"),
                    "self_check": checker(doc("self_check")), "self_check_full": checker(doc("self_check_full"))})

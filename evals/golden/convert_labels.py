@@ -15,6 +15,7 @@ Mechanical mappings (format only):
 Decisions Eason made on 2026-10-13 after reviewing the contract wording (recorded per review_id below).
 """
 
+import argparse
 import csv
 import sys
 from pathlib import Path
@@ -47,8 +48,12 @@ def sentences(rid, text):
     return segs
 
 
-def main():
-    src = HERE / "golden_50_labeled_workbook_export.csv"
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--src", default=str(HERE / "golden_50_labeled_workbook_export.csv"))
+    ap.add_argument("--out", default=str(HERE / "golden_50_labeled.csv"))
+    a = ap.parse_args(argv)
+    src, dst = Path(a.src), Path(a.out)
     rows = list(csv.DictReader(open(src, encoding="utf-8-sig")))
     out, notes = [], []
     for r in rows:
@@ -81,11 +86,11 @@ def main():
         out.append(rec)
     cols = ["review_id", "review_text", "topic", "issue_human", "intent", "sentiment", "severity", "entities",
             "evidence_quote", "needs_review", "decision_note"]
-    with open(HERE / "golden_50_labeled.csv", "w", encoding="utf-8", newline="") as f:
+    with open(dst, "w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, lineterminator="\n")
         w.writeheader()
         w.writerows(out)
-    print(f"wrote {len(out)} labelled reviews to evals/golden/golden_50_labeled.csv ({len(notes)} recorded decisions)")
+    print(f"wrote {len(out)} labelled reviews to {dst} ({len(notes)} recorded decisions)")
 
 
 if __name__ == "__main__":

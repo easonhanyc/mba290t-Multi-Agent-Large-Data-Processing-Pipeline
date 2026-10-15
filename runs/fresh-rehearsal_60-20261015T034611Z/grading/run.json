@@ -1,0 +1,15 @@
+{
+  "allow_multi_issue": false,
+  "analysis_count": 60,
+  "analysis_sha256": "d14360867715e255870a4fc74be32dd513c21834b05f01147fa6efe11cef0205",
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "exported_at": "2026-10-15T03:48:33.923Z",
+  "full_source": null,
+  "input_file": "runs/fresh-rehearsal_60-20261015T034611Z/input.csv",
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
+  "offline_stub": false,
+  "scope_note": "Development checkpoint export, not the final submission.",
+  "version": "a5-audit-v1"
+}

@@ -1,0 +1,82 @@
+{
+  "areas": [
+    {
+      "area": "billing/support",
+      "complaints": 9,
+      "decision_option": true,
+      "share_of_complaints": 0.3,
+      "share_of_complaints_ci95": [
+        0.166646,
+        0.478761
+      ],
+      "share_of_reviews": 0.15,
+      "share_of_reviews_ci95": [
+        0.080973,
+        0.261148
+      ]
+    },
+    {
+      "area": "usability",
+      "complaints": 8,
+      "decision_option": true,
+      "share_of_complaints": 0.266667,
+      "share_of_complaints_ci95": [
+        0.141825,
+        0.444483
+      ],
+      "share_of_reviews": 0.133333,
+      "share_of_reviews_ci95": [
+        0.06914,
+        0.241654
+      ]
+    },
+    {
+      "area": "general/unspecified",
+      "complaints": 6,
+      "decision_option": false,
+      "share_of_complaints": 0.2,
+      "share_of_complaints_ci95": [
+        0.09505,
+        0.37306
+      ],
+      "share_of_reviews": 0.1,
+      "share_of_reviews_ci95": [
+        0.046642,
+        0.201497
+      ]
+    },
+    {
+      "area": "playback/performance",
+      "complaints": 4,
+      "decision_option": true,
+      "share_of_complaints": 0.133333,
+      "share_of_complaints_ci95": [
+        0.053096,
+        0.296817
+      ],
+      "share_of_reviews": 0.066667,
+      "share_of_reviews_ci95": [
+        0.026228,
+        0.159256
+      ]
+    },
+    {
+      "area": "catalog/content",
+      "complaints": 3,
+      "decision_option": false,
+      "share_of_complaints": 0.1,
+      "share_of_complaints_ci95": [
+        0.034599,
+        0.256214
+      ],
+      "share_of_reviews": 0.05,
+      "share_of_reviews_ci95": [
+        0.017149,
+        0.137007
+      ]
+    }
+  ],
+  "complaints": 30,
+  "note": "Sampling intervals for a uniform random sample of the corpus; they do not include labelling error (see the golden-set and verifier results for that).",
+  "reviews": 60
+}

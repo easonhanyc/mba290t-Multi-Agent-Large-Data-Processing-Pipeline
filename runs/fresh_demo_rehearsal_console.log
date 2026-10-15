@@ -1,0 +1,38 @@
+== 1. prepare evals/fresh_input/rehearsal_60.csv
+[fresh] 60 rows, 0 empty texts, 0 duplicate IDs -> runs/fresh-rehearsal_60-20261015T034611Z/input.csv; filled: review_likes, app_version
+== 2a. initial run, one worker, stopped after the first saved request (an interruption with saved progress)
+[run] run-20261015T034611.915Z-0447 | phase initial | run dir runs/fresh-rehearsal_60-20261015T034611Z | budget $0.05 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 60 rows | 60 nonempty | 0 empty | 60 distinct texts (0 exact-text reuses) | 60 missing app_version
+[enrich] label_config = gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247
+[enrich] pending distinct texts: 60 | staged for a fallback decision: 0 | fallback caps {'fallback1': 1, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 1
+[enrich] primary: 0 distinct texts saved this invocation (of 60 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $0.05 (reserved $0.0057)
+[enrich] primary: 47 distinct texts saved this invocation (of 60 pending at start) | 1.5/s | staged 3 | spent $0.0007 of $0.05 (reserved $0.0015)
+[run] enrichment incomplete (simulated_interruption); skipping verify/group/rank/memo until a resumed run finishes it
+[run] stopped (simulated_interruption) in 42.4s | completed 56 | quarantined 0 | unfinished 4 | spend $0.001000
+== 2b. resume the same run directory: only reviews not yet saved are sent
+[run] run-20261015T034655.015Z-a6f4 | phase resume | run dir runs/fresh-rehearsal_60-20261015T034611Z | budget $0.05 (already spent $0.001000, unknown $0.000000) | LIVE
+[ingest] 60 rows | 60 nonempty | 0 empty | 60 distinct texts (0 exact-text reuses) | 60 missing app_version
+[enrich] label_config = gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247
+[enrich] pending distinct texts: 0 | staged for a fallback decision: 4 | fallback caps {'fallback1': 1, 'fallback2': 1} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 2
+[enrich] fallback decisions: 4 staged | routing 1 to fallback1 (cap 1, already routed 0) | 3 keep their primary label
+[verify] declared sample 10 of 60 distinct texts; 10 to call
+[group] 30 complaint/cancellation memberships in 12 issues; naming top 12 (10 new model calls, 2 cached or empty)
+[rank] 12 issues ranked from 30 complaint/cancellation records (no model calls)
+[analysis] 60 completed records: 17 months, 3 spike months, 1 app-version families; verifier robustness: False; premium-only records without a payment word: 2 (severity 6) (no model calls)
+[memo] memo.md written (source: model); 40 issue-level claims in claims.csv; 129 tokens in memo_tokens.csv
+[run] completed in 98.7s | completed 60 | quarantined 0 | unfinished 0 | spend $0.001022
+== 3. course checker (reference built from the same CSV)
+== 4. ranking rebuilt from saved outputs, no model call
+== 5. summary
+run dir      runs/fresh-rehearsal_60-20261015T034611Z
+records      completed 60 | quarantined 0 | unfinished 0
+model calls  enrich:fallback1 1/1, enrich:primary 2/2, group 10/10, memo 1/1, verify 1/1
+billed       $0.001022 (Claude roles on Claude Pro are not billed per call)
+checker      pass | issues {} | coverage candidate 1.0 (60 completed, 0 quarantined)
+rank check   identical=True | issues 12
+  #1 billing.premium_only: 8 complaints, severity sum 24
+  #2 other.general: 6 complaints, severity sum 12
+  #3 usability.ads: 4 complaints, severity sum 8
+  #4 catalog.recommendations: 2 complaints, severity sum 6
+  #5 playback.stops: 2 complaints, severity sum 6
+memo         Scope: a 60-review development checkpoint (input.csv), not the full corpus  

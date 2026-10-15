@@ -1,0 +1,10 @@
+{"confidence":"high","intent":"unclear","request_id":"req-20261015T034658002675-1500da98","review_id":"1d26e407-765e-4e48-8904-0560cdb7161d","sentiment":0.0,"severity":1,"status":"completed","topic":"other"}
+{"confidence":"medium","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"2895858c-0a3b-40dd-a6af-ab31663593e6","sentiment":-0.5,"severity":2,"status":"completed","topic":"usability"}
+{"confidence":"high","intent":"praise","request_id":"req-20261015T034658002675-1500da98","review_id":"52032f0b-18f4-4025-8b47-05cebef394fd","sentiment":0.5,"severity":1,"status":"completed","topic":"other"}
+{"confidence":"medium","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"68e08ce4-195b-46d7-b5dc-eee6893b3cde","sentiment":-1.0,"severity":2,"status":"completed","topic":"other"}
+{"confidence":"high","intent":"praise","request_id":"req-20261015T034658002675-1500da98","review_id":"784e7f0f-19cc-44ac-9e89-27bcf9c43f5b","sentiment":0.5,"severity":1,"status":"completed","topic":"other"}
+{"confidence":"high","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"865dbe36-a04f-4e2c-aecc-61fd7d5afa3a","sentiment":-0.5,"severity":4,"status":"completed","topic":"playback"}
+{"confidence":"high","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"98616bf9-b8e7-42cb-9e0a-cf2ab59faa1d","sentiment":-1.0,"severity":3,"status":"completed","topic":"usability"}
+{"confidence":"high","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"a7e69c17-14b2-4289-9f56-76a90acdb5f1","sentiment":-1.0,"severity":3,"status":"completed","topic":"usability"}
+{"confidence":"high","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"c3a997d2-fc66-44f0-b7fc-29d76679745b","sentiment":-1.0,"severity":2,"status":"completed","topic":"other"}
+{"confidence":"high","intent":"complaint","request_id":"req-20261015T034658002675-1500da98","review_id":"c8f69e30-7d5e-4fcf-abb5-b9607c80c3fa","sentiment":-1.0,"severity":4,"status":"completed","topic":"billing"}

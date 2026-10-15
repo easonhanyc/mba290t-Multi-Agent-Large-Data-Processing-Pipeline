@@ -1,0 +1,101 @@
+{
+  "increase_rule": "largest_increases lists at most five issues whose share rose, i.e. pp_difference > 0 after rounding to one decimal; zero and negative changes are left out",
+  "rule": "full months with more than 1.8x the median full-month review count",
+  "share_definition": "share = the issue's complaint and cancellation reviews / all classified reviews in the month (a share of reviews, not of complaints); pp_difference = share in the spike month minus the same share over the other full months",
+  "spikes": [
+    {
+      "complaint_share": 0.428571,
+      "largest_increases": [
+        {
+          "complaints_in_month": 1,
+          "issue_id": "playback.crash",
+          "pp_difference": 14.286,
+          "share_in_month": 0.142857,
+          "share_other_months": 0.0
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "catalog.recommendations",
+          "pp_difference": 12.245,
+          "share_in_month": 0.142857,
+          "share_other_months": 0.020408
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "billing.premium_only",
+          "pp_difference": 4.082,
+          "share_in_month": 0.142857,
+          "share_other_months": 0.102041
+        }
+      ],
+      "median_full_month_reviews": 3,
+      "month": "2022-06",
+      "reviews": 7
+    },
+    {
+      "complaint_share": 0.444444,
+      "largest_increases": [
+        {
+          "complaints_in_month": 3,
+          "issue_id": "other.general",
+          "pp_difference": 26.95,
+          "share_in_month": 0.333333,
+          "share_other_months": 0.06383
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "usability.ads",
+          "pp_difference": 4.728,
+          "share_in_month": 0.111111,
+          "share_other_months": 0.06383
+        }
+      ],
+      "median_full_month_reviews": 3,
+      "month": "2023-07",
+      "reviews": 9
+    },
+    {
+      "complaint_share": 0.727273,
+      "largest_increases": [
+        {
+          "complaints_in_month": 3,
+          "issue_id": "other.general",
+          "pp_difference": 20.606,
+          "share_in_month": 0.272727,
+          "share_other_months": 0.066667
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "playback.stops",
+          "pp_difference": 9.091,
+          "share_in_month": 0.090909,
+          "share_other_months": 0.0
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "usability.navigation",
+          "pp_difference": 9.091,
+          "share_in_month": 0.090909,
+          "share_other_months": 0.0
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "usability.other",
+          "pp_difference": 6.869,
+          "share_in_month": 0.090909,
+          "share_other_months": 0.022222
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "usability.ads",
+          "pp_difference": 2.424,
+          "share_in_month": 0.090909,
+          "share_other_months": 0.066667
+        }
+      ],
+      "median_full_month_reviews": 3,
+      "month": "2023-10",
+      "reviews": 11
+    }
+  ]
+}

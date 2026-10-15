@@ -1,0 +1,312 @@
+{
+  "allow_multi_issue": false,
+  "group_config": "sonnet@low|group-v1|cfg-28f1c4b99f",
+  "issues": [
+    {
+      "area": "billing/support",
+      "complaint_count": 8,
+      "default_name": "Premium-only restrictions",
+      "definition": "Features locked to Premium: skip limits, forced shuffle, cannot pick songs, cannot repeat or rewind, lyrics or offline behind a paywall, 'everything needs Premium now'.",
+      "evidence": [
+        {
+          "quote": "Don't like it cause you need to pay money to just listen what you wanna hear and I'm not gonna be having 60 different songs to just listen what I want to hear",
+          "review_id": "d8ed500e-f4cf-4e66-bb54-fa50e36d0839"
+        },
+        {
+          "quote": "Bruhhh i hate that i cant turn off shuffle option and i cant drag the timelinee suuch basic features are gonee",
+          "review_id": "a7e69c17-14b2-4289-9f56-76a90acdb5f1"
+        },
+        {
+          "quote": "Cant listen to any specific portion of the audio anymore(have to listen to the whole audio), as if ads weren't enough.",
+          "review_id": "e1a57cd5-78a1-4716-a762-17209c2f5207"
+        },
+        {
+          "quote": "The new update made it the worst we can't even play our own favorite song without permission and can't shift the song to our favorite part and can only skip 6 songs a day without premium this the worst update",
+          "review_id": "c8f69e30-7d5e-4fcf-abb5-b9607c80c3fa"
+        },
+        {
+          "quote": "Everything is premium which is annoying because you can't listen to your playlist anyway you like nor you can play any part of the song very unhappy.",
+          "review_id": "039d7c1a-2ddb-491a-87bc-63e3cdaa83ea"
+        },
+        {
+          "quote": "Everything was good before the update but after update every thing is put in premium so 1 star is perfect for this",
+          "review_id": "1ecde608-637b-4897-bfa1-14762fb0d954"
+        },
+        {
+          "quote": "I like you don't need the app open for music but it's dumb I have to pay to turn off shuffle when I can just go listen to it on YouTube music with shuffle off.",
+          "review_id": "f176de7b-5fff-4e2d-98a1-4c0d2990c4a2"
+        },
+        {
+          "quote": "only thing i hate is not being able to play specific songs out of premium and no widgets",
+          "review_id": "a88eb7c1-09cf-4678-8551-021d790636e1"
+        }
+      ],
+      "issue_id": "billing.premium_only",
+      "misfit_review_ids": [],
+      "name": "Free tier playback restrictions",
+      "named_by": "model",
+      "subtopic": "premium_only",
+      "summary": "Free users are frustrated that forced shuffle, skip limits, and inability to pick or rewind songs now require a Premium subscription.",
+      "topic": "billing"
+    },
+    {
+      "area": "general/unspecified",
+      "complaint_count": 6,
+      "default_name": "General or unrelated",
+      "definition": "General praise or criticism with no specific feature, unrelated content (politics, artists, boycotts), or meaningless text.",
+      "evidence": [
+        {
+          "quote": "Worst app ever 🤬🤬",
+          "review_id": "ac2965d2-3753-4186-9f07-de49efd7ac21"
+        },
+        {
+          "quote": "Before it was the best app ever , but now this app just got a most frustrated app ever I am using since 2018 but now I think it's worth deleting",
+          "review_id": "7dcdae21-bf0a-4cd1-aa68-d9b244b11bed"
+        },
+        {
+          "quote": "Very bad experience",
+          "review_id": "c3a997d2-fc66-44f0-b7fc-29d76679745b"
+        },
+        {
+          "quote": "This is very bad app no",
+          "review_id": "6e5a86cf-61bb-44d1-ac29-621e71fc0adc"
+        },
+        {
+          "quote": "After updation Spotify become worst!!",
+          "review_id": "68e08ce4-195b-46d7-b5dc-eee6893b3cde"
+        },
+        {
+          "quote": "I hate you",
+          "review_id": "e8e61131-943a-49a8-8703-430caafe9381"
+        }
+      ],
+      "issue_id": "other.general",
+      "misfit_review_ids": [],
+      "name": "General or unrelated",
+      "named_by": "taxonomy (catch-all issue: never model-named)",
+      "subtopic": "general",
+      "summary": null,
+      "topic": "other"
+    },
+    {
+      "area": "usability",
+      "complaint_count": 4,
+      "default_name": "Ad interruptions",
+      "definition": "Too many, too long, too loud or repeated ads; ads interrupting listening.",
+      "evidence": [
+        {
+          "quote": "It gives too much ads bro.after 2 songs you will get 1 ad or some times it comes when you start the application.",
+          "review_id": "54271e33-caf9-4b79-a9fa-8050d0dd21c1"
+        },
+        {
+          "quote": "The ads are becoming way too much....",
+          "review_id": "2c105ee7-a641-4053-a676-cc5d4ca41457"
+        },
+        {
+          "quote": "Honestly I really don't like spotify, it gives me up to five ads in a row and when I try to play songs I like it play it plays completely different types of songs.",
+          "review_id": "84080b17-b4d9-4f21-b290-d6e123787e89"
+        },
+        {
+          "quote": "It shows so many ads 😡😡😡😡😡😡😡😡 and it's says pay charges .",
+          "review_id": "98616bf9-b8e7-42cb-9e0a-cf2ab59faa1d"
+        }
+      ],
+      "issue_id": "usability.ads",
+      "misfit_review_ids": [],
+      "name": "Excessive ad frequency",
+      "named_by": "model",
+      "subtopic": "ads",
+      "summary": "Customers report that ads appear too frequently and in long clusters, disrupting their music listening experience.",
+      "topic": "usability"
+    },
+    {
+      "area": "catalog/content",
+      "complaint_count": 2,
+      "default_name": "Recommendations",
+      "definition": "Recommendations, the algorithm, autoplay or radio picks, the DJ, unwanted suggested songs.",
+      "evidence": [
+        {
+          "quote": "Very good and i love the app But the fact that it doesn't shuffle and plays an artist song is what i don't like",
+          "review_id": "502610e9-9667-41e8-93fa-e1cac819fc33"
+        },
+        {
+          "quote": "It's good and all but for some reason I can't get Dj and some ppl do have it and some don't.",
+          "review_id": "402ab8b0-3653-4709-8266-b97ea2c054af"
+        }
+      ],
+      "issue_id": "catalog.recommendations",
+      "misfit_review_ids": [],
+      "name": "DJ and Shuffle Feature Availability Issues",
+      "named_by": "model",
+      "subtopic": "recommendations",
+      "summary": "Customers report inconsistent access to the DJ feature and dissatisfaction with autoplay not shuffling songs as expected.",
+      "topic": "catalog"
+    },
+    {
+      "area": "playback/performance",
+      "complaint_count": 2,
+      "default_name": "Playback stops or skips",
+      "definition": "Music stops, pauses, skips by itself, will not start, or plays the wrong song.",
+      "evidence": [
+        {
+          "quote": "Now stops after every song making play Iists useless",
+          "review_id": "865dbe36-a04f-4e2c-aecc-61fd7d5afa3a"
+        },
+        {
+          "quote": "When I enter the Spotify app and play the music but when I leave there the problem starts, the music only stops like that (I don't know if it is my phone or Spotify)",
+          "review_id": "cf9ab0bf-f46f-40fe-b2ff-42c62387f310"
+        }
+      ],
+      "issue_id": "playback.stops",
+      "misfit_review_ids": [],
+      "name": "Music playback stops unexpectedly",
+      "named_by": "model",
+      "subtopic": "stops",
+      "summary": "Playback halts on its own, interrupting songs or playlists and requiring users to manually restart music.",
+      "topic": "playback"
+    },
+    {
+      "area": "billing/support",
+      "complaint_count": 1,
+      "default_name": "Charges and subscriptions",
+      "definition": "Unexpected or repeated charges, refunds, payment failures, a subscription or trial not activating, cancellation or plan problems.",
+      "evidence": [
+        {
+          "quote": "Been charged 9.99 but can't find my account",
+          "review_id": "8501cdf1-d33e-4e39-acb1-95e386a4ce97"
+        }
+      ],
+      "issue_id": "billing.payment",
+      "misfit_review_ids": [],
+      "name": "Charged without linked account access",
+      "named_by": "model",
+      "subtopic": "payment",
+      "summary": "Customers are charged for a subscription but cannot locate or access the account associated with the payment.",
+      "topic": "billing"
+    },
+    {
+      "area": "playback/performance",
+      "complaint_count": 1,
+      "default_name": "Crashes and freezes",
+      "definition": "App crashes, freezes, will not open or load, blank screens.",
+      "evidence": [
+        {
+          "quote": "and it freezes up when trying to select a channel doesn't play music app is trash after this update please fix or are u trying to force premium on us now will change when it goes back to normal loved the app before now",
+          "review_id": "855babc7-b0d6-4481-89f3-aa214d3250b3"
+        }
+      ],
+      "issue_id": "playback.crash",
+      "misfit_review_ids": [],
+      "name": "App freezing and failing to play music",
+      "named_by": "model",
+      "subtopic": "crash",
+      "summary": "Customers report the app freezes when selecting a channel, preventing music playback and disrupting their listening experience.",
+      "topic": "playback"
+    },
+    {
+      "area": "usability",
+      "complaint_count": 2,
+      "default_name": "Other control annoyances",
+      "definition": "Notifications, emails, settings, toggles, widgets and other interaction annoyances.",
+      "evidence": [
+        {
+          "quote": "New update is worst",
+          "review_id": "d50d4e0e-7030-40a5-83c1-839d37d1ccec"
+        },
+        {
+          "quote": "and you just woke me with one of your notifications",
+          "review_id": "6df535df-a358-4346-a329-1416f58bca1d"
+        }
+      ],
+      "issue_id": "usability.other",
+      "misfit_review_ids": [],
+      "name": "Other control annoyances",
+      "named_by": "taxonomy (catch-all issue: never model-named)",
+      "subtopic": "other",
+      "summary": null,
+      "topic": "usability"
+    },
+    {
+      "area": "catalog/content",
+      "complaint_count": 1,
+      "default_name": "Lyrics availability",
+      "definition": "Lyrics missing, wrong or not loading.",
+      "evidence": [
+        {
+          "quote": "Can't even see lyrics.spotify is taking every features which where the best in this app",
+          "review_id": "26eae562-ef53-401a-be7a-1aa81c2161a4"
+        }
+      ],
+      "issue_id": "catalog.lyrics",
+      "misfit_review_ids": [],
+      "name": "Lyrics feature unavailable",
+      "named_by": "model",
+      "subtopic": "lyrics",
+      "summary": "Customers report that the lyrics feature is missing from the app, preventing them from viewing song lyrics while listening.",
+      "topic": "catalog"
+    },
+    {
+      "area": "playback/performance",
+      "complaint_count": 1,
+      "default_name": "Performance and audio quality",
+      "definition": "Lag, slowness, battery or storage use, audio quality or volume problems.",
+      "evidence": [
+        {
+          "quote": "spotify is great with the excption of sound quality ,its way behind its competitors ,pemium should be cd quality at the very least",
+          "review_id": "36ee85a9-0c2b-4816-af4d-bdb75813dc5c"
+        }
+      ],
+      "issue_id": "playback.performance",
+      "misfit_review_ids": [],
+      "name": "Low Audio Quality on Premium",
+      "named_by": "model",
+      "subtopic": "performance",
+      "summary": "Customers report that premium streaming audio quality is poor and falls short of competitors, diminishing their listening experience.",
+      "topic": "playback"
+    },
+    {
+      "area": "usability",
+      "complaint_count": 1,
+      "default_name": "Library, queue and playlists",
+      "definition": "Managing the queue, playlists, liked songs or library; shuffle or repeat controls that misbehave.",
+      "evidence": [
+        {
+          "quote": "Naha2luan nman ng nka2 inis na mha tug2.",
+          "review_id": "2895858c-0a3b-40dd-a6af-ab31663593e6"
+        }
+      ],
+      "issue_id": "usability.library",
+      "misfit_review_ids": [
+        "2895858c-0a3b-40dd-a6af-ab31663593e6"
+      ],
+      "name": "Unclear queue/playlist complaint",
+      "named_by": "model",
+      "subtopic": "library",
+      "summary": "The provided quote is not legible or interpretable, so no specific library, queue, or playlist issue can be identified.",
+      "topic": "usability"
+    },
+    {
+      "area": "usability",
+      "complaint_count": 1,
+      "default_name": "Navigation and layout",
+      "definition": "Hard to find things, confusing layout, redesigns or home-screen changes, buttons moved or removed.",
+      "evidence": [
+        {
+          "quote": "New update is the worst....removed all the basics",
+          "review_id": "73f023b0-f11e-44c3-a7cd-f1efe8e048ac"
+        }
+      ],
+      "issue_id": "usability.navigation",
+      "misfit_review_ids": [],
+      "name": "Redesign removed familiar features",
+      "named_by": "model",
+      "subtopic": "navigation",
+      "summary": "Customers report that a recent app update changed the layout and removed basic features they relied on, making navigation harder.",
+      "topic": "usability"
+    }
+  ],
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
+  "owner": "code (membership) + model (names only)",
+  "rule": "issue_id = topic.subtopic of each completed complaint/cancellation record; one issue per record",
+  "stage": "group"
+}

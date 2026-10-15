@@ -1,0 +1,130 @@
+token_id,kind,value,measure,source
+C01,claim,45,top_issues[billing.premium_only].complaint_count,claims.csv (from ranking.csv)
+C02,claim,135,top_issues[billing.premium_only].severity_sum,claims.csv (from ranking.csv)
+C03,claim,3.000000,top_issues[billing.premium_only].mean_severity,claims.csv (from ranking.csv)
+C04,claim,135,top_issues[billing.premium_only].priority_score,claims.csv (from ranking.csv)
+C05,claim,56,top_issues[other.general].complaint_count,claims.csv (from ranking.csv)
+C06,claim,111,top_issues[other.general].severity_sum,claims.csv (from ranking.csv)
+C07,claim,1.982143,top_issues[other.general].mean_severity,claims.csv (from ranking.csv)
+C08,claim,111,top_issues[other.general].priority_score,claims.csv (from ranking.csv)
+C09,claim,32,top_issues[usability.ads].complaint_count,claims.csv (from ranking.csv)
+C10,claim,68,top_issues[usability.ads].severity_sum,claims.csv (from ranking.csv)
+C11,claim,2.125000,top_issues[usability.ads].mean_severity,claims.csv (from ranking.csv)
+C12,claim,68,top_issues[usability.ads].priority_score,claims.csv (from ranking.csv)
+C13,claim,14,top_issues[playback.stops].complaint_count,claims.csv (from ranking.csv)
+C14,claim,46,top_issues[playback.stops].severity_sum,claims.csv (from ranking.csv)
+C15,claim,3.285714,top_issues[playback.stops].mean_severity,claims.csv (from ranking.csv)
+C16,claim,46,top_issues[playback.stops].priority_score,claims.csv (from ranking.csv)
+C17,claim,14,top_issues[usability.navigation].complaint_count,claims.csv (from ranking.csv)
+C18,claim,37,top_issues[usability.navigation].severity_sum,claims.csv (from ranking.csv)
+C19,claim,2.642857,top_issues[usability.navigation].mean_severity,claims.csv (from ranking.csv)
+C20,claim,37,top_issues[usability.navigation].priority_score,claims.csv (from ranking.csv)
+C21,claim,8,top_issues[access.login].complaint_count,claims.csv (from ranking.csv)
+C22,claim,31,top_issues[access.login].severity_sum,claims.csv (from ranking.csv)
+C23,claim,3.875000,top_issues[access.login].mean_severity,claims.csv (from ranking.csv)
+C24,claim,31,top_issues[access.login].priority_score,claims.csv (from ranking.csv)
+C25,claim,8,top_issues[playback.crash].complaint_count,claims.csv (from ranking.csv)
+C26,claim,31,top_issues[playback.crash].severity_sum,claims.csv (from ranking.csv)
+C27,claim,3.875000,top_issues[playback.crash].mean_severity,claims.csv (from ranking.csv)
+C28,claim,31,top_issues[playback.crash].priority_score,claims.csv (from ranking.csv)
+C29,claim,7,top_issues[playback.connection].complaint_count,claims.csv (from ranking.csv)
+C30,claim,27,top_issues[playback.connection].severity_sum,claims.csv (from ranking.csv)
+C31,claim,3.857143,top_issues[playback.connection].mean_severity,claims.csv (from ranking.csv)
+C32,claim,27,top_issues[playback.connection].priority_score,claims.csv (from ranking.csv)
+C33,claim,7,top_issues[downloads.offline].complaint_count,claims.csv (from ranking.csv)
+C34,claim,25,top_issues[downloads.offline].severity_sum,claims.csv (from ranking.csv)
+C35,claim,3.571429,top_issues[downloads.offline].mean_severity,claims.csv (from ranking.csv)
+C36,claim,25,top_issues[downloads.offline].priority_score,claims.csv (from ranking.csv)
+C37,claim,8,top_issues[usability.library].complaint_count,claims.csv (from ranking.csv)
+C38,claim,24,top_issues[usability.library].severity_sum,claims.csv (from ranking.csv)
+C39,claim,3.000000,top_issues[usability.library].mean_severity,claims.csv (from ranking.csv)
+C40,claim,24,top_issues[usability.library].priority_score,claims.csv (from ranking.csv)
+A01,area roll-up,46,areas[playback/performance].complaint_count,area_rollup.json
+A02,area roll-up,159,areas[playback/performance].severity_sum,area_rollup.json
+A03,area roll-up,0.186992,areas[playback/performance].share_of_complaints,area_rollup.json
+A04,area roll-up,52,areas[billing/support].complaint_count,area_rollup.json
+A05,area roll-up,158,areas[billing/support].severity_sum,area_rollup.json
+A06,area roll-up,0.211382,areas[billing/support].share_of_complaints,area_rollup.json
+A07,area roll-up,59,areas[usability].complaint_count,area_rollup.json
+A08,area roll-up,140,areas[usability].severity_sum,area_rollup.json
+A09,area roll-up,0.239837,areas[usability].share_of_complaints,area_rollup.json
+A10,area roll-up,56,areas[general/unspecified].complaint_count,area_rollup.json
+A11,area roll-up,111,areas[general/unspecified].severity_sum,area_rollup.json
+A12,area roll-up,0.227642,areas[general/unspecified].share_of_complaints,area_rollup.json
+A13,area roll-up,24,areas[catalog/content].complaint_count,area_rollup.json
+A14,area roll-up,70,areas[catalog/content].severity_sum,area_rollup.json
+A15,area roll-up,0.097561,areas[catalog/content].share_of_complaints,area_rollup.json
+A16,area roll-up,9,areas[access/onboarding].complaint_count,area_rollup.json
+A17,area roll-up,36,areas[access/onboarding].severity_sum,area_rollup.json
+A18,area roll-up,0.036585,areas[access/onboarding].share_of_complaints,area_rollup.json
+A19,area roll-up,22.8%,unallocated_complaints.share_of_complaints_percent,area_rollup.json
+S01,scope figure,500,Reviews in scope (unique IDs ingested),ingestion_report.json
+S02,scope figure,500,Completed classifications,grading/records.jsonl
+S03,scope figure,0,Quarantined: empty text,quarantine.jsonl
+S04,scope figure,0,Quarantined: other reasons,quarantine.jsonl
+S05,scope figure,0,Unfinished,run_summary.json
+S06,scope figure,31,Completed records flagged needs_review,enriched.jsonl
+S07,scope figure,246,Complaint and cancellation records ranked,membership.csv
+S08,scope figure,48,Verification sample compared,verification/report.json
+S09,scope figure,0.8542,Verifier topic agreement (rate),verification/report.json
+S10,scope figure,0.9583,Verifier intent agreement (rate),verification/report.json
+S11,scope figure,0.7292,Verifier exact severity agreement (rate),verification/report.json
+T01,trend/robustness,2022 Jun-Oct,trends_and_robustness.period_comparison.earlier_period,analysis/period_comparison.json
+T02,trend/robustness,2023 Jun-Oct,trends_and_robustness.period_comparison.later_period,analysis/period_comparison.json
+T03,trend/robustness,111,trends_and_robustness.period_comparison.denominators.earlier_period.reviews,analysis/period_comparison.json
+T04,trend/robustness,31.5%,trends_and_robustness.period_comparison.denominators.earlier_period.complaint_share,analysis/period_comparison.json
+T05,trend/robustness,205,trends_and_robustness.period_comparison.denominators.later_period.reviews,analysis/period_comparison.json
+T06,trend/robustness,61.0%,trends_and_robustness.period_comparison.denominators.later_period.complaint_share,analysis/period_comparison.json
+T07,trend/robustness,1.8%,trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_earlier_period,analysis/period_comparison.json
+T08,trend/robustness,2.4%,trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_later_period,analysis/period_comparison.json
+T09,trend/robustness,+0.6 pp,trends_and_robustness.period_comparison.areas[access/onboarding].change_pp,analysis/period_comparison.json
+T10,trend/robustness,9.9%,trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_earlier_period,analysis/period_comparison.json
+T11,trend/robustness,12.7%,trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_later_period,analysis/period_comparison.json
+T12,trend/robustness,+2.8 pp,trends_and_robustness.period_comparison.areas[billing/support].change_pp,analysis/period_comparison.json
+T13,trend/robustness,4.5%,trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_earlier_period,analysis/period_comparison.json
+T14,trend/robustness,9.3%,trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_later_period,analysis/period_comparison.json
+T15,trend/robustness,+4.8 pp,trends_and_robustness.period_comparison.areas[playback/performance].change_pp,analysis/period_comparison.json
+T16,trend/robustness,9.9%,trends_and_robustness.period_comparison.areas[usability].share_of_reviews_earlier_period,analysis/period_comparison.json
+T17,trend/robustness,10.2%,trends_and_robustness.period_comparison.areas[usability].share_of_reviews_later_period,analysis/period_comparison.json
+T18,trend/robustness,+0.3 pp,trends_and_robustness.period_comparison.areas[usability].change_pp,analysis/period_comparison.json
+T19,trend/robustness,24.0%,trends_and_robustness.area_shares_with_sampling_intervals[usability].share_of_complaints,analysis/area_intervals.json
+T20,trend/robustness,19.1%,trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_low,analysis/area_intervals.json
+T21,trend/robustness,29.7%,trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_high,analysis/area_intervals.json
+T22,trend/robustness,21.1%,trends_and_robustness.area_shares_with_sampling_intervals[billing/support].share_of_complaints,analysis/area_intervals.json
+T23,trend/robustness,16.5%,trends_and_robustness.area_shares_with_sampling_intervals[billing/support].ci_low,analysis/area_intervals.json
+T24,trend/robustness,26.7%,trends_and_robustness.area_shares_with_sampling_intervals[billing/support].ci_high,analysis/area_intervals.json
+T25,trend/robustness,18.7%,trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].share_of_complaints,analysis/area_intervals.json
+T26,trend/robustness,14.3%,trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].ci_low,analysis/area_intervals.json
+T27,trend/robustness,24.0%,trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].ci_high,analysis/area_intervals.json
+T28,trend/robustness,3.7%,trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].share_of_complaints,analysis/area_intervals.json
+T29,trend/robustness,1.9%,trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].ci_low,analysis/area_intervals.json
+T30,trend/robustness,6.8%,trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].ci_high,analysis/area_intervals.json
+T31,trend/robustness,2023-07,trends_and_robustness.spike_months[2023-07].month,analysis/spike_months.json
+T32,trend/robustness,56,trends_and_robustness.spike_months[2023-07].reviews,analysis/spike_months.json
+T33,trend/robustness,21,trends_and_robustness.spike_months[2023-07].median_full_month_reviews,analysis/spike_months.json
+T34,trend/robustness,+42.5 pp,trends_and_robustness.spike_months[2023-07].largest_increases[other.general].pp_difference,analysis/spike_months.json
+T35,trend/robustness,+2.6 pp,trends_and_robustness.spike_months[2023-07].largest_increases[downloads.offline].pp_difference,analysis/spike_months.json
+T36,trend/robustness,+0.8 pp,trends_and_robustness.spike_months[2023-07].largest_increases[playback.performance].pp_difference,analysis/spike_months.json
+T37,trend/robustness,2023-10,trends_and_robustness.spike_months[2023-10].month,analysis/spike_months.json
+T38,trend/robustness,79,trends_and_robustness.spike_months[2023-10].reviews,analysis/spike_months.json
+T39,trend/robustness,21,trends_and_robustness.spike_months[2023-10].median_full_month_reviews,analysis/spike_months.json
+T40,trend/robustness,+20.6 pp,trends_and_robustness.spike_months[2023-10].largest_increases[billing.premium_only].pp_difference,analysis/spike_months.json
+T41,trend/robustness,+5.8 pp,trends_and_robustness.spike_months[2023-10].largest_increases[catalog.lyrics].pp_difference,analysis/spike_months.json
+T42,trend/robustness,+3.3 pp,trends_and_robustness.spike_months[2023-10].largest_increases[usability.other].pp_difference,analysis/spike_months.json
+T43,trend/robustness,48,trends_and_robustness.verifier_robustness.sample_reviews,analysis/robustness.json
+T44,trend/robustness,26,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[usability].severity_sum,analysis/robustness.json
+T45,trend/robustness,18,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[playback/performance].severity_sum,analysis/robustness.json
+T46,trend/robustness,11,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[billing/support].severity_sum,analysis/robustness.json
+T47,trend/robustness,32,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[usability].severity_sum,analysis/robustness.json
+T48,trend/robustness,14,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[billing/support].severity_sum,analysis/robustness.json
+T49,trend/robustness,11,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[playback/performance].severity_sum,analysis/robustness.json
+T50,trend/robustness,4,trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[access/onboarding].severity_sum,analysis/robustness.json
+T51,trend/robustness,2.7%,trends_and_robustness.period_comparison.non_decision_areas[catalog/content].share_of_reviews_earlier_period,analysis/period_comparison.json
+T52,trend/robustness,6.8%,trends_and_robustness.period_comparison.non_decision_areas[catalog/content].share_of_reviews_later_period,analysis/period_comparison.json
+T53,trend/robustness,+4.1 pp,trends_and_robustness.period_comparison.non_decision_areas[catalog/content].change_pp,analysis/period_comparison.json
+T54,trend/robustness,2.7%,trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].share_of_reviews_earlier_period,analysis/period_comparison.json
+T55,trend/robustness,19.5%,trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].share_of_reviews_later_period,analysis/period_comparison.json
+T56,trend/robustness,+16.8 pp,trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].change_pp,analysis/period_comparison.json
+T57,trend/robustness,7,trends_and_robustness.premium_only_sensitivity.records_without_payment_word,analysis/premium_only_sensitivity.json
+T58,trend/robustness,21,trends_and_robustness.premium_only_sensitivity.their_severity_sum,analysis/premium_only_sensitivity.json
+T59,trend/robustness,137,trends_and_robustness.premium_only_sensitivity.billing_support_severity_sum_without_them,analysis/premium_only_sensitivity.json

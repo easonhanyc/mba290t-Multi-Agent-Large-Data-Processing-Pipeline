@@ -1,0 +1,79 @@
+{
+  "counts": {
+    "distinct_nonempty_texts": 60,
+    "duplicate_review_id_rows": 0,
+    "empty_review_text": 0,
+    "exact_text_cache_aliases": 0,
+    "first_pass_model_work_units": 60,
+    "invalid_rating": 0,
+    "missing_app_version": 60,
+    "mostly_non_latin_text": 0,
+    "multiline_text": 0,
+    "no_letter_text": 1,
+    "nonempty_to_classify": 60,
+    "records": 60,
+    "rows_in_exact_duplicate_text_groups": 0,
+    "unique_review_ids": 60
+  },
+  "exact_text_reuse": true,
+  "finished_at": "2026-10-15T03:46:12.487Z",
+  "first_review": "2022-06-01 12:30:41",
+  "handling": {
+    "classification_input": "review_text only (stars, likes, version and timestamp stay metadata)",
+    "duplicate_review_id": "first occurrence kept; later rows reported here and excluded",
+    "empty_text": "quarantined with reason empty_review_text; never sent to a model",
+    "exact_duplicate_text": "one model result per distinct text; other rows get cache_source_id provenance",
+    "missing_app_version": "kept; app_version is metadata and never used for classification"
+  },
+  "helper_profile": "ingestion.json: full-file profile of runs/fresh-rehearsal_60-20261015T034611Z/input.csv produced by the provided check_submission.py profile helper",
+  "input": {
+    "bytes": 8539,
+    "ignored_columns": [],
+    "note": "Only the six source fields are stored; ignored columns never reach any model.",
+    "path": "runs/fresh-rehearsal_60-20261015T034611Z/input.csv",
+    "sha256": "d14360867715e255870a4fc74be32dd513c21834b05f01147fa6efe11cef0205"
+  },
+  "last_review": "2023-11-12 20:00:31",
+  "owner": "code",
+  "reviews_by_month": {
+    "2022-06": 7,
+    "2022-07": 1,
+    "2022-08": 2,
+    "2022-09": 2,
+    "2022-10": 3,
+    "2022-11": 2,
+    "2022-12": 3,
+    "2023-01": 1,
+    "2023-02": 1,
+    "2023-03": 3,
+    "2023-05": 2,
+    "2023-06": 3,
+    "2023-07": 9,
+    "2023-08": 3,
+    "2023-09": 3,
+    "2023-10": 11,
+    "2023-11": 4
+  },
+  "reviews_by_rating": {
+    "1": 24,
+    "2": 4,
+    "3": 4,
+    "4": 7,
+    "5": 21
+  },
+  "run_id": "run-20261015T034611.915Z-0447",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "stage": "ingest",
+  "started_at": "2026-10-15T03:46:12.486Z",
+  "text_length_chars": {
+    "max": 490,
+    "mean": 77.8,
+    "median": 36.0,
+    "min": 3,
+    "p90": 191
+  },
+  "top_duplicate_texts": []
+}

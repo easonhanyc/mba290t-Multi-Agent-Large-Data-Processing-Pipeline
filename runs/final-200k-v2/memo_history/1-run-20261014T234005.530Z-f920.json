@@ -1,0 +1,2036 @@
+{
+  "code_written_limitations": [
+    "Unallocated complaints (computed by code from `area_rollup.json`): 29.7% (A19) of complaint and cancellation records (27137 (A01)) are general/unspecified: generic criticism (for example \"worst update\") that names no specific area, so they are not allocated to any of the four decision areas. If many of them refer to one area's problem, for example the same free-tier change, that area's total is understated; the labels cannot show which area that would be.",
+    "Premium-only boundary, upper-bound sensitivity (computed by code; `analysis/premium_only_sensitivity.json`): 2456 (T56) of the 15763 (C05) `billing.premium_only` complaint and cancellation records contain no Premium or payment word (premium, subscri-, pay/paid/paying, free, buy, money, trial, $; case-insensitive), with a severity sum of 7283 (T57). If none of them belonged to billing/support, its severity sum would fall from 52551 (A08) to 45268 (T58), below usability 52983 (A05) and playback/performance 48060 (A11). This is an upper bound, not a relabelling: many of these reviews plainly describe free-tier limits without naming Premium (skip limits, forced shuffle), and they were not moved to any other area."
+  ],
+  "generated_at": "2026-10-15T03:27:24.183Z",
+  "mandatory_limitations": [
+    "Counts describe the labeled reviews in the declared analysis scope of 200,013 reviews (analysis_200k.csv, a deterministic uniform sample of the 660,622-review corpus plus every empty-text row): self-selected public app reviews, not a customer population. They carry no revenue, plan tier or confirmed cancellations, so revenue at risk cannot be computed.",
+    "Cancellation language is expressed intent, not observed churn; nothing here estimates a causal effect on retention.",
+    "Star ratings and helpful votes were not used to classify; severity is judged from the text under the shared rubric.",
+    "17828 completed records are flagged needs_review, 13 are quarantined and 0 are unfinished.",
+    "The analysis covers a uniform random sample of the corpus, not every review; shares carry sampling error (intervals shown) and the 460,609 out-of-scope reviews were ingested but not classified."
+  ],
+  "memo_config": "sonnet@low|memo-v1|cfg-b9e01714ea",
+  "output": {
+    "alternatives": [
+      {
+        "area": "usability",
+        "why_not_first": "Usability has the highest severity sum among the four decision areas at {A05} and the highest share of complaints at {T19}, driven by Ad interruptions (severity sum {C10} across {C09} reviews) and Shuffle/repeat/queue malfunctions (severity sum {C18} across {C17} reviews). Its trend share fell by {T18} between {T01} and {T02}, and the verifier's labels rank it below playback/performance on severity sum ({T47} versus {T46}), so it is not chosen as the lead despite its severity-sum size."
+      },
+      {
+        "area": "playback/performance",
+        "why_not_first": "Playback/performance's severity sum {A11} trails both usability's {A05} and billing/support's {A08}, and its trend share fell by {T15} between {T01} and {T02}, moving from {T13} to {T14}. Its lead issue, Playback stops or skips, carries severity sum {C14} across {C13} reviews. It is the verifier's top area by severity sum ({T46}), which argues for monitoring it but not for leading over billing/support's baseline priority and trend."
+      },
+      {
+        "area": "access/onboarding",
+        "why_not_first": "Access/onboarding has the lowest severity sum among the four decision areas at {A17} and the lowest share of complaints at {T28}. Its lead issue, Login and verification failures, carries severity sum {C26} across {C25} reviews. Its trend share rose only {T09} between {T01} and {T02}, the smallest movement among the four decision areas."
+      }
+    ],
+    "cited_reviews": [
+      "674b2fb0-f4a5-430d-9241-ee3ea348a30e",
+      "8fd5987c-9ed8-4789-aa71-65b2a92c9d83"
+    ],
+    "limitations": [
+      "The verifier's labels disagree with the enricher's on which area leads severity sum (playback/performance under verifier labels versus billing/support under enricher labels), so the ranking between billing/support and the top alternatives is not settled by this evidence alone.",
+      "The period comparison spans only {T01} to {T02} and cannot show whether billing/support's increase will continue, reverse, or plateau beyond that window.",
+      "The spike month {T35} figures describe one month's pattern in self-selected reviews and cannot establish a repeating seasonal cause for the Premium-only increase.",
+      "Sampling intervals and verifier agreement rates describe the labeled sample, not a customer population, so they cannot quantify how many actual free-tier customers are affected."
+    ],
+    "next_quarter_actions": [
+      "Test clearer in-app messaging and a gentler rollout for the Premium-only restrictions issue (skip limits, forced shuffle, repeat or rewind) to see whether its complaint count below {C05} and severity sum below {C06} move down next period.",
+      "Review the free-tier feature boundary itself (song selection, repeat, rewind) referenced in the Premium-only restrictions issue, aiming to reduce its share of complaints below {T22} in the next sampling window.",
+      "Investigate the ad-frequency experience behind the Ad interruptions issue (severity sum {C10} across {C09} reviews) as a secondary usability track, watching whether its severity sum moves down.",
+      "Audit the Shuffle, repeat and queue malfunctions issue (severity sum {C18} across {C17} reviews) for playlist-order bugs, tracking whether its complaint count falls below {C17} next period."
+    ],
+    "rationale": [
+      "Billing/support carries severity sum {A08} across its complaint and cancellation reviews, close behind usability's severity sum {A05} but ahead of playback/performance's severity sum {A11}, with the Premium-only issue alone contributing severity sum {C06} on {C05} reviews.",
+      "Between {T01} and {T02}, billing/support shows the largest increase among the four decision areas, moving from share of reviews {T10} to {T11}, a change of {T12}, while playback/performance fell by {T15} and usability fell by {T18}.",
+      "Billing/support's share of complaints {T22} (interval {T23} to {T24}) does not overlap with usability's share {T19} (interval {T20} to {T21}), so usability leads billing/support on share of complaints even where billing/support leads on severity sum; billing/support's interval also does not overlap playback/performance's share {T25} (interval {T26} to {T27}).",
+      "The spike month {T35} shows the Premium-only issue with the largest increase among that month's issues, a lift of {T38} in its share of reviews.",
+      "Robustness is mixed: the verifier's labels on sample size {T41} put playback/performance ahead of billing/support on severity sum ({T46} versus {T48}), a labelling disagreement with the enricher's ordering that puts billing/support first ({T42} versus {T44}), making this call provisional."
+    ],
+    "recommendation": "Billing/support should get next quarter's effort, led by the Premium-only restrictions issue with severity sum {C06} across {C05} complaint and cancellation reviews, mean severity {C07}. This is free-tier packaging and entitlement policy work - deciding what the free tier includes (skip limits, forced shuffle, repeat or rewind, song selection) and how changes are rolled out and explained - not a payment or checkout defect.",
+    "recommended_area": "billing/support",
+    "what_would_change_the_call": [
+      "A human audit of the premium-only records without a payment word (severity sum {T57} across {T56} records) finding that most are not genuine free-tier restriction complaints would weaken the billing/support upper bound of severity sum {T58}.",
+      "The verifier's severity ordering holding for playback/performance over billing/support on a larger verified sample beyond {T41} reviews would support switching the recommendation to playback/performance.",
+      "Billing/support's trend share reversing back toward {T10} in the same months of the following year, rather than holding near {T11}, would undercut the trend argument for prioritizing billing/support."
+    ]
+  },
+  "payload": {
+    "areas": [
+      {
+        "area": "general/unspecified",
+        "complaint_count": {
+          "token": "{A01}",
+          "value": 27137
+        },
+        "decision_option": false,
+        "severity_sum": {
+          "token": "{A02}",
+          "value": 54364
+        },
+        "share_of_complaints": {
+          "token": "{A03}",
+          "value": "0.297333"
+        }
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{A04}",
+          "value": 22146
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A05}",
+          "value": 52983
+        },
+        "share_of_complaints": {
+          "token": "{A06}",
+          "value": "0.242648"
+        }
+      },
+      {
+        "area": "billing/support",
+        "complaint_count": {
+          "token": "{A07}",
+          "value": 17990
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A08}",
+          "value": 52551
+        },
+        "share_of_complaints": {
+          "token": "{A09}",
+          "value": "0.197112"
+        }
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{A10}",
+          "value": 14668
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A11}",
+          "value": 48060
+        },
+        "share_of_complaints": {
+          "token": "{A12}",
+          "value": "0.160714"
+        }
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{A13}",
+          "value": 6422
+        },
+        "decision_option": false,
+        "severity_sum": {
+          "token": "{A14}",
+          "value": 18576
+        },
+        "share_of_complaints": {
+          "token": "{A15}",
+          "value": "0.070364"
+        }
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{A16}",
+          "value": 2905
+        },
+        "decision_option": true,
+        "severity_sum": {
+          "token": "{A17}",
+          "value": 11300
+        },
+        "share_of_complaints": {
+          "token": "{A18}",
+          "value": "0.031829"
+        }
+      }
+    ],
+    "decision_rule": "baseline priority = severity_sum over complaint and cancellation reviews; areas sum their issues",
+    "evidence": [
+      {
+        "issue_id": "other.general",
+        "quote": "stupid app.",
+        "review_id": "0b33282e-1629-4f26-b4a6-7a470573e5e5"
+      },
+      {
+        "issue_id": "other.general",
+        "quote": "The worst update ever just to earn profit",
+        "review_id": "f15ac08e-ded3-4c59-8da7-2b544af8a628"
+      },
+      {
+        "issue_id": "billing.premium_only",
+        "quote": "For like 3 to 4 days before I was listening songs and today I really shocked to see that ..now I have to buy premium to put the song again and I can't even play the song now .",
+        "review_id": "674b2fb0-f4a5-430d-9241-ee3ea348a30e"
+      },
+      {
+        "issue_id": "billing.premium_only",
+        "quote": "Very disappointed with the update even we can't use the basic features like previous song, middle of song,by sequence",
+        "review_id": "8fd5987c-9ed8-4789-aa71-65b2a92c9d83"
+      },
+      {
+        "issue_id": "usability.ads",
+        "quote": "Itni jaldi bhikhari bhi dobara bhikh nhi mangta jitni jaldi tumhari app ad chala kar paise mangne lagti hai",
+        "review_id": "16c47c30-882b-40c1-8dd4-6a304bf1e631"
+      },
+      {
+        "issue_id": "usability.ads",
+        "quote": "Tooo many adds",
+        "review_id": "59d1e2cd-526e-4dea-86b5-964667c7c45e"
+      },
+      {
+        "issue_id": "playback.stops",
+        "quote": "The app keeps stopping while I'm listening and when I restart it takes me back minutes to an hour in the podcast.",
+        "review_id": "016e1433-3c2d-4538-9748-a4a6d5c8f0fe"
+      },
+      {
+        "issue_id": "playback.stops",
+        "quote": "Plays 3 to 4 songs then the app stops playing",
+        "review_id": "044830ff-c085-45a0-896b-db1fc1a4c73b"
+      },
+      {
+        "issue_id": "usability.library",
+        "quote": "I spend hours creating a Playlist and when I go to play the list it plays random stupid songs most having NO discernable connection.",
+        "review_id": "3a8d3202-5efe-4711-a74c-6dbf338533b9"
+      },
+      {
+        "issue_id": "usability.library",
+        "quote": "YOU CAN'T EVEN REPEAT SONGS?????",
+        "review_id": "ea18965a-e6a7-463e-813f-7429b81cec73"
+      }
+    ],
+    "question": "Where should the next quarter of product-improvement effort go: access/onboarding, usability, playback/performance, or billing/support?",
+    "scope_figures": {
+      "S01": {
+        "label": "Reviews in scope (unique IDs ingested)",
+        "source": "ingestion_report.json",
+        "token": "{S01}",
+        "value": 200013
+      },
+      "S02": {
+        "label": "Completed classifications",
+        "source": "grading/records.jsonl",
+        "token": "{S02}",
+        "value": 200000
+      },
+      "S03": {
+        "label": "Quarantined: empty text",
+        "source": "quarantine.jsonl",
+        "token": "{S03}",
+        "value": 13
+      },
+      "S04": {
+        "label": "Quarantined: other reasons",
+        "source": "quarantine.jsonl",
+        "token": "{S04}",
+        "value": 0
+      },
+      "S05": {
+        "label": "Unfinished",
+        "source": "run_summary.json",
+        "token": "{S05}",
+        "value": 0
+      },
+      "S06": {
+        "label": "Completed records flagged needs_review",
+        "source": "enriched.jsonl",
+        "token": "{S06}",
+        "value": 17828
+      },
+      "S07": {
+        "label": "Complaint and cancellation records ranked",
+        "source": "membership.csv",
+        "token": "{S07}",
+        "value": 91268
+      },
+      "S08": {
+        "label": "Verification sample compared",
+        "source": "verification/report.json",
+        "token": "{S08}",
+        "value": 2000
+      },
+      "S09": {
+        "label": "Verifier topic agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S09}",
+        "value": 0.8175
+      },
+      "S10": {
+        "label": "Verifier intent agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S10}",
+        "value": 0.915
+      },
+      "S11": {
+        "label": "Verifier exact severity agreement (rate)",
+        "source": "verification/report.json",
+        "token": "{S11}",
+        "value": 0.7825
+      }
+    },
+    "top_issues": [
+      {
+        "area": "general/unspecified",
+        "complaint_count": {
+          "token": "{C01}",
+          "value": 27137
+        },
+        "definition": "General praise or criticism with no specific feature, unrelated content (politics, artists, boycotts), or meaningless text.",
+        "issue_id": "other.general",
+        "mean_severity": {
+          "token": "{C03}",
+          "value": "2.003317"
+        },
+        "name": "General or unrelated",
+        "priority_score": {
+          "token": "{C04}",
+          "value": 54364
+        },
+        "severity_sum": {
+          "token": "{C02}",
+          "value": 54364
+        }
+      },
+      {
+        "area": "billing/support",
+        "complaint_count": {
+          "token": "{C05}",
+          "value": 15763
+        },
+        "definition": "Features locked to Premium: skip limits, forced shuffle, cannot pick songs, cannot repeat or rewind, lyrics or offline behind a paywall, 'everything needs Premium now'.",
+        "issue_id": "billing.premium_only",
+        "mean_severity": {
+          "token": "{C07}",
+          "value": "2.933832"
+        },
+        "name": "Premium-only restrictions",
+        "priority_score": {
+          "token": "{C08}",
+          "value": 46246
+        },
+        "severity_sum": {
+          "token": "{C06}",
+          "value": 46246
+        },
+        "summary": "Free users report losing basic playback controls like song selection, skipping, repeat, and offline access unless they pay for Premium."
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C09}",
+          "value": 11233
+        },
+        "definition": "Too many, too long, too loud or repeated ads; ads interrupting listening.",
+        "issue_id": "usability.ads",
+        "mean_severity": {
+          "token": "{C11}",
+          "value": "2.068459"
+        },
+        "name": "Ad interruptions",
+        "priority_score": {
+          "token": "{C12}",
+          "value": 23235
+        },
+        "severity_sum": {
+          "token": "{C10}",
+          "value": 23235
+        },
+        "summary": "Customers report frequent, repeated ad breaks interrupting music listening, making the app frustrating to use."
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C13}",
+          "value": 6110
+        },
+        "definition": "Music stops, pauses, skips by itself, will not start, or plays the wrong song.",
+        "issue_id": "playback.stops",
+        "mean_severity": {
+          "token": "{C15}",
+          "value": "3.201964"
+        },
+        "name": "Playback stops or skips",
+        "priority_score": {
+          "token": "{C16}",
+          "value": 19564
+        },
+        "severity_sum": {
+          "token": "{C14}",
+          "value": 19564
+        },
+        "summary": "Customers report that playback randomly pauses, stops, or plays the wrong song, disrupting their listening experience."
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C17}",
+          "value": 5685
+        },
+        "definition": "Managing the queue, playlists, liked songs or library; shuffle or repeat controls that misbehave.",
+        "issue_id": "usability.library",
+        "mean_severity": {
+          "token": "{C19}",
+          "value": "2.970624"
+        },
+        "name": "Shuffle, repeat and queue malfunctions",
+        "priority_score": {
+          "token": "{C20}",
+          "value": 16888
+        },
+        "severity_sum": {
+          "token": "{C18}",
+          "value": 16888
+        },
+        "summary": "Customers report that shuffle, repeat, queue, and playlist playback behave unpredictably, playing wrong or repeated songs and disrupting intended listening order."
+      },
+      {
+        "area": "playback/performance",
+        "complaint_count": {
+          "token": "{C21}",
+          "value": 2953
+        },
+        "definition": "App crashes, freezes, will not open or load, blank screens.",
+        "issue_id": "playback.crash",
+        "mean_severity": {
+          "token": "{C23}",
+          "value": "3.798510"
+        },
+        "name": "App crashes, freezes, and fails to load",
+        "priority_score": {
+          "token": "{C24}",
+          "value": 11217
+        },
+        "severity_sum": {
+          "token": "{C22}",
+          "value": 11217
+        },
+        "summary": "Customers report the app freezes, crashes, or gets stuck loading, often requiring force-stops or reinstalls without resolving the issue."
+      },
+      {
+        "area": "access/onboarding",
+        "complaint_count": {
+          "token": "{C25}",
+          "value": 2413
+        },
+        "definition": "Cannot log in, keeps getting logged out, login or verification-code errors.",
+        "issue_id": "access.login",
+        "mean_severity": {
+          "token": "{C27}",
+          "value": "3.937422"
+        },
+        "name": "Login and verification failures",
+        "priority_score": {
+          "token": "{C28}",
+          "value": 9501
+        },
+        "severity_sum": {
+          "token": "{C26}",
+          "value": 9501
+        },
+        "summary": "Customers are unexpectedly logged out or cannot log back in due to failed verification codes, phone number errors, or connection issues, disrupting their listening."
+      },
+      {
+        "area": "usability",
+        "complaint_count": {
+          "token": "{C29}",
+          "value": 3168
+        },
+        "definition": "Hard to find things, confusing layout, redesigns or home-screen changes, buttons moved or removed.",
+        "issue_id": "usability.navigation",
+        "mean_severity": {
+          "token": "{C31}",
+          "value": "2.460543"
+        },
+        "name": "Navigation and layout",
+        "priority_score": {
+          "token": "{C32}",
+          "value": 7795
+        },
+        "severity_sum": {
+          "token": "{C30}",
+          "value": 7795
+        },
+        "summary": "Customers find the redesigned interface confusing and cluttered, making it hard to locate music and features quickly."
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{C33}",
+          "value": 2041
+        },
+        "definition": "Recommendations, the algorithm, autoplay or radio picks, the DJ, unwanted suggested songs.",
+        "issue_id": "catalog.recommendations",
+        "mean_severity": {
+          "token": "{C35}",
+          "value": "2.788829"
+        },
+        "name": "Unwanted song insertions in playlists/radio",
+        "priority_score": {
+          "token": "{C36}",
+          "value": 5692
+        },
+        "severity_sum": {
+          "token": "{C34}",
+          "value": 5692
+        },
+        "summary": "Customers report that the app's algorithm inserts repeated or unwanted songs and podcasts into playlists and radio, disrupting their intended listening experience."
+      },
+      {
+        "area": "catalog/content",
+        "complaint_count": {
+          "token": "{C37}",
+          "value": 1856
+        },
+        "definition": "Songs, artists, albums or podcasts missing, removed, greyed out or unavailable.",
+        "issue_id": "catalog.missing",
+        "mean_severity": {
+          "token": "{C39}",
+          "value": "2.948815"
+        },
+        "name": "Missing or removed content",
+        "priority_score": {
+          "token": "{C40}",
+          "value": 5473
+        },
+        "severity_sum": {
+          "token": "{C38}",
+          "value": 5473
+        },
+        "summary": "Customers find that specific songs, albums, or artist catalogs are unavailable, blocked, or removed, preventing them from listening to desired content."
+      }
+    ],
+    "trends_and_robustness": {
+      "area_shares_with_sampling_intervals": [
+        {
+          "area": "usability",
+          "ci_high": {
+            "token": "{T21}",
+            "value": "24.5%"
+          },
+          "ci_low": {
+            "token": "{T20}",
+            "value": "24.0%"
+          },
+          "interval_overlaps_with": [],
+          "share_of_complaints": {
+            "token": "{T19}",
+            "value": "24.3%"
+          }
+        },
+        {
+          "area": "billing/support",
+          "ci_high": {
+            "token": "{T24}",
+            "value": "20.0%"
+          },
+          "ci_low": {
+            "token": "{T23}",
+            "value": "19.5%"
+          },
+          "interval_overlaps_with": [],
+          "share_of_complaints": {
+            "token": "{T22}",
+            "value": "19.7%"
+          }
+        },
+        {
+          "area": "playback/performance",
+          "ci_high": {
+            "token": "{T27}",
+            "value": "16.3%"
+          },
+          "ci_low": {
+            "token": "{T26}",
+            "value": "15.8%"
+          },
+          "interval_overlaps_with": [],
+          "share_of_complaints": {
+            "token": "{T25}",
+            "value": "16.1%"
+          }
+        },
+        {
+          "area": "access/onboarding",
+          "ci_high": {
+            "token": "{T30}",
+            "value": "3.3%"
+          },
+          "ci_low": {
+            "token": "{T29}",
+            "value": "3.1%"
+          },
+          "interval_overlaps_with": [],
+          "share_of_complaints": {
+            "token": "{T28}",
+            "value": "3.2%"
+          }
+        }
+      ],
+      "period_comparison": {
+        "areas": [
+          {
+            "area": "access/onboarding",
+            "change_pp": {
+              "token": "{T09}",
+              "value": "+0.8 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T07}",
+              "value": "1.0%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T08}",
+              "value": "1.8%"
+            }
+          },
+          {
+            "area": "billing/support",
+            "change_pp": {
+              "token": "{T12}",
+              "value": "+10.2 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T10}",
+              "value": "3.8%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T11}",
+              "value": "13.9%"
+            }
+          },
+          {
+            "area": "playback/performance",
+            "change_pp": {
+              "token": "{T15}",
+              "value": "-4.8 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T13}",
+              "value": "9.9%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T14}",
+              "value": "5.1%"
+            }
+          },
+          {
+            "area": "usability",
+            "change_pp": {
+              "token": "{T18}",
+              "value": "-1.1 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T16}",
+              "value": "11.1%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T17}",
+              "value": "10.0%"
+            }
+          }
+        ],
+        "comparison_scope": "areas lists the four decision areas only; areas that are not decision options are under non_decision_areas",
+        "denominators": {
+          "earlier_period": {
+            "complaint_share": {
+              "token": "{T04}",
+              "value": "31.2%"
+            },
+            "reviews": {
+              "token": "{T03}",
+              "value": "45073"
+            }
+          },
+          "later_period": {
+            "complaint_share": {
+              "token": "{T06}",
+              "value": "59.2%"
+            },
+            "reviews": {
+              "token": "{T05}",
+              "value": "82997"
+            }
+          }
+        },
+        "earlier_period": {
+          "token": "{T01}",
+          "value": "2022 Jun-Oct"
+        },
+        "largest_increase_among_the_four_decision_areas": "billing/support",
+        "later_period": {
+          "token": "{T02}",
+          "value": "2023 Jun-Oct"
+        },
+        "method": "share = complaint/cancellation reviews in the area / all classified reviews in the period; Wilson 95% intervals; identical calendar months one year apart avoid the partial first/last months and seasonal mix. Descriptive only: reviews are self-selected, not a customer census.",
+        "non_decision_areas": [
+          {
+            "area": "catalog/content",
+            "change_pp": {
+              "token": "{T52}",
+              "value": "+0.7 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T50}",
+              "value": "2.6%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T51}",
+              "value": "3.2%"
+            }
+          },
+          {
+            "area": "general/unspecified",
+            "change_pp": {
+              "token": "{T55}",
+              "value": "+22.3 pp"
+            },
+            "share_of_reviews_earlier_period": {
+              "token": "{T53}",
+              "value": "2.9%"
+            },
+            "share_of_reviews_later_period": {
+              "token": "{T54}",
+              "value": "25.2%"
+            }
+          }
+        ]
+      },
+      "premium_only_sensitivity": {
+        "billing_support_severity_sum": {
+          "token": "{A08}",
+          "value": 52551
+        },
+        "billing_support_severity_sum_without_them": {
+          "token": "{T58}",
+          "value": "45268"
+        },
+        "decision_area_order_without_them": [
+          "usability",
+          "playback/performance",
+          "billing/support",
+          "access/onboarding"
+        ],
+        "decision_areas_above_billing_support_without_them": [
+          "usability",
+          "playback/performance"
+        ],
+        "interpretation": "Upper-bound sensitivity, not a relabelling. It assumes that none of the records without a Premium or payment word belongs in billing/support and adds them to no other area. Many of them plainly describe free-tier limits without naming Premium (skip limits, forced shuffle, no repeat or rewind), and non-English payment words (for example 'paisa') are not matched, so the real effect is smaller than shown.",
+        "issue_complaint_records": {
+          "token": "{C05}",
+          "value": 15763
+        },
+        "issue_id": "billing.premium_only",
+        "other_decision_area_severity_sums": [
+          {
+            "area": "usability",
+            "severity_sum": {
+              "token": "{A05}",
+              "value": 52983
+            }
+          },
+          {
+            "area": "playback/performance",
+            "severity_sum": {
+              "token": "{A11}",
+              "value": 48060
+            }
+          },
+          {
+            "area": "access/onboarding",
+            "severity_sum": {
+              "token": "{A17}",
+              "value": 11300
+            }
+          }
+        ],
+        "payment_words_case_insensitive": [
+          "premium",
+          "subscri-",
+          "pay/paid/paying",
+          "free",
+          "buy",
+          "money",
+          "trial",
+          "$"
+        ],
+        "records_without_payment_word": {
+          "token": "{T56}",
+          "value": "2456"
+        },
+        "their_severity_sum": {
+          "token": "{T57}",
+          "value": "7283"
+        },
+        "what": "upper-bound sensitivity of the billing/support lead to the premium-only topic boundary, computed by code; not a relabelling"
+      },
+      "spike_months": [
+        {
+          "largest_increases": [
+            {
+              "issue_id": "other.general",
+              "pp_difference": {
+                "token": "{T34}",
+                "value": "+35.9 pp"
+              }
+            }
+          ],
+          "measure": "the issue's complaint and cancellation reviews as a share of all reviews in the month, minus the same share in the other full months (share of reviews)",
+          "median_full_month_reviews": {
+            "token": "{T33}",
+            "value": "8549"
+          },
+          "month": {
+            "token": "{T31}",
+            "value": "2023-07"
+          },
+          "reviews": {
+            "token": "{T32}",
+            "value": "25850"
+          }
+        },
+        {
+          "largest_increases": [
+            {
+              "issue_id": "billing.premium_only",
+              "pp_difference": {
+                "token": "{T38}",
+                "value": "+23.3 pp"
+              }
+            },
+            {
+              "issue_id": "other.general",
+              "pp_difference": {
+                "token": "{T39}",
+                "value": "+15.3 pp"
+              }
+            },
+            {
+              "issue_id": "usability.library",
+              "pp_difference": {
+                "token": "{T40}",
+                "value": "+1.4 pp"
+              }
+            }
+          ],
+          "measure": "the issue's complaint and cancellation reviews as a share of all reviews in the month, minus the same share in the other full months (share of reviews)",
+          "median_full_month_reviews": {
+            "token": "{T37}",
+            "value": "8549"
+          },
+          "month": {
+            "token": "{T35}",
+            "value": "2023-10"
+          },
+          "reviews": {
+            "token": "{T36}",
+            "value": "26790"
+          }
+        }
+      ],
+      "verifier_robustness": {
+        "decision_area_order_enricher_labels": [
+          "billing/support",
+          "usability",
+          "playback/performance",
+          "access/onboarding"
+        ],
+        "decision_area_order_verifier_labels": [
+          "playback/performance",
+          "usability",
+          "billing/support",
+          "access/onboarding"
+        ],
+        "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+        "same_top_area": false,
+        "sample_reviews": {
+          "token": "{T41}",
+          "value": "2000"
+        },
+        "sample_severity_sum_by_area_enricher_labels": [
+          {
+            "area": "billing/support",
+            "severity_sum": {
+              "token": "{T42}",
+              "value": "705"
+            }
+          },
+          {
+            "area": "usability",
+            "severity_sum": {
+              "token": "{T43}",
+              "value": "650"
+            }
+          },
+          {
+            "area": "playback/performance",
+            "severity_sum": {
+              "token": "{T44}",
+              "value": "617"
+            }
+          },
+          {
+            "area": "access/onboarding",
+            "severity_sum": {
+              "token": "{T45}",
+              "value": "168"
+            }
+          }
+        ],
+        "sample_severity_sum_by_area_verifier_labels": [
+          {
+            "area": "playback/performance",
+            "severity_sum": {
+              "token": "{T46}",
+              "value": "758"
+            }
+          },
+          {
+            "area": "usability",
+            "severity_sum": {
+              "token": "{T47}",
+              "value": "747"
+            }
+          },
+          {
+            "area": "billing/support",
+            "severity_sum": {
+              "token": "{T48}",
+              "value": "660"
+            }
+          },
+          {
+            "area": "access/onboarding",
+            "severity_sum": {
+              "token": "{T49}",
+              "value": "196"
+            }
+          }
+        ],
+        "top_by_complaint_count": {
+          "note": "area names only, no counts: state in words, cite no token",
+          "top_enricher": "usability",
+          "top_verifier": "usability"
+        },
+        "top_decision_area_enricher_labels": "billing/support",
+        "top_decision_area_verifier_labels": "playback/performance"
+      }
+    },
+    "unallocated_complaints": {
+      "area": "general/unspecified",
+      "complaint_count": {
+        "token": "{A01}",
+        "value": 27137
+      },
+      "share_of_complaints_percent": {
+        "token": "{A19}",
+        "value": "29.7%"
+      },
+      "what": "complaint and cancellation records labelled with no specific area (generic criticism); not allocated to any decision area"
+    }
+  },
+  "rejected_outputs": [
+    {
+      "attempt": 1,
+      "output": {
+        "alternatives": [
+          {
+            "area": "billing/support",
+            "why_not_first": "Its severity sum {A08} is close to but below usability's {A05}, and while it shows the largest increase among the four decision areas in share of reviews (from {T10} to {T11}, change {T12}), that is a share-of-reviews metric, not the baseline severity-sum metric, so per the decision rule it cannot alone justify choosing it over usability; it is also largely driven by the premium-only restrictions issue (severity sum {C06}), which is a free-tier packaging and entitlement policy question, not a usability or engineering fix."
+          },
+          {
+            "area": "playback/performance",
+            "why_not_first": "Its severity sum {A11} trails both usability's {A05} and billing/support's {A08}, and its share of reviews fell between {T01} and {T02} (from {T13} to {T14}, change {T15}); it leads only under the verifier's relabelling of the sampled reviews, not under the enricher labels used for the baseline priority."
+          },
+          {
+            "area": "access/onboarding",
+            "why_not_first": "Its severity sum {A17} is far below the other three decision areas, and its share of complaints at {T28} has a non-overlapping interval below usability's, billing/support's, and playback/performance's shares, though its share of reviews did grow somewhat (from {T07} to {T08}, change {T09})."
+          }
+        ],
+        "cited_reviews": [
+          "3a8d3202-5efe-4711-a74c-6dbf338533b9",
+          "ea18965a-e6a7-463e-813f-7429b81cec73",
+          "16c47c30-882b-40c1-8dd4-6a304bf1e631",
+          "59d1e2cd-526e-4dea-86b5-964667c7c45e",
+          "674b2fb0-f4a5-430d-9241-ee3ea348a30e",
+          "8fd5987c-9ed8-4789-aa71-65b2a92c9d83"
+        ],
+        "limitations": [
+          "The spike months {T31} and {T35} show large increases concentrated in the general/unspecified area (not a decision option) and in premium-only restrictions, not usability, so spike-month evidence does not support or undermine the usability recommendation either way.",
+          "The verifier's severity-sum ordering disagrees with the enricher's on which area leads (playback/performance versus usability), based on a sample of {T41} reviews, so the usability call should be read as provisional pending a larger verified check.",
+          "The narrow numeric gap between usability's severity sum {A05} and billing/support's {A08} means small changes in future labeling or scope could shift which area leads.",
+          "Trend figures cover only {T01} versus {T02}; they cannot show whether usability's issues (ads, library, navigation) are improving or worsening within that window beyond the two endpoint shares."
+        ],
+        "next_quarter_actions": [
+          "Test reduced ad frequency or pacing changes against the ad interruptions issue (severity sum {C10} across {C09} reviews); watch for the issue's complaint count and severity sum to fall next review cycle.",
+          "Audit and fix shuffle/repeat/queue logic tied to usability.library (severity sum {C18} across {C17} reviews), citing reviews {3a8d3202-5efe-4711-a74c-6dbf338533b9} and {ea18965a-e6a7-463e-813f-7429b81cec73}; target a drop in this issue's share of complaints.",
+          "Simplify navigation and restore findability for moved features tied to usability.navigation (severity sum {C30} across {C29} reviews); watch for its complaint count to decline.",
+          "As a hedge, monitor billing/support's premium-only restrictions issue (severity sum {C06} across {C05} reviews, citing {674b2fb0-f4a5-430d-9241-ee3ea348a30e} and {8fd5987c-9ed8-4789-aa71-65b2a92c9d83}) for continued growth in its share of reviews, given billing/support showed the largest increase among the four decision areas in share of reviews ({T10} to {T11}, change {T12})."
+        ],
+        "rationale": [
+          "Usability's severity sum {A05} across its complaint and cancellation reviews is the highest among the four decision areas, narrowly ahead of billing/support's severity sum {A08}, playback/performance's {A11}, and access/onboarding's {A17}.",
+          "Usability also leads on share of complaints at {T19} with a non-overlapping interval against billing/support's {T22}, playback/performance's {T25}, and access/onboarding's {T28}, so usability's higher share is not within sampling error of these others.",
+          "Usability's share of reviews shrank slightly between {T01} and {T02} (from {T16} to {T17}, change {T18}), while billing/support grew (from {T10} to {T11}, change {T12}); but this is a share-of-reviews trend, a different metric from the baseline severity sum, so it does not by itself justify departing from usability.",
+          "Robustness is mixed: the verifier agrees with the enricher that usability tops complaint count, but under verifier labels the top area by severity sum is playback/performance rather than usability or billing/support (sample of {T41} reviews), a labelling disagreement that makes this call provisional.",
+          "Within the enricher's own sample-level severity sums, billing/support ({T42}) edges ahead of usability ({T43}) and playback/performance ({T44}), the reverse of the full-dataset ordering, underscoring how close the top areas are."
+        ],
+        "recommendation": "Usability carries the highest baseline priority among the four decision areas, with a severity sum of {A05} across its complaint and cancellation reviews, driven chiefly by ad interruptions (severity sum {C10} across {C09} reviews), shuffle/repeat/queue malfunctions (severity sum {C18} across {C17} reviews), and navigation and layout confusion (severity sum {C30} across {C29} reviews). This is core interaction-design and feature-reliability work: fixing ad pacing, queue/shuffle/repeat logic, and navigation clarity, not a payment or infrastructure fix.",
+        "recommended_area": "usability",
+        "what_would_change_the_call": [
+          "If a larger verified sample confirms the verifier's severity-sum ordering (playback/performance ahead of usability, {T46} versus {T47}, on a bigger sample), that would weaken the usability recommendation.",
+          "If usability's share of complaints interval {T20}-{T21} were found to overlap with billing/support's {T23}-{T24} on a reanalysis, the clear lead claimed here would no longer hold.",
+          "A human audit of the premium-only records without a payment word (severity sum {T57} across {T56} records) finding that most genuinely belong in billing/support would raise billing/support's severity sum toward or past usability's {A05}, weakening the usability call."
+        ]
+      },
+      "problems": [
+        "next_quarter_actions[1] contains a typed digit (numbers must be tokens): ... {} reviews), citing reviews {3a8d3202-5efe-4711-a74c-6dbf338...",
+        "next_quarter_actions[1] contains {3a8d3202-5efe-4711-a74c-6dbf338533b9}, which is not a token: write the token from the input's token field (a letter and digits in braces), never a key name in braces",
+        "next_quarter_actions[3] contains a typed digit (numbers must be tokens): ...{} across {} reviews, citing {674b2fb0-f4a5-430d-9241-ee3ea34...",
+        "next_quarter_actions[3] contains {674b2fb0-f4a5-430d-9241-ee3ea348a30e}, which is not a token: write the token from the input's token field (a letter and digits in braces), never a key name in braces"
+      ],
+      "request_id": "req-20261015T032538074389-ad036d67"
+    }
+  ],
+  "source": "model",
+  "token_index": [
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C01",
+      "value": "27137"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C02",
+      "value": "54364"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C03",
+      "value": "2.003317"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[other.general].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C04",
+      "value": "54364"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C05",
+      "value": "15763"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C06",
+      "value": "46246"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C07",
+      "value": "2.933832"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[billing.premium_only].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C08",
+      "value": "46246"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C09",
+      "value": "11233"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C10",
+      "value": "23235"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C11",
+      "value": "2.068459"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.ads].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C12",
+      "value": "23235"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.stops].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C13",
+      "value": "6110"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.stops].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C14",
+      "value": "19564"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.stops].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C15",
+      "value": "3.201964"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.stops].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C16",
+      "value": "19564"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C17",
+      "value": "5685"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C18",
+      "value": "16888"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C19",
+      "value": "2.970624"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.library].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C20",
+      "value": "16888"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C21",
+      "value": "2953"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C22",
+      "value": "11217"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C23",
+      "value": "3.798510"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[playback.crash].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C24",
+      "value": "11217"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.login].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C25",
+      "value": "2413"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.login].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C26",
+      "value": "9501"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.login].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C27",
+      "value": "3.937422"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[access.login].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C28",
+      "value": "9501"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C29",
+      "value": "3168"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C30",
+      "value": "7795"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C31",
+      "value": "2.460543"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[usability.navigation].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C32",
+      "value": "7795"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.recommendations].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C33",
+      "value": "2041"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.recommendations].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C34",
+      "value": "5692"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.recommendations].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C35",
+      "value": "2.788829"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.recommendations].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C36",
+      "value": "5692"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].complaint_count",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C37",
+      "value": "1856"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].severity_sum",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C38",
+      "value": "5473"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].mean_severity",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C39",
+      "value": "2.948815"
+    },
+    {
+      "kind": "claim",
+      "measure": "top_issues[catalog.missing].priority_score",
+      "source": "claims.csv (from ranking.csv)",
+      "token_id": "C40",
+      "value": "5473"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[general/unspecified].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A01",
+      "value": "27137"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[general/unspecified].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A02",
+      "value": "54364"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[general/unspecified].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A03",
+      "value": "0.297333"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[usability].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A04",
+      "value": "22146"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[usability].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A05",
+      "value": "52983"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[usability].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A06",
+      "value": "0.242648"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[billing/support].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A07",
+      "value": "17990"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[billing/support].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A08",
+      "value": "52551"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[billing/support].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A09",
+      "value": "0.197112"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[playback/performance].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A10",
+      "value": "14668"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[playback/performance].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A11",
+      "value": "48060"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[playback/performance].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A12",
+      "value": "0.160714"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[catalog/content].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A13",
+      "value": "6422"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[catalog/content].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A14",
+      "value": "18576"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[catalog/content].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A15",
+      "value": "0.070364"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[access/onboarding].complaint_count",
+      "source": "area_rollup.json",
+      "token_id": "A16",
+      "value": "2905"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[access/onboarding].severity_sum",
+      "source": "area_rollup.json",
+      "token_id": "A17",
+      "value": "11300"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "areas[access/onboarding].share_of_complaints",
+      "source": "area_rollup.json",
+      "token_id": "A18",
+      "value": "0.031829"
+    },
+    {
+      "kind": "area roll-up",
+      "measure": "unallocated_complaints.share_of_complaints_percent",
+      "source": "area_rollup.json",
+      "token_id": "A19",
+      "value": "29.7%"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Reviews in scope (unique IDs ingested)",
+      "source": "ingestion_report.json",
+      "token_id": "S01",
+      "value": "200013"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Completed classifications",
+      "source": "grading/records.jsonl",
+      "token_id": "S02",
+      "value": "200000"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Quarantined: empty text",
+      "source": "quarantine.jsonl",
+      "token_id": "S03",
+      "value": "13"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Quarantined: other reasons",
+      "source": "quarantine.jsonl",
+      "token_id": "S04",
+      "value": "0"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Unfinished",
+      "source": "run_summary.json",
+      "token_id": "S05",
+      "value": "0"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Completed records flagged needs_review",
+      "source": "enriched.jsonl",
+      "token_id": "S06",
+      "value": "17828"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Complaint and cancellation records ranked",
+      "source": "membership.csv",
+      "token_id": "S07",
+      "value": "91268"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verification sample compared",
+      "source": "verification/report.json",
+      "token_id": "S08",
+      "value": "2000"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verifier topic agreement (rate)",
+      "source": "verification/report.json",
+      "token_id": "S09",
+      "value": "0.8175"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verifier intent agreement (rate)",
+      "source": "verification/report.json",
+      "token_id": "S10",
+      "value": "0.915"
+    },
+    {
+      "kind": "scope figure",
+      "measure": "Verifier exact severity agreement (rate)",
+      "source": "verification/report.json",
+      "token_id": "S11",
+      "value": "0.7825"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T01",
+      "value": "2022 Jun-Oct"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T02",
+      "value": "2023 Jun-Oct"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.earlier_period.reviews",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T03",
+      "value": "45073"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.earlier_period.complaint_share",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T04",
+      "value": "31.2%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.later_period.reviews",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T05",
+      "value": "82997"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.denominators.later_period.complaint_share",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T06",
+      "value": "59.2%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T07",
+      "value": "1.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[access/onboarding].share_of_reviews_later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T08",
+      "value": "1.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[access/onboarding].change_pp",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T09",
+      "value": "+0.8 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T10",
+      "value": "3.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[billing/support].share_of_reviews_later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T11",
+      "value": "13.9%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[billing/support].change_pp",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T12",
+      "value": "+10.2 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T13",
+      "value": "9.9%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[playback/performance].share_of_reviews_later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T14",
+      "value": "5.1%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[playback/performance].change_pp",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T15",
+      "value": "-4.8 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[usability].share_of_reviews_earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T16",
+      "value": "11.1%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[usability].share_of_reviews_later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T17",
+      "value": "10.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.areas[usability].change_pp",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T18",
+      "value": "-1.1 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[usability].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T19",
+      "value": "24.3%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T20",
+      "value": "24.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[usability].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T21",
+      "value": "24.5%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[billing/support].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T22",
+      "value": "19.7%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[billing/support].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T23",
+      "value": "19.5%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[billing/support].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T24",
+      "value": "20.0%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T25",
+      "value": "16.1%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T26",
+      "value": "15.8%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[playback/performance].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T27",
+      "value": "16.3%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].share_of_complaints",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T28",
+      "value": "3.2%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].ci_low",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T29",
+      "value": "3.1%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.area_shares_with_sampling_intervals[access/onboarding].ci_high",
+      "source": "analysis/area_intervals.json",
+      "token_id": "T30",
+      "value": "3.3%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].month",
+      "source": "analysis/spike_months.json",
+      "token_id": "T31",
+      "value": "2023-07"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T32",
+      "value": "25850"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].median_full_month_reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T33",
+      "value": "8549"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-07].largest_increases[other.general].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T34",
+      "value": "+35.9 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].month",
+      "source": "analysis/spike_months.json",
+      "token_id": "T35",
+      "value": "2023-10"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T36",
+      "value": "26790"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].median_full_month_reviews",
+      "source": "analysis/spike_months.json",
+      "token_id": "T37",
+      "value": "8549"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].largest_increases[billing.premium_only].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T38",
+      "value": "+23.3 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].largest_increases[other.general].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T39",
+      "value": "+15.3 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.spike_months[2023-10].largest_increases[usability.library].pp_difference",
+      "source": "analysis/spike_months.json",
+      "token_id": "T40",
+      "value": "+1.4 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_reviews",
+      "source": "analysis/robustness.json",
+      "token_id": "T41",
+      "value": "2000"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[billing/support].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T42",
+      "value": "705"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[usability].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T43",
+      "value": "650"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[playback/performance].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T44",
+      "value": "617"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_enricher_labels[access/onboarding].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T45",
+      "value": "168"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[playback/performance].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T46",
+      "value": "758"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[usability].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T47",
+      "value": "747"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[billing/support].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T48",
+      "value": "660"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.verifier_robustness.sample_severity_sum_by_area_verifier_labels[access/onboarding].severity_sum",
+      "source": "analysis/robustness.json",
+      "token_id": "T49",
+      "value": "196"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.non_decision_areas[catalog/content].share_of_reviews_earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T50",
+      "value": "2.6%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.non_decision_areas[catalog/content].share_of_reviews_later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T51",
+      "value": "3.2%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.non_decision_areas[catalog/content].change_pp",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T52",
+      "value": "+0.7 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].share_of_reviews_earlier_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T53",
+      "value": "2.9%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].share_of_reviews_later_period",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T54",
+      "value": "25.2%"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.period_comparison.non_decision_areas[general/unspecified].change_pp",
+      "source": "analysis/period_comparison.json",
+      "token_id": "T55",
+      "value": "+22.3 pp"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.premium_only_sensitivity.records_without_payment_word",
+      "source": "analysis/premium_only_sensitivity.json",
+      "token_id": "T56",
+      "value": "2456"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.premium_only_sensitivity.their_severity_sum",
+      "source": "analysis/premium_only_sensitivity.json",
+      "token_id": "T57",
+      "value": "7283"
+    },
+    {
+      "kind": "trend/robustness",
+      "measure": "trends_and_robustness.premium_only_sensitivity.billing_support_severity_sum_without_them",
+      "source": "analysis/premium_only_sensitivity.json",
+      "token_id": "T58",
+      "value": "45268"
+    }
+  ],
+  "tokens": {
+    "A01": "27137",
+    "A02": "54364",
+    "A03": "0.297333",
+    "A04": "22146",
+    "A05": "52983",
+    "A06": "0.242648",
+    "A07": "17990",
+    "A08": "52551",
+    "A09": "0.197112",
+    "A10": "14668",
+    "A11": "48060",
+    "A12": "0.160714",
+    "A13": "6422",
+    "A14": "18576",
+    "A15": "0.070364",
+    "A16": "2905",
+    "A17": "11300",
+    "A18": "0.031829",
+    "A19": "29.7%",
+    "C01": "27137",
+    "C02": "54364",
+    "C03": "2.003317",
+    "C04": "54364",
+    "C05": "15763",
+    "C06": "46246",
+    "C07": "2.933832",
+    "C08": "46246",
+    "C09": "11233",
+    "C10": "23235",
+    "C11": "2.068459",
+    "C12": "23235",
+    "C13": "6110",
+    "C14": "19564",
+    "C15": "3.201964",
+    "C16": "19564",
+    "C17": "5685",
+    "C18": "16888",
+    "C19": "2.970624",
+    "C20": "16888",
+    "C21": "2953",
+    "C22": "11217",
+    "C23": "3.798510",
+    "C24": "11217",
+    "C25": "2413",
+    "C26": "9501",
+    "C27": "3.937422",
+    "C28": "9501",
+    "C29": "3168",
+    "C30": "7795",
+    "C31": "2.460543",
+    "C32": "7795",
+    "C33": "2041",
+    "C34": "5692",
+    "C35": "2.788829",
+    "C36": "5692",
+    "C37": "1856",
+    "C38": "5473",
+    "C39": "2.948815",
+    "C40": "5473",
+    "S01": "200013",
+    "S02": "200000",
+    "S03": "13",
+    "S04": "0",
+    "S05": "0",
+    "S06": "17828",
+    "S07": "91268",
+    "S08": "2000",
+    "S09": "0.8175",
+    "S10": "0.915",
+    "S11": "0.7825",
+    "T01": "2022 Jun-Oct",
+    "T02": "2023 Jun-Oct",
+    "T03": "45073",
+    "T04": "31.2%",
+    "T05": "82997",
+    "T06": "59.2%",
+    "T07": "1.0%",
+    "T08": "1.8%",
+    "T09": "+0.8 pp",
+    "T10": "3.8%",
+    "T11": "13.9%",
+    "T12": "+10.2 pp",
+    "T13": "9.9%",
+    "T14": "5.1%",
+    "T15": "-4.8 pp",
+    "T16": "11.1%",
+    "T17": "10.0%",
+    "T18": "-1.1 pp",
+    "T19": "24.3%",
+    "T20": "24.0%",
+    "T21": "24.5%",
+    "T22": "19.7%",
+    "T23": "19.5%",
+    "T24": "20.0%",
+    "T25": "16.1%",
+    "T26": "15.8%",
+    "T27": "16.3%",
+    "T28": "3.2%",
+    "T29": "3.1%",
+    "T30": "3.3%",
+    "T31": "2023-07",
+    "T32": "25850",
+    "T33": "8549",
+    "T34": "+35.9 pp",
+    "T35": "2023-10",
+    "T36": "26790",
+    "T37": "8549",
+    "T38": "+23.3 pp",
+    "T39": "+15.3 pp",
+    "T40": "+1.4 pp",
+    "T41": "2000",
+    "T42": "705",
+    "T43": "650",
+    "T44": "617",
+    "T45": "168",
+    "T46": "758",
+    "T47": "747",
+    "T48": "660",
+    "T49": "196",
+    "T50": "2.6%",
+    "T51": "3.2%",
+    "T52": "+0.7 pp",
+    "T53": "2.9%",
+    "T54": "25.2%",
+    "T55": "+22.3 pp",
+    "T56": "2456",
+    "T57": "7283",
+    "T58": "45268"
+  },
+  "validation_problems": [
+    "attempt 1: next_quarter_actions[1] contains a typed digit (numbers must be tokens): ... {} reviews), citing reviews {3a8d3202-5efe-4711-a74c-6dbf338...; next_quarter_actions[1] contains {3a8d3202-5efe-4711-a74c-6dbf338533b9}, which is not a token: write the token from the input's token field (a letter and digits in braces), never a key name in braces; next_quarter_actions[3] contains a typed digit (numbers must be tokens): ...{} across {} reviews, citing {674b2fb0-f4a5-430d-9241-ee3ea34...; next_quarter_actions[3] contains {674b2fb0-f4a5-430d-9241-ee3ea348a30e}, which is not a token: write the token from the input's token field (a letter and digits in braces), never a key name in braces"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "increase_rule": "largest_increases lists at most five issues whose share rose, i.e. pp_difference > 0 after rounding to one decimal; zero and negative changes are left out",
+  "rule": "full months with more than 1.8x the median full-month review count",
+  "share_definition": "share = the issue's complaint and cancellation reviews / all classified reviews in the month (a share of reviews, not of complaints); pp_difference = share in the spike month minus the same share over the other full months",
+  "spikes": [
+    {
+      "complaint_share": 0.583443,
+      "largest_increases": [
+        {
+          "complaints_in_month": 11381,
+          "issue_id": "other.general",
+          "pp_difference": 35.894,
+          "share_in_month": 0.440271,
+          "share_other_months": 0.081334
+        }
+      ],
+      "median_full_month_reviews": 8549,
+      "month": "2023-07",
+      "reviews": 25850
+    },
+    {
+      "complaint_share": 0.754685,
+      "largest_increases": [
+        {
+          "complaints_in_month": 7310,
+          "issue_id": "billing.premium_only",
+          "pp_difference": 23.335,
+          "share_in_month": 0.272863,
+          "share_other_months": 0.039511
+        },
+        {
+          "complaints_in_month": 7034,
+          "issue_id": "other.general",
+          "pp_difference": 15.326,
+          "share_in_month": 0.262561,
+          "share_other_months": 0.109298
+        },
+        {
+          "complaints_in_month": 1062,
+          "issue_id": "usability.library",
+          "pp_difference": 1.381,
+          "share_in_month": 0.039642,
+          "share_other_months": 0.025831
+        },
+        {
+          "complaints_in_month": 439,
+          "issue_id": "catalog.lyrics",
+          "pp_difference": 1.017,
+          "share_in_month": 0.016387,
+          "share_other_months": 0.006214
+        },
+        {
+          "complaints_in_month": 447,
+          "issue_id": "usability.other",
+          "pp_difference": 0.77,
+          "share_in_month": 0.016685,
+          "share_other_months": 0.008983
+        }
+      ],
+      "median_full_month_reviews": 8549,
+      "month": "2023-10",
+      "reviews": 26790
+    }
+  ]
+}

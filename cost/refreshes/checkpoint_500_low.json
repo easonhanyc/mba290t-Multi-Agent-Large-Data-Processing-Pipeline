@@ -1,0 +1,41 @@
+{
+  "label": "checkpoint_500_low",
+  "run_dir": "runs/live-checkpoint500-low",
+  "offline_stub": false,
+  "rows": 500,
+  "distinct_texts": 479,
+  "completed": 500,
+  "quarantined": 0,
+  "unfinished": 0,
+  "workers": 1,
+  "invocations": 1,
+  "wall_clock_s": 462.063,
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
+  "saved_at": "2026-10-14T21:46:32+00:00",
+  "workers_source": "max over the invocations that made enrichment calls",
+  "latest_invocation_workers": 1,
+  "enrichment_invocations": 1,
+  "enrichment_wall_clock_s": 462.063,
+  "enrichment_stage_seconds": 338.559,
+  "invocations_detail": [
+    {
+      "run_id": "run-20261014T213849.919Z-1bf0",
+      "phase": "initial",
+      "status": "completed",
+      "workers": 1,
+      "wall_clock_s": 462.063,
+      "stage_seconds": {
+        "enrich": 338.559,
+        "export": 0.026,
+        "group": 40.755,
+        "ingest": 0.019,
+        "memo": 46.772,
+        "rank": 0.024,
+        "verify": 35.879
+      },
+      "enrichment_calls": 17,
+      "budget_cap_usd": 0.15,
+      "budget_denials": 0
+    }
+  ]
+}

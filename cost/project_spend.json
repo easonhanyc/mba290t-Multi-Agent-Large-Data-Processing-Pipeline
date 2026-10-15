@@ -1,9 +1,9 @@
 {
-  "total_billed_usd": 2.142643,
-  "settled_billed_usd": 2.142643,
-  "unknown_reserved_usd": 0.0,
-  "calls": 17292,
-  "runs": 12,
+  "total_billed_usd": 4.702001,
+  "settled_billed_usd": 4.604903,
+  "unknown_reserved_usd": 0.097098,
+  "calls": 22977,
+  "runs": 17,
   "per_run": {
     "runs/final-200k": {
       "billed_usd": 2.019246,
@@ -21,6 +21,40 @@
       "calls_priced_from_logged_cost": 0,
       "unpriced_calls": 0,
       "recorded_ledger_usd": 2.0192462,
+      "matches_ledger": true
+    },
+    "runs/final-200k-v2": {
+      "billed_usd": 2.323945,
+      "unknown_reserved_usd": 0.097098,
+      "calls": 5366,
+      "usage_from": "state.sqlite",
+      "calls_from_state_db": 5366,
+      "calls_from_committed_usage": 0,
+      "committed_evidence": [
+        "cost/refreshes/final_200k_v2_usage.csv + cost/refreshes/final_200k_v2_calls.jsonl"
+      ],
+      "committed_calls_also_in_state_db": 5366,
+      "logged_cost_usd": 2.323945,
+      "calls_differing_from_logged_cost": 0,
+      "calls_priced_from_logged_cost": 0,
+      "unpriced_calls": 0,
+      "recorded_ledger_usd": 2.42104266,
+      "matches_ledger": true
+    },
+    "runs/fresh-rehearsal_60-20261015T034611Z": {
+      "billed_usd": 0.001022,
+      "unknown_reserved_usd": 0.0,
+      "calls": 3,
+      "usage_from": "state.sqlite",
+      "calls_from_state_db": 3,
+      "calls_from_committed_usage": 0,
+      "committed_evidence": null,
+      "committed_calls_also_in_state_db": 0,
+      "logged_cost_usd": 0.001022,
+      "calls_differing_from_logged_cost": 0,
+      "calls_priced_from_logged_cost": 0,
+      "unpriced_calls": 0,
+      "recorded_ledger_usd": 0.00102156,
       "matches_ledger": true
     },
     "runs/golden-decisions": {
@@ -89,6 +123,24 @@
       "recorded_ledger_usd": 0.0963262,
       "matches_ledger": true
     },
+    "runs/live-analysis10000-low": {
+      "billed_usd": 0.128644,
+      "unknown_reserved_usd": 0.0,
+      "calls": 296,
+      "usage_from": "state.sqlite",
+      "calls_from_state_db": 296,
+      "calls_from_committed_usage": 0,
+      "committed_evidence": [
+        "cost/refreshes/analysis_10000_low_usage.csv + cost/refreshes/analysis_10000_low_calls.jsonl"
+      ],
+      "committed_calls_also_in_state_db": 296,
+      "logged_cost_usd": 0.128644,
+      "calls_differing_from_logged_cost": 0,
+      "calls_priced_from_logged_cost": 0,
+      "unpriced_calls": 0,
+      "recorded_ledger_usd": 0.12864428,
+      "matches_ledger": true
+    },
     "runs/live-budget-drill": {
       "billed_usd": 0.004306,
       "unknown_reserved_usd": 0.0,
@@ -121,6 +173,24 @@
       "calls_priced_from_logged_cost": 0,
       "unpriced_calls": 0,
       "recorded_ledger_usd": 0.00517458,
+      "matches_ledger": true
+    },
+    "runs/live-checkpoint500-low": {
+      "billed_usd": 0.006952,
+      "unknown_reserved_usd": 0.0,
+      "calls": 17,
+      "usage_from": "state.sqlite",
+      "calls_from_state_db": 17,
+      "calls_from_committed_usage": 0,
+      "committed_evidence": [
+        "cost/refreshes/checkpoint_500_low_usage.csv + cost/refreshes/checkpoint_500_low_calls.jsonl"
+      ],
+      "committed_calls_also_in_state_db": 17,
+      "logged_cost_usd": 0.006952,
+      "calls_differing_from_logged_cost": 0,
+      "calls_priced_from_logged_cost": 0,
+      "unpriced_calls": 0,
+      "recorded_ledger_usd": 0.00695177,
       "matches_ledger": true
     },
     "runs/live-checkpoint500-w2": {
@@ -163,7 +233,7 @@
       "calls_from_state_db": 3,
       "calls_from_committed_usage": 0,
       "committed_evidence": [
-        "cost/usage.csv + cost/pilot_calls.jsonl"
+        "cost/experiments/pilot-effort-none/usage.csv + cost/experiments/pilot-effort-none/pilot_calls.jsonl"
       ],
       "committed_calls_also_in_state_db": 3,
       "logged_cost_usd": 0.001339,
@@ -171,6 +241,24 @@
       "calls_priced_from_logged_cost": 0,
       "unpriced_calls": 0,
       "recorded_ledger_usd": 0.00133929,
+      "matches_ledger": true
+    },
+    "runs/pilot100-20261014T213535Z": {
+      "billed_usd": 0.001698,
+      "unknown_reserved_usd": 0.0,
+      "calls": 3,
+      "usage_from": "state.sqlite",
+      "calls_from_state_db": 3,
+      "calls_from_committed_usage": 0,
+      "committed_evidence": [
+        "cost/usage.csv + cost/pilot_calls.jsonl"
+      ],
+      "committed_calls_also_in_state_db": 3,
+      "logged_cost_usd": 0.001698,
+      "calls_differing_from_logged_cost": 0,
+      "calls_priced_from_logged_cost": 0,
+      "unpriced_calls": 0,
+      "recorded_ledger_usd": 0.00169829,
       "matches_ledger": true
     },
     "runs/probe-decisions": {
@@ -213,24 +301,28 @@
     "unknown_outcome_calls_without_reservation": 0
   },
   "cross_check": {
-    "calls_with_logged_cost": 17292,
-    "logged_cost_usd": 2.142643,
+    "calls_with_logged_cost": 22960,
+    "logged_cost_usd": 4.604903,
     "calls_differing_from_logged_cost": 0,
-    "calls_in_state_db_and_committed_usage": 17197,
+    "calls_in_state_db_and_committed_usage": 22879,
     "calls_differing_between_sources": 0,
     "duplicate_request_ids_across_state_dbs": 0
   },
   "evidence": {
     "runs_root": "runs",
-    "state_dbs_read": 19,
+    "state_dbs_read": 24,
     "state_dbs_unreadable": {},
     "committed_files": [
       "cost/refreshes/analysis_10000_usage.csv + cost/refreshes/analysis_10000_calls.jsonl",
+      "cost/refreshes/analysis_10000_low_usage.csv + cost/refreshes/analysis_10000_low_calls.jsonl",
       "cost/refreshes/checkpoint_500_usage.csv + cost/refreshes/checkpoint_500_calls.jsonl",
+      "cost/refreshes/checkpoint_500_low_usage.csv + cost/refreshes/checkpoint_500_low_calls.jsonl",
       "cost/refreshes/final_200k_usage.csv + cost/refreshes/final_200k_calls.jsonl",
-      "cost/usage.csv + cost/pilot_calls.jsonl"
+      "cost/refreshes/final_200k_v2_usage.csv + cost/refreshes/final_200k_v2_calls.jsonl",
+      "cost/usage.csv + cost/pilot_calls.jsonl",
+      "cost/experiments/pilot-effort-none/usage.csv + cost/experiments/pilot-effort-none/pilot_calls.jsonl"
     ]
   },
   "method": "usage x rates.csv per billed-provider call, deduplicated by request_id; usage from runs/**/state.sqlite when present, else committed per-call evidence (cost/refreshes/*_usage.csv + *_calls.jsonl, cost/usage.csv + pilot_calls.jsonl); unknown-outcome calls count their reservation; stub and Claude Pro (subscription) calls excluded",
-  "computed_at": "2026-10-14T18:50:41+00:00"
+  "computed_at": "2026-10-15T03:54:18+00:00"
 }

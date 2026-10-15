@@ -136,6 +136,9 @@ class GroupStage:
                             disp.submit(t)
                         elif outcome.status == "budget":
                             ctx.request_stop("budget_cap")
+                        elif outcome.status == "systemic":  # e.g. a Claude Pro plan limit: stop, resume later
+                            ctx.request_stop(f"systemic_provider_error: {outcome.error}")
+                            issues[iid]["named_by"] = "taxonomy default (run stopped before naming)"
                         else:
                             issues[iid]["named_by"] = f"taxonomy default (model naming failed: {outcome.status})"
             finally:

@@ -1,0 +1,29 @@
+{
+  "analysis_input": {
+    "bytes": 8539,
+    "path": "runs/fresh-rehearsal_60-20261015T034611Z/input.csv",
+    "rows": 60,
+    "sha256": "d14360867715e255870a4fc74be32dd513c21834b05f01147fa6efe11cef0205"
+  },
+  "classification_input_fields": [
+    "review_text"
+  ],
+  "ingestion_profile": {
+    "counts": {
+      "duplicate_review_ids": 0,
+      "empty_review_text": 0,
+      "missing_app_version": 60,
+      "records": 60
+    },
+    "file": "ingestion.json",
+    "file_sha256": "d14360867715e255870a4fc74be32dd513c21834b05f01147fa6efe11cef0205",
+    "parsed_rows_sha256": "ac79c134a72e4b66402ac2ae22349b5983af65845f6d28a33193a05db209d7f4",
+    "profiled": "runs/fresh-rehearsal_60-20261015T034611Z/input.csv"
+  },
+  "run_id": "run-20261015T034611.915Z-0447",
+  "scope": {
+    "declared_scope": "the whole input file",
+    "input_is_subset": false
+  },
+  "written_at": "2026-10-15T03:46:12.493Z"
+}

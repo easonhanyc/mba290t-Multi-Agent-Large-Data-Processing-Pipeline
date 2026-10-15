@@ -68,8 +68,9 @@ backlog_max = 400            # pause new LLM batches while this many cross-check
 prompt = "prompts/llm_enrich_v2.md"
 provider = "openai"          # used only when backend = "llm"
 model = "gpt-6-luna"
-effort = "none"              # cheapest supported reasoning setting for GPT-6 Luna
-max_output_tokens_per_review = 70   # 10k: mean 32 output tokens/review; 3 of 173 batches truncated at 60
+effort = "low"               # golden-50 winner (evals/golden/error_analysis.md); "none" was used by the superseded
+                             # first final run (runs/final-200k) and the 500 / 10,000 effort-none checkpoints
+max_output_tokens_per_review = 200  # reasoning tokens count as output at effort low; the golden candidate used 200
 service_tier = "flex"        # cost-only (not in label_config): Flex is 50% of Standard, slower, may return 429
 timeout_s = 900              # Flex requests can queue; OpenAI suggests long client timeouts
 
@@ -78,7 +79,8 @@ enabled = true
 provider = "openai"
 model = "gpt-6-luna"
 effort = "low"
-max_fraction = 0.10           # 10k: 9.6% of texts flagged ambiguous; measured ~$0.00004 per routed review
+max_fraction = 0.015          # the golden-50 winner's setting (label_config cfg-52c5333247); flagged texts above
+                              # the cap keep their primary label with needs_review
 max_output_tokens = 600
 service_tier = "flex"
 timeout_s = 900

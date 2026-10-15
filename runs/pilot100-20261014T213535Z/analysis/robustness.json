@@ -1,0 +1,67 @@
+{
+  "by_complaint_count": {
+    "top_enricher": "usability",
+    "top_verifier": "usability"
+  },
+  "decision_area_order_enricher": [
+    "usability",
+    "playback/performance"
+  ],
+  "decision_area_order_verifier": [
+    "usability",
+    "playback/performance",
+    "billing/support"
+  ],
+  "enricher_labels": {
+    "areas": {
+      "catalog/content": {
+        "complaints": 1,
+        "severity_sum": 2,
+        "share_of_complaints": 0.2
+      },
+      "playback/performance": {
+        "complaints": 1,
+        "severity_sum": 3,
+        "share_of_complaints": 0.2
+      },
+      "usability": {
+        "complaints": 3,
+        "severity_sum": 7,
+        "share_of_complaints": 0.6
+      }
+    },
+    "complaints": 5
+  },
+  "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+  "note": "Same reviews (the declared verification sample, distinct texts weighted by the rows sharing each text), labelled independently by two model roles. Sampling error is not included.",
+  "row_weighted_reviews": 10,
+  "same_top_decision_area": true,
+  "sample": 10,
+  "top_decision_area_enricher": "usability",
+  "top_decision_area_verifier": "usability",
+  "verifier_labels": {
+    "areas": {
+      "billing/support": {
+        "complaints": 1,
+        "severity_sum": 2,
+        "share_of_complaints": 0.2
+      },
+      "catalog/content": {
+        "complaints": 1,
+        "severity_sum": 2,
+        "share_of_complaints": 0.2
+      },
+      "playback/performance": {
+        "complaints": 1,
+        "severity_sum": 4,
+        "share_of_complaints": 0.2
+      },
+      "usability": {
+        "complaints": 2,
+        "severity_sum": 7,
+        "share_of_complaints": 0.4
+      }
+    },
+    "complaints": 5
+  }
+}

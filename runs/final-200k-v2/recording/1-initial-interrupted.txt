@@ -1,0 +1,24 @@
+$ .venv/bin/python -m insight run --input data/analysis_200k.csv --full Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv --run-dir runs/final-200k-v2 --allow-paid --budget-usd 4.00 --workers 16
+[run] run-20261014T233644.409Z-a3e1 | phase initial | run dir runs/final-200k-v2 | budget $4.00 (already spent $0.000000, unknown $0.000000) | LIVE
+[ingest] 200013 rows | 200000 nonempty | 13 empty | 152363 distinct texts (47637 exact-text reuses) | 48432 missing app_version
+[enrich] label_config = gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247
+[enrich] pending distinct texts: 152363 | staged for a fallback decision: 0 | fallback caps {'fallback1': 2285, 'fallback2': 380} | already routed {'fallback1': 0, 'fallback2': 0} | backend llm | workers 16
+[enrich] primary: 0 distinct texts saved this invocation (of 152363 pending at start) | 0.0/s | staged 0 | spent $0.0000 of $4.00 (reserved $0.0913)
+[enrich] primary: 722 distinct texts saved this invocation (of 152363 pending at start) | 23.8/s | staged 78 | spent $0.0118 of $4.00 (reserved $0.0914)
+[enrich] primary: 857 distinct texts saved this invocation (of 152363 pending at start) | 18.8/s | staged 93 | spent $0.0139 of $4.00 (reserved $0.0915)
+[enrich] primary: 1495 distinct texts saved this invocation (of 152363 pending at start) | 24.5/s | staged 155 | spent $0.0239 of $4.00 (reserved $0.0913)
+[enrich] primary: 2173 distinct texts saved this invocation (of 152363 pending at start) | 28.4/s | staged 227 | spent $0.0347 of $4.00 (reserved $0.0915)
+[enrich] primary: 2769 distinct texts saved this invocation (of 152363 pending at start) | 30.2/s | staged 280 | spent $0.0444 of $4.00 (reserved $0.0915)
+[enrich] primary: 3364 distinct texts saved this invocation (of 152363 pending at start) | 31.4/s | staged 335 | spent $0.0535 of $4.00 (reserved $0.0915)
+[enrich] primary: 3817 distinct texts saved this invocation (of 152363 pending at start) | 31.1/s | staged 383 | spent $0.0608 of $4.00 (reserved $0.0915)
+[enrich] primary: 4509 distinct texts saved this invocation (of 152363 pending at start) | 32.7/s | staged 440 | spent $0.0716 of $4.00 (reserved $0.0916)
+[enrich] primary: 4998 distinct texts saved this invocation (of 152363 pending at start) | 32.6/s | staged 502 | spent $0.0798 of $4.00 (reserved $0.0918)
+
+[recorder] sent SIGINT (Ctrl-C) after 180 s
+
+[SIGINT] stopping: no new requests; finishing in-flight work and saving. Press Ctrl-C again to exit immediately (in-flight calls are reconciled on the next run).
+[enrich] primary: 5500 distinct texts saved this invocation (of 152363 pending at start) | 32.6/s | staged 550 | spent $0.0880 of $4.00 (reserved $0.0858)
+[run] enrichment incomplete (interrupted (SIGINT)); skipping verify/group/rank/memo until a resumed run finishes it
+[run] interrupted (interrupted (SIGINT)) in 199.8s | completed 36780 | quarantined 13 | unfinished 163220 | spend $0.099104
+
+[recorder] command exited with code 130 after 201.1 s

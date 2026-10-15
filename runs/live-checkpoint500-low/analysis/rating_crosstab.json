@@ -1,0 +1,67 @@
+{
+  "intent_by_rating": {
+    "1": {
+      "cancellation": 26,
+      "complaint": 148,
+      "praise": 1,
+      "unclear": 12
+    },
+    "2": {
+      "cancellation": 3,
+      "complaint": 27,
+      "praise": 2,
+      "unclear": 1
+    },
+    "3": {
+      "complaint": 15,
+      "praise": 1,
+      "request": 1,
+      "unclear": 2
+    },
+    "4": {
+      "complaint": 15,
+      "praise": 23,
+      "request": 5,
+      "unclear": 2
+    },
+    "5": {
+      "complaint": 12,
+      "praise": 189,
+      "request": 2,
+      "unclear": 13
+    }
+  },
+  "note": "Star ratings are metadata only; they never set or change a label. This table checks that labels relate sensibly to stars (e.g. praise concentrated in 5-star reviews).",
+  "severity_by_rating": {
+    "1": {
+      "1": 16,
+      "2": 80,
+      "3": 70,
+      "4": 21
+    },
+    "2": {
+      "1": 3,
+      "2": 4,
+      "3": 19,
+      "4": 7
+    },
+    "3": {
+      "1": 4,
+      "2": 3,
+      "3": 11,
+      "4": 1
+    },
+    "4": {
+      "1": 30,
+      "2": 5,
+      "3": 8,
+      "5": 2
+    },
+    "5": {
+      "1": 204,
+      "2": 2,
+      "3": 7,
+      "4": 3
+    }
+  }
+}

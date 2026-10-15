@@ -1,0 +1,94 @@
+{
+  "label": "final_200k_v2",
+  "run_dir": "runs/final-200k-v2",
+  "offline_stub": false,
+  "rows": 200013,
+  "distinct_texts": 152363,
+  "completed": 200000,
+  "quarantined": 13,
+  "unfinished": 0,
+  "workers": 16,
+  "invocations": 4,
+  "wall_clock_s": 9389.902,
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
+  "saved_at": "2026-10-15T03:36:14+00:00",
+  "workers_source": "max over the invocations that made enrichment calls",
+  "latest_invocation_workers": 4,
+  "enrichment_invocations": 2,
+  "enrichment_wall_clock_s": 9212.494,
+  "enrichment_stage_seconds": 8755.792,
+  "invocations_detail": [
+    {
+      "run_id": "run-20261014T233644.409Z-a3e1",
+      "phase": "initial",
+      "status": "interrupted",
+      "workers": 16,
+      "wall_clock_s": 199.769,
+      "stage_seconds": {
+        "enrich": 184.264,
+        "export": 3.17,
+        "ingest": 12.265
+      },
+      "enrichment_calls": 138,
+      "budget_cap_usd": 4.0,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261014T234005.530Z-f920",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 16,
+      "wall_clock_s": 9012.725,
+      "stage_seconds": {
+        "enrich": 8571.528,
+        "export": 8.839,
+        "group": 28.934,
+        "ingest": 0.017,
+        "memo": 106.839,
+        "rank": 2.997,
+        "verify": 292.384
+      },
+      "enrichment_calls": 5228,
+      "budget_cap_usd": 4.0,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261015T032949.255Z-ff9e",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 86.101,
+      "stage_seconds": {
+        "enrich": 2.546,
+        "export": 8.782,
+        "group": 10.173,
+        "ingest": 0.016,
+        "memo": 60.391,
+        "rank": 2.811,
+        "verify": 0.464
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 4.0,
+      "budget_denials": 0
+    },
+    {
+      "run_id": "run-20261015T033337.582Z-bf5d",
+      "phase": "resume",
+      "status": "completed",
+      "workers": 4,
+      "wall_clock_s": 91.307,
+      "stage_seconds": {
+        "enrich": 2.651,
+        "export": 8.692,
+        "group": 9.135,
+        "ingest": 0.021,
+        "memo": 66.756,
+        "rank": 2.683,
+        "verify": 0.46
+      },
+      "enrichment_calls": 0,
+      "budget_cap_usd": 4.0,
+      "budget_denials": 0
+    }
+  ]
+}

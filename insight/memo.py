@@ -214,8 +214,14 @@ def build_payload(ranking, issues_doc, areas_doc, scope, evidence_issues, quotes
     return payload, tokens, claims
 
 
-def validate(data, tokens, evidence_ids):
+def _no_interval_overlaps(payload):
+    shares = ((payload or {}).get("trends_and_robustness") or {}).get("area_shares_with_sampling_intervals") or []
+    return bool(shares) and all(not s.get("interval_overlaps_with") for s in shares)
+
+
+def validate(data, tokens, evidence_ids, payload=None):
     problems = []
+    no_overlap = _no_interval_overlaps(payload)
     if not isinstance(data, dict):
         return ["output is not an object"]
     if data.get("recommended_area") not in labels.DECISION_AREAS:
@@ -241,6 +247,9 @@ def validate(data, tokens, evidence_ids):
         if hit:
             snippet = bare[max(0, hit.start() - 30):hit.end() + 30].replace("\n", " ")
             problems.append(f"{where} contains a typed digit (numbers must be tokens): ...{snippet}...")
+        if no_overlap and re.search(r"within (the )?sampling (error|noise)", text, re.I):
+            problems.append(f"{where} says 'within sampling error', but no two decision areas' share intervals overlap "
+                            "(interval_overlaps_with is empty for every area): say which share is higher instead")
         stray = re.search(r"\{[^{}]*\}", TOKEN.sub("", text))  # code would leave it unfilled in memo.md
         if stray:
             problems.append(f"{where} contains {stray.group(0)}, which is not a token: write the token from the "
@@ -442,6 +451,9 @@ class MemoStage:
             data, source, problems_log = self._call(payload, tokens, evidence_ids)
             if data is not None and source == "model":
                 store.cache_put("memo", key, data, None, ctx.run_id)
+        if data is None and ranking and ctx.stop_reason:  # stopped mid-stage: a resumed run writes the memo
+            self.log(f"[memo] not written: run stopping ({ctx.stop_reason}); a resumed run generates it")
+            return {"source": f"not written (run stopping: {ctx.stop_reason})", "claims": 0}
         if data is None:
             data, source = template_memo(payload), ("template (no complaints in scope)" if not ranking
                                                     else "template (model memo failed validation)")
@@ -499,10 +511,12 @@ class MemoStage:
                 problems_log.append(f"attempt {attempt}: {outcome.status} {outcome.error}")
                 if outcome.status == "budget":
                     ctx.request_stop("budget_cap")
+                elif outcome.status == "systemic":  # e.g. a Claude Pro plan limit: stop and resume, never a template
+                    ctx.request_stop(f"systemic_provider_error: {outcome.error}")
                 if outcome.status not in ("invalid_output",):
                     break
                 continue
-            problems = validate(outcome.result.data, tokens, evidence_ids) if outcome.result.data is not None \
+            problems = validate(outcome.result.data, tokens, evidence_ids, payload) if outcome.result.data is not None \
                 else [f"unusable output: {outcome.result.finish}"]
             if not problems:
                 return outcome.result.data, "model", problems_log

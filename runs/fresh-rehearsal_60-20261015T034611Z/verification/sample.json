@@ -1,0 +1,24 @@
+{
+  "declared": {
+    "fraction": 0.1,
+    "max": 2000,
+    "method": "lowest SHA-256(seed + ':' + review_id) among distinct completed texts",
+    "min": 10,
+    "population": 60,
+    "sample_size": 10,
+    "seed": "berkeley-fa-2026-insight-v1"
+  },
+  "review_ids": [
+    "1d26e407-765e-4e48-8904-0560cdb7161d",
+    "2895858c-0a3b-40dd-a6af-ab31663593e6",
+    "52032f0b-18f4-4025-8b47-05cebef394fd",
+    "68e08ce4-195b-46d7-b5dc-eee6893b3cde",
+    "784e7f0f-19cc-44ac-9e89-27bcf9c43f5b",
+    "865dbe36-a04f-4e2c-aecc-61fd7d5afa3a",
+    "98616bf9-b8e7-42cb-9e0a-cf2ab59faa1d",
+    "a7e69c17-14b2-4289-9f56-76a90acdb5f1",
+    "c3a997d2-fc66-44f0-b7fc-29d76679745b",
+    "c8f69e30-7d5e-4fcf-abb5-b9607c80c3fa"
+  ],
+  "verifier_config": "haiku@n/a|verify-v1|cfg-26c97bdddf"
+}

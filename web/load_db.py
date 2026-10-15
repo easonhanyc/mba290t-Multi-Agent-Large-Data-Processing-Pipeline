@@ -169,6 +169,9 @@ def documents(run_dir: Path):
     add("self_check_full", "eval", "self-check-vs-full-reference.json")
     add("golden_results", "eval", ROOT / "evals" / "golden" / "results.json")
     add("golden_error_analysis", "eval_md", ROOT / "evals" / "golden" / "error_analysis.md")
+    for cand in ("golden-luna-none", "golden-luna-low", "golden-decisions"):  # the setups compared before choosing
+        add(f"golden_candidate:{cand}", "eval", ROOT / "evals" / "golden" / "candidates" / f"{cand}.json")
+    add("quote_support", "eval", ROOT / "evals" / "quote_support" / "summary.json")
     add("injection_check", "eval", ROOT / "evals" / "injection" / "synthetic_check.json")
     add("run_summary", "run", "run_summary.json")
     add("ingestion_report", "run", "ingestion_report.json")

@@ -33,6 +33,6 @@
   },
   "out_of_scope_rows": 460609,
   "out_of_scope_reason": "Not classified: outside the declared 200,000-review analysis scope chosen to keep total API spend under the $10 project budget. Ingested and profiled only.",
-  "created_at": "2026-10-12T23:29:24+00:00",
+  "created_at": "2026-10-14T23:36:44+00:00",
   "command": "python3 scripts/make_analysis_subset.py"
 }

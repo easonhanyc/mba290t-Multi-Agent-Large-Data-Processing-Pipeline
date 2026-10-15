@@ -1,0 +1,95 @@
+{
+  "by_complaint_count": {
+    "top_enricher": "usability",
+    "top_verifier": "usability"
+  },
+  "decision_area_order_enricher": [
+    "usability",
+    "billing/support",
+    "playback/performance",
+    "access/onboarding"
+  ],
+  "decision_area_order_verifier": [
+    "usability",
+    "billing/support",
+    "playback/performance",
+    "access/onboarding"
+  ],
+  "enricher_labels": {
+    "areas": {
+      "access/onboarding": {
+        "complaints": 14,
+        "severity_sum": 53,
+        "share_of_complaints": 0.026565
+      },
+      "billing/support": {
+        "complaints": 95,
+        "severity_sum": 274,
+        "share_of_complaints": 0.180266
+      },
+      "catalog/content": {
+        "complaints": 33,
+        "severity_sum": 96,
+        "share_of_complaints": 0.062619
+      },
+      "general/unspecified": {
+        "complaints": 170,
+        "severity_sum": 345,
+        "share_of_complaints": 0.322581
+      },
+      "playback/performance": {
+        "complaints": 76,
+        "severity_sum": 254,
+        "share_of_complaints": 0.144213
+      },
+      "usability": {
+        "complaints": 139,
+        "severity_sum": 333,
+        "share_of_complaints": 0.263757
+      }
+    },
+    "complaints": 527
+  },
+  "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+  "note": "Same reviews (the declared verification sample, distinct texts weighted by the rows sharing each text), labelled independently by two model roles. Sampling error is not included.",
+  "row_weighted_reviews": 1070,
+  "same_top_decision_area": true,
+  "sample": 845,
+  "top_decision_area_enricher": "usability",
+  "top_decision_area_verifier": "usability",
+  "verifier_labels": {
+    "areas": {
+      "access/onboarding": {
+        "complaints": 14,
+        "severity_sum": 52,
+        "share_of_complaints": 0.027559
+      },
+      "billing/support": {
+        "complaints": 91,
+        "severity_sum": 300,
+        "share_of_complaints": 0.179134
+      },
+      "catalog/content": {
+        "complaints": 19,
+        "severity_sum": 52,
+        "share_of_complaints": 0.037402
+      },
+      "general/unspecified": {
+        "complaints": 157,
+        "severity_sum": 318,
+        "share_of_complaints": 0.309055
+      },
+      "playback/performance": {
+        "complaints": 81,
+        "severity_sum": 286,
+        "share_of_complaints": 0.159449
+      },
+      "usability": {
+        "complaints": 146,
+        "severity_sum": 374,
+        "share_of_complaints": 0.287402
+      }
+    },
+    "complaints": 508
+  }
+}

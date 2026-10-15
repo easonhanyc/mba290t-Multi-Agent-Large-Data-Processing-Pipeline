@@ -1,7 +1,7 @@
 """Offline stand-in for `claude -p --output-format json --json-schema ...` (tests and offline runs only).
 
 Answers deterministically from the JSON schema with insight.stub.instance; reports the model as
-stub-<alias> and plausible token counts. STUB_CLAUDE_FAULT=limit|error|garbage forces a failure path.
+stub-<alias> and plausible token counts. STUB_CLAUDE_FAULT=limit|session|error|garbage forces a failure path.
 Never used in a live run (the registry selects it only under --offline-stub).
 """
 
@@ -39,6 +39,10 @@ def main(argv):
     if fault in ("limit", "error"):
         msg = "Claude AI usage limit reached|1760000000" if fault == "limit" else "Something odd happened"
         print(json.dumps({**base, "is_error": True, "subtype": "success", "result": msg, "usage": {}, "modelUsage": {}}))
+        return 1
+    if fault == "session":  # wording the CLI used on 2026-10-14, reported as HTTP 429
+        print(json.dumps({**base, "is_error": True, "subtype": "success", "api_error_status": 429, "usage": {},
+                          "modelUsage": {}, "result": "You've hit your session limit · resets 4:30pm (America/Los_Angeles)"}))
         return 1
     schema = json.loads(opts.get("--json-schema", "{}"))
     seed = hashlib.sha256((prompt + model).encode()).hexdigest()

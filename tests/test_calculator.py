@@ -70,8 +70,8 @@ def doubled_rates(tmp):
 
 
 def runs_copy_without_final_db(tmp):
-    """runs/ as a clean clone has it: every committed state database, but not runs/final-200k/state.sqlite
-    (git-ignored, published only as a release asset) and not the git-ignored runs/_* folders."""
+    """runs/ as a clean clone has it: every committed state database, but not runs/final-*/state.sqlite (the final
+    run and the superseded first final run: git-ignored, published only as release assets) and not runs/_* folders."""
     dst = Path(tmp) / "runs"
     dst.mkdir()
     for d in sorted((ROOT / "runs").iterdir()):
@@ -83,7 +83,7 @@ def runs_copy_without_final_db(tmp):
             shutil.copytree(d / "invocations", t / "invocations")
         if (d / "run_summary.json").exists():
             shutil.copy2(d / "run_summary.json", t / "run_summary.json")
-        if d.name != "final-200k":
+        if not d.name.startswith("final-"):
             for f in d.glob("state.sqlite*"):
                 shutil.copy2(f, t / f.name)
     return dst
@@ -220,6 +220,9 @@ class TestSpendToDate(unittest.TestCase):
         self.assertEqual((final["calls_from_state_db"], final["usage_from"]), (0, "committed usage"))
         self.assertAlmostEqual(final["billed_usd"], round(by_hand_billed(COST / "refreshes" / "final_200k_usage.csv"), 6), places=6)
         self.assertTrue(final["matches_ledger"])  # equals the run's own ledger in runs/final-200k/invocations/*.json
+        v2 = offline["per_run"]["runs/final-200k-v2"]
+        self.assertEqual((v2["calls_from_state_db"], v2["usage_from"]), (0, "committed usage"))
+        self.assertTrue(v2["matches_ledger"])
         # nothing is counted twice: each request ID once, whichever sources hold it
         self.assertEqual(sum(v["calls"] for v in offline["per_run"].values()), offline["calls"])
         self.assertEqual(sum(v["calls"] for v in local["per_run"].values()), local["calls"])

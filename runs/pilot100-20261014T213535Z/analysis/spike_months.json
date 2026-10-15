@@ -1,0 +1,72 @@
+{
+  "increase_rule": "largest_increases lists at most five issues whose share rose, i.e. pp_difference > 0 after rounding to one decimal; zero and negative changes are left out",
+  "rule": "full months with more than 1.8x the median full-month review count",
+  "share_definition": "share = the issue's complaint and cancellation reviews / all classified reviews in the month (a share of reviews, not of complaints); pp_difference = share in the spike month minus the same share over the other full months",
+  "spikes": [
+    {
+      "complaint_share": 0.454545,
+      "largest_increases": [
+        {
+          "complaints_in_month": 4,
+          "issue_id": "other.general",
+          "pp_difference": 26.84,
+          "share_in_month": 0.363636,
+          "share_other_months": 0.095238
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "downloads.offline",
+          "pp_difference": 7.9,
+          "share_in_month": 0.090909,
+          "share_other_months": 0.011905
+        }
+      ],
+      "median_full_month_reviews": 5,
+      "month": "2023-07",
+      "reviews": 11
+    },
+    {
+      "complaint_share": 0.842105,
+      "largest_increases": [
+        {
+          "complaints_in_month": 5,
+          "issue_id": "billing.premium_only",
+          "pp_difference": 21.053,
+          "share_in_month": 0.263158,
+          "share_other_months": 0.052632
+        },
+        {
+          "complaints_in_month": 3,
+          "issue_id": "usability.library",
+          "pp_difference": 15.789,
+          "share_in_month": 0.157895,
+          "share_other_months": 0.0
+        },
+        {
+          "complaints_in_month": 2,
+          "issue_id": "catalog.lyrics",
+          "pp_difference": 10.526,
+          "share_in_month": 0.105263,
+          "share_other_months": 0.0
+        },
+        {
+          "complaints_in_month": 4,
+          "issue_id": "other.general",
+          "pp_difference": 10.526,
+          "share_in_month": 0.210526,
+          "share_other_months": 0.105263
+        },
+        {
+          "complaints_in_month": 1,
+          "issue_id": "catalog.missing",
+          "pp_difference": 3.947,
+          "share_in_month": 0.052632,
+          "share_other_months": 0.013158
+        }
+      ],
+      "median_full_month_reviews": 5,
+      "month": "2023-10",
+      "reviews": 19
+    }
+  ]
+}

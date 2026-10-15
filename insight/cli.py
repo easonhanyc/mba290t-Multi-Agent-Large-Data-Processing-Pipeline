@@ -428,7 +428,7 @@ def _memo(store, cfg, registry, ctx, args):
         scope_name = (f"the declared analysis scope of {n:,} reviews ({Path(input_meta['path']).name}, a deterministic uniform "
                       f"sample of the 660,622-review corpus plus every empty-text row)")
     else:
-        scope_name = f"a {n}-review development checkpoint ({Path(input_meta['path']).name}), not the full corpus"
+        scope_name = f"a {n}-review input ({Path(input_meta['path']).name}), not the full corpus"
     scope = [("Reviews in scope (unique IDs ingested)", n, "ingestion_report.json"),
              ("Completed classifications", res["completed"], "grading/records.jsonl"),
              ("Quarantined: empty text", res["quarantined_empty_text"], "quarantine.jsonl"),

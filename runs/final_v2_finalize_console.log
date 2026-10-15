@@ -1,0 +1,70 @@
+Saved deterministic audit output to runs/final-200k-v2/local-reference.json
+Saved deterministic audit output to runs/final-200k-v2/self-check.json
+{
+  "check": "ranking recomputed from grading/records + membership (no model calls)",
+  "identical": true,
+  "issues": 22,
+  "first_difference": null
+}
+{
+  "status": "detected",
+  "review_id": "00015590-a6ef-4883-970e-6b48b6aad68c",
+  "original": {
+    "topic": "catalog",
+    "intent": "praise",
+    "severity": 1,
+    "sentiment": 1.0
+  },
+  "planted": {
+    "topic": "billing",
+    "intent": "complaint",
+    "severity": 5,
+    "sentiment": -1.0
+  },
+  "verifier": {
+    "topic": "catalog",
+    "intent": "praise",
+    "severity": 1,
+    "sentiment": 1.0,
+    "confidence": "high"
+  },
+  "comparison_before": [],
+  "comparison_after": [
+    "topic",
+    "intent",
+    "severity",
+    "sentiment_within_tolerance"
+  ],
+  "baseline": "a stored record on which enricher and verifier fully agree",
+  "note": "Test copy only; the stored record was not changed. Detection uses the saved verifier output.",
+  "offline_stub_labels": false
+}
+wrote docs/trace_example.md
+{
+  "status": "ready",
+  "cases": 50,
+  "agreement": {
+    "topic": 0.78,
+    "intent": 0.76,
+    "severity": 0.74,
+    "joint": 0.48
+  },
+  "severity": {
+    "exact": 0.74,
+    "mean_abs_error": 0.26,
+    "distance_counts": {
+      "0": 37,
+      "1": 13
+    }
+  },
+  "sentiment": {
+    "tolerance": 0.5,
+    "labelled": 50,
+    "mean_abs_error": 0.275,
+    "within_tolerance": 0.88
+  }
+}
+Saved deterministic audit output to runs/final-200k-v2/full-reference.json
+Saved deterministic audit output to runs/final-200k-v2/self-check-vs-full-reference.json
+wrote evals/verification/disagreement_counts.json: 762 disagreements of 2000 compared
+[refresh] saved cost/refreshes/final_200k_v2.json and rewrote cost/report.md

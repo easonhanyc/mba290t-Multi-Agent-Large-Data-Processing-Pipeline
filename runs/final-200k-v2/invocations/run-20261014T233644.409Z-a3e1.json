@@ -1,0 +1,219 @@
+{
+  "calls_all_invocations": {
+    "enrich:primary": {
+      "attempts": 138,
+      "cached_input_tokens": 321901,
+      "cost_usd": 0.099106,
+      "input_tokens": 564215,
+      "invalid_output_retries": 2,
+      "output_tokens": 329421,
+      "reasoning_tokens": 110107,
+      "retries": 0,
+      "succeeded": 138
+    }
+  },
+  "calls_this_invocation": {
+    "enrich:primary": {
+      "attempts": 138,
+      "cached_input_tokens": 321901,
+      "cost_usd": 0.099106,
+      "input_tokens": 564215,
+      "invalid_output_retries": 2,
+      "output_tokens": 329421,
+      "reasoning_tokens": 110107,
+      "retries": 0,
+      "succeeded": 138
+    }
+  },
+  "completed_ids_saved": 36780,
+  "config_summary": {
+    "crosscheck": {
+      "batch": "1 review/request",
+      "fields": "off",
+      "service_tier": "standard"
+    },
+    "enrich_primary": {
+      "batch": "50 reviews/request",
+      "service_tier": "flex"
+    },
+    "fallback1": {
+      "batch": "1 review/request",
+      "service_tier": "flex"
+    },
+    "fallback2": {
+      "batch": "1 review/request",
+      "service_tier": "subscription"
+    },
+    "group": {
+      "batch": "<= 12 quotes/request",
+      "service_tier": "subscription"
+    },
+    "memo": {
+      "batch": "aggregates + evidence pack",
+      "service_tier": "subscription"
+    },
+    "verify": {
+      "batch": "50 reviews/request",
+      "service_tier": "subscription"
+    }
+  },
+  "finished_at": "2026-10-14T23:40:05.332Z",
+  "input": {
+    "bytes": 29411284,
+    "ingested_at": "2026-10-14T23:36:51.150Z",
+    "path": "data/analysis_200k.csv",
+    "rows": 200013,
+    "sha256": "3c023c9dd47a577523dc2a74eb00ec69a79ae1300b80de13f2423256b7222fad"
+  },
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
+  "ledger": {
+    "cap_usd": 4.0,
+    "denials": 0,
+    "reserved_usd": 0.0,
+    "spent_usd": 0.0991042,
+    "unknown_usd": 0.0
+  },
+  "models": {
+    "crosscheck": {
+      "effort": "n/a",
+      "enabled": false,
+      "fields": [
+        "intent",
+        "severity"
+      ],
+      "model": "gpt-6-luna",
+      "provider": "openai_decisions"
+    },
+    "enrich_primary": {
+      "effort": "low",
+      "model": "gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback1": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.015,
+      "model": "gpt-6-luna",
+      "provider": "openai"
+    },
+    "fallback2": {
+      "effort": "low",
+      "enabled": true,
+      "max_fraction": 0.0025,
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "group": {
+      "effort": "low",
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "memo": {
+      "effort": "low",
+      "model": "sonnet",
+      "provider": "claude_code"
+    },
+    "verify": {
+      "effort": "n/a",
+      "model": "haiku",
+      "provider": "claude_code"
+    }
+  },
+  "offline_stub": false,
+  "phase": "initial",
+  "project_spend": {
+    "effective_budget_usd": 4.0,
+    "other_runs_billed_usd": 2.27993686,
+    "per_run": {
+      "runs/final-200k": 2.019246,
+      "runs/golden-decisions": 0.00909,
+      "runs/golden-luna-low": 0.000866,
+      "runs/golden-luna-none": 0.00067,
+      "runs/live-analysis10000": 0.096326,
+      "runs/live-analysis10000-low": 0.128644,
+      "runs/live-budget-drill": 0.004306,
+      "runs/live-checkpoint500": 0.005175,
+      "runs/live-checkpoint500-low": 0.006952,
+      "runs/live-checkpoint500-w2": 0.00425,
+      "runs/live-synthetic-injection": 0.000234,
+      "runs/pilot100-20261012T224901Z": 0.001339,
+      "runs/pilot100-20261014T213535Z": 0.001698,
+      "runs/probe-decisions": 0.000942,
+      "runs/probe-luna": 0.000198
+    },
+    "project_cap_usd": 9.0,
+    "requested_budget_usd": 4.0
+  },
+  "reconciled_unknown_calls": 0,
+  "results": {
+    "by_status_and_tier": {
+      "completed:cache": 30595,
+      "completed:primary": 6185,
+      "quarantined:rule": 13
+    },
+    "completed": 36780,
+    "exact_text_cache_reuses": 30595,
+    "needs_review": 1187,
+    "quarantined": 13,
+    "quarantined_empty_text": 13,
+    "scope": {
+      "distinct_nonempty_texts": 152363,
+      "duplicate_id_rows": 0,
+      "empty_texts": 13,
+      "nonempty": 200000,
+      "representatives": 152363,
+      "rows": 200013,
+      "unique_ids": 200013
+    },
+    "unfinished": 163220
+  },
+  "run_id": "run-20261014T233644.409Z-a3e1",
+  "stage_configs": {
+    "group": "sonnet@low|group-v1|cfg-28f1c4b99f",
+    "memo": "sonnet@low|memo-v1|cfg-b9e01714ea",
+    "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
+  },
+  "stage_seconds": {
+    "enrich": 184.264,
+    "export": 3.17,
+    "ingest": 12.265
+  },
+  "stages": {
+    "enrich": {
+      "aliases_written": 30595,
+      "caps": {
+        "fallback1": 2285,
+        "fallback2": 380
+      },
+      "difficult": 615,
+      "fallback_not_selected_cap": 0,
+      "invalid_output_retries": 2,
+      "invalid_outputs": 0,
+      "left_pending_stopping": 0,
+      "left_pending_transient": 0,
+      "quarantined": 0,
+      "routed": {
+        "fallback1": 0,
+        "fallback2": 0
+      },
+      "saved_fallback1": 0,
+      "saved_fallback2": 0,
+      "saved_primary": 6185,
+      "staged": 615,
+      "still_pending": 146178,
+      "stop_reason": "interrupted (SIGINT)",
+      "transient_requeued": 0
+    },
+    "export": {
+      "calls": 138,
+      "checkpoint_after": 36780,
+      "checkpoint_before": 36780,
+      "grading_dir": "runs/final-200k-v2/grading",
+      "records": 200013
+    }
+  },
+  "status": "interrupted",
+  "stop_reason": "interrupted (SIGINT)",
+  "wall_clock_s": 199.769,
+  "workers": 16
+}

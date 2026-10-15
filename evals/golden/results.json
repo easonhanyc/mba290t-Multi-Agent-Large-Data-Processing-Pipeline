@@ -1,9 +1,9 @@
 {
   "agreement": {
-    "intent": 0.74,
+    "intent": 0.76,
     "joint": 0.48,
-    "severity": 0.76,
-    "topic": 0.76
+    "severity": 0.74,
+    "topic": 0.78
   },
   "ambiguous_cases": 0,
   "cases": 50,
@@ -23,7 +23,7 @@
       "ambiguous": false,
       "correct": {
         "intent": true,
-        "severity": true,
+        "severity": false,
         "topic": true
       },
       "entities_unsupported": [],
@@ -32,13 +32,13 @@
         "intent": "complaint",
         "labeled_by": "primary",
         "needs_review": 0,
-        "sentiment": -1.0,
-        "severity": 3,
+        "sentiment": -0.5,
+        "severity": 2,
         "topic": "catalog"
       },
       "quote_is_exact_substring": true,
       "review_id": "292ce26a-815d-4bce-a3b6-93cb6c9e7e2c",
-      "severity_distance": 0,
+      "severity_distance": 1,
       "text": "Staff must be full of mentally ill kool-aid heads. Banning conservative music that speaks truth. Spotify is doing all they can to protect pedophiles, by banning Christian songs discussing the path the devil leads you down. Pride is a sin."
     },
     {
@@ -122,7 +122,7 @@
       "ambiguous": false,
       "correct": {
         "intent": true,
-        "severity": false,
+        "severity": true,
         "topic": false
       },
       "entities_unsupported": [],
@@ -132,12 +132,12 @@
         "labeled_by": "primary",
         "needs_review": 0,
         "sentiment": -0.5,
-        "severity": 3,
-        "topic": "billing"
+        "severity": 2,
+        "topic": "other"
       },
       "quote_is_exact_substring": true,
       "review_id": "991b6b3a-f511-458a-a5b7-234f78048fb5",
-      "severity_distance": 1,
+      "severity_distance": 0,
       "text": "Ads were okay, but limited functionality..it's just too much"
     },
     {
@@ -461,7 +461,7 @@
         "intent": "praise",
         "labeled_by": "cache",
         "needs_review": 0,
-        "sentiment": 1.0,
+        "sentiment": 0.5,
         "severity": 1,
         "topic": "other"
       },
@@ -527,7 +527,7 @@
         "intent": "complaint",
         "labeled_by": "primary",
         "needs_review": 0,
-        "sentiment": -0.5,
+        "sentiment": 0.0,
         "severity": 2,
         "topic": "usability"
       },
@@ -550,19 +550,19 @@
       },
       "ambiguous": false,
       "correct": {
-        "intent": false,
+        "intent": true,
         "severity": true,
-        "topic": true
+        "topic": false
       },
       "entities_unsupported": [],
       "prediction": {
         "evidence_quote": "Lhat ng song nasa spotify",
-        "intent": "unclear",
-        "labeled_by": "fallback1",
-        "needs_review": 1,
-        "sentiment": 0.0,
+        "intent": "praise",
+        "labeled_by": "primary",
+        "needs_review": 0,
+        "sentiment": 1.0,
         "severity": 1,
-        "topic": "other"
+        "topic": "catalog"
       },
       "quote_is_exact_substring": true,
       "review_id": "ac6cd66d-a9d2-42a4-afb8-2f84beff7fd1",
@@ -591,7 +591,7 @@
       "prediction": {
         "evidence_quote": "Avtar sungh",
         "intent": "unclear",
-        "labeled_by": "fallback1",
+        "labeled_by": "primary",
         "needs_review": 1,
         "sentiment": 0.0,
         "severity": 1,
@@ -888,7 +888,7 @@
       "prediction": {
         "evidence_quote": "Bheekhmangon",
         "intent": "unclear",
-        "labeled_by": "fallback1",
+        "labeled_by": "primary",
         "needs_review": 1,
         "sentiment": 0.0,
         "severity": 1,
@@ -921,8 +921,8 @@
       "prediction": {
         "evidence_quote": "Unconditional love, Stoli Canales",
         "intent": "unclear",
-        "labeled_by": "fallback1",
-        "needs_review": 1,
+        "labeled_by": "primary",
+        "needs_review": 0,
         "sentiment": 0.0,
         "severity": 1,
         "topic": "other"
@@ -1079,7 +1079,7 @@
       "ambiguous": false,
       "correct": {
         "intent": false,
-        "severity": true,
+        "severity": false,
         "topic": true
       },
       "entities_unsupported": [],
@@ -1089,12 +1089,12 @@
         "labeled_by": "primary",
         "needs_review": 0,
         "sentiment": -1.0,
-        "severity": 3,
+        "severity": 2,
         "topic": "usability"
       },
       "quote_is_exact_substring": true,
       "review_id": "46c0b49f-83a1-427e-8f0b-cef62e3c94b5",
-      "severity_distance": 0,
+      "severity_distance": 1,
       "text": "Are you out of your mind? This is dangerous! Listening to music in a normal volume and suddenly an add starts and my ears feel like they explode!! Stop this BS, or you're gonna destroy someones ears."
     },
     {
@@ -1410,7 +1410,7 @@
       "correct": {
         "intent": true,
         "severity": false,
-        "topic": false
+        "topic": true
       },
       "entities_unsupported": [],
       "prediction": {
@@ -1420,7 +1420,7 @@
         "needs_review": 0,
         "sentiment": -1.0,
         "severity": 3,
-        "topic": "billing"
+        "topic": "playback"
       },
       "quote_is_exact_substring": true,
       "review_id": "dceb14e7-2df0-422f-bb2b-73d7c373159a",
@@ -1542,7 +1542,7 @@
       "correct": {
         "intent": true,
         "severity": true,
-        "topic": false
+        "topic": true
       },
       "entities_unsupported": [],
       "prediction": {
@@ -1552,7 +1552,7 @@
         "needs_review": 0,
         "sentiment": -1.0,
         "severity": 2,
-        "topic": "usability"
+        "topic": "billing"
       },
       "quote_is_exact_substring": true,
       "review_id": "d2f3874f-d15d-4a2f-bb97-4f1213defa46",
@@ -1663,28 +1663,26 @@
     "intent": {
       "complaint -> unclear": 1,
       "praise -> complaint": 1,
-      "praise -> unclear": 2,
+      "praise -> unclear": 1,
       "request -> complaint": 7,
       "request -> unclear": 1,
       "unclear -> complaint": 1
     },
     "topic": {
       "billing -> other": 1,
-      "billing -> usability": 1,
-      "other -> catalog": 2,
+      "other -> catalog": 3,
       "other -> usability": 3,
-      "playback -> billing": 1,
       "support -> playback": 1,
-      "usability -> billing": 2,
-      "usability -> other": 1
+      "usability -> billing": 1,
+      "usability -> other": 2
     }
   },
   "entities_unsupported_total": 0,
-  "label_config": "gpt-6-luna@none>gpt-6-luna@low(10%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-f6337dc790",
+  "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
   "missing_or_quarantined_predictions": 0,
   "needs_review_vs_human": {
-    "human=False,model=False": 41,
-    "human=False,model=True": 3,
+    "human=False,model=False": 43,
+    "human=False,model=True": 1,
     "human=True,model=False": 4,
     "human=True,model=True": 2
   },
@@ -1707,10 +1705,10 @@
         "support": 14
       },
       "praise": {
-        "f1": 0.9302,
+        "f1": 0.9545,
         "precision": 1.0,
-        "predicted": 20,
-        "recall": 0.8696,
+        "predicted": 21,
+        "recall": 0.913,
         "support": 23
       },
       "request": {
@@ -1721,25 +1719,25 @@
         "support": 9
       },
       "unclear": {
-        "f1": 0.4444,
-        "precision": 0.3333,
-        "predicted": 6,
+        "f1": 0.5,
+        "precision": 0.4,
+        "predicted": 5,
         "recall": 0.6667,
         "support": 3
       }
     },
     "topic": {
       "billing": {
-        "f1": 0.2857,
-        "precision": 0.25,
-        "predicted": 4,
-        "recall": 0.3333,
+        "f1": 0.6667,
+        "precision": 0.6667,
+        "predicted": 3,
+        "recall": 0.6667,
         "support": 3
       },
       "catalog": {
-        "f1": 0.75,
-        "precision": 0.6,
-        "predicted": 5,
+        "f1": 0.6667,
+        "precision": 0.5,
+        "predicted": 6,
         "recall": 1.0,
         "support": 3
       },
@@ -1751,17 +1749,17 @@
         "support": 1
       },
       "other": {
-        "f1": 0.8772,
-        "precision": 0.9259,
+        "f1": 0.8421,
+        "precision": 0.8889,
         "predicted": 27,
-        "recall": 0.8333,
+        "recall": 0.8,
         "support": 30
       },
       "playback": {
-        "f1": 0.75,
-        "precision": 0.75,
-        "predicted": 4,
-        "recall": 0.75,
+        "f1": 0.8889,
+        "precision": 0.8,
+        "predicted": 5,
+        "recall": 1.0,
         "support": 4
       },
       "support": {
@@ -1772,9 +1770,9 @@
         "support": 1
       },
       "usability": {
-        "f1": 0.5882,
-        "precision": 0.5556,
-        "predicted": 9,
+        "f1": 0.625,
+        "precision": 0.625,
+        "predicted": 8,
         "recall": 0.625,
         "support": 8
       }
@@ -1784,15 +1782,15 @@
     "labelled": 50,
     "mean_abs_error": 0.275,
     "tolerance": 0.5,
-    "within_tolerance": 0.86
+    "within_tolerance": 0.88
   },
   "severity": {
     "distance_counts": {
-      "0": 38,
-      "1": 12
+      "0": 37,
+      "1": 13
     },
-    "exact": 0.76,
-    "mean_abs_error": 0.24
+    "exact": 0.74,
+    "mean_abs_error": 0.26
   },
   "status": "ready"
 }

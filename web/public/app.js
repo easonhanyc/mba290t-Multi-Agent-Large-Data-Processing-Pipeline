@@ -464,6 +464,17 @@ function needsReviewText(m) {  // {"human=False,model=False": 41, …} -> readab
 }
 const labelsText = (x) => (x ? `${esc(x.topic)} / ${esc(x.intent)} / severity ${esc(x.severity)} / sentiment ${esc(x.sentiment)}` : "–");
 const confusions = (obj) => Object.entries(obj || {}).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([k, c]) => `<code>${esc(k)}</code> ${n(c)}`).join(", ") || "–";
+function candidatesTable(c, final) {  // setups compared on the golden 50 before the final run was chosen
+  if (!c || !Object.keys(c).length) return "";
+  const rows = [["golden-luna-none", "GPT-6 Luna, effort none"], ["golden-luna-low", "GPT-6 Luna, effort low (chosen)"], ["golden-decisions", "OpenAI Decisions"]]
+    .filter(([k]) => c[k]?.agreement);
+  const best = Math.max(...rows.map(([k]) => c[k].agreement.joint));
+  return `<p class="small"><strong>Setup chosen on these 50.</strong> Each candidate labelled the same texts; the predeclared rule picks the best “all three correct” within the cost cap, and the final run uses the winner's exact configuration.</p>` +
+    `<div class="table-wrap"><table><tr><th>Candidate</th><th class="num">Topic</th><th class="num">Intent</th><th class="num">Severity</th><th class="num">All three</th></tr>` +
+    rows.map(([k, label]) => { const a = c[k].agreement; return `<tr${a.joint === best ? " class='hl'" : ""}><td>${esc(label)}</td><td class="num">${pct(a.topic, 0)}</td><td class="num">${pct(a.intent, 0)}</td><td class="num">${pct(a.severity, 0)}</td><td class="num">${pct(a.joint, 0)}</td></tr>`; }).join("") +
+    (final?.agreement ? `<tr><td>Final run (winner's configuration, all 200,000)</td><td class="num">${pct(final.agreement.topic, 0)}</td><td class="num">${pct(final.agreement.intent, 0)}</td><td class="num">${pct(final.agreement.severity, 0)}</td><td class="num">${pct(final.agreement.joint, 0)}</td></tr>` : "") +
+    `</table></div>`;
+}
 async function loadEvaluation() {
   const e = await get("/evals");
   const g = e.golden;
@@ -474,8 +485,21 @@ async function loadEvaluation() {
       [`Sentiment within ±${g.sentiment?.tolerance ?? 0.5} / MAE`, `${pct(g.sentiment?.within_tolerance)} / ${g.sentiment?.mean_abs_error ?? "–"}`],
       ["Missing or quarantined predictions (count as wrong)", n(g.missing_or_quarantined_predictions)],
       ["needs_review flag vs human flag", needsReviewText(g.needs_review_vs_human)]]) +
+      candidatesTable(e.golden_candidates, g) +
       (e.golden_error_analysis ? `<details><summary>Error analysis</summary><div class="md">${md(e.golden_error_analysis)}</div></details>` : "");
   } else $("golden").innerHTML = "<p class='muted'>Golden-set comparison not loaded yet.</p>";
+  const qs = e.quote_support;
+  if (qs && qs.by_set) {
+    const order = ["golden/model", "golden/human", "final_sample/model"];
+    const name = {"golden/model": "Golden 50, final run's quotes", "golden/human": "Golden 50, Eason's quotes", "final_sample/model": "Random final-run sample"};
+    const keys = order.filter((k) => qs.by_set[k]);
+    $("quotes").innerHTML = `<p class="small muted">Code checks that each quote is an exact substring of its review. A blind judge (Claude Haiku, Claude Pro, not billed) then reads the review, the quote and the three labels, and says whether the quote alone supports each label. Model and human items are shuffled together, so Eason's own quotes calibrate the judge.</p>` +
+      `<div class="table-wrap"><table><tr><th>Set</th><th class="num">Items</th><th class="num">Exact substring</th><th class="num">Topic</th><th class="num">Intent</th><th class="num">Severity</th><th class="num">All three</th></tr>` +
+      keys.map((k) => { const t = qs.by_set[k]; return `<tr><td>${esc(name[k] || k)}</td><td class="num">${n(t.items)}</td><td class="num">${n(t.exact_substring)}/${n(t.items)}</td><td class="num">${pct(t.topic?.supported, 0)}</td><td class="num">${pct(t.intent?.supported, 0)}</td><td class="num">${pct(t.severity?.supported, 0)}</td><td class="num">${pct(t.all_three_supported, 0)}</td></tr>`; }).join("") +
+      `</table></div>` +
+      keys.filter((k) => qs.by_set[k].same_sentence_as_human !== undefined).map((k) => `<p class="small">${esc(name[k] || k)}: the model quoted Eason's evidence sentence in ${n(qs.by_set[k].same_sentence_as_human)} of ${n(qs.by_set[k].items)} reviews (multi-sentence reviews: ${esc(qs.by_set[k].same_sentence_as_human_multi)}).</p>`).join("") +
+      `<p class="small muted">Shares are “supported” verdicts; the full report, with every quote the judge did not accept, is <code>evals/quote_support/report.md</code>.</p>`;
+  } else $("quotes").innerHTML = "<p class='muted'>Quote check not loaded yet.</p>";
   const v = e.verification_report;
   if (v && v.agreement) {
     const a = v.agreement;

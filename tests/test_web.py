@@ -132,13 +132,17 @@ class TestDashboardApi(_ApiCase):
         self.assertEqual(r.status_code, 200)
         e = r.json()
         self.assertEqual(set(e), {"verification_sql", "verification_report", "golden", "golden_error_analysis",
+                                  "golden_candidates", "quote_support",
                                   "planted_error", "injection", "rank_check", "self_check", "self_check_full"})
         if e["verification_report"]:
             self.assertNotIn("disagreements", e["verification_report"])
             self.assertIn("agreement", e["verification_report"])
             self.assertIn("top_confusions", e["verification_report"])
-        if isinstance(e["golden"], dict):
-            self.assertNotIn("cases_detail", e["golden"])
+        for k in ("golden",):
+            if isinstance(e[k], dict):
+                self.assertNotIn("cases_detail", e[k])
+        for d in (e["golden_candidates"] or {}).values():
+            self.assertNotIn("cases_detail", d)
         for k in ("self_check", "self_check_full"):
             if isinstance(e[k], dict):
                 self.assertNotIn("calculated_ranking", e[k])

@@ -1,10 +1,10 @@
 {
-  "pilot_id": "pilot100-20261012T224901Z",
+  "pilot_id": "pilot100-20261014T213535Z",
   "offline_stub": false,
-  "executed_at": "2026-10-12T22:51:41.853281+00:00",
-  "run_dir": "runs/pilot100-20261012T224901Z",
+  "executed_at": "2026-10-14T21:38:33.951263+00:00",
+  "run_dir": "runs/pilot100-20261014T213535Z",
   "input": {
-    "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+    "path": "runs/pilot100-20261014T213535Z/input/cost_100.csv",
     "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
     "manifest_sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e",
     "matches_manifest": true,
@@ -113,14 +113,14 @@
   },
   "settings": {
     "workers": 1,
-    "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+    "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
     "stages": {
       "enrich_primary": {
         "provider": "openai",
         "model": "gpt-6-luna",
-        "effort": "none",
+        "effort": "low",
         "tier": "flex",
-        "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+        "config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
         "batch": "50 reviews/request"
       },
       "crosscheck": {
@@ -136,7 +136,7 @@
         "model": "gpt-6-luna",
         "effort": "low",
         "tier": "flex",
-        "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+        "config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
         "batch": "1 review/request"
       },
       "fallback2": {
@@ -144,7 +144,7 @@
         "model": "sonnet",
         "effort": "low",
         "tier": "subscription",
-        "config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+        "config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
         "batch": "1 review/request"
       },
       "verify": {
@@ -152,30 +152,30 @@
         "model": "haiku",
         "effort": "n/a",
         "tier": "subscription",
-        "config": "haiku@n/a|verify-v1|cfg-e6ab73d745",
-        "batch": "25 reviews/request"
+        "config": "haiku@n/a|verify-v1|cfg-26c97bdddf",
+        "batch": "50 reviews/request"
       },
       "group": {
         "provider": "claude_code",
         "model": "sonnet",
         "effort": "low",
         "tier": "subscription",
-        "config": "sonnet@low|group-v1|cfg-df12b8e8c6",
-        "batch": "<= 8 quotes/request"
+        "config": "sonnet@low|group-v1|cfg-28f1c4b99f",
+        "batch": "<= 12 quotes/request"
       },
       "memo": {
         "provider": "claude_code",
         "model": "sonnet",
         "effort": "low",
         "tier": "subscription",
-        "config": "sonnet@low|memo-v1|cfg-7897f460ec",
+        "config": "sonnet@low|memo-v1|cfg-b9e01714ea",
         "batch": "aggregates + evidence pack"
       }
     }
   },
   "process_wall_clock_s": {
-    "cold": 160.006,
-    "warm": 0.314
+    "cold": 178.378,
+    "warm": 0.332
   },
   "runs": {
     "cold": {
@@ -194,33 +194,33 @@
         "enrich:primary": {
           "attempts": 2,
           "cached_input_tokens": 2368,
-          "cost_usd": 0.001191,
+          "cost_usd": 0.00155,
           "input_tokens": 8315,
           "invalid_output_retries": 0,
-          "output_tokens": 3231,
-          "reasoning_tokens": 0,
+          "output_tokens": 4667,
+          "reasoning_tokens": 1435,
           "retries": 0,
           "succeeded": 2
         },
         "group": {
-          "attempts": 12,
-          "cached_input_tokens": 0,
+          "attempts": 11,
+          "cached_input_tokens": 1568,
           "cost_usd": 0.0,
-          "input_tokens": 19418,
+          "input_tokens": 19636,
           "invalid_output_retries": 0,
-          "output_tokens": 1753,
+          "output_tokens": 1741,
           "reasoning_tokens": 0,
           "retries": 0,
-          "succeeded": 12
+          "succeeded": 11
         },
         "memo": {
           "attempts": 1,
-          "cached_input_tokens": 0,
+          "cached_input_tokens": 13792,
           "cost_usd": 0.0,
-          "input_tokens": 7932,
+          "input_tokens": 30476,
           "invalid_output_retries": 0,
-          "output_tokens": 2861,
-          "reasoning_tokens": 1352,
+          "output_tokens": 4957,
+          "reasoning_tokens": 405,
           "retries": 0,
           "succeeded": 1
         },
@@ -228,10 +228,10 @@
           "attempts": 1,
           "cached_input_tokens": 0,
           "cost_usd": 0.0,
-          "input_tokens": 2646,
+          "input_tokens": 2645,
           "invalid_output_retries": 0,
-          "output_tokens": 2115,
-          "reasoning_tokens": 1489,
+          "output_tokens": 2509,
+          "reasoning_tokens": 1883,
           "retries": 0,
           "succeeded": 1
         }
@@ -251,33 +251,33 @@
         "enrich:primary": {
           "attempts": 2,
           "cached_input_tokens": 2368,
-          "cost_usd": 0.001191,
+          "cost_usd": 0.00155,
           "input_tokens": 8315,
           "invalid_output_retries": 0,
-          "output_tokens": 3231,
-          "reasoning_tokens": 0,
+          "output_tokens": 4667,
+          "reasoning_tokens": 1435,
           "retries": 0,
           "succeeded": 2
         },
         "group": {
-          "attempts": 12,
-          "cached_input_tokens": 0,
+          "attempts": 11,
+          "cached_input_tokens": 1568,
           "cost_usd": 0.0,
-          "input_tokens": 19418,
+          "input_tokens": 19636,
           "invalid_output_retries": 0,
-          "output_tokens": 1753,
+          "output_tokens": 1741,
           "reasoning_tokens": 0,
           "retries": 0,
-          "succeeded": 12
+          "succeeded": 11
         },
         "memo": {
           "attempts": 1,
-          "cached_input_tokens": 0,
+          "cached_input_tokens": 13792,
           "cost_usd": 0.0,
-          "input_tokens": 7932,
+          "input_tokens": 30476,
           "invalid_output_retries": 0,
-          "output_tokens": 2861,
-          "reasoning_tokens": 1352,
+          "output_tokens": 4957,
+          "reasoning_tokens": 405,
           "retries": 0,
           "succeeded": 1
         },
@@ -285,10 +285,10 @@
           "attempts": 1,
           "cached_input_tokens": 0,
           "cost_usd": 0.0,
-          "input_tokens": 2646,
+          "input_tokens": 2645,
           "invalid_output_retries": 0,
-          "output_tokens": 2115,
-          "reasoning_tokens": 1489,
+          "output_tokens": 2509,
+          "reasoning_tokens": 1883,
           "retries": 0,
           "succeeded": 1
         }
@@ -313,7 +313,7 @@
           "service_tier": "subscription"
         },
         "group": {
-          "batch": "<= 8 quotes/request",
+          "batch": "<= 12 quotes/request",
           "service_tier": "subscription"
         },
         "memo": {
@@ -321,24 +321,24 @@
           "service_tier": "subscription"
         },
         "verify": {
-          "batch": "25 reviews/request",
+          "batch": "50 reviews/request",
           "service_tier": "subscription"
         }
       },
-      "finished_at": "2026-10-12T22:51:41.473Z",
+      "finished_at": "2026-10-14T21:38:33.554Z",
       "input": {
         "bytes": 15466,
-        "ingested_at": "2026-10-12T22:49:01.983Z",
-        "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+        "ingested_at": "2026-10-14T21:35:36.223Z",
+        "path": "runs/pilot100-20261014T213535Z/input/cost_100.csv",
         "rows": 100,
         "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
       },
-      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
       "ledger": {
         "cap_usd": 0.1,
         "denials": 0,
         "reserved_usd": 0.0,
-        "spent_usd": 0.00133929,
+        "spent_usd": 0.00169829,
         "unknown_usd": 0.0
       },
       "models": {
@@ -353,7 +353,7 @@
           "provider": "openai_decisions"
         },
         "enrich_primary": {
-          "effort": "none",
+          "effort": "low",
           "model": "gpt-6-luna",
           "provider": "openai"
         },
@@ -391,8 +391,18 @@
       "phase": "initial",
       "project_spend": {
         "effective_budget_usd": 0.1,
-        "other_runs_billed_usd": 0.00114055,
+        "other_runs_billed_usd": 2.14264252,
         "per_run": {
+          "runs/final-200k": 2.019246,
+          "runs/golden-decisions": 0.00909,
+          "runs/golden-luna-low": 0.000866,
+          "runs/golden-luna-none": 0.00067,
+          "runs/live-analysis10000": 0.096326,
+          "runs/live-budget-drill": 0.004306,
+          "runs/live-checkpoint500": 0.005175,
+          "runs/live-checkpoint500-w2": 0.00425,
+          "runs/live-synthetic-injection": 0.000234,
+          "runs/pilot100-20261012T224901Z": 0.001339,
           "runs/probe-decisions": 0.000942,
           "runs/probe-luna": 0.000198
         },
@@ -421,46 +431,161 @@
         },
         "unfinished": 0
       },
-      "run_id": "run-20261012T224901.597Z-55e5",
+      "run_id": "run-20261014T213535.337Z-c6e0",
       "stage_configs": {
-        "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
-        "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
-        "verify": "haiku@n/a|verify-v1|cfg-e6ab73d745"
+        "group": "sonnet@low|group-v1|cfg-28f1c4b99f",
+        "memo": "sonnet@low|memo-v1|cfg-b9e01714ea",
+        "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
       },
       "stage_seconds": {
-        "enrich": 61.262,
-        "export": 0.012,
-        "group": 42.729,
+        "enrich": 65.199,
+        "export": 0.01,
+        "group": 38.966,
         "ingest": 0.009,
-        "memo": 36.601,
-        "rank": 0.019,
-        "verify": 18.834
+        "memo": 50.925,
+        "rank": 0.022,
+        "verify": 22.17
       },
       "stages": {
         "analysis": {
+          "premium_only_sensitivity": {
+            "area": "billing/support",
+            "broader_word_list_check": {
+              "billing_support_rank_without_them": 3,
+              "billing_support_severity_sum_without_them": 24,
+              "case_insensitive": true,
+              "decision_area_order_without_them": [
+                "usability",
+                "playback/performance",
+                "billing/support",
+                "access/onboarding"
+              ],
+              "decision_area_severity_sums_without_them": {
+                "access/onboarding": 8,
+                "billing/support": 24,
+                "playback/performance": 26,
+                "usability": 30
+              },
+              "decision_areas_above_billing_support_without_them": [
+                "usability",
+                "playback/performance"
+              ],
+              "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$|paymen|pric|upgrad|purchas|\\bcosts?\\b|\\bcharg|\\bfees?\\b|\\bplans?\\b",
+              "records": 1,
+              "severity_sum": 3,
+              "share_of_issue_records": 0.111111,
+              "words": [
+                "premium",
+                "subscri-",
+                "pay/paid/paying",
+                "free",
+                "buy",
+                "money",
+                "trial",
+                "$",
+                "paymen-",
+                "pric-",
+                "upgrad-",
+                "purchas-",
+                "cost/costs",
+                "charg-",
+                "fee/fees",
+                "plan/plans"
+              ]
+            },
+            "decision_area_order": [
+              "usability",
+              "billing/support",
+              "playback/performance",
+              "access/onboarding"
+            ],
+            "decision_area_severity_sums": {
+              "access/onboarding": 8,
+              "billing/support": 27,
+              "playback/performance": 26,
+              "usability": 30
+            },
+            "interpretation": "Upper-bound sensitivity, not a relabelling. It assumes that none of the records without a Premium or payment word belongs in billing/support and adds them to no other area. Many of them plainly describe free-tier limits without naming Premium (skip limits, forced shuffle, no repeat or rewind), and non-English payment words (for example 'paisa') are not matched, so the real effect is smaller than shown.",
+            "issue_id": "billing.premium_only",
+            "issue_records": 9,
+            "issue_severity_sum": 27,
+            "matches_area_rollup": true,
+            "method": "case-insensitive regular expression over review_text (the words listed); severity from the saved labels; area sums over all complaint and cancellation records (equal to area_rollup.json).",
+            "population": "completed complaint and cancellation records of billing.premium_only (its membership in membership.csv), one per record, so row-weighted like the baseline ranking",
+            "without_payment_word": {
+              "billing_support_rank_without_them": 3,
+              "billing_support_severity_sum_without_them": 24,
+              "case_insensitive": true,
+              "decision_area_order_without_them": [
+                "usability",
+                "playback/performance",
+                "billing/support",
+                "access/onboarding"
+              ],
+              "decision_area_severity_sums_without_them": {
+                "access/onboarding": 8,
+                "billing/support": 24,
+                "playback/performance": 26,
+                "usability": 30
+              },
+              "decision_areas_above_billing_support_without_them": [
+                "usability",
+                "playback/performance"
+              ],
+              "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$",
+              "records": 1,
+              "severity_sum": 3,
+              "share_of_issue_records": 0.111111,
+              "words": [
+                "premium",
+                "subscri-",
+                "pay/paid/paying",
+                "free",
+                "buy",
+                "money",
+                "trial",
+                "$"
+              ]
+            },
+            "word_notes": "Case-insensitive. 'subscri-' matches subscribe, subscription and subscriber; 'paymen-', 'pric-', 'upgrad-' and 'purchas-' match payment(s), price/pricing, upgrade and purchase; 'charg-' matches at a word start (charge, charged); pay/paid/paying, free (free version, free tier, free user), buy, cost/costs, fee/fees and plan/plans match whole words only; premium, money, trial and $ match anywhere in the text."
+          },
           "robustness": {
+            "by_complaint_count": {
+              "top_enricher": "usability",
+              "top_verifier": "usability"
+            },
+            "decision_area_order_enricher": [
+              "usability",
+              "playback/performance"
+            ],
+            "decision_area_order_verifier": [
+              "usability",
+              "playback/performance",
+              "billing/support"
+            ],
             "enricher_labels": {
               "areas": {
                 "catalog/content": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
-                },
-                "general/unspecified": {
-                  "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 2,
+                  "share_of_complaints": 0.2
                 },
                 "playback/performance": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 3,
+                  "share_of_complaints": 0.2
                 },
                 "usability": {
                   "complaints": 3,
-                  "share_of_complaints": 0.5
+                  "severity_sum": 7,
+                  "share_of_complaints": 0.6
                 }
               },
-              "complaints": 6
+              "complaints": 5
             },
-            "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+            "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+            "note": "Same reviews (the declared verification sample, distinct texts weighted by the rows sharing each text), labelled independently by two model roles. Sampling error is not included.",
+            "row_weighted_reviews": 10,
             "same_top_decision_area": true,
             "sample": 10,
             "top_decision_area_enricher": "usability",
@@ -469,22 +594,26 @@
               "areas": {
                 "billing/support": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 2,
+                  "share_of_complaints": 0.2
                 },
                 "catalog/content": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 2,
+                  "share_of_complaints": 0.2
                 },
                 "playback/performance": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 4,
+                  "share_of_complaints": 0.2
                 },
                 "usability": {
-                  "complaints": 3,
-                  "share_of_complaints": 0.5
+                  "complaints": 2,
+                  "severity_sum": 7,
+                  "share_of_complaints": 0.4
                 }
               },
-              "complaints": 6
+              "complaints": 5
             }
           }
         },
@@ -514,60 +643,60 @@
           "transient_requeued": 0
         },
         "export": {
-          "calls": 17,
+          "calls": 16,
           "checkpoint_after": 100,
           "checkpoint_before": 0,
-          "grading_dir": "runs/pilot100-20261012T224901Z/grading",
+          "grading_dir": "runs/pilot100-20261014T213535Z/grading",
           "records": 100
         },
         "group": {
-          "issues": 15,
-          "memberships": 52,
-          "named_calls": 12
+          "issues": 16,
+          "memberships": 51,
+          "named_calls": 11
         },
         "memo": {
           "claims": 40,
           "source": "model"
         },
         "rank": {
-          "complaints": 52,
-          "issues": 15,
+          "complaints": 51,
+          "issues": 16,
           "top": [
             {
-              "complaint_count": 13,
+              "complaint_count": 9,
               "issue_id": "billing.premium_only",
               "mean_severity": "3.000000",
-              "priority_score": 39,
+              "priority_score": 27,
               "rank": 1,
-              "severity_sum": 39
+              "severity_sum": 27
             },
             {
-              "complaint_count": 14,
+              "complaint_count": 13,
               "issue_id": "other.general",
-              "mean_severity": "2.000000",
-              "priority_score": 28,
+              "mean_severity": "1.923077",
+              "priority_score": 25,
               "rank": 2,
-              "severity_sum": 28
+              "severity_sum": 25
             },
             {
-              "complaint_count": 7,
+              "complaint_count": 8,
               "issue_id": "usability.ads",
-              "mean_severity": "2.142857",
-              "priority_score": 15,
+              "mean_severity": "2.000000",
+              "priority_score": 16,
               "rank": 3,
-              "severity_sum": 15
+              "severity_sum": 16
+            },
+            {
+              "complaint_count": 3,
+              "issue_id": "usability.library",
+              "mean_severity": "3.000000",
+              "priority_score": 9,
+              "rank": 4,
+              "severity_sum": 9
             },
             {
               "complaint_count": 2,
               "issue_id": "access.login",
-              "mean_severity": "4.000000",
-              "priority_score": 8,
-              "rank": 4,
-              "severity_sum": 8
-            },
-            {
-              "complaint_count": 2,
-              "issue_id": "playback.crash",
               "mean_severity": "4.000000",
               "priority_score": 8,
               "rank": 5,
@@ -578,9 +707,9 @@
         "verify": {
           "agreement": {
             "intent": {
-              "agree": 10,
+              "agree": 8,
               "of": 10,
-              "rate": 1.0
+              "rate": 0.8
             },
             "sentiment_within_tolerance": {
               "agree": 10,
@@ -588,14 +717,14 @@
               "rate": 1.0
             },
             "severity": {
-              "agree": 7,
+              "agree": 6,
               "of": 10,
-              "rate": 0.7
+              "rate": 0.6
             },
             "topic": {
-              "agree": 9,
+              "agree": 8,
               "of": 10,
-              "rate": 0.9
+              "rate": 0.8
             }
           },
           "completed": 10,
@@ -604,7 +733,7 @@
       },
       "status": "completed",
       "stop_reason": null,
-      "wall_clock_s": 159.495,
+      "wall_clock_s": 177.332,
       "workers": 1
     },
     "warm": {
@@ -623,33 +752,33 @@
         "enrich:primary": {
           "attempts": 2,
           "cached_input_tokens": 2368,
-          "cost_usd": 0.001191,
+          "cost_usd": 0.00155,
           "input_tokens": 8315,
           "invalid_output_retries": 0,
-          "output_tokens": 3231,
-          "reasoning_tokens": 0,
+          "output_tokens": 4667,
+          "reasoning_tokens": 1435,
           "retries": 0,
           "succeeded": 2
         },
         "group": {
-          "attempts": 12,
-          "cached_input_tokens": 0,
+          "attempts": 11,
+          "cached_input_tokens": 1568,
           "cost_usd": 0.0,
-          "input_tokens": 19418,
+          "input_tokens": 19636,
           "invalid_output_retries": 0,
-          "output_tokens": 1753,
+          "output_tokens": 1741,
           "reasoning_tokens": 0,
           "retries": 0,
-          "succeeded": 12
+          "succeeded": 11
         },
         "memo": {
           "attempts": 1,
-          "cached_input_tokens": 0,
+          "cached_input_tokens": 13792,
           "cost_usd": 0.0,
-          "input_tokens": 7932,
+          "input_tokens": 30476,
           "invalid_output_retries": 0,
-          "output_tokens": 2861,
-          "reasoning_tokens": 1352,
+          "output_tokens": 4957,
+          "reasoning_tokens": 405,
           "retries": 0,
           "succeeded": 1
         },
@@ -657,10 +786,10 @@
           "attempts": 1,
           "cached_input_tokens": 0,
           "cost_usd": 0.0,
-          "input_tokens": 2646,
+          "input_tokens": 2645,
           "invalid_output_retries": 0,
-          "output_tokens": 2115,
-          "reasoning_tokens": 1489,
+          "output_tokens": 2509,
+          "reasoning_tokens": 1883,
           "retries": 0,
           "succeeded": 1
         }
@@ -686,7 +815,7 @@
           "service_tier": "subscription"
         },
         "group": {
-          "batch": "<= 8 quotes/request",
+          "batch": "<= 12 quotes/request",
           "service_tier": "subscription"
         },
         "memo": {
@@ -694,24 +823,24 @@
           "service_tier": "subscription"
         },
         "verify": {
-          "batch": "25 reviews/request",
+          "batch": "50 reviews/request",
           "service_tier": "subscription"
         }
       },
-      "finished_at": "2026-10-12T22:51:41.841Z",
+      "finished_at": "2026-10-14T21:38:33.939Z",
       "input": {
         "bytes": 15466,
-        "ingested_at": "2026-10-12T22:49:01.983Z",
-        "path": "runs/pilot100-20261012T224901Z/input/cost_100.csv",
+        "ingested_at": "2026-10-14T21:35:36.223Z",
+        "path": "runs/pilot100-20261014T213535Z/input/cost_100.csv",
         "rows": 100,
         "sha256": "c884ac3b9be5066995d5063f96ad9af6e5e082975788c1684c4f6b6ea661dd0e"
       },
-      "label_config": "gpt-6-luna@none>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-1a5b53adeb",
+      "label_config": "gpt-6-luna@low>gpt-6-luna@low(1.5%)>sonnet@low(0.25%)|enrich-v2|schema-v2|cfg-52c5333247",
       "ledger": {
         "cap_usd": 0.1,
         "denials": 0,
         "reserved_usd": 0.0,
-        "spent_usd": 0.00133929,
+        "spent_usd": 0.00169829,
         "unknown_usd": 0.0
       },
       "models": {
@@ -726,7 +855,7 @@
           "provider": "openai_decisions"
         },
         "enrich_primary": {
-          "effort": "none",
+          "effort": "low",
           "model": "gpt-6-luna",
           "provider": "openai"
         },
@@ -764,8 +893,18 @@
       "phase": "resume",
       "project_spend": {
         "effective_budget_usd": 0.1,
-        "other_runs_billed_usd": 0.00114055,
+        "other_runs_billed_usd": 2.14264252,
         "per_run": {
+          "runs/final-200k": 2.019246,
+          "runs/golden-decisions": 0.00909,
+          "runs/golden-luna-low": 0.000866,
+          "runs/golden-luna-none": 0.00067,
+          "runs/live-analysis10000": 0.096326,
+          "runs/live-budget-drill": 0.004306,
+          "runs/live-checkpoint500": 0.005175,
+          "runs/live-checkpoint500-w2": 0.00425,
+          "runs/live-synthetic-injection": 0.000234,
+          "runs/pilot100-20261012T224901Z": 0.001339,
           "runs/probe-decisions": 0.000942,
           "runs/probe-luna": 0.000198
         },
@@ -794,46 +933,161 @@
         },
         "unfinished": 0
       },
-      "run_id": "run-20261012T225141.618Z-d2d1",
+      "run_id": "run-20261014T213833.675Z-aede",
       "stage_configs": {
-        "group": "sonnet@low|group-v1|cfg-df12b8e8c6",
-        "memo": "sonnet@low|memo-v1|cfg-7897f460ec",
-        "verify": "haiku@n/a|verify-v1|cfg-e6ab73d745"
+        "group": "sonnet@low|group-v1|cfg-28f1c4b99f",
+        "memo": "sonnet@low|memo-v1|cfg-b9e01714ea",
+        "verify": "haiku@n/a|verify-v1|cfg-26c97bdddf"
       },
       "stage_seconds": {
         "enrich": 0.001,
-        "export": 0.007,
+        "export": 0.006,
         "group": 0.002,
         "ingest": 0.0,
-        "memo": 0.005,
-        "rank": 0.007,
+        "memo": 0.01,
+        "rank": 0.01,
         "verify": 0.002
       },
       "stages": {
         "analysis": {
+          "premium_only_sensitivity": {
+            "area": "billing/support",
+            "broader_word_list_check": {
+              "billing_support_rank_without_them": 3,
+              "billing_support_severity_sum_without_them": 24,
+              "case_insensitive": true,
+              "decision_area_order_without_them": [
+                "usability",
+                "playback/performance",
+                "billing/support",
+                "access/onboarding"
+              ],
+              "decision_area_severity_sums_without_them": {
+                "access/onboarding": 8,
+                "billing/support": 24,
+                "playback/performance": 26,
+                "usability": 30
+              },
+              "decision_areas_above_billing_support_without_them": [
+                "usability",
+                "playback/performance"
+              ],
+              "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$|paymen|pric|upgrad|purchas|\\bcosts?\\b|\\bcharg|\\bfees?\\b|\\bplans?\\b",
+              "records": 1,
+              "severity_sum": 3,
+              "share_of_issue_records": 0.111111,
+              "words": [
+                "premium",
+                "subscri-",
+                "pay/paid/paying",
+                "free",
+                "buy",
+                "money",
+                "trial",
+                "$",
+                "paymen-",
+                "pric-",
+                "upgrad-",
+                "purchas-",
+                "cost/costs",
+                "charg-",
+                "fee/fees",
+                "plan/plans"
+              ]
+            },
+            "decision_area_order": [
+              "usability",
+              "billing/support",
+              "playback/performance",
+              "access/onboarding"
+            ],
+            "decision_area_severity_sums": {
+              "access/onboarding": 8,
+              "billing/support": 27,
+              "playback/performance": 26,
+              "usability": 30
+            },
+            "interpretation": "Upper-bound sensitivity, not a relabelling. It assumes that none of the records without a Premium or payment word belongs in billing/support and adds them to no other area. Many of them plainly describe free-tier limits without naming Premium (skip limits, forced shuffle, no repeat or rewind), and non-English payment words (for example 'paisa') are not matched, so the real effect is smaller than shown.",
+            "issue_id": "billing.premium_only",
+            "issue_records": 9,
+            "issue_severity_sum": 27,
+            "matches_area_rollup": true,
+            "method": "case-insensitive regular expression over review_text (the words listed); severity from the saved labels; area sums over all complaint and cancellation records (equal to area_rollup.json).",
+            "population": "completed complaint and cancellation records of billing.premium_only (its membership in membership.csv), one per record, so row-weighted like the baseline ranking",
+            "without_payment_word": {
+              "billing_support_rank_without_them": 3,
+              "billing_support_severity_sum_without_them": 24,
+              "case_insensitive": true,
+              "decision_area_order_without_them": [
+                "usability",
+                "playback/performance",
+                "billing/support",
+                "access/onboarding"
+              ],
+              "decision_area_severity_sums_without_them": {
+                "access/onboarding": 8,
+                "billing/support": 24,
+                "playback/performance": 26,
+                "usability": 30
+              },
+              "decision_areas_above_billing_support_without_them": [
+                "usability",
+                "playback/performance"
+              ],
+              "pattern": "premium|subscri|\\bpa(?:y|id|ying)\\b|\\bfree\\b|\\bbuy\\b|money|trial|\\$",
+              "records": 1,
+              "severity_sum": 3,
+              "share_of_issue_records": 0.111111,
+              "words": [
+                "premium",
+                "subscri-",
+                "pay/paid/paying",
+                "free",
+                "buy",
+                "money",
+                "trial",
+                "$"
+              ]
+            },
+            "word_notes": "Case-insensitive. 'subscri-' matches subscribe, subscription and subscriber; 'paymen-', 'pric-', 'upgrad-' and 'purchas-' match payment(s), price/pricing, upgrade and purchase; 'charg-' matches at a word start (charge, charged); pay/paid/paying, free (free version, free tier, free user), buy, cost/costs, fee/fees and plan/plans match whole words only; premium, money, trial and $ match anywhere in the text."
+          },
           "robustness": {
+            "by_complaint_count": {
+              "top_enricher": "usability",
+              "top_verifier": "usability"
+            },
+            "decision_area_order_enricher": [
+              "usability",
+              "playback/performance"
+            ],
+            "decision_area_order_verifier": [
+              "usability",
+              "playback/performance",
+              "billing/support"
+            ],
             "enricher_labels": {
               "areas": {
                 "catalog/content": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
-                },
-                "general/unspecified": {
-                  "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 2,
+                  "share_of_complaints": 0.2
                 },
                 "playback/performance": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 3,
+                  "share_of_complaints": 0.2
                 },
                 "usability": {
                   "complaints": 3,
-                  "share_of_complaints": 0.5
+                  "severity_sum": 7,
+                  "share_of_complaints": 0.6
                 }
               },
-              "complaints": 6
+              "complaints": 5
             },
-            "note": "Same reviews (the declared verification sample), labelled independently by two model roles.",
+            "metric": "severity_sum (the baseline priority) over complaint and cancellation reviews, row-weighted",
+            "note": "Same reviews (the declared verification sample, distinct texts weighted by the rows sharing each text), labelled independently by two model roles. Sampling error is not included.",
+            "row_weighted_reviews": 10,
             "same_top_decision_area": true,
             "sample": 10,
             "top_decision_area_enricher": "usability",
@@ -842,22 +1096,26 @@
               "areas": {
                 "billing/support": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 2,
+                  "share_of_complaints": 0.2
                 },
                 "catalog/content": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 2,
+                  "share_of_complaints": 0.2
                 },
                 "playback/performance": {
                   "complaints": 1,
-                  "share_of_complaints": 0.166667
+                  "severity_sum": 4,
+                  "share_of_complaints": 0.2
                 },
                 "usability": {
-                  "complaints": 3,
-                  "share_of_complaints": 0.5
+                  "complaints": 2,
+                  "severity_sum": 7,
+                  "share_of_complaints": 0.4
                 }
               },
-              "complaints": 6
+              "complaints": 5
             }
           }
         },
@@ -887,60 +1145,60 @@
           "transient_requeued": 0
         },
         "export": {
-          "calls": 17,
+          "calls": 16,
           "checkpoint_after": 100,
           "checkpoint_before": 0,
-          "grading_dir": "runs/pilot100-20261012T224901Z/grading",
+          "grading_dir": "runs/pilot100-20261014T213535Z/grading",
           "records": 100
         },
         "group": {
-          "issues": 15,
-          "memberships": 52,
+          "issues": 16,
+          "memberships": 51,
           "named_calls": 0
         },
         "memo": {
           "claims": 40,
-          "source": "cache"
+          "source": "model, reused from the stage cache (generated in `run-20261014T213535.337Z-c6e0`)"
         },
         "rank": {
-          "complaints": 52,
-          "issues": 15,
+          "complaints": 51,
+          "issues": 16,
           "top": [
             {
-              "complaint_count": 13,
+              "complaint_count": 9,
               "issue_id": "billing.premium_only",
               "mean_severity": "3.000000",
-              "priority_score": 39,
+              "priority_score": 27,
               "rank": 1,
-              "severity_sum": 39
+              "severity_sum": 27
             },
             {
-              "complaint_count": 14,
+              "complaint_count": 13,
               "issue_id": "other.general",
-              "mean_severity": "2.000000",
-              "priority_score": 28,
+              "mean_severity": "1.923077",
+              "priority_score": 25,
               "rank": 2,
-              "severity_sum": 28
+              "severity_sum": 25
             },
             {
-              "complaint_count": 7,
+              "complaint_count": 8,
               "issue_id": "usability.ads",
-              "mean_severity": "2.142857",
-              "priority_score": 15,
+              "mean_severity": "2.000000",
+              "priority_score": 16,
               "rank": 3,
-              "severity_sum": 15
+              "severity_sum": 16
+            },
+            {
+              "complaint_count": 3,
+              "issue_id": "usability.library",
+              "mean_severity": "3.000000",
+              "priority_score": 9,
+              "rank": 4,
+              "severity_sum": 9
             },
             {
               "complaint_count": 2,
               "issue_id": "access.login",
-              "mean_severity": "4.000000",
-              "priority_score": 8,
-              "rank": 4,
-              "severity_sum": 8
-            },
-            {
-              "complaint_count": 2,
-              "issue_id": "playback.crash",
               "mean_severity": "4.000000",
               "priority_score": 8,
               "rank": 5,
@@ -951,9 +1209,9 @@
         "verify": {
           "agreement": {
             "intent": {
-              "agree": 10,
+              "agree": 8,
               "of": 10,
-              "rate": 1.0
+              "rate": 0.8
             },
             "sentiment_within_tolerance": {
               "agree": 10,
@@ -961,14 +1219,14 @@
               "rate": 1.0
             },
             "severity": {
-              "agree": 7,
+              "agree": 6,
               "of": 10,
-              "rate": 0.7
+              "rate": 0.6
             },
             "topic": {
-              "agree": 9,
+              "agree": 8,
               "of": 10,
-              "rate": 0.9
+              "rate": 0.8
             }
           },
           "sample": 10
@@ -976,7 +1234,7 @@
       },
       "status": "completed",
       "stop_reason": null,
-      "wall_clock_s": 0.038,
+      "wall_clock_s": 0.044,
       "workers": 1
     }
   }

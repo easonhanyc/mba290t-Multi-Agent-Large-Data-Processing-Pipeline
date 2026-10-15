@@ -1,0 +1,72 @@
+{
+  "increase_rule": "largest_increases lists at most five issues whose share rose, i.e. pp_difference > 0 after rounding to one decimal; zero and negative changes are left out",
+  "rule": "full months with more than 1.8x the median full-month review count",
+  "share_definition": "share = the issue's complaint and cancellation reviews / all classified reviews in the month (a share of reviews, not of complaints); pp_difference = share in the spike month minus the same share over the other full months",
+  "spikes": [
+    {
+      "complaint_share": 0.581059,
+      "largest_increases": [
+        {
+          "complaints_in_month": 558,
+          "issue_id": "other.general",
+          "pp_difference": 36.566,
+          "share_in_month": 0.447833,
+          "share_other_months": 0.08217
+        },
+        {
+          "complaints_in_month": 16,
+          "issue_id": "access.login",
+          "pp_difference": 0.075,
+          "share_in_month": 0.012841,
+          "share_other_months": 0.012095
+        }
+      ],
+      "median_full_month_reviews": 438,
+      "month": "2023-07",
+      "reviews": 1246
+    },
+    {
+      "complaint_share": 0.75887,
+      "largest_increases": [
+        {
+          "complaints_in_month": 414,
+          "issue_id": "billing.premium_only",
+          "pp_difference": 26.262,
+          "share_in_month": 0.299783,
+          "share_other_months": 0.037159
+        },
+        {
+          "complaints_in_month": 333,
+          "issue_id": "other.general",
+          "pp_difference": 12.902,
+          "share_in_month": 0.24113,
+          "share_other_months": 0.112112
+        },
+        {
+          "complaints_in_month": 29,
+          "issue_id": "catalog.lyrics",
+          "pp_difference": 1.58,
+          "share_in_month": 0.020999,
+          "share_other_months": 0.0052
+        },
+        {
+          "complaints_in_month": 42,
+          "issue_id": "usability.library",
+          "pp_difference": 0.708,
+          "share_in_month": 0.030413,
+          "share_other_months": 0.023335
+        },
+        {
+          "complaints_in_month": 14,
+          "issue_id": "billing.price",
+          "pp_difference": 0.659,
+          "share_in_month": 0.010138,
+          "share_other_months": 0.003551
+        }
+      ],
+      "median_full_month_reviews": 438,
+      "month": "2023-10",
+      "reviews": 1381
+    }
+  ]
+}

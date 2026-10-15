@@ -1,0 +1,263 @@
+{
+  "change_in_share_of_reviews": {
+    "access/onboarding": {
+      "2022": 0.018018,
+      "2023": 0.02439,
+      "decision_option": true,
+      "pp_change": 0.637
+    },
+    "billing/support": {
+      "2022": 0.099099,
+      "2023": 0.126829,
+      "decision_option": true,
+      "pp_change": 2.773
+    },
+    "catalog/content": {
+      "2022": 0.027027,
+      "2023": 0.068293,
+      "decision_option": false,
+      "pp_change": 4.127
+    },
+    "general/unspecified": {
+      "2022": 0.027027,
+      "2023": 0.195122,
+      "decision_option": false,
+      "pp_change": 16.809
+    },
+    "playback/performance": {
+      "2022": 0.045045,
+      "2023": 0.092683,
+      "decision_option": true,
+      "pp_change": 4.764
+    },
+    "usability": {
+      "2022": 0.099099,
+      "2023": 0.102439,
+      "decision_option": true,
+      "pp_change": 0.334
+    }
+  },
+  "largest_increase": {
+    "among_all_areas": "general/unspecified",
+    "among_the_four_decision_areas": "playback/performance"
+  },
+  "method": "share = complaint/cancellation reviews in the area / all classified reviews in the period; Wilson 95% intervals; identical calendar months one year apart avoid the partial first/last months and seasonal mix. Descriptive only: reviews are self-selected, not a customer census.",
+  "periods": {
+    "2022 Jun-Oct": {
+      "areas": {
+        "access/onboarding": {
+          "ci95": [
+            0.004955,
+            0.063327
+          ],
+          "complaints": 2,
+          "share_of_reviews": 0.018018
+        },
+        "billing/support": {
+          "ci95": [
+            0.05624,
+            0.16878
+          ],
+          "complaints": 11,
+          "share_of_reviews": 0.099099
+        },
+        "catalog/content": {
+          "ci95": [
+            0.009233,
+            0.076464
+          ],
+          "complaints": 3,
+          "share_of_reviews": 0.027027
+        },
+        "general/unspecified": {
+          "ci95": [
+            0.009233,
+            0.076464
+          ],
+          "complaints": 3,
+          "share_of_reviews": 0.027027
+        },
+        "playback/performance": {
+          "ci95": [
+            0.019391,
+            0.101136
+          ],
+          "complaints": 5,
+          "share_of_reviews": 0.045045
+        },
+        "usability": {
+          "ci95": [
+            0.05624,
+            0.16878
+          ],
+          "complaints": 11,
+          "share_of_reviews": 0.099099
+        }
+      },
+      "complaint_share": 0.315315,
+      "complaint_share_ci95": [
+        0.236288,
+        0.406699
+      ],
+      "complaints": 35,
+      "months": [
+        "2022-06",
+        "2022-07",
+        "2022-08",
+        "2022-09",
+        "2022-10"
+      ],
+      "reviews": 111,
+      "top_issues": {
+        "access.login": {
+          "complaints": 2,
+          "share_of_reviews": 0.018018
+        },
+        "billing.payment": {
+          "complaints": 3,
+          "share_of_reviews": 0.027027
+        },
+        "billing.premium_only": {
+          "complaints": 7,
+          "share_of_reviews": 0.063063
+        },
+        "catalog.missing": {
+          "complaints": 2,
+          "share_of_reviews": 0.018018
+        },
+        "other.general": {
+          "complaints": 3,
+          "share_of_reviews": 0.027027
+        },
+        "playback.crash": {
+          "complaints": 2,
+          "share_of_reviews": 0.018018
+        },
+        "playback.stops": {
+          "complaints": 2,
+          "share_of_reviews": 0.018018
+        },
+        "usability.ads": {
+          "complaints": 5,
+          "share_of_reviews": 0.045045
+        },
+        "usability.library": {
+          "complaints": 2,
+          "share_of_reviews": 0.018018
+        },
+        "usability.navigation": {
+          "complaints": 3,
+          "share_of_reviews": 0.027027
+        }
+      }
+    },
+    "2023 Jun-Oct": {
+      "areas": {
+        "access/onboarding": {
+          "ci95": [
+            0.010462,
+            0.055816
+          ],
+          "complaints": 5,
+          "share_of_reviews": 0.02439
+        },
+        "billing/support": {
+          "ci95": [
+            0.08804,
+            0.179347
+          ],
+          "complaints": 26,
+          "share_of_reviews": 0.126829
+        },
+        "catalog/content": {
+          "ci95": [
+            0.041113,
+            0.111355
+          ],
+          "complaints": 14,
+          "share_of_reviews": 0.068293
+        },
+        "general/unspecified": {
+          "ci95": [
+            0.14669,
+            0.25477
+          ],
+          "complaints": 40,
+          "share_of_reviews": 0.195122
+        },
+        "playback/performance": {
+          "ci95": [
+            0.060138,
+            0.140213
+          ],
+          "complaints": 19,
+          "share_of_reviews": 0.092683
+        },
+        "usability": {
+          "ci95": [
+            0.067981,
+            0.151523
+          ],
+          "complaints": 21,
+          "share_of_reviews": 0.102439
+        }
+      },
+      "complaint_share": 0.609756,
+      "complaint_share_ci95": [
+        0.541547,
+        0.673928
+      ],
+      "complaints": 125,
+      "months": [
+        "2023-06",
+        "2023-07",
+        "2023-08",
+        "2023-09",
+        "2023-10"
+      ],
+      "reviews": 205,
+      "top_issues": {
+        "access.login": {
+          "complaints": 4,
+          "share_of_reviews": 0.019512
+        },
+        "billing.premium_only": {
+          "complaints": 25,
+          "share_of_reviews": 0.121951
+        },
+        "catalog.lyrics": {
+          "complaints": 7,
+          "share_of_reviews": 0.034146
+        },
+        "catalog.recommendations": {
+          "complaints": 5,
+          "share_of_reviews": 0.02439
+        },
+        "other.general": {
+          "complaints": 40,
+          "share_of_reviews": 0.195122
+        },
+        "playback.performance": {
+          "complaints": 5,
+          "share_of_reviews": 0.02439
+        },
+        "playback.stops": {
+          "complaints": 5,
+          "share_of_reviews": 0.02439
+        },
+        "usability.ads": {
+          "complaints": 11,
+          "share_of_reviews": 0.053659
+        },
+        "usability.library": {
+          "complaints": 3,
+          "share_of_reviews": 0.014634
+        },
+        "usability.other": {
+          "complaints": 4,
+          "share_of_reviews": 0.019512
+        }
+      }
+    }
+  }
+}

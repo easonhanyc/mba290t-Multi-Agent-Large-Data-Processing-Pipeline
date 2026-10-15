@@ -1,0 +1,56 @@
+{
+  "complaint_or_cancellation": 4612,
+  "complaint_share": 0.4612,
+  "completed": 10000,
+  "exact_text_cache_reuses": 1552,
+  "intent": {
+    "cancellation": 424,
+    "complaint": 4188,
+    "praise": 4282,
+    "request": 245,
+    "unclear": 861
+  },
+  "labeled_by": {
+    "cache": 1552,
+    "fallback1": 126,
+    "primary": 8322
+  },
+  "mean_sentiment": 0.1034,
+  "needs_review": 957,
+  "note": "Counts are review records in the declared scope (each original ID counted once, cache reuses included).",
+  "quarantined": 0,
+  "severity": {
+    "1": 5407,
+    "2": 2109,
+    "3": 2071,
+    "4": 391,
+    "5": 22
+  },
+  "severity_among_complaints": {
+    "1": 19,
+    "2": 2109,
+    "3": 2071,
+    "4": 391,
+    "5": 22
+  },
+  "topic": {
+    "access": 144,
+    "billing": 969,
+    "catalog": 752,
+    "downloads": 126,
+    "other": 5736,
+    "playback": 819,
+    "support": 14,
+    "usability": 1440
+  },
+  "topic_among_complaints": {
+    "access": 141,
+    "billing": 927,
+    "catalog": 311,
+    "downloads": 77,
+    "other": 1355,
+    "playback": 671,
+    "support": 4,
+    "usability": 1126
+  }
+}

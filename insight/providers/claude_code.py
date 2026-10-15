@@ -23,7 +23,14 @@ from . import ProviderError, Result, empty_usage
 _STRIP_ENV = ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN", "ANTHROPIC_BASE_URL", "CLAUDE_CODE_USE_BEDROCK",
               "CLAUDE_CODE_USE_VERTEX")
 _LIMIT_WORDS = ("usage limit", "limit reached", "limit will reset", "out of extra usage", "weekly limit",
-                "5-hour limit", "upgrade to")
+                "5-hour limit", "session limit", "upgrade to")
+
+
+def is_usage_limit(text: str) -> bool:
+    """A Claude Pro plan limit (stop and resume later), not a momentary 429. The CLI reports these as HTTP 429 with
+    wording that has changed over time, e.g. "You've hit your session limit · resets 4:30pm" (2026-10-14)."""
+    low = (text or "").lower()
+    return any(w in low for w in _LIMIT_WORDS) or ("limit" in low and ("resets" in low or "hit your" in low))
 _AUTH_WORDS = ("failed to authenticate", "not logged in", "please run /login", "oauth", "invalid api key")
 
 
@@ -101,7 +108,7 @@ class ClaudeCodeProvider:
             text = str(d.get("result") or d.get("terminal_reason") or "error").strip()
             low = text.lower()
             status = d.get("api_error_status")
-            if any(w in low for w in _LIMIT_WORDS):
+            if is_usage_limit(text):
                 raise ProviderError("systemic", f"Claude Pro usage limit: {text[:200]}", usage=usage,
                                     provider_request_id=rid)
             if any(w in low for w in _AUTH_WORDS):

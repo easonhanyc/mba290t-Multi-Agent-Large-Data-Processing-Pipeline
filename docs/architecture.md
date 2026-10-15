@@ -10,7 +10,7 @@ flowchart TD
     FULL -->|scripts/make_analysis_subset.py| SUB[("declared scope (final run)<br/>data/analysis_200k.csv<br/>200,013 rows")]
     SUB --> ING["1 Ingest - code<br/>hash rows, profile, dedupe exact text, queue"]
     ING -->|empty text| QE[(quarantine: empty_review_text)]
-    ING -->|"state.sqlite: reviews<br/>one model result per distinct text"| EN{"2 Enrich - GPT-6 Luna + code<br/>50 reviews/request, effort none, Flex"}
+    ING -->|"state.sqlite: reviews<br/>one model result per distinct text"| EN{"2 Enrich - GPT-6 Luna + code<br/>50 reviews/request, effort low, Flex"}
     EN -->|valid, no difficulty| RES[(results: completed<br/>+ exact-text aliases)]
     EN -->|"model flag or intent/severity<br/>contradiction"| ST[(staged: primary kept)]
     EN -.->|"backend hybrid only:<br/>high-stakes + 10% sample"| CC["optional cross-check - OpenAI Decisions<br/>1 review/request, intent + severity<br/>built and tested, off: 50 requests/day"]
@@ -18,7 +18,7 @@ flowchart TD
     CC -.->|disagree| ST
     EN -->|invalid output| RT["one retry"] -->|still invalid| ST
     EN -->|429 / 5xx / timeout| BO["backoff + jitter, bounded<br/>exhausted -> pending"]
-    ST -->|"after all primaries: contradictions,<br/>then flags, then review_id; cap 10%"| F1["fallback1 - GPT-6 Luna<br/>1 review, effort low"]
+    ST -->|"after all primaries: contradictions,<br/>then flags, then review_id; cap 1.5%"| F1["fallback1 - GPT-6 Luna<br/>1 review, effort low"]
     ST -->|beyond the cap| KP["save primary + needs_review"]
     F1 -->|valid| RES
     F1 -->|invalid twice, cap 0.25%| F2["fallback2 - Claude Sonnet<br/>via claude -p (Pro)"]
@@ -48,8 +48,8 @@ flowchart TD
 | # | Stage | Owner | Input | Output | Failure behaviour | Stop condition |
 |---|---|---|---|---|---|---|
 | 1 | Ingest | code | analysis CSV (+ `--full` source) | `reviews` table, `ingestion_report.json`, `ingestion.json` (provided helper, full file), `data_manifest.json` | malformed CSV, or an analysis row that differs from the full file, aborts before any model call | all rows read |
-| 2 | Enrich | `gpt-6-luna` (effort none, Flex) + code; capped fallbacks `gpt-6-luna` (effort low) and Claude Sonnet | pending distinct texts, at most 50 per request | `results` rows saved per batch; `staged` rows awaiting a fallback decision | every returned ID validated; invalid items retried once, then staged/quarantined; transient errors: backoff, re-queued once, then pending | queue empty, budget cap, project cap, circuit breaker, Ctrl-C |
-| 3 | Verify | Claude Haiku (`claude -p`, Pro) + code | declared random sample of distinct completed texts (10%, at most 2,000), 50 per request (25 in the pilot and 500 runs) | `verification/*` | invalid items retried once, then recorded as failed | sample done or stop |
+| 2 | Enrich | `gpt-6-luna` (effort low, Flex) + code; capped fallbacks `gpt-6-luna` (effort low) and Claude Sonnet | pending distinct texts, at most 50 per request | `results` rows saved per batch; `staged` rows awaiting a fallback decision | every returned ID validated; invalid items retried once, then staged/quarantined; transient errors: backoff, re-queued once, then pending | queue empty, budget cap, project cap, circuit breaker, Ctrl-C |
+| 3 | Verify | Claude Haiku (`claude -p`, Pro) + code | declared random sample of distinct completed texts (10%, at most 2,000), 50 per request (25 in the superseded effort-none 500 run) | `verification/*` | invalid items retried once, then recorded as failed | sample done or stop |
 | 4 | Group | code (membership) + Claude Sonnet (names only) | completed complaint/cancellation records | `membership.csv`, `issues.json` | naming failure keeps the taxonomy name | top 12 issues named |
 | 5 | Rank | code | records + membership | `ranking.csv`, `aggregates.csv`, `area_rollup.json` | inconsistent membership raises | always completes |
 | 5b | Analysis | code | records + source metadata | `analysis/*` | n/a (arithmetic) | always completes |
@@ -82,19 +82,19 @@ the allowlist is the set of provider/model pairs in `cost/rates.csv`. The `claud
 
 ## Why each model call exists
 
-- **GPT-6 Luna, enrich** (50 reviews per request, `reasoning.effort = none`, Flex tier): the fixed-label
+- **GPT-6 Luna, enrich** (50 reviews per request, `reasoning.effort = low`, Flex tier): the fixed-label
   judgments (issue/topic, intent, severity, sentiment level, which sentence is the evidence, an ambiguity
-  flag). It is the only measured option that fits both the budget and the time limit. On the 500-review
-  checkpoint it labelled 479 distinct texts in 10 requests for $0.004974, with no retries and no invalid
-  outputs (`runs/live-checkpoint500/run_summary.json`), and the account's limit was 5,000 requests per
-  minute (`runs/probe-luna/state.sqlite`). Jev was not run (TypeSafe's $5 minimum purchase), and the
-  Decisions API allowed 50 requests per day (see "Alternative enrichment backends" below). Golden-set
-  quality: golden 50 (human labels): final run topic 76%, intent 74%, severity exact 76% (MAE 0.24); effort low alone 80% / 76% / 76%, effort none alone 74% / 70% / 72%, Decisions 76% / 74% / 68% (`docs/model_choice.md`, `evals/golden/error_analysis.md`).
-- **GPT-6 Luna, fallback1** (one review, `effort = low`): a second, more careful read of the reviews the
-  primary pass flagged or contradicted itself on, capped at 10% of distinct texts (1.5% up to the
-  10,000-review checkpoint, where 871 of 8,448 distinct texts were staged and only 126 could be routed;
-  `runs/analysis10k_console.log`). In the final run all 13,639 staged texts fit under the cap of 15,236
-  (`runs/final_resume_console.log`).
+  flag). Batched Luna is the only measured option that fits both the budget and the time limit (the Decisions API
+  allowed 50 requests per day, see "Alternative enrichment backends" below; Jev was not run because of TypeSafe's $5
+  minimum purchase), and effort low won the golden-50 comparison of three candidate setups (54% all three correct,
+  against 46% for effort none and 48% for Decisions; `docs/model_choice.md`). In the final run it labelled 152,363
+  distinct texts in 3,062 successful requests for $2.256960 (`runs/final-200k-v2/run_summary.json`); the account's
+  limit was 5,000 requests per minute (`runs/probe-luna/state.sqlite`). Golden 50 for the final run: topic 78%,
+  intent 76%, severity exact 74% (MAE 0.26) (`evals/golden/error_analysis.md`).
+- **GPT-6 Luna, fallback1** (one review, `effort = low`): a second read of the reviews the primary pass flagged or
+  contradicted itself on, with the definitions and a specific question, capped at 1.5% of distinct texts. In the final
+  run 12,664 texts were staged and the 2,285 the cap allowed were routed; the other 10,379 kept their primary label
+  with `needs_review` (`runs/final_v2_resume_console.log`).
 - **Claude Sonnet, fallback2**: only when fallback1 output is invalid twice; capped at 0.25%.
 - **Claude Haiku, verify**: an independent second opinion from a different model family, blind to the
   enricher, on a declared random sample.
@@ -105,12 +105,9 @@ the allowlist is the set of provider/model pairs in `cost/rates.csv`. The `claud
 - **Claude Sonnet, memo**: prose from saved aggregates. Code checks every token, review ID and area, and
   rejects any digit typed outside a token; code also appends fixed limitations the model cannot change
   (`code_written_limitations` in `memo.json`: the share of complaints with no specific area and the premium-only
-  sensitivity). The template fallback (output invalid twice) ran once: in one post-run regeneration of the final
-  run both memo attempts typed digits outside tokens
-  (`runs/final-200k/invocations/run-20261013T233601.448Z-8794.json`); after spike months and comparison periods
-  were turned into tokens (`insight/memo.py`), every later memo validated on its first attempt. The final memo
-  was generated in `run-20261014T184545.752Z-3a1e` and reused from the stage cache by the last invocation
-  (`runs/final-200k/memo.json`). History: [post_run_corrections.md](post_run_corrections.md).
+  sensitivity). A Claude Pro plan limit stops the run (resume later) instead of producing a template memo. The final
+  memo was generated in `run-20261015T033337.582Z-bf5d` after two earlier memos of the same run were set aside
+  (`runs/final-200k-v2/memo_history/`, reasons in the README, "Decision memo").
 
 What code does instead of a model: parsing, hashing, duplicate detection, the pending queue, quote
 extraction (exact slices), entity matching, schema and consistency validation, grouping, ranking
@@ -178,17 +175,16 @@ misses, so the combined rule (74% / 74% / 70%) does not beat Luna alone (`evals/
 
 ## Concurrency, rate limits and spend
 
-- One worker for the pilot. Measured 1-vs-2-worker comparison on the same 500 reviews: the enrich stage
-  took 266.8 s with 1 worker and 154.3 s with 2 (`run_summary.json` in `runs/live-checkpoint500` and
-  `runs/live-checkpoint500-w2`). The labels matched on all of topic, intent and severity for 466 of 500
-  reviews; the differences come from the model's answers, not from routing (see `docs/model_choice.md`).
-  The 10,000-review checkpoint ran with 8 workers (931.6 s, `cost/refreshes/analysis_10000.json`). Both
-  enrichment invocations of the final run used 16 workers (`invocations` table of
-  `runs/final-200k/state.sqlite`): enrich took 193.1 s before the interruption and 8,374.6 s in the resume.
-  Flex returned 172 HTTP 429 responses, all retried with backoff; 10 enrichment outputs were fully invalid and 10
-  partly valid, and their 19 retry tasks made 20 attempts (reconciled in a footnote under "Retries" in
-  `cost/report.md`). The ten post-run regeneration invocations (group, rank, memo and export only, no enrichment
-  calls) used 4 workers (`runs/final-200k/invocations/*.json`), so the run has 12 invocations in all.
+- One worker for the pilot and the 500-review checkpoint. Measured 1-vs-2-worker comparison on the same 500
+  reviews (effort-none setup): the enrich stage took 266.8 s with 1 worker and 154.3 s with 2 (`run_summary.json`
+  in `runs/live-checkpoint500` and `runs/live-checkpoint500-w2`); the labels matched on all of topic, intent and
+  severity for 466 of 500 reviews, and the differences come from the model's answers, not from routing (see
+  `docs/model_choice.md`). The 10,000-review checkpoint ran with 8 workers. Both enrichment invocations of the final
+  run used 16 workers (`runs/final-200k-v2/invocations/*.json`): enrich took 184.3 s before the interruption and
+  8,571.5 s in the resume. Flex returned 1 HTTP 429 and 16 requests hit the 900 s timeout; all were retried with
+  backoff, and the timeouts count at their reserved cost because the provider may have billed them. 14 outputs were
+  partly valid and their retry tasks made 14 attempts (footnote under "Retries" in `cost/report.md`). The two memo
+  regenerations that followed (no enrichment, verify or naming calls) used 4 workers, so the run has 4 invocations.
 - One token-bucket limiter per provider (requests/min and tokens/min) shared by all workers.
 - One spend ledger per run directory, shared by all workers. Before each attempt: reserve the worst case at
   Standard prices; refuse when spent + unknown + reserved + next reservation would exceed the cap.

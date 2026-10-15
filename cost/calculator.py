@@ -941,8 +941,9 @@ def invalid_output_reconciliation(ref):
     out["footnote"] = (
         f"Invalid outputs, reconciled ({ref.get('label')}, from the per-call evidence `refreshes/{ref.get('label')}_calls.jsonl`): "
         f"the enrichment model returned **{out['whole_output_invalid']}** outputs that failed validation as a whole "
-        f"({why}; {out['whole_output_invalid_first_try']} on a first try, {out['whole_output_invalid_on_retry']} on a retry) "
-        f"and {out['partially_valid']} that were only partly valid (some reviews' labels rejected, the rest saved). "
+        + (f"({why}; {out['whole_output_invalid_first_try']} on a first try, {out['whole_output_invalid_on_retry']} on a retry) "
+           if out["whole_output_invalid"] else "")
+        + f"and {out['partially_valid']} that were only partly valid (some reviews' labels rejected, the rest saved). "
         f"Those {first_try} first-try problems started **{out['retry_tasks']}** retry tasks"
         + (f" (the enrich stage's `invalid_output_retries` counter in `run_log.jsonl`: {counter})" if counter is not None else "")
         + f"; {out['retry_task_resends']} retry task(s) were resent after a transient error, so the retry tasks made "
@@ -950,6 +951,19 @@ def invalid_output_reconciliation(ref):
         f"invalid on the retry were routed to the fallback tier. The memo stage, outside these enrichment counts, had {out['memo_invalid_outputs']} "
         f"output(s) rejected by its validator ({out['memo_invalid_outputs_on_retry']} of them on its single retry).")
     return out
+
+
+def same_setup(meas, refreshes):
+    """Refreshes measured with the pilot's label_config (the setup being projected); all of them if none match."""
+    setup = ((meas or {}).get("settings") or {}).get("label_config")
+    same = [r for r in refreshes if r.get("label_config") == setup] if setup else []
+    return same or list(refreshes)
+
+
+def setup_name(label_config):
+    """'gpt-6-luna@low>...' -> 'effort low' (the primary model's reasoning effort)."""
+    head = (label_config or "").split(">")[0]
+    return f"effort {head.split('@', 1)[1]}" if "@" in head else (head.split("|")[0] or "-")
 
 
 def _ref_step(r):
@@ -966,7 +980,9 @@ def _scaling_decision(L, meas, refreshes, comparisons, proj, a, spend):
                                                   "enrich_pool": c.get("enrich_pool")},
                            c.get("workers"), c["stage_seconds"].get("enrich"), c["wall_clock_s"],
                            meas["settings"].get("label_config"), c["api_cost_usd"]))
-    real_refs = [r for r in refreshes if not r.get("offline_stub")]
+    all_refs = [r for r in refreshes if not r.get("offline_stub")]
+    real_refs = [r for r in same_setup(meas, all_refs)]
+    other_refs = [r for r in all_refs if r not in real_refs]
     steps += [_ref_step(r) for r in real_refs]
     if not steps:
         return
@@ -989,17 +1005,46 @@ def _scaling_decision(L, meas, refreshes, comparisons, proj, a, spend):
                  f"{s['attempts']:,} ({s['primary_attempts']:,} + {s['fallback1_attempts']:,}) | {s['rate_limited']} | "
                  f"{s['transient']} | {s['invalid']} | {s['fb_routed']:,} = {_pct(s['fb_share'])}{cap} | {fmt_usd(s['billed'], 6)} | "
                  f"{fmt_usd(s['per_text'], 8)} | {fmt_usd(s['primary_per_text'], 8)} | {_num(s['enrich_s'])} | {s['unfinished']} |")
+    if other_refs:
+        L += ["", f"All steps above used the final setup (`{steps[0]['label_config']}`). The same steps were first measured with "
+              "a superseded setup, kept here because their calls are billed project spend and they show the same scaling "
+              "behaviour (why the setup changed: `docs/model_choice.md`):", "",
+              "| Superseded step | Setup | Run | Rows | Distinct texts | Enrichment workers | Enrichment attempts | Billed | "
+              "Billed per distinct text | Primary pass per distinct text | Enrichment stage s | Unfinished |",
+              "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
+        old_pilot = COST_DIR / "experiments" / "pilot-effort-none"
+        if (old_pilot / "pilot_runs.json").exists():
+            op = json.loads((old_pilot / "pilot_runs.json").read_text(encoding="utf-8"))
+            op["calls"] = read_jsonl(old_pilot / "pilot_calls.jsonl") if (old_pilot / "pilot_calls.jsonl").exists() else []
+            om = measured(load_rates(COST_DIR / "rates.csv"), load_usage(old_pilot / "usage.csv"), op)
+            c = (om or {}).get("runs", {}).get("cold")
+            if c:
+                s0 = _step("pilot_100 (cold)", {"stages": c["stages"], "rows": c["rows"], "distinct_texts": c["distinct_texts"],
+                                               "run_dir": f"runs/{om['pilot_id']}", "unfinished": c["unfinished"]},
+                           c.get("workers"), c["stage_seconds"].get("enrich"), c["wall_clock_s"],
+                           om["settings"].get("label_config"), c["api_cost_usd"])
+                other_steps = [s0]
+            else:
+                other_steps = []
+        else:
+            other_steps = []
+        other_steps += [_ref_step(r) for r in other_refs]
+        for s in other_steps:
+            L.append(f"| {s['label']} | {setup_name(s['label_config'])} | `{s['run_dir']}` | {_int(s['rows'])} | {_int(s['distinct'])} | "
+                     f"{s['workers']} | {s['attempts']:,} | {fmt_usd(s['billed'], 6)} | {fmt_usd(s['per_text'], 8)} | "
+                     f"{fmt_usd(s['primary_per_text'], 8)} | {_num(s['enrich_s'])} | {s['unfinished']} |")
     per_text = " -> ".join(f"{fmt_usd(s['per_text'], 8)} ({_int(s['distinct'])} texts)" for s in steps)
     prim = [s["primary_per_text"] for s in steps if s["primary_per_text"] is not None]
-    L += ["", f"- **Cost per distinct text:** {per_text}."
-          + (f" The primary pass alone stayed between {fmt_usd(min(prim), 8)} and {fmt_usd(max(prim), 8)} per distinct text at "
-             "every size; the higher total per text of the final step is the fallback1 share, which rose when its cap was "
-             "raised (next bullet), not a change in the primary pass." if prim else "")]
     fb_txt = "; ".join(f"{s['label']}: {_pct(s['fb_share'])} of a {_pct(s['fb_cap'], 1)} cap" + (" (cap reached)" if s["fb_at_cap"] else "")
                        for s in steps if s["fb_cap"] is not None)
     at_cap = [s for s in steps if s["fb_at_cap"]]
+    cap_raised = bool(at_cap and final and final["fb_cap"] and final["fb_cap"] > (at_cap[-1]["fb_cap"] or 0))
+    L += ["", f"- **Cost per distinct text:** {per_text}."
+          + (f" The primary pass alone stayed between {fmt_usd(min(prim), 8)} and {fmt_usd(max(prim), 8)} per distinct text at "
+             "every size" + ("; the higher total per text of the final step is the fallback1 share, which rose when its cap "
+                             "was raised (next bullet), not a change in the primary pass." if cap_raised else ".") if prim else "")]
     raised = ""
-    if at_cap and final and final["fb_cap"] and final["fb_cap"] > (at_cap[-1]["fb_cap"] or 0):
+    if cap_raised:
         allowed = math.floor(final["fb_cap"] * (final["distinct"] or 0))
         raised = (f" The cap was reached at {', '.join(s['label'] for s in at_cap)}, so it was raised to "
                   f"{_pct(final['fb_cap'], 1)} for the final run, which routed {final['fb_routed']:,} texts, under the "
@@ -1016,17 +1061,17 @@ def _scaling_decision(L, meas, refreshes, comparisons, proj, a, spend):
         L.append(f"- <sub>{rec['footnote']}</sub>")
 
     # worker comparison: refreshes plus declared comparison runs, by worker count
-    cmp_rows = sorted([_ref_step(r) for r in real_refs] + [_ref_step(c) for c in comparisons if c.get("available")],
-                      key=lambda s: (s["workers"] or 0, s["distinct"] or 0))
+    cmp_rows = sorted([_ref_step(r) for r in all_refs] + [_ref_step(c) for c in comparisons if c.get("available")],
+                      key=lambda s: (s["workers"] or 0, s["distinct"] or 0, setup_name(s["label_config"])))
     missing = [c["run_dir"] for c in comparisons if not c.get("available")]
     if cmp_rows:
         L += ["", "### Worker comparison", "",
-              "| Enrichment workers | Run | Distinct texts | Enrichment stage s | Distinct texts per enrichment second | "
+              "| Enrichment workers | Setup | Run | Distinct texts | Enrichment stage s | Distinct texts per enrichment second | "
               "Mean primary attempt latency s | Rate-limited (HTTP 429) | Primary pass per distinct text | Pool utilisation | Note |",
-              "|---:|---|---:|---:|---:|---:|---:|---:|---:|---|"]
+              "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---|"]
         for s in cmp_rows:
             tput = s["distinct"] / s["enrich_s"] if s["distinct"] and s["enrich_s"] else None
-            L.append(f"| {s['workers']} | `{s['run_dir']}` | {_int(s['distinct'])} | {_num(s['enrich_s'])} | {_num(tput, 2)} | "
+            L.append(f"| {s['workers']} | {setup_name(s['label_config'])} | `{s['run_dir']}` | {_int(s['distinct'])} | {_num(s['enrich_s'])} | {_num(tput, 2)} | "
                      f"{_num(s['primary_latency'], 2)} | {s['rate_limited']} | {fmt_usd(s['primary_per_text'], 8)} | "
                      f"{_pct(s['utilisation'], 1)} | {s['note'] or ''} |")
         if missing:
@@ -1043,9 +1088,14 @@ def _scaling_decision(L, meas, refreshes, comparisons, proj, a, spend):
                      "second run sent the same requests as the first).")
         big = [s for s in cmp_rows if not any(s is p for pr in pairs for p in pr)]
         if big:
-            L.append(f"- The {' and '.join(str(s['workers']) for s in big)}-worker rows are different, larger inputs (with "
-                     "different fallback caps), so their throughput is indicative only, not a controlled speedup.")
-        top = cmp_rows[-1]
+            ws = sorted({s["workers"] for s in big})
+            L.append(f"- The other rows ({', '.join(map(str, ws[:-1])) + ' and ' + str(ws[-1]) if len(ws) > 1 else ws[0]} workers) "
+                     "differ in input size, setup or fallback cap, so their throughput is indicative only, not a controlled "
+                     "speedup" + (f"; at {' and '.join(map(str, both))} worker(s) both setups ran the same inputs, which compares "
+                                  "the setups, not the worker count." if (both := sorted({x["workers"] for x in cmp_rows for y in cmp_rows
+                                  if x["workers"] == y["workers"] and x["distinct"] == y["distinct"]
+                                  and x["label_config"] != y["label_config"]})) else "."))
+        top = final or cmp_rows[-1]  # the largest run of the setup being projected
         if top["enrich_s"] and top["attempts"]:
             rpm = top["attempts"] / (top["enrich_s"] / 60)
             limit = _val(a["stages"]["enrich_primary"].get("provider_requests_per_minute_limit", {"value": None}))
@@ -1230,13 +1280,15 @@ def render(meas, proj, a, R, refreshes, spend, sources_note, comparisons=()):
         L += ["", "## Measured refreshes at larger checkpoints", "",
               "Enrichment workers come from the invocations that made enrichment calls (the `invocations/*.json` files of the "
               "run); the number in brackets is the count of distinct worker IDs seen in those calls.", "",
-              "| Checkpoint | Run | Rows | Distinct texts | Enrichment workers | Enrichment stage s | Wall clock s (all invocations) | "
+              "| Checkpoint | Setup | Run | Rows | Distinct texts | Enrichment workers | Enrichment stage s | Wall clock s (all invocations) | "
               "Billed API cost | Billed / 1,000 rows | API-equivalent (Pro) | Fallback1 reviews | Verify reviews |",
-              "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
+              "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
+        cur = ((meas or {}).get("settings") or {}).get("label_config")
         for r in refreshes:
             st = r["stages"]
             seen = (r.get("enrich_pool") or {}).get("worker_ids_seen_in_calls")
-            L.append(f"| {r['label']} | `{r['run_dir']}` | {r['rows']:,} | {r['distinct_texts']:,} | {r.get('workers')}"
+            tag = setup_name(r.get("label_config")) + (" (final setup)" if r.get("label_config") == cur else " (superseded)")
+            L.append(f"| {r['label']} | {tag} | `{r['run_dir']}` | {r['rows']:,} | {r['distinct_texts']:,} | {r.get('workers')}"
                      f"{f' ({seen})' if seen else ''} | {_num(r.get('enrichment_stage_seconds'), 3)} | "
                      f"{r.get('wall_clock_s')} | {fmt_usd(r['api_cost_usd'], 4)} | {fmt_usd(r['cost_per_1000_input_rows_usd'], 4)} | "
                      f"{fmt_usd(r['api_equivalent_subscription_usd'], 4)} | {st.get('fallback1', {}).get('unique_reviews', 0)} | "
@@ -1403,9 +1455,10 @@ def replay(rates_path, assumptions_path, pilot_dir, out_dir, budget=None, runs_r
     usage = load_usage(Path(pilot_dir) / "usage.csv")
     meas = measured(R, usage, pilot)
     refreshes = load_refreshes(R, Path(pilot_dir) / "refreshes")
-    proj = projection(a, R, meas, budget, refreshes=refreshes)
+    same = same_setup(meas, refreshes)  # projections use only measurements of the setup the pilot ran
+    proj = projection(a, R, meas, budget, refreshes=same)
     scaling = {str(n): {k: {"api_cost_usd": v["api_cost_usd"], "elapsed_hours": v["elapsed_hours"]}
-                        for k, v in projection(a, R, meas, budget, rows_override=n, refreshes=refreshes)["scenarios"].items()
+                        for k, v in projection(a, R, meas, budget, rows_override=n, refreshes=same)["scenarios"].items()
                         if k.endswith("_reuse")}
                for n in (100, 500, 10_000)}
     note = ("Scaling checkpoints (estimates with reuse, same per-unit inputs): "

@@ -1,0 +1,15 @@
+{
+  "source": "evals/fresh_input/rehearsal_60.csv",
+  "source_sha256": "ea436d2acc4633445cd550e952f222f7680a427d22b0a2389f46e1181ed9e684",
+  "output": "runs/fresh-rehearsal_60-20261015T034611Z/input.csv",
+  "output_sha256": "d14360867715e255870a4fc74be32dd513c21834b05f01147fa6efe11cef0205",
+  "rows": 60,
+  "text_column": "review_text",
+  "columns_filled_blank_or_generated": [
+    "review_likes",
+    "app_version"
+  ],
+  "ignored_columns": [],
+  "empty_texts": 0,
+  "duplicate_review_ids": 0
+}

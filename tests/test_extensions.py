@@ -37,7 +37,8 @@ class TestClaudeCodeAdapter(unittest.TestCase):
         self.assertEqual(res.model_reported, "stub-haiku")
 
     def test_usage_limit_is_systemic_and_garbage_is_transient(self):
-        for fault, kind in (("limit", "systemic"), ("garbage", "transient"), ("error", "invalid_output")):
+        for fault, kind in (("limit", "systemic"), ("session", "systemic"), ("garbage", "transient"),
+                            ("error", "invalid_output")):
             os.environ["STUB_CLAUDE_FAULT"] = fault
             try:
                 with self.assertRaises(ProviderError) as cm:

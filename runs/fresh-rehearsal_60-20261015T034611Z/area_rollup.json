@@ -1,0 +1,51 @@
+{
+  "areas": [
+    {
+      "area": "billing/support",
+      "cancellation_count": 1,
+      "complaint_count": 9,
+      "decision_option": true,
+      "issues": 2,
+      "severity_sum": 29,
+      "share_of_complaints": "0.300000"
+    },
+    {
+      "area": "usability",
+      "cancellation_count": 0,
+      "complaint_count": 8,
+      "decision_option": true,
+      "issues": 4,
+      "severity_sum": 17,
+      "share_of_complaints": "0.266667"
+    },
+    {
+      "area": "playback/performance",
+      "cancellation_count": 0,
+      "complaint_count": 4,
+      "decision_option": true,
+      "issues": 3,
+      "severity_sum": 13,
+      "share_of_complaints": "0.133333"
+    },
+    {
+      "area": "general/unspecified",
+      "cancellation_count": 1,
+      "complaint_count": 6,
+      "decision_option": false,
+      "issues": 1,
+      "severity_sum": 12,
+      "share_of_complaints": "0.200000"
+    },
+    {
+      "area": "catalog/content",
+      "cancellation_count": 0,
+      "complaint_count": 3,
+      "decision_option": false,
+      "issues": 2,
+      "severity_sum": 9,
+      "share_of_complaints": "0.100000"
+    }
+  ],
+  "denominator_complaints": 30,
+  "note": "Derived view: sums of baseline issue metrics by decision area. Not a contract metric."
+}

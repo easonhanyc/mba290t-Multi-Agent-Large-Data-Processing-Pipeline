@@ -1,0 +1,17 @@
+{
+  "purpose": "rehearsal input for scripts/fresh_input_demo.sh: real reviews outside the declared 200k scope, never labelled by any run",
+  "source": "Final Assignment - Spotify Reviews Dataset/spotify_reviews_18months.csv",
+  "selection": "lowest SHA-256('fresh-demo-2026-10-14:' + review_id) among nonempty rows not in data/analysis_200k.csv; distinct texts",
+  "rows": 60,
+  "columns_kept": [
+    "review_id",
+    "review_text",
+    "review_rating",
+    "review_timestamp"
+  ],
+  "columns_left_out_to_exercise_prepare_fresh_input": [
+    "review_likes",
+    "app_version"
+  ],
+  "file_sha256": "ea436d2acc4633445cd550e952f222f7680a427d22b0a2389f46e1181ed9e684"
+}

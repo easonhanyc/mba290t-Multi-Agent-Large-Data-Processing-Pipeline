@@ -1,13 +1,47 @@
-# Post-run corrections to the final run
+# Post-run corrections
+
+Two runs have post-run corrections. Labels were never changed after a run: each correction reran only the stages
+after enrichment on the same run directory, from the saved labels, with no enrichment calls.
+
+## Final run (`runs/final-200k-v2`): the memo was regenerated twice
+
+| # | Invocation | Workers | Wall clock s | Model calls | Memo | Recommended area |
+|---:|---|---:|---:|---|---|---|
+| 1 | `run-20261014T233644.409Z-a3e1` (initial) | 16 | 199.8 | enrich 138 | none (stopped by SIGINT) | - |
+| 2 | `run-20261014T234005.530Z-f920` (resume) | 16 | 9,012.7 | enrich 5,228, verify 40, group 10, memo 2 (1 rejected) | model ([memo_history/1-...](../runs/final-200k-v2/memo_history/1-run-20261014T234005.530Z-f920.md)) | billing/support |
+| 3 | `run-20261015T032949.255Z-ff9e` | 4 | 86.1 | memo 1 | model ([memo_history/2-...](../runs/final-200k-v2/memo_history/2-run-20261015T032949.255Z-ff9e.md)) | usability |
+| 4 | `run-20261015T033337.582Z-bf5d` | 4 | 91.3 | memo 1 | model, the final [memo.md](../runs/final-200k-v2/memo.md) | usability |
+
+Sources: `runs/final-200k-v2/invocations/*.json`, `calls` table of the run's `state.sqlite`, and the two earlier memos
+with their `memo.json` in `runs/final-200k-v2/memo_history/`. Every invocation from #2 on reports the same 22 issues,
+91,268 memberships and ranking; the rank check is identical.
+
+1. **Memo #1 departed from the baseline without same-metric evidence.** It recommended billing/support while the area
+   with the highest baseline priority was usability (severity sum 52,983 against 52,551), so code added a visible
+   "Check" line to it. The memo prompt already said a departure needs trend or robustness evidence on the severity-sum
+   metric; memo #1 argued from the growth in share of reviews (a count-based trend) and the size of one issue, and the
+   severity-sum robustness figures did not support billing/support (the verifier's labels put it third; the
+   premium-only upper-bound sensitivity would put it third). **Fix:** the prompt now says count-based trends, spike
+   lifts and single-issue size can support but never by themselves justify a departure, and that a departure must
+   be argued in the first rationale point (`prompts/memo_v2.md`). Memo #2 recommended usability.
+2. **Memo #2 misused "within sampling error"** (it called usability's share higher "within sampling error" although no
+   two decision areas' intervals overlap) and said a human audit confirming the premium-only records would
+   strengthen billing/support (they are already counted there). **Fix:** the validator now rejects "within sampling
+   error" when no intervals overlap (`insight/memo.py`, `validate`), and the prompt says confirming those records
+   leaves billing/support unchanged. Memo #3, the final memo, recommends usability and passed validation on its first
+   attempt. Tests: `tests/test_pipeline_fixes.py::TestPlanLimitStopsInsteadOfDegrading`.
+
+Both regenerations were Claude Pro calls ($0 billed); the run's billed total stays $2.323945 (`ledger` in
+`run_summary.json`, plus $0.097098 reserved for unknown-outcome enrichment calls).
+
+## Superseded first final run (`runs/final-200k`, effort none)
 
 The labels of `runs/final-200k` were produced by its first two invocations (initial, interrupted by SIGINT, then
 resume) and were never changed afterwards. After the run, two reviews of the outputs led to corrections in how
 issues are **named**, which **metric** is used to compare the four decision areas, and how the **memo is
-validated and written**. Each correction was applied by rerunning group, rank, memo and export on the same run
-directory from the saved labels, with no enrichment calls. This page lists what changed, why, and how the
-result was checked. The README summarises it in three lines ([Evaluation](../README.md#evaluation)).
+validated and written**. The final run used the corrected code from its start.
 
-## Invocations of the final run
+### Invocations of the superseded run
 
 Sources: `history` in [`runs/final-200k/run_summary.json`](../runs/final-200k/run_summary.json), one file per
 invocation in [`runs/final-200k/invocations/`](../runs/final-200k/invocations/) (`workers`, `wall_clock_s`,
@@ -37,7 +71,7 @@ and the final rank check is identical, so no correction changed a label, a membe
 ([`grading/calls.jsonl.gz`](../runs/final-200k/grading/calls.jsonl.gz)). The run's billed total stays
 $2.019246 (`ledger` in `run_summary.json`).
 
-## 1. Issue naming: the catch-all was misnamed
+### 1. Issue naming: the catch-all was misnamed
 
 **Found.** The first naming pass (invocation #2) gave the naming model each issue's 8 highest-severity quotes.
 It named the catch-all `other.general` "Privacy and data collection concerns" (`stage_cache`, group output of
@@ -49,7 +83,7 @@ catch-alls `other.general` and `usability.other` keep their taxonomy names (`con
 `insight/group.py`). Invocation #3 renamed the top issues with 10 group calls. Membership is code and did not
 change.
 
-## 2. Metric choice: which measure ranks the four decision areas
+### 2. Metric choice: which measure ranks the four decision areas
 
 The contract's baseline priority is the severity sum (`priority_score = severity_sum`, `insight/rank.py`). The
 two natural measures point to different areas, and both are reported:
@@ -79,7 +113,7 @@ labels put billing/support first on severity sum (787) and the verifier's labels
 (758, billing/support third with 661) (`analysis/robustness.json`, memo tokens T42-T48). The memo states this
 disagreement and calls the recommendation provisional.
 
-## 3. Memo validation and the template fallback
+### 3. Memo validation and the template fallback
 
 The memo model writes tokens only; code fills every number and rejects any digit typed outside a token
 (`insight/memo.py`). Before invocation #6 the memo prompt was extended to ask for concrete next-quarter
@@ -90,7 +124,7 @@ so the run fell back to the deterministic template memo, marked as such
 The spike months and comparison periods were then turned into tokens (`insight/memo.py`), and the model memo of
 #7 validated on its first attempt.
 
-## 4. Memo revisions after the second review (invocations #8 to #11)
+### 4. Memo revisions after the second review (invocations #8 to #11)
 
 A second grading review of the memo found one wrong comparison ("largest increase of any area", while the
 non-decision area general/unspecified rose more), a sentence that called non-overlapping shares close, a
@@ -117,7 +151,7 @@ no validation problems) now:
 Invocation #12 re-ran group, rank, memo and export with the issue names and the memo reused from the stage
 cache (no model call).
 
-## 5. How the corrected outputs were checked
+### 5. How the corrected outputs were checked
 
 - Course checker against the declared-scope reference: `pass`, 0 issues, coverage candidate 1.0
   ([`runs/final-200k/self-check.json`](../runs/final-200k/self-check.json)).
@@ -128,6 +162,5 @@ cache (no model call).
   `grading/claims.csv`.
 - Cost: `cost/calculator.py refresh` then replay; the final-run refresh covers all 12 invocations
   (`cost/refreshes/final_200k.json`), and billed spend is unchanged because no correction made a billed call.
-- Trace regenerated with `python -m insight trace` ([docs/trace_example.md](trace_example.md)).
-- The dashboard database was reloaded from the corrected export; `/api/consistency` recomputes the ranking, the
-  40 claims and the memo's area, scope and trend tokens in SQL (see the README, [Dashboard](../README.md#dashboard)).
+- At the time, the trace and the dashboard database were regenerated from the corrected export. Both now show the
+  final run (`runs/final-200k-v2`).
