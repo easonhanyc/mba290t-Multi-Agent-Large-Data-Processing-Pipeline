@@ -21,7 +21,7 @@ re-sending finished reviews. A Postgres database, a read-only FastAPI backend an
 | Golden 50 (Eason's labels) | Final run: topic 78%, intent 76%, severity 74% exact (MAE 0.26) ([error_analysis.md](evals/golden/error_analysis.md)) |
 | Blind verifier, 2,000 reviews | topic 82%, intent 92%, severity 78% exact ([report.json](runs/final-200k-v2/verification/report.json)) |
 | Evidence quotes | 100% exact substrings; a blind judge finds 89% of sampled final-run quotes support all three labels ([quote_support/report.md](evals/quote_support/report.md)) |
-| Spend | $4.700980 billed API for the whole project, $2.421043 of it the final run (settled $2.323945 plus $0.097098 reserved for 17 calls of unknown outcome) ([project_spend.json](cost/project_spend.json)); Claude roles on Claude Pro ($1.9607 API-equivalent for the final run, not billed) |
+| Spend | $4.702001 billed API for the whole project, $2.421043 of it the final run (settled $2.323945 plus $0.097098 reserved for 17 calls of unknown outcome) ([project_spend.json](cost/project_spend.json)); Claude roles on Claude Pro ($1.9607 API-equivalent for the final run, not billed) |
 | Final run | [`runs/final-200k-v2`](runs/final-200k-v2/): 4 invocations, 9,389.902 s; grading export in [`grading/`](runs/final-200k-v2/grading/). A first final run with a superseded setting is kept in [`runs/final-200k`](runs/final-200k/) |
 
 ## Recommendation
@@ -55,7 +55,7 @@ python3 "$D/check_submission.py" reference --full "$D/spotify_reviews_18months.c
 python3 "$D/check_submission.py" check --reference /tmp/ref.json --submission runs/final-200k-v2/grading --out /tmp/check.json
 # 2. Ranking rebuilt from grading/ with no model call -> "identical": true, "issues": 22
 python3 -m insight rank --run-dir runs/final-200k-v2 --check
-# 3. Offline cost replay, no state database -> spend to date $4.700980 over 16 run directories
+# 3. Offline cost replay, no state database -> spend to date $4.702001 over 17 run directories
 python3 cost/calculator.py replay --out-dir /tmp/calc
 ```
 
@@ -73,7 +73,7 @@ subset script and the rank check refresh a timestamp in their manifest and `rank
 | D4 | Recommendation, alternatives, limitations | Memo: 4 actions, what would change the call, 3 alternatives, code-written limitations ([summary](#decision-memo)) |
 | T1 | 50 human labels, comparison, error analysis | [golden_50_labeled.csv](evals/golden/golden_50_labeled.csv); 3 candidate setups and the final run scored; [error_analysis.md](evals/golden/error_analysis.md); quote support checked ([report](evals/quote_support/report.md)) |
 | T2 | Verification, planted error, injection | Haiku blind on 2,000, [762 disagreements analysed](evals/verification/disagreement_analysis.md); planted error `detected`; injection 8/8 ([Evaluation](#evaluation)) |
-| T3 | Pilot, calculator, retry/spend/recovery | Pilot cold $0.001698 / 177.3 s, warm 0 calls; replay reproduces $4.700980; live budget drill; retries reconciled ([Cost](#cost-and-spend-controls)) |
+| T3 | Pilot, calculator, retry/spend/recovery | Pilot cold $0.001698 / 177.3 s, warm 0 calls; replay reproduces $4.702001; live budget drill; retries reconciled ([Cost](#cost-and-spend-controls)) |
 | W1 | Full ingestion, coverage, classification | Full file profiled with the provided helper ([ingestion.json](runs/final-200k-v2/grading/ingestion.json)); 200,000 / 13 / 0; checker `pass` |
 | W2 | Staged program, bounded calls, resume | `python -m insight run --input <csv>`; at most 50 reviews/request; [recorded SIGINT and resume](#interruption-and-resume); [fresh-input demonstration](#fresh-input-demonstration) |
 | W3 | Reproducible ranking, deployed dashboard | Rank check identical, 22 issues ([rank_check.json](runs/final-200k-v2/rank_check.json)); [Dashboard](#dashboard) |
@@ -225,10 +225,10 @@ Full report: [cost/report.md](cost/report.md) (offline replay); calculator guide
 - **100-review pilot** (`cost/report.md`, "Measured 100-review pilot"), final setup: cold, 100 of 100 completed with 3
   enrichment calls in 177.3 s, $0.001698 billed; warm rerun in the same directory, 0 calls, 100 result-cache hits,
   0.044 s. The first pilot with the superseded setup is in `cost/experiments/pilot-effort-none/`.
-- **Billed spend**: $4.700980 over 22,974 billed-provider calls in 16 run directories against the $9.00 project cap
-  (settled $4.603881 plus $0.097098 reserved for the final run's 17 unknown-outcome calls): the final run $2.421043,
-  the superseded first final run $2.019246, the two analysis_10000 runs $0.128644 and $0.096326, the other twelve
-  runs $0.035720 together (per run in `cost/project_spend.json`). Each call is priced as its reported usage x
+- **Billed spend**: $4.702001 over 22,977 billed-provider calls in 17 run directories against the $9.00 project cap
+  (settled $4.604903 plus $0.097098 reserved for the final run's 17 unknown-outcome calls): the final run $2.421043,
+  the superseded first final run $2.019246, the two analysis_10000 runs $0.128644 and $0.096326, the other thirteen
+  runs $0.036742 together (including the $0.001022 fresh-input rehearsal) (per run in `cost/project_spend.json`). Each call is priced as its reported usage x
   `rates.csv`, so the total is reproduced offline without the git-ignored run databases. Billed OpenAI spend can be
   reconciled against the account's usage page; no such reconciliation figure is recorded in this repository.
 - **Claude Pro**: the Claude roles run through `claude -p` on a flat monthly Claude Pro subscription. That fee is

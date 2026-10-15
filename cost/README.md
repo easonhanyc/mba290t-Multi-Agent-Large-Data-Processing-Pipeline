@@ -80,8 +80,8 @@ python3 cost/calculator.py refresh --run-dir runs/<run> --label checkpoint_500
   enrichment-pool utilisation; because that utilisation comes from the same run, the projection check against it
   (8,755.5 s projected vs 8,755.8 s measured for enrichment) is a consistency check, not an independent forecast.
   The estimate before the run, from analysis_10000_low, was $2.32 (base, reuse) to $4.55 (conservative, no reuse).
-- **Billed spend: $4.700980** over 16 run directories and 22,974 billed-provider calls in `project_spend.json`
-  (settled $4.603881 plus the $0.097098 reservation), of which $2.421043 is the final run and $2.019246 the superseded
+- **Billed spend: $4.702001** over 17 run directories and 22,977 billed-provider calls in `project_spend.json`
+  (settled $4.604903 plus the $0.097098 reservation), of which $2.421043 is the final run and $2.019246 the superseded
   first final run, against the $9.00 project cap. No run directory is "not reproducible offline", and the costs logged
   at call time sum to the same total (`report.md`, "Spending controls and spend to date"). A clean-clone replay without
   the git-ignored run databases gives the same total.
