@@ -38,6 +38,13 @@ verifier's labels put playback/performance first, 758 (T46) against usability 74
 and billing/support's share of reviews grew the most, +10.2 pp (T12), so a hedge action covers its Premium-only
 restrictions issue ([memo summary](#decision-memo)).
 
+**Why not Premium-only restrictions?** `billing.premium_only` is still the largest single issue in a decision area
+(severity sum 46,246 (C06), rank 2 behind the catch-all `other.general`), and an earlier final run made with a
+superseded setting recommended billing/support. The question asks for an area, though, and usability's severity is
+spread over three issues whose total is higher; with the final setup, fewer free-tier complaints that never name
+Premium are filed as premium-only. The gap is small (0.8%), so the memo hedges toward the Premium-only issue and calls
+its call provisional ([why the two runs differ](#results)).
+
 ## Verify in 3 commands
 
 No API key and no install: the checker, the rank check and the calculator use only the Python 3.12 standard
@@ -357,7 +364,7 @@ against both references, rank check, planted error, trace, golden scoring, disag
 | Checks | [self-check.json](runs/final-200k-v2/self-check.json), [rank_check.json](runs/final-200k-v2/rank_check.json), [verification/](runs/final-200k-v2/verification/), [planted_error.json](runs/final-200k-v2/evals/planted_error.json), [evals/](evals/) |
 | Cost | [cost/report.md](cost/report.md), [cost/README.md](cost/README.md), [cost/project_spend.json](cost/project_spend.json) |
 | Design docs | [architecture](docs/architecture.md), [labels](docs/labels.md), [model choice](docs/model_choice.md), [walkthrough](docs/walkthrough.md), [trace](docs/trace_example.md), [post-run corrections](docs/post_run_corrections.md) |
-| Superseded first final run | [`runs/final-200k/`](runs/final-200k/) (effort none; its own grading export, memo and checks) |
+| Superseded first final run | [`runs/final-200k/`](runs/final-200k/) (effort none; its own grading export, memo and checks; [why it is superseded](runs/final-200k/SUPERSEDED.md)) |
 
 **Final-run state database (not in git).** `runs/final-200k-v2/state.sqlite` is the asset
 `final-200k-v2-state.sqlite.gz` of the release
