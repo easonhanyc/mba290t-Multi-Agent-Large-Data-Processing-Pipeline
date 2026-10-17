@@ -115,8 +115,15 @@ attempt, no validation problems in `memo.json`).
 - **Alternatives**: billing/support (52,551 (A08); the largest single decision-area issue, Premium-only restrictions,
   46,246 (C06), and the largest growth, from 3.8% (T10) to 13.9% (T11) of reviews); playback/performance (48,060 (A11);
   share of reviews fell -4.8 pp (T15), but first under the verifier's labels); access/onboarding (smallest, 11,300 (A17)).
+- **Representative reviews the memo cites** (exact quotes, from its evidence pack): `usability.ads` `16c47c30-...`
+  (romanized Hindi: the app runs ads and asks for money more often than a beggar asks twice) and `59d1e2cd-...` ("Tooo many adds");
+  `usability.library` `3a8d3202-...` ("I spend hours creating a Playlist and when I go to play the list it plays
+  random stupid songs") and `ea18965a-...` ("YOU CAN'T EVEN REPEAT SONGS?????"). Full IDs and quotes per issue are in
+  the memo's "Representative evidence" section.
 - **Limitations stated in the memo**: the verifier disagreement makes the call provisional; 29.7% (A19) of complaints
-  are general/unspecified and allocated to no decision area; the premium-only upper-bound sensitivity (without the
+  are general/unspecified and allocated to no decision area; the 460,609 out-of-scope reviews were ingested but not
+  classified, while within scope 13 empty texts are quarantined, 0 are unfinished and 17,828 completed records carry
+  `needs_review`; the premium-only upper-bound sensitivity (without the
   2,456 records that never mention Premium or payment, billing/support's severity sum would fall from 52,551 to 45,268
   (T58), [premium_only_sensitivity.json](runs/final-200k-v2/analysis/premium_only_sensitivity.json)); self-selected
   reviews, no revenue or churn data, cancellation language is intent; shares carry sampling error.
@@ -227,7 +234,11 @@ setups are within noise of each other, and the golden scores of the final run ca
 
 ## Cost and spend controls
 
-Full report: [cost/report.md](cost/report.md) (offline replay); calculator guide: [cost/README.md](cost/README.md).
+Full report: [cost/report.md](cost/report.md) (offline replay, projections and scaling decision); calculator:
+[cost/calculator.py](cost/calculator.py) and its guide [cost/README.md](cost/README.md); dated prices with source links:
+[cost/rates.csv](cost/rates.csv); projection inputs and controls: [cost/assumptions.json](cost/assumptions.json);
+measured pilot evidence: [pilot_runs.json](cost/pilot_runs.json), [pilot_calls.jsonl](cost/pilot_calls.jsonl),
+[usage.csv](cost/usage.csv).
 
 - **100-review pilot** (`cost/report.md`, "Measured 100-review pilot"), final setup: cold, 100 of 100 completed with 3
   enrichment calls in 177.3 s, $0.001698 billed; warm rerun in the same directory, 0 calls, 100 result-cache hits,
@@ -329,7 +340,7 @@ that no run had labelled, with two source columns left out ([evals/fresh_input/r
   injection, checker), Run & cost (plays both recordings) and Review lookup (per-review trace). Every memo number shows
   what it measures and its source file.
 - **Consistency**: `/api/consistency` recomputes the ranking, the 40 claims and the memo's 52 area, scope and
-  trend tokens (selection in `web/api/index.py`, `_token_checks`) in SQL at request time; a check on 2026-10-15 UTC found
+  trend tokens (selection in `web/api/index.py`, `_token_checks`) in SQL at request time; a check on 2026-10-17 UTC found
   all of them matching.
 - **API**: GET-only JSON, including `/api/health`, `/api/overview`, `/api/ranking`, `/api/recommendation`,
   `/api/evals`, `/api/reviews/{review_id}` and `/api/consistency`; interactive Swagger docs at `/api/docs` (also `/docs`).
