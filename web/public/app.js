@@ -490,10 +490,10 @@ async function loadEvaluation() {
   } else $("golden").innerHTML = "<p class='muted'>Golden-set comparison not loaded yet.</p>";
   const qs = e.quote_support;
   if (qs && qs.by_set) {
-    const order = ["golden/model", "golden/human", "final_sample/model"];
-    const name = {"golden/model": "Golden 50, final run's quotes", "golden/human": "Golden 50, Eason's quotes", "final_sample/model": "Random final-run sample"};
+    const order = ["golden/model", "final_sample/model"];
+    const name = {"golden/model": "Golden 50, final run's quotes", "final_sample/model": "Random final-run sample"};
     const keys = order.filter((k) => qs.by_set[k]);
-    $("quotes").innerHTML = `<p class="small muted">Code checks that each quote is an exact substring of its review. A blind judge (Claude Haiku, Claude Pro, not billed) then reads the review, the quote and the three labels, and says whether the quote alone supports each label. Model and human items are shuffled together, so Eason's own quotes calibrate the judge.</p>` +
+    $("quotes").innerHTML = `<p class="small muted">Code checks that each quote is an exact substring of its review. A blind judge (Claude Haiku, Claude Pro, not billed) then reads the review, the quote and the three labels, and says whether the quote alone supports each label. The judge sees only the final run's own labels; Eason's golden labels are used only by code, for the comparison below.</p>` +
       `<div class="table-wrap"><table><tr><th>Set</th><th class="num">Items</th><th class="num">Exact substring</th><th class="num">Topic</th><th class="num">Intent</th><th class="num">Severity</th><th class="num">All three</th></tr>` +
       keys.map((k) => { const t = qs.by_set[k]; return `<tr><td>${esc(name[k] || k)}</td><td class="num">${n(t.items)}</td><td class="num">${n(t.exact_substring)}/${n(t.items)}</td><td class="num">${pct(t.topic?.supported, 0)}</td><td class="num">${pct(t.intent?.supported, 0)}</td><td class="num">${pct(t.severity?.supported, 0)}</td><td class="num">${pct(t.all_three_supported, 0)}</td></tr>`; }).join("") +
       `</table></div>` +

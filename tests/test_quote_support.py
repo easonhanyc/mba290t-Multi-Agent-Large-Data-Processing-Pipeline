@@ -71,16 +71,21 @@ class TestQuoteSupport(unittest.TestCase):
             with mock.patch.object(qs.ProviderRegistry, "get", return_value=fake), \
                     contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(qs.main(argv), 0)
-            # the judge never sees who labelled an item or the review ID
+            # the judge gets one item per review, with the run's own labels only: no human labels, no review IDs
             self.assertTrue(fake.requests)
+            items = [json.loads(x) for x in (out / "items.jsonl").read_text().splitlines()]
+            self.assertEqual(len(items), 4 + 3)
+            self.assertEqual({i["who"] for i in items}, {"model"})
+            sent = sum(len(re.findall(r'<item id="q\d+">', req["user"])) for req in fake.requests)
+            self.assertEqual(sent, len({i["key"] for i in items}))  # identical items are sent once
             for req in fake.requests:
                 self.assertNotIn("human", req["user"].lower())
                 for p in done:
                     self.assertNotIn(p["review_id"], req["user"])
             summary = json.loads((out / "summary.json").read_text())
-            gm, gh = summary["by_set"]["golden/model"], summary["by_set"]["golden/human"]
+            self.assertNotIn("golden/human", summary["by_set"])
+            gm = summary["by_set"]["golden/model"]
             self.assertEqual(gm["items"], 4)
-            self.assertEqual(gh["items"], 4)
             self.assertEqual(gm["exact_substring"], 4)
             self.assertEqual(gm["same_sentence_as_human"], 4)  # the labels file copied the model's own quotes
             self.assertEqual(gm["severity"]["partial"], 1.0)

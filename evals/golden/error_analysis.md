@@ -50,9 +50,8 @@ Patterns:
 - Exact substring (code): 50/50 final-run quotes.
 - Unsupported entities: 0 predicted entities not found in the text. Eason's entities are feature descriptions in his own words, so they are compared case by case in `results_disagreements.md`.
 - needs_review vs human: {'human=False,model=False': 43, 'human=False,model=True': 1, 'human=True,model=False': 4, 'human=True,model=True': 2}.
-- Does the quote support the labels (golden 50, final run's quotes, blind judge): topic 92%, intent 96%, severity 98% supported; all three 88%; the model quoted Eason's evidence sentence in 47 of 50 (multi-sentence reviews 9/12).
-- Does the quote support the labels (golden 50, Eason's quotes, blind judge): topic 92%, intent 80%, severity 90% supported; all three 70%.
-- Does the quote support the labels (random final-run sample, blind judge): topic 94%, intent 97%, severity 97% supported; all three 89%.
+- Does the quote support the labels (golden 50, final run's quotes, blind judge): topic 98%, intent 100%, severity 100% supported; all three 98%; the model quoted Eason's evidence sentence in 47 of 50 (multi-sentence reviews 9/12).
+- Does the quote support the labels (random final-run sample, blind judge): topic 92%, intent 97%, severity 97% supported; all three 89%.
 - Method and every quote the judge did not accept: `evals/quote_support/report.md`.
 
 ## 6. Would combining the typed classifier with Luna help?

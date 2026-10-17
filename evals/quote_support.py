@@ -4,11 +4,13 @@ The Doc asks to check evidence_quote membership in code AND to inspect whether t
   code   every quote is an exact substring of its review; on human-labelled sets, whether the model quoted the
          same sentence the human chose as evidence (reported separately for multi-sentence reviews, where the
          choice is not forced)
-  judge  for each (review, quote, topic, intent, severity) item: supported / partial / not_supported per label,
-         and whether another part of the review is clearly better evidence. The judge never sees who labelled an
-         item: model and human items from the labelled sets are shuffled together under neutral IDs, so the human
-         items calibrate the judge. A declared random sample of final-run records adds scale.
-Human labels are read here only to build the human items and to score; they never reach the enricher.
+  judge  for each (review, quote, topic, intent, severity) item of the final run: supported / partial /
+         not_supported per label, and whether another part of the review is clearly better evidence. Items carry
+         only the final run's own labels and quotes, under neutral IDs: the golden set and a declared random sample
+         of final-run records.
+Human golden labels are read here only by code, after judging, to score (same evidence sentence; judge verdicts
+split by whether the model's label matches the human's). They never reach any model, including the judge
+(the Doc: "Never supply their human answer labels as model inputs").
 
   .venv/bin/python evals/quote_support.py --run-dir runs/final-200k-v2 \
       --labelled golden=evals/golden/golden_50_labeled.csv --sample 500 --out-dir evals/quote_support
@@ -82,8 +84,6 @@ def build_items(store, lc, labelled, sample_n):
                 items.append({**base, "who": "model", "quote": p["evidence_quote"], "topic": p["topic"],
                               "intent": p["intent"], "severity": int(p["severity"]),
                               "human": {f: r[f].split("|") for f in FIELDS}, "human_quote": r["evidence_quote"]})
-            items.append({**base, "who": "human", "quote": r["evidence_quote"], "topic": _first(r["topic"]),
-                          "intent": _first(r["intent"]), "severity": int(_first(r["severity"]))})
     if sample_n:
         taken = {r["review_id"] for rows in label_rows.values() for r in rows}
         pool = []
@@ -99,7 +99,8 @@ def build_items(store, lc, labelled, sample_n):
     for it in items:
         it["key"] = hashlib.sha256(json.dumps([it["text"], it["quote"]] + [it[f] for f in FIELDS]).encode()).hexdigest()[:20]
     rng = random.Random(SAMPLE_SEED)
-    rng.shuffle(items)  # model and human items interleaved, so a batch never groups one labeller
+    rng.shuffle(items)  # golden and sampled items interleaved under neutral IDs
+    assert all(it["who"] == "model" for it in items), "only the final run's own labels may reach the judge"
     for n, it in enumerate(items, 1):
         it["id"] = f"q{n:04d}"
     return items
@@ -197,10 +198,15 @@ def report(table, groups, calls, meta):
          "**Method.** Code checks that every quote is an exact substring of its review and, on the human-labelled golden set, "
          "whether the model quoted the sentence the human chose as evidence. A blind judge then reads each review, the quote "
          "and the three labels and says, per label, whether the quote on its own supports it (`supported`), is consistent "
-         "but needs the rest of the review (`partial`), or does not show it (`not_supported`). Model and human items are "
-         "shuffled together under neutral IDs, so the judge cannot tell who labelled what; the human items show how often "
-         "the judge accepts a person's own evidence. The final-run sample is a declared random sample of distinct texts "
+         "but needs the rest of the review (`partial`), or does not show it (`not_supported`). The judge sees only the final "
+         "run's own labels and quotes, under neutral IDs; Eason's golden labels are read only by code, after judging, for the "
+         "comparisons below. The final-run sample is a declared random sample of distinct texts "
          f"(lowest SHA-256('{SAMPLE_SEED}:' + review_id), excluding the labelled sets).", "",
+         "**Golden labels kept out of the judge.** A first version of this check (2026-10-15) also sent the 50 golden labels "
+         "and evidence quotes to the judge as calibration items. Because the Doc says never to supply the human answer "
+         "labels as model inputs, that version was withdrawn on 2026-10-17 and every item was judged again in batches that "
+         "contain only the final run's labels. Both versions ran after the final run's labels were fixed; neither changed "
+         "a label, the ranking or the memo.", "",
          "| Set / labeller | Items | Exact substring | Topic supported | Intent supported | Severity supported | All three supported | Any label not supported | Quote is the best evidence |",
          "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     pct = lambda x: "-" if x is None else f"{x:.0%}"

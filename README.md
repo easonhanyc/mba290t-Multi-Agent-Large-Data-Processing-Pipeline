@@ -267,10 +267,11 @@ Details and commands: [evals/README.md](evals/README.md).
   ([error_analysis.md](evals/golden/error_analysis.md), [every disagreement](evals/golden/results_disagreements.md)).
   The golden set chose the setup (section 1 of the error analysis), so these scores carry a small selection bias; no
   fresh human-labelled set was added after the choice.
-- **Do the quotes support the labels?** A blind judge (Claude Haiku, Claude Pro) read each review, its quote and its
-  three labels, with model and human items shuffled together: 89% of 500 sampled final-run quotes support all three
-  labels, 88% of the final run's golden quotes and 70% of Eason's own golden quotes (the judge applies the contract's
-  request-vs-complaint precedence). The model quoted Eason's evidence sentence in 47 of 50 golden reviews
+- **Do the quotes support the labels?** A blind judge (Claude Haiku, Claude Pro) read each review with the final run's
+  quote and three labels: 89% of 500 sampled final-run quotes support all three labels (topic 92%, intent 97%,
+  severity 97%), and 98% of the final run's golden quotes. Code, not a model, compared the golden quotes with Eason's
+  evidence sentences: the model quoted the same sentence in 47 of 50 reviews. Eason's golden labels never reach the
+  judge; a first version that also sent them as calibration items was withdrawn and re-run without them
   ([quote_support/report.md](evals/quote_support/report.md), every rejected quote listed).
 - **Independent verification**: Claude Haiku labels a declared random sample blind (2,000 reviews, figures in
   [Results](#results)). The 762 disagreements are counted by field and direction in

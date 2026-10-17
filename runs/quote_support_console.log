@@ -1,15 +1,13 @@
-[quote-support] 600 items (0 cached); 12 requests to send
+[quote-support] 550 items (0 cached); 11 requests to send
 [quote-support] batch q0001..: 50/50 judged
 [quote-support] batch q0051..: 50/50 judged
-[quote-support] batch q0102..: 50/50 judged
-[quote-support] batch q0153..: 50/50 judged
-[quote-support] batch q0204..: 50/50 judged
-[quote-support] batch q0256..: 50/50 judged
-[quote-support] batch q0309..: 50/50 judged
-[quote-support] batch q0361..: 50/50 judged
-[quote-support] batch q0417..: 50/50 judged
-[quote-support] batch q0467..: 50/50 judged
-[quote-support] batch q0521..: 50/50 judged
-[quote-support] batch q0574..: 25/25 judged
+[quote-support] batch q0101..: 50/50 judged
+[quote-support] batch q0151..: 50/50 judged
+[quote-support] batch q0201..: 50/50 judged
+[quote-support] batch q0251..: 50/50 judged
+[quote-support] batch q0301..: 50/50 judged
+[quote-support] batch q0351..: 50/50 judged
+[quote-support] batch q0401..: 50/50 judged
+[quote-support] batch q0451..: 50/50 judged
+[quote-support] batch q0502..: 49/49 judged
 [quote-support] wrote evals/quote_support/report.md and summary.json (0 items unjudged)
-./scripts/live.sh: line 80: unexpected EOF while looking for matching `"'

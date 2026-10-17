@@ -164,8 +164,7 @@ def main():
     if qs.exists():
         q = load(qs)["by_set"]
         pct = lambda v: "-" if v is None else f"{v:.0%}"
-        for key, label in (("golden/model", "golden 50, final run's quotes"), ("golden/human", "golden 50, Eason's quotes"),
-                           ("final_sample/model", "random final-run sample")):
+        for key, label in (("golden/model", "golden 50, final run's quotes"), ("final_sample/model", "random final-run sample")):
             if key in q:
                 t = q[key]
                 extra = (f"; the model quoted Eason's evidence sentence in {t['same_sentence_as_human']} of {t['items']} "

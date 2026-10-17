@@ -9,9 +9,9 @@
       "model_alias": "haiku"
     },
     "models_reported": "claude-haiku-4-5-20251001",
-    "requests": 12,
-    "attempts": 12,
-    "api_equivalent_usd": 0.711022,
+    "requests": 11,
+    "attempts": 11,
+    "api_equivalent_usd": 0.658822,
     "billed_usd": 0.0,
     "sample_seed": "quote-support-v1",
     "sample_size": 500,
@@ -24,79 +24,56 @@
       "multi_sentence": 154,
       "exact_substring": 500,
       "topic": {
-        "supported": 0.936,
-        "partial": 0.03,
-        "not_supported": 0.034
+        "supported": 0.922,
+        "partial": 0.048,
+        "not_supported": 0.03
       },
       "intent": {
-        "supported": 0.966,
-        "partial": 0.028,
-        "not_supported": 0.006
+        "supported": 0.968,
+        "partial": 0.024,
+        "not_supported": 0.008
       },
       "severity": {
-        "supported": 0.972,
-        "partial": 0.022,
-        "not_supported": 0.006
+        "supported": 0.974,
+        "partial": 0.018,
+        "not_supported": 0.008
       },
-      "all_three_supported": 0.89,
+      "all_three_supported": 0.892,
       "any_not_supported": 0.042,
-      "quote_best": 0.94
-    },
-    "golden/human": {
-      "items": 50,
-      "multi_sentence": 12,
-      "exact_substring": 50,
-      "topic": {
-        "supported": 0.92,
-        "partial": 0.02,
-        "not_supported": 0.06
-      },
-      "intent": {
-        "supported": 0.8,
-        "partial": 0.08,
-        "not_supported": 0.12
-      },
-      "severity": {
-        "supported": 0.9,
-        "partial": 0.04,
-        "not_supported": 0.06
-      },
-      "all_three_supported": 0.7,
-      "any_not_supported": 0.18,
-      "quote_best": 0.92
+      "quote_best": 0.942
     },
     "golden/model": {
       "items": 50,
       "multi_sentence": 12,
       "exact_substring": 50,
       "topic": {
-        "supported": 0.92,
-        "partial": 0.04,
-        "not_supported": 0.04
-      },
-      "intent": {
-        "supported": 0.96,
-        "partial": 0.02,
-        "not_supported": 0.02
-      },
-      "severity": {
         "supported": 0.98,
         "partial": 0.02,
         "not_supported": 0.0
       },
-      "all_three_supported": 0.88,
-      "any_not_supported": 0.04,
+      "intent": {
+        "supported": 1.0,
+        "partial": 0.0,
+        "not_supported": 0.0
+      },
+      "severity": {
+        "supported": 1.0,
+        "partial": 0.0,
+        "not_supported": 0.0
+      },
+      "all_three_supported": 0.98,
+      "any_not_supported": 0.0,
       "quote_best": 0.96,
       "same_sentence_as_human": 47,
       "same_sentence_as_human_multi": "9/12",
-      "topic_supported_when_label_matches_human": 0.9487,
-      "topic_supported_when_label_differs_from_human": 0.8182,
+      "topic_supported_when_label_matches_human": 1.0,
+      "topic_supported_when_label_differs_from_human": 0.9091,
       "topic_label_differs_from_human": 11,
-      "intent_supported_when_label_matches_human": 0.9474,
+      "intent_supported_when_label_matches_human": 1.0,
       "intent_supported_when_label_differs_from_human": 1.0,
       "intent_label_differs_from_human": 12,
       "severity_supported_when_label_matches_human": 1.0,
-      "severity_supported_when_label_differs_from_human": 0.9231,
+      "severity_supported_when_label_differs_from_human": 1.0,
       "severity_label_differs_from_human": 13
     }
   }
